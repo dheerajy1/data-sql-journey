@@ -23,3 +23,8 @@ The schema : Project Name : SQL File Location , src, Blog
 [.sql - [Link¹](sql/castandconvert.sql)]
 [ src - [Link²](src/castnconvert.md)]
 [ Blog - [Link³]()]
+
+4. Building Analytics by establishing a bridge between Power BI & SQL:
+[.sql - [Link¹](sql/chocolatesdbsqlfile.sql)]
+[ src - [Link²](src/bridgePowerBI&SQL.md)]
+[ Blog - [Link³]()] 

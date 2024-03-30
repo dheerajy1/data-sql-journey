@@ -27,4 +27,9 @@ The schema : Project Name : SQL File Location , src, Blog
 4. Building Analytics by establishing a bridge between Power BI & SQL:
 [.sql - [Link¹](sql/chocolatesdbsqlfile.sql)]
 [ src - [Link²](src/bridgePowerBI&SQL.md)]
-[ Blog - [Link³]()] 
+[ Blog - [Link³](https://dheerajy1.hashnode.dev/building-analytics-by-establishing-a-bridge-between-power-bi-sql)] 
+
+5. Power BI and Fabric - Developer of the Future:
+[.sql - [Link¹]()]
+[ src - [Link²](src/PowerBI&FabricDeveloper.md)]
+[ Blog - [Link³]()]

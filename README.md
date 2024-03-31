@@ -32,4 +32,9 @@ The schema : Project Name : SQL File Location , src, Blog
 5. Power BI and Fabric - Developer of the Future:
 [.sql - [Link¹]()]
 [ src - [Link²](src/PowerBI&FabricDeveloper.md)]
+[ Blog - [Link³](https://dheerajy1.hashnode.dev/power-bi-and-fabric-developer-of-the-future)]
+
+6. Data Engineering in Microsoft Fabric:
+[.sql - [Link¹]()]
+[ src - [Link²](src/DataEngineeringinMSfabric.md)]
 [ Blog - [Link³]()]

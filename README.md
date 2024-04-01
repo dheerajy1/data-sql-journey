@@ -37,4 +37,4 @@ The schema : Project Name : SQL File Location , src, Blog
 6. Data Engineering in Microsoft Fabric:
 [.sql - [Link¹]()]
 [ src - [Link²](src/DataEngineeringinMSfabric.md)]
-[ Blog - [Link³]()]
+[ Blog - [Link³](https://dheerajy1.hashnode.dev/data-engineering-in-microsoft-fabric)]

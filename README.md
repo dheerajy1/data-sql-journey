@@ -38,3 +38,9 @@ The schema : Project Name : SQL File Location , src, Blog
 [.sql - [Link¹]()]
 [ src - [Link²](src/DataEngineeringinMSfabric.md)]
 [ Blog - [Link³](https://dheerajy1.hashnode.dev/data-engineering-in-microsoft-fabric)]
+
+7. Microsoft Power BI Data Analyst
+[.sql - [Link¹]()]
+[ src - [Link²](src/MicrosoftPowerBIDatAnalyst.md)]
+[ Blog - [Link³]()]
+

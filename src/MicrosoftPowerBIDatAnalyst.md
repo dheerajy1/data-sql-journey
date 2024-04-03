@@ -67,14 +67,13 @@ You know how to assess data quality. Plus, you understand data security, includi
 | --- | --- |
 | Module 17 |  |
 
-# I. Module 1
+# I. Module 1 Discover data analysis
 
 ![](https://learn.microsoft.com/en-us/training/achievements/data-analytics-and-microsoft.svg align="center")
 
 | Course | Microsoft Power BI Data Analyst |
 | --- | --- |
 | Module 1/17 | Discover data analysis |
-| Unit /6 |  |
 
 Would you like to explore the journey of a data analyst and learn how a data analyst tells a story with data?
 
@@ -139,6 +138,8 @@ While the process of data analysis focuses on the tasks of cleaning, modeling, a
 * Manage - management of Power BI
     
 
+## Answers:
+
 A data analyst uses appropriate visuals to help business decision makers gain deep and meaningful insights from data.
 
 An optimized and tuned semantic model performs better and provides a better data analysis experience.
@@ -156,20 +157,131 @@ In this module, you'll:
 
 ---
 
-# II. Module 2
+# II. Module 2 Get started building with Power BI
 
 | Course | Microsoft Power BI Data Analyst |
 | --- | --- |
 | Module 2/17 | Get started building with Power BI |
-| Unit /6 |  |
 
 ![](https://learn.microsoft.com/en-us/training/achievements/get-started-power-bi.svg align="center")
 
-## i. Unit /
+## **Introduction**
 
-## ii. Unit /
+**Microsoft Power BI** is a complete reporting solution that offers data preparation, data visualization, distribution, and management through development tools and an online platform.
 
-Remarks:
+Use Power BI to create visually stunning, interactive reports requiring complex data modeling & to serve as the analytics and decision engine.
+
+## **Use Power BI**
+
+Power BI Desktop - development tool available to data analysts and other report creators.  
+Power BI service - allows you to organize, manage, and distribute your reports and other Power BI items, create high-level dashboards that drill down to reports.
+
+The flow of Power BI is:
+
+1. Connect to data with Power BI Desktop.
+    
+2. Transform in Power Query and model data with Power BI Desktop.
+    
+3. Create visualizations and reports with Power BI Desktop.
+    
+4. Publish report to Power BI service.
+    
+5. Distribute and manage reports in the Power BI service.
+    
+
+## **Building blocks of Power BI**
+
+The building blocks of Power BI are **semantic models** and **visualizations**.
+
+semantic model - consists of all connected data, transformations, relationships, and calculations.
+
+## **Tour and use the Power BI service**
+
+**Workspaces** are the foundation of the Power BI service.
+
+Distribute content - Apps are the ideal sharing solution within any organization.
+
+Refresh a semantic model - configure scheduled refreshes of your semantic models in the Power BI service.
+
+## Answers:
+
+The Power BI service lets you view and interact with reports and dashboards, but doesn't let you shape data.  
+Without a semantic model, you can't create visualizations, and reports are made up of visualizations.
+
+An app is a collection of ready-made visuals, pre-arranged in dashboards and reports. You can get apps that connect to many online services from the AppSource.
+
+## **Summary**
+
+Microsoft Power BI offers a complete data analytics solution that includes data preparation, visualization, and distribution.
+
+**Semantic models** and **visualizations** are the building blocks of Power BI.
+
+The flow and components of Power BI include:
+
+* **Power BI Desktop** for creating semantic models and reports with visualizations.
+    
+* **Power BI service** for creating dashboards from published reports and distributing content with apps.
+    
+* **Power BI Mobile** for on-the-go access to the Power BI service content, designed for mobile.
+    
+
+By using Power BI, you can make data-informed decisions across your organization.
+
+## **Learning objectives**
+
+In this module, you'll learn:
+
+* How Power BI services and applications work together.
+    
+* Explore how Power BI can make your business more efficient.
+    
+* How to create compelling visuals and reports.
+    
+
+---
+
+# III. Module 3 **Get data in Power BI**
+
+| Course | Microsoft Power BI Data Analyst |
+| --- | --- |
+| Module /17 | **Get data in Power BI** |
+
+![](https://learn.microsoft.com/en-us/training/achievements/get-data.svg align="center")
+
+You'll learn how to retrieve data from a variety of data sources, including Microsoft Excel, relational databases, and NoSQL data stores. You'll also learn how to improve performance while retrieving data.
+
+## **Learning objectives**
+
+By the end of this module, you'll be able to:
+
+* Identify and connect to a data source
+    
+* Get data from a relational database, like Microsoft SQL Server
+    
+* Get data from a file, like Microsoft Excel
+    
+* Get data from applications
+    
+* Get data from Azure Analysis Services
+    
+* Select a storage mode
+    
+* Fix performance issues
+    
+* Resolve data import errors
+    
+
+---
+
+# IV. Module 4
+
+| Course | Microsoft Power BI Data Analyst |
+| --- | --- |
+| Module /17 |  |
+
+![]( align="center")
+
+---
 
 ---
 
@@ -181,12 +293,6 @@ Remarks:
 | Unit / |  |
 
 ![]( align="center")
-
-## i. Unit /
-
-## ii. Unit /
-
-Remarks:
 
 ---
 

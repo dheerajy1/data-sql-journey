@@ -306,6 +306,298 @@ To support their daily operations, organizations frequently use a range of softw
 
 ## **Select a storage mode**
 
+business requirements are satisfied when you're importing data into Power BI.
+
+However, sometimes there may be security requirements around your data that make it impossible to directly import a copy. Or your semantic models may simply be too large and would take too long to load into Power BI, and you want to avoid creating a performance bottleneck.
+
+Power BI solves these problems by using the DirectQuery storage mode, which allows you to query the data in the data source directly and not import a copy into Power BI. DirectQuery is useful because it ensures you're always viewing the most recent version of the data.
+
+The three different types of storage modes you can choose from:
+
+* Import -
+    
+    * create a local Power BI copy of your semantic models from your data source, use all Power BI service features with this storage mode,
+        
+    * including Q&A and Quick Insights,
+        
+    * Data refreshes can be scheduled or on-demand.
+        
+* DirectQuery
+    
+    * useful when you don't want to save local copies of your data because your data won't be cached,
+        
+    * you can query the specific tables that you'll need by using native Power BI queries,
+        
+    * Essentially, you're creating a direct connection to the data source,
+        
+    * ensures that you're always viewing the most up-to-date data, and that all security requirements are satisfied,
+        
+    * Additionally, this mode is suited for when you have large semantic models to pull data from. Instead of slowing down performance by having to load large amounts of data into Power BI, you can use DirectQuery to create a connection to the source, solving data latency issues as well.
+        
+* Dual (Composite)
+    
+    * In Dual mode, you can identify some data to be directly imported and other data that must be queried. Any table that is brought in to your report is a product of both Import and DirectQuery modes.
+        
+    * Using the Dual mode allows Power BI to choose the most efficient form of data retrieval.
+        
+
+## **Get data from Azure Analysis Services**
+
+Azure Analysis Services is a fully managed platform as a service (PaaS) that provides enterprise-grade semantic models in the cloud.
+
+You can use advanced mashup and modeling features to combine data from multiple data sources, define metrics, and secure your data in a single, trusted tabular semantic model.
+
+The semantic model provides an easier and faster way for users to perform ad hoc data analysis using tools like Power BI.
+
+Notable differences between Azure Analysis Services and SQL Server are:
+
+* Analysis Services models have calculations already created.
+    
+* If you don’t need an entire table, you can query the data directly. Instead of using Transact-SQL (T-SQL) to query the data, like you would in SQL Server, you can use multi-dimensional expressions (MDX) or data analysis expressions (DAX).
+    
+
+## **Fix performance issues**
+
+Occasionally, organizations will need to address performance issues when running reports.
+
+Power BI provides the Performance Analyzer tool to help fix problems and streamline the process.
+
+### **Optimize performance in Power Query**
+
+The performance in Power Query depends on the performance at the data source level.
+
+The variety of data sources that Power Query offers is wide, and the performance tuning techniques for each source are equally wide.
+
+For instance, if you extract data from a Microsoft SQL Server, you should follow the performance tuning guidelines for the product. Good SQL Server performance tuning techniques include index creation, hardware upgrades, execution plan tuning, and data compression.
+
+These topics are beyond the scope here, and are covered only as an example to build familiarity with your data source and reap the benefits when using Power BI and Power Query.
+
+Power Query takes advantage of good performance at the data source through a technique called Query Folding.
+
+#### Query folding
+
+*Query folding* is the process by which the transformations and edits that you make in Power Query Editor are simultaneously tracked as native queries, or simple **Select** SQL statements, while you're actively making transformations.
+
+The reason for implementing this process is to ensure that these transformations can take place in the original data source server and don't overwhelm Power BI computing resources.
+
+You can use Power Query to load data into Power BI. Then use Power Query Editor to transform your data, such as renaming or deleting columns, appending, parsing, filtering, or grouping your data.
+
+Consider a scenario where you’ve renamed a few columns in the Sales data and merged a city and state column together in the “city state” format. Meanwhile, the query folding feature tracks those changes in native queries. Then, when you load your data, the transformations take place independently in the original source, this ensures that performance is optimized in Power BI.
+
+The benefits to query folding include:
+
+* **More efficiency in data refreshes and incremental refreshes.** When you import data tables by using query folding, Power BI is better able to allocate resources and refresh the data faster because Power BI doesn't have to run through each transformation locally.
+    
+* **Automatic compatibility with DirectQuery and Dual storage modes.** All DirectQuery and Dual storage mode data sources must have the back-end server processing abilities to create a direct connection, which means that query folding is an automatic capability that you can use. If all transformations can be reduced to a single **Select** statement, then query folding can occur.
+    
+
+> If all transformations can be reduced to a single **Select** statement, then query folding can occur.
+
+Native queries aren't possible for the following transformations:
+
+* Adding an index column
+    
+* Merging and appending columns of different tables with two different sources
+    
+* Changing the data type of a column
+    
+
+A good guideline to remember is that if you can translate a transformation into a **Select** SQL statement, which includes operators and clauses such as GROUP BY, SORT BY, WHERE, UNION ALL, and JOIN, you can use query folding.
+
+While query folding is one option to optimize performance when retrieving, importing, and preparing data, another option is query diagnostics.
+
+### **Query diagnostics**
+
+  
+Another tool that you can use to study query performance is *query diagnostics*. You can determine what bottlenecks may exist while loading and transforming your data, refreshing your data in Power Query, running SQL statements in Query Editor, and so on.
+
+This tool is useful when you want to analyze performance on the Power Query side for tasks such as loading semantic models, running data refreshes, or running other transformative tasks.
+
+## **Other techniques to optimize performance**
+
+Other ways to optimize query performance in Power BI include:
+
+* **Process as much data as possible in the original data source.** Power Query and Power Query Editor allow you to process the data; however, the processing power that is required to complete this task might lower performance in other areas of your reports. Generally, a good practice is to process, as much as possible, in the native data source.
+    
+* **Use native SQL queries.** When using DirectQuery for SQL databases, such as the case for our scenario, make sure that you aren't pulling data from stored procedures or common table expressions (CTEs).
+    
+* **Separate date and time, if bound together.** If any of your tables have columns that combine date and time, make sure that you separate them into distinct columns before importing them into Power BI. This approach will increase compression abilities.
+    
+
+## **Resolve data import errors**
+
+While importing data into Power BI, you may encounter errors resulting from factors such as:
+
+* Power BI imports from numerous data sources.
+    
+* Each data source might have dozens (and sometimes hundreds) of different error messages.
+    
+* Other components can cause errors, such as hard drives, networks, software services, and operating systems.
+    
+* Data often can't comply with any specific schema.
+    
+
+The following sections cover some of the more common error messages that you might encounter in Power BI.
+
+### **Query timeout expired**
+
+Relational source systems often have many people who are concurrently using the same data in the same database. Some relational systems and their administrators seek to limit a user from monopolizing all hardware resources by setting a query timeout. These timeouts can be configured for any timespan, from as little as five seconds to as much as 30 minutes or more.
+
+For instance, if you’re pulling data from your organization’s SQL Server, you might see the error shown in the following figure.
+
+[![Screenshot of the data import errors for query timeout.](https://learn.microsoft.com/en-us/training/modules/get-data/media/9-data-import-query-timeout-ss.png align="left")](https://learn.microsoft.com/en-us/training/modules/get-data/media/9-data-import-query-timeout-ss.png#lightbox)
+
+### **Power BI Query Error: Timeout expired**
+
+This error indicates that you’ve pulled too much data according to your organization’s policies. Administrators incorporate this policy to avoid slowing down a different application or suite of applications that might also be using that database.
+
+You can resolve this error by pulling fewer columns or rows from a single table. While you're writing SQL statements, it might be a common practice to include groupings and aggregations. You can also join multiple tables in a single SQL statement. Additionally, you can perform complicated subqueries and nested queries in a single statement. These complexities add to the query processing requirements of the relational system and can greatly elongate the time of implementation.
+
+If you need the rows, columns, and complexity, consider taking small chunks of data and then bringing them back together by using Power Query. For instance, you can combine half the columns in one query and the other half in a different query. Power Query can merge those two queries back together after you're finished.
+
+### **We couldn't find any data formatted as a table**
+
+Occasionally, you may encounter the “We couldn’t find any data formatted as a table” error while importing data from Microsoft Excel. Fortunately, this error is self-explanatory. Power BI expects to find data formatted as a table from Excel. The error even tells you the resolution. Perform the following steps to resolve the issue:
+
+1. Open your Excel workbook, and highlight the data that you want to import.
+    
+2. Press the **Ctrl-T** keyboard shortcut. The first row will likely be your column headers.
+    
+3. Verify that the column headers reflect how you want to name your columns. Then, try to import data from Excel again. This time, it should work.
+    
+    [![Screenshot of the Power B I Excel error: We couldn't find any data formatted as a table.](https://learn.microsoft.com/en-us/training/modules/get-data/media/9-format-as-table-excel-ss.png align="left")](https://learn.microsoft.com/en-us/training/modules/get-data/media/9-format-as-table-excel-ss.png#lightbox)
+    
+
+### **Couldn't find file**
+
+While importing data from a file, you may get the "Couldn't find file" error.
+
+[![Screenshot of the Could not find file error screen.](https://learn.microsoft.com/en-us/training/modules/get-data/media/9-file-location-ss.png align="left")](https://learn.microsoft.com/en-us/training/modules/get-data/media/9-file-location-ss.png#lightbox)
+
+Usually, this error is caused by the file moving locations or the permissions to the file changing. If the cause is the former, you need to find the file and change the source settings.
+
+1. Open Power Query by selecting the **Transform Data** button in Power BI.
+    
+2. Highlight the query that is creating the error.
+    
+3. On the left, under **Query Settings**, select the gear icon next to **Source**.
+    
+    [![Screenshot of the query settings pane with Source selected under Applied Steps.](https://learn.microsoft.com/en-us/training/modules/get-data/media/9-query-changes-ss.png align="left")](https://learn.microsoft.com/en-us/training/modules/get-data/media/9-query-changes-ss.png#lightbox)
+    
+4. Change the file location to the new location.
+    
+    [![Screenshot of the file location settings pane.](https://learn.microsoft.com/en-us/training/modules/get-data/media/9-file-location-new-location-ss.png align="left")](https://learn.microsoft.com/en-us/training/modules/get-data/media/9-file-location-new-location-ss.png#lightbox)
+    
+
+### **Data type errors**
+
+Sometimes, when you import data into Power BI, the columns appear blank. This situation happens because of an error in interpreting the data type in Power BI. The resolution to this error is unique to the data source. For instance, if you're importing data from SQL Server and see blank columns, you could try to convert to the correct data type in the query.
+
+Instead of using this query:
+
+`SELECT CustomerPostalCode FROM Sales.Customers`
+
+Use this query:
+
+`SELECT CAST(CustomerPostalCode as varchar(10)) FROM Sales.Customers`
+
+By specifying the correct type at the data source, you eliminate many of these common data source errors.
+
+You may encounter different types of errors in Power BI that are caused by the diverse data source systems where your data resides.
+
+## **Exercise - Prepare data in Power BI Desktop**
+
+# Get Data in Power BI Desktop
+
+## **Lab story**
+
+This lab is designed to introduce you to Power BI Desktop application and how to connect to data and how to use data preview techniques to understand the characteristics and quality of the source data. The learning objectives are:
+
+* Open Power BI Desktop
+    
+* Connect to different data sources
+    
+* Preview source data with Power Query
+    
+* Use data profiling features in Power Query
+    
+
+## **Get data from SQL Server**
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712293898196/d8665311-8a1c-4691-86c7-5a22cb46e839.png align="center")
+
+### **Preview Data in Power Query Editor**
+
+Observed:
+
+#### DimEmployee Query
+
+table - Notice that the last five columns contain Table or Value links.
+
+These five columns represent relationships to other tables in the database.
+
+They can be used to join tables together. **You’ll join tables in the Load Transformed Data in Power BI Desktop lab.**
+
+Column Quality for Position column - shows 94% empty.
+
+Column Distribution for EmployeeKey column
+
+*When the distinct and unique counts are the same, it means the column contains unique values.*
+
+*When modeling, it’s important that some model tables have unique columns. These unique columns can be used to create one-to-many relationships, which you’ll do in the* ***Model Data in Power BI Desktop*** *lab.*
+
+[![Column distribution showing 296 distinct, 296 unique values](https://microsoftlearning.github.io/PL-300-Microsoft-Power-BI-Data-Analyst/Instructions/Labs/Linked_image_Files/01-prepare-data-with-power-query-in-power-bi-desktop_image26.png align="center")](https://microsoftlearning.github.io/PL-300-Microsoft-Power-BI-Data-Analyst/Instructions/Labs/Linked_image_Files/01-prepare-data-with-power-query-in-power-bi-desktop_image26.png)
+
+#### DimReseller query
+
+Column Profile for BusinessType column header - Notice the data quality issue: there are two labels for warehouse (Warehouse, and the misspelled Ware House) - Y**ou’ll apply a transformation to relabel these five rows in the Load Transformed Data in Power BI Desktop lab.**
+
+#### DimSalesTerritory query
+
+**In the Model Data in Power BI Desktop lab, you’ll create a hierarchy to support analysis at region, country, or group level.**
+
+#### FactResellerSales query
+
+column quality for the TotalProductCost column, and notice that 8% of the rows are empty - Missing TotalProductCost column values is a data quality issue. **To address the issue, in the Load Transformed Data in Power BI Desktop lab, you’ll apply transformations to fill in missing values by using the product standard cost, which is stored in the related DimProduct table.**
+
+## **Get data from a CSV file**
+
+ResellerSalesTargets query
+
+Repeat the steps to create a query based on the **D:\\Allfiles\\Resources\\ColorFormats.csv** file.
+
+Save / apply later.
+
+# **Check your knowledge**
+
+T-SQL is the query language that you would use for SQL Server.
+
+You're creating a Power BI report with data from an Azure Analysis Services MDX Cube. When the data refreshes in the cube, you would like to see it immediately in the Power BI report. How should you connect? - Live connection.
+
+What can you do to improve performance when you're getting data in Power BI?Always use the least amount of data needed for your project.
+
+# **Summary**
+
+In this module, you learned about pulling data from many different data sources and into Power BI.
+
+You can pull data from files, relational databases, Azure Analysis Services, cloud-based applications, websites, and more.
+
+Retrieving data from different data sources requires treating each data source differently. For instance, Microsoft Excel data should be pulled in from an Excel table. Relational databases often have query timeouts.
+
+You can connect to SQL Server Analysis Services with Connect live, which allows you to see data changes in real-time.
+
+It's important to select the correct storage mode for your data.
+
+Do you require that visuals interact quickly but don’t mind possibly refreshing the data when the underlying data source changes?
+
+If so, select Import to import data into Power BI.
+
+If you prefer to see updates to data as soon as they happen at the cost of interactivity performance, then choose Direct Query for your data instead.
+
+In addition, you learned how to solve performance problems and data import errors.
+
+You learned that Power BI gives you tooling to identify where performance problems may exist. Data import errors can be alarming at first, but you can see that the resolution is easily implemented.
+
 ## **Learning objectives**
 
 By the end of this module, you'll be able to:

@@ -44,3 +44,8 @@ The schema : Project Name : SQL File Location , src, Blog
 [ src - [Link²](src/MicrosoftPowerBIDatAnalyst.md)]
 [ Blog - [Link³]()]
 
+
+8. AI Skills Challenge: Fabric Analytics Engineer
+[.sql - [Link¹]()]
+[ src - [Link²](src/AISkillsChallengeFabricAnalyticsEngineer.md)]
+[ Blog - [Link³]()]

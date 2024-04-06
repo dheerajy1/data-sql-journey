@@ -408,7 +408,6 @@ While query folding is one option to optimize performance when retrieving, impor
 
 ### **Query diagnostics**
 
-  
 Another tool that you can use to study query performance is *query diagnostics*. You can determine what bottlenecks may exist while loading and transforming your data, refreshing your data in Power Query, running SQL statements in Query Editor, and so on.
 
 This tool is useful when you want to analyze performance on the Power Query side for tasks such as loading semantic models, running data refreshes, or running other transformative tasks.
@@ -544,7 +543,7 @@ Column Distribution for EmployeeKey column
 
 *When the distinct and unique counts are the same, it means the column contains unique values.*
 
-*When modeling, it’s important that some model tables have unique columns. These unique columns can be used to create one-to-many relationships, which you’ll do in the* ***Model Data in Power BI Desktop*** *lab.*
+*When modeling, it’s important that some model tables have unique columns. These unique columns can be used to create one-to-many relationships, which you’ll do in the****Model Data in Power BI Desktop****lab.*
 
 [![Column distribution showing 296 distinct, 296 unique values](https://microsoftlearning.github.io/PL-300-Microsoft-Power-BI-Data-Analyst/Instructions/Labs/Linked_image_Files/01-prepare-data-with-power-query-in-power-bi-desktop_image26.png align="center")](https://microsoftlearning.github.io/PL-300-Microsoft-Power-BI-Data-Analyst/Instructions/Labs/Linked_image_Files/01-prepare-data-with-power-query-in-power-bi-desktop_image26.png)
 
@@ -629,7 +628,114 @@ By the end of this module, you'll be able to:
 
 ![](https://learn.microsoft.com/en-us/training/achievements/clean-transform-and-load-data-in-power-bi.svg align="center")
 
-Power Query has an incredible number of features that are dedicated to helping you clean and prepare your data for analysis. You'll learn how to simplify a complicated model, change data types, rename objects, and pivot data. You'll also learn how to profile columns so that you know which columns have the valuable data that you’re seeking for deeper analytics.
+Power Query has an incredible number of features that are dedicated to helping you clean and prepare your data for analysis.
+
+You'll learn how to simplify a complicated model, change data types, rename objects, and pivot data.
+
+You'll also learn how to profile columns so that you know which columns have the valuable data that you’re seeking for deeper analytics.
+
+# **Introduction**
+
+When examining the data, you discover several issues, including:
+
+* A column called **Employment status** only contains numerals.
+    
+* Several columns contain errors.
+    
+* Some columns contain null values.
+    
+* The customer ID in some columns appears as if it was duplicated repeatedly.
+    
+* A single address column has combined street address, city, state, and zip code.
+    
+
+Clean data has the following advantages:
+
+* Measures and columns produce more accurate results when they perform aggregations and calculations.
+    
+* Tables are organized, where users can find the data in an intuitive manner.
+    
+* Duplicates are removed, making data navigation simpler. It will also produce columns that can be used in slicers and filters.
+    
+* A complicated column can be split into two, simpler columns. Multiple columns can be combined into one column for readability.
+    
+* Codes and integers can be replaced with human readable values.
+    
+
+## **Shape the initial data**
+
+Power Query Editor in Power BI Desktop allows you to shape (transform) your imported data.
+
+You can accomplish actions such as
+
+* renaming columns or tables,
+    
+* changing text to numbers,
+    
+* removing rows,
+    
+* setting the first row as headers,
+    
+* and much more.
+    
+
+It is important to shape your data to ensure that it meets your needs and is suitable for use in reports.
+
+## **Get started with Power Query Editor**
+
+Removing columns at an early stage in the process rather than later is best, especially when you have established relationships between your tables. Removing unnecessary columns will help you to focus on the data that you need and help improve the overall performance of your Power BI Desktop semantic models and reports.  
+
+## **Simplify the data structure**
+
+Rename a query
+
+Replace values
+
+Replace null values
+
+Remove duplicates
+
+## **Evaluate and change column data types**
+
+Implications of incorrect data types
+
+Incorrect data types will prevent you from creating certain calculations, deriving hierarchies, or creating proper relationships with other tables.
+
+  
+For example, if you try to calculate the Quantity of Orders YTD, you'll get the following error stating that the OrderDate column data type isn't Date, which is required in time-based calculations.
+
+Another issue with having an incorrect data type applied on a date field is the inability to create a date hierarchy, which would allow you to analyze your data on a yearly, monthly, or weekly basis.
+
+Change the column data type in Power Query Editor
+
+the change that you make to the column data type is saved as a programmed step. This step is called Changed Type
+
+## **Combine multiple tables into a single table**
+
+You can combine tables into a single table in the following circumstances:
+
+* Too many tables exist, making it difficult to navigate an overly complicated semantic model.
+    
+* Several tables have a similar role.
+    
+* A table has only a column or two that can fit into a different table.
+    
+* You want to use several columns from different tables in a custom column.
+    
+
+You can combine the tables in two different ways: merging and appending.
+
+### **Append queries**
+
+When you append queries, you'll be adding rows of data to another table or query.
+
+For example, you could have two tables, one with 300 rows and another with 100 rows, and when you append queries, you'll end up with 400 rows.
+
+### **Merge queries**
+
+When you merge queries, you'll be adding columns from one table (or query) into another. To merge two tables, you must have a column that is the key between the two tables.
+
+This process is similar to the JOIN clause in SQL.
 
 ## **Learning objectives**
 
@@ -654,31 +760,139 @@ By the end of this module, you’ll be able to:
 
 ---
 
-# V. Module 5
+# V. Module 5 **Design a semantic model in Power BI**
 
 | Course | Microsoft Power BI Data Analyst |
 | --- | --- |
-| Module /17 |  |
-| Unit / |  |
+| Module 5/17 | **Design a semantic model in Power BI** |
 
-![]( align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/design-a-data-model-in-power-bi.svg align="center")
 
 i
 
 ---
 
-# l
-
----
-
-# . Module
+# VI. Module 6 **Add measures to Power BI Desktop models**
 
 | Course | Microsoft Power BI Data Analyst |
 | --- | --- |
-| Module /17 |  |
-| Unit / |  |
+| Module 6/17 |  |
 
-![]( align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/add-measures-power-bi-desktop.svg align="center")
+
+i
+
+---
+
+# VII. Module 7 **Add calculated tables and columns to Power BI Desktop models**
+
+| Course | Microsoft Power BI Data Analyst |
+| --- | --- |
+| Module 7/17 | **Add calculated tables and columns to Power BI Desktop models** |
+
+![](https://learn.microsoft.com/en-us/training/achievements/dax-power-bi-add-calculated-tables.svg align="center")
+
+i
+
+---
+
+# VIII. Module 8 **Use DAX time intelligence functions in Power BI Desktop models**
+
+| Course | Microsoft Power BI Data Analyst |
+| --- | --- |
+| Module 8/17 | **Use DAX time intelligence functions in Power BI Desktop models** |
+
+![](https://learn.microsoft.com/en-us/training/achievements/use-dax-power-bi-desktop.svg align="center")
+
+---
+
+# IX. Module 9 **Optimize a model for performance in Power BI**
+
+| Course | Microsoft Power BI Data Analyst |
+| --- | --- |
+| Module 9/17 | **Optimize a model for performance in Power BI** |
+
+![](https://learn.microsoft.com/en-us/training/achievements/optimize-model-power-bi.svg align="center")
+
+---
+
+# X. Module 10 **Design Power BI reports**
+
+| Course | Microsoft Power BI Data Analyst |
+| --- | --- |
+| Module 10/17 | **Design Power BI reports** |
+
+![](https://learn.microsoft.com/en-us/training/achievements/power-bi-effective-reports.svg align="center")
+
+---
+
+# XI. Module 11 **Configure Power BI report filters**
+
+| Course | Microsoft Power BI Data Analyst |
+| --- | --- |
+| Module 11/17 | **Configure Power BI report filters** |
+
+![](https://learn.microsoft.com/en-us/training/achievements/power-bi-effective-filters.svg align="center")
+
+---
+
+# XII. Module 12 **Enhance Power BI report designs for the user experience**
+
+| Course | Microsoft Power BI Data Analyst |
+| --- | --- |
+| Module 12/17 | **Enhance Power BI report designs for the user experience** |
+
+![](https://learn.microsoft.com/en-us/training/achievements/power-bi-effective-user-experience.svg align="center")
+
+---
+
+# XIII. Module 13 **Perform analytics in Power BI**
+
+| Course | Microsoft Power BI Data Analyst |
+| --- | --- |
+| Module 13/17 | **Perform analytics in Power BI** |
+
+![](https://learn.microsoft.com/en-us/training/achievements/perform-analytics-power-bi.svg align="center")
+
+---
+
+# XIV. Module 14 **Create and manage workspaces in Power BI**
+
+| Course | Microsoft Power BI Data Analyst |
+| --- | --- |
+| Module 14/17 | **Create and manage workspaces in Power BI** |
+
+![](https://learn.microsoft.com/en-us/training/achievements/create-manage-workspaces-power-bi.svg align="center")
+
+---
+
+# XV. Module 15 **Manage semantic models in Power BI**
+
+| Course | Microsoft Power BI Data Analyst |
+| --- | --- |
+| Module 15/17 | **Manage semantic models in Power BI** |
+
+![](https://learn.microsoft.com/en-us/training/achievements/manage-datasets-in-power-bi.svg align="center")
+
+---
+
+# XVI. Module 16 **Create dashboards in Power BI**
+
+| Course | Microsoft Power BI Data Analyst |
+| --- | --- |
+| Module 16/17 | **Create dashboards in Power BI** |
+
+![](https://learn.microsoft.com/en-us/training/achievements/create-dashboards-power-bi.svg align="center")
+
+---
+
+# XVI. Module 17 **Implement row-level security**
+
+| Course | Microsoft Power BI Data Analyst |
+| --- | --- |
+| Module 17/17 | **Implement row-level security** |
+
+![](https://learn.microsoft.com/en-us/training/achievements/row-level-security-power-bi.svg align="center")
 
 ---
 

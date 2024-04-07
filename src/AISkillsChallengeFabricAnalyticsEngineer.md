@@ -8,7 +8,7 @@ In this article, I am going to log my learnings completed as part of the AI Skil
 
 Discover how Microsoft Fabric can meet your enterprise's analytics needs in one platform. Learn about Microsoft Fabric, how it works, and identify how you can use it for your analytics needs.
 
-## **a. Introduction**
+## **1\. Introduction**
 
 Fabric provides a set of integrated services that enable you to ingest, store, process, and analyze data in a single environment.
 
@@ -27,7 +27,7 @@ Fabric includes the following services:
 * Business intelligence
     
 
-## **b. Explore end-to-end analytics with Microsoft Fabric**
+## **2\. Explore end-to-end analytics with Microsoft Fabric**
 
 Scalable analytics can be complex, fragmented, and expensive.
 
@@ -62,13 +62,13 @@ Fabric's experiences include:
 
 In the admin center you can manage groups and permissions, configure data sources and gateways, and monitor usage and performance.
 
-## **c. Data teams and Microsoft Fabric**
+## **3\. Data teams and Microsoft Fabric**
 
-## **d. Enable and use Microsoft Fabric**
+## **4\. Enable and use Microsoft Fabric**
 
 Fabric is built on Power BI and Azure Data Lake Storage, and includes capabilities from Azure Synapse Analytics, Azure Data Factory, Azure Databricks, and Azure Machine Learning.
 
-## **e. Knowledge Check**
+## **5\. Knowledge Check**
 
 Which of the following is a key benefit of using Microsoft Fabric in data projects?
 
@@ -82,7 +82,7 @@ Which of the following Fabric workloads is used to move and transform data?
 
 The Data Factory workload combines Power Query with the scale of Azure Data Factory to move and transform data.
 
-# **f. Summary**
+# **6\. Summary**
 
 Data professionals are increasingly expected to be able to work with data at scale, and to be able to do so in a way that is secure, compliant, and cost-effective.
 
@@ -90,7 +90,7 @@ At the same time, the business wants to use that data more effectively and quick
 
 Microsoft Fabric is a collection of tools and services that enables organizations to do just that. In this module, you learned about Fabric's OneLake storage, what workloads that are included in Fabric, and how to enable and use Fabric in your organization.
 
-## **g. Learning objectives**
+## **Learning objectives**
 
 In this module, you'll learn how to:
 
@@ -103,7 +103,7 @@ Lakehouses merge data lake storage flexibility with data warehouse analytics.
 
 Microsoft Fabric offers a lakehouse solution for comprehensive analytics on a single SaaS platform.
 
-## **a. Introduction**
+## **1\. Introduction**
 
 The foundation of Microsoft Fabric is a lakehouse, which is built on top of the **OneLake** scalable storage layer and uses Apache Spark and SQL compute engines for big data processing.
 
@@ -114,7 +114,7 @@ A lakehouse is a unified platform that combines:
 * The ability to query and analyze data of a data warehouse
     
 
-## **b. Explore the Microsoft Fabric lakehouse**
+## **2\. Explore the Microsoft Fabric lakehouse**
 
 A lakehouse presents as a database and is built on top of a data lake using Delta format tables.
 
@@ -148,7 +148,7 @@ After transforming your data, you can query it using SQL, use it to train machin
 
 You can also apply data governance policies to your lakehouse, such as data classification and access control.
 
-## **c. Work with Microsoft Fabric lakehouses**
+## **3\. Work with Microsoft Fabric lakehouses**
 
 You create and configure a new lakehouse in the Data Engineering workload. Each L produces three named items in the Fabric-enabled workspace:
 
@@ -161,7 +161,7 @@ You create and configure a new lakehouse in the Data Engineering workload. Each 
 
 **Shortcuts** enable you to integrate data into your lakehouse while keeping it stored in external storage.
 
-### **i. Ingest data into a lakehouse**
+### **4\. Ingest data into a lakehouse**
 
 There are many ways to load data into a Fabric lakehouse, including:
 
@@ -171,16 +171,16 @@ There are many ways to load data into a Fabric lakehouse, including:
     
 * **Notebooks**: Use notebooks in Fabric to ingest and transform data, and load it into tables or files in the lakehouse.
     
-* **Data Factory pipelines**: Copy data and orchestrate data processing activities, loading the results into tables or files in the lakehouse.  
+* **Data Factory pipelines**: Copy data and orchestrate data processing activities, loading the results into tables or files in the lakehouse.
     
 
-### **ii. Grant access to a lakehouse**
+### **5\. Grant access to a lakehouse**
 
 Fabric lakehouse permissions are granted either at the workspace or item level.
 
 You can also grant object-level security by using the SQL analytics endpoint to further control what users can access.
 
-## **d. Explore and transform data in a lakehouse**
+## **6\. Explore and transform data in a lakehouse**
 
 After loading data into the lakehouse, you can use various tools and techniques to explore and transform it, including:
 
@@ -197,13 +197,13 @@ After loading data into the lakehouse, you can use various tools and techniques 
 * **Data pipelines**: Orchestrate complex data transformation logic that operates on data in the lakehouse through a sequence of activities (such as dataflows, Spark jobs, and other control flow logic).
     
 
-### **Analyze and visualize data in a lakehouse**
+### **i. Analyze and visualize data in a lakehouse**
 
 The data in your lakehouse tables is included in a semantic model that defines a relational model for your data.
 
 By combining the data visualization capabilities of Power BI with the centralized storage and tabular schema of a data lakehouse, you can implement an end-to-end analytics solution on a single platform.
 
-## **e. Exercise - Create and ingest data with a Microsoft Fabric lakehouse**
+## **7\. Exercise - Create and ingest data with a Microsoft Fabric lakehouse**
 
 Create a Lakehouse
 
@@ -234,19 +234,19 @@ GROUP BY Item
 ORDER BY Revenue DESC;
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712465955191/53764d61-e515-4634-8f04-e1067f446842.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712465955191/53764d61-e515-4634-8f04-e1067f446842.png)
 
 ### vii. Create a visual query
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712466216745/3a1cce01-41fe-48d6-8ae8-3d6b496b5660.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712466216745/3a1cce01-41fe-48d6-8ae8-3d6b496b5660.png)
 
 ## viii. Create a report
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712466562480/ec1df57a-15a5-4f8d-a323-f0162e77f64f.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712466562480/ec1df57a-15a5-4f8d-a323-f0162e77f64f.png)
 
 ### ix. Clean up resources
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712466651314/6dbdaf3f-bbdd-457d-945c-0707ee9c9060.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712466651314/6dbdaf3f-bbdd-457d-945c-0707ee9c9060.png)
 
 In this exercise, I have created a lakehouse and imported data into it.
 
@@ -254,7 +254,7 @@ I’ve seen how a lakehouse consists of files and tables stored in a OneLake dat
 
 The managed tables can be queried using SQL, and are included in a default semantic model to support data visualizations.
 
-## f. **Knowledge check**
+## 8\. **Knowledge check**
 
 What is a Microsoft Fabric lakehouse?
 
@@ -268,7 +268,7 @@ You want to use Apache Spark to interactively explore data in a file in the lake
 
 A notebook enables interactive Spark coding.
 
-## g. **Summary**
+## 9\. **Summary**
 
 Microsoft Fabric lakehouses provide data engineers and analysts with the combined benefits of data lake storage and a relational data warehouse.
 
@@ -286,10 +286,173 @@ In this module, you'll learn how to:
     
 * Query lakehouse tables with SQL
     
-* Build report
+* build report
     
 
 # III. Use Apache Spark in Microsoft Fabric
+
+Apache Spark is a core technology for large-scale data analytics.
+
+Microsoft Fabric provides support for Spark clusters, enabling you to analyze and process data in a Lakehouse at scale.
+
+## 1\. Introduction
+
+Apache Spark is an open-source parallel processing framework for large-scale data processing and analytics.
+
+This module explores how you can use Spark in Microsoft Fabric to ingest, process, and analyze data in a lakehouse.
+
+While the core techniques and code described in this module are common to all Spark implementations, the integrated tools and ability to work with Spark in the same environment as other data services in Microsoft Fabric makes it easier to incorporate Spark-based data processing into your overall data analytics solution.
+
+## 3\. Prepare to use Apache Spark
+
+Apache Spark is a distributed data processing framework that enables large-scale data analytics by coordinating work across multiple processing nodes in a cluster.
+
+Put more simply, Spark uses a "divide and conquer" approach to processing large volumes of data quickly by distributing the work across multiple computers.
+
+The process of distributing tasks and collating results is handled for you by Spark.
+
+### **i. Spark settings**
+
+In Microsoft Fabric, each workspace is assigned a Spark cluster.
+
+### ii. **Libraries**
+
+## 3\. Run Spark code
+
+To edit and run Spark code in Microsoft Fabric, you can use notebooks, or you can define a Spark job.
+
+### i. **Notebooks**
+
+When you want to use Spark to explore and analyze data interactively, use a notebook.
+
+Notebooks enable you to combine text, images, and code written in multiple languages to create an interactive item that you can share with others and collaborate.
+
+### ii. Spark job definition
+
+If you want to use Spark to ingest and transform data as part of an automated process, you can define a Spark job to run a script on-demand or based on a schedule.
+
+## 4\. Work with data in a Spark dataframe
+
+Natively, Spark uses a data structure called a *resilient distributed dataset* (RDD); but while you *can* write code that works directly with RDDs, the most commonly used data structure for working with structured data in Spark is the *dataframe*, which is provided as part of the *Spark SQL* library.
+
+### **i. Inferring a schema**
+
+products.csv \[[Link](https://github.com/MicrosoftLearning/dp-data/blob/main/products.csv)\]
+
+```python
+%%pyspark
+df = spark.read.load('Files/data/products.csv',
+    format='csv',
+    header=True
+)
+display(df.limit(10))
+```
+
+The `%%pyspark` line at the beginning is called a *magic*, and tells Spark that the language used in this cell is PySpark.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712499408220/b30b3f1b-06db-4256-8b0a-956be975ab57.png)
+
+### ii. **Specifying an explicit schema**
+
+Specifying an explicit schema also improves performance!
+
+```python
+from pyspark.sql.types import *
+from pyspark.sql.functions import *
+
+productSchema = StructType([
+    StructField("ProductID",IntegerType()),
+    StructField("ProductName",StringType()),
+    StructField("Category",StringType()),
+    StructField("ListPrice",FloatType())
+])
+
+df = spark.read.load(
+    'Files/product-data.csv',
+    format = "csv",
+    schema = productSchema,
+    Header = False
+)
+display(df.limit(10))
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712500486157/e66d3e09-8751-4064-a750-d1ad9660347c.png)
+
+### iii. **Filtering and grouping dataframes**
+
+```python
+pricelist_df = df.select("ProductID", "ListPrice")
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712502272753/a2fd2e2b-78d1-4fd9-aa96-3db5cf515d1d.png)
+
+this example code chains the select and where methods to create a new dataframe containing the ProductName and ListPrice columns for products with a category of Mountain Bikes or Road Bikes:
+
+```python
+bikes_df = df.select("ProductName", "Category", "ListPrice").where((df["Category"]=="Mountain Bikes") | (df["Category"]=="Road Bikes"))
+display(bikes_df)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712503142282/b8a26332-9c6d-4deb-809c-7813bf04cccb.png)
+
+PySpark code counts the number of products for each category:
+
+```python
+count_df  = df.select("ProductID","Category").groupBy("Category").count()
+display(count_df)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712503553539/3a53ae4a-e1f8-4a5f-bb27-33c27c18a9b8.png)
+
+### iv. **Saving a dataframe**
+
+You'll often want to use Spark to transform raw data and save the results for further analysis or downstream processing. The following code example saves the dataFrame into a *parquet* file in the data lake, replacing any existing file of the same name.
+
+```python
+bikes_df.write.mode("overwrite").parquet('Files/bike_data/bikes.parquet')
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712503999542/a83a4b4c-2ea4-4e06-9a3f-5be2490b8506.png)
+
+### v. **Partitioning the output file**
+
+Partitioning is an optimization technique that enables Spark to maximize performance across the worker nodes. More performance gains can be achieved when filtering data in queries by eliminating unnecessary disk IO.
+
+```python
+bikes_df.write.partitionBy("Category").mode("overwrite").parquet("Files/bike_data")
+```
+
+### vi. **Load partitioned data**
+
+```python
+road_bikes_df = spark.read.parquet('Files/bike_data/Category=Road Bikes')
+display(road_bikes_df.limit(5))
+```
+
+## 5\. Work with data using Spark SQL
+
+## 6\. Visualize data in a Spark notebook
+
+## 7\. Exercise - Analyze data with Apache Spark
+
+## 8\. Knowledge check
+
+## 9\. Summary
+
+## **Learning objectives**
+
+In this module, you'll learn how to:
+
+* Configure Spark in a Microsoft Fabric workspace
+    
+* Identify suitable scenarios for Spark notebooks and Spark jobs
+    
+* Use Spark dataframes to analyze and transform data
+    
+* Use Spark SQL to query data in tables and views
+    
+* Visualize data in a Spark notebook
+    
 
 # IV. Work with Delta Lake tables in Microsoft Fabric
 

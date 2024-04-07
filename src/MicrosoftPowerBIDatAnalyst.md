@@ -69,7 +69,7 @@ You know how to assess data quality. Plus, you understand data security, includi
 
 # I. Module 1 Discover data analysis
 
-![](https://learn.microsoft.com/en-us/training/achievements/data-analytics-and-microsoft.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/data-analytics-and-microsoft.svg)
 
 | Course | Microsoft Power BI Data Analyst |
 | --- | --- |
@@ -77,7 +77,7 @@ You know how to assess data quality. Plus, you understand data security, includi
 
 Would you like to explore the journey of a data analyst and learn how a data analyst tells a story with data?
 
-### **Introduction**
+### **a. Introduction**
 
 > As a data analyst, you are on a journey.
 
@@ -91,7 +91,7 @@ Data analysis exists to help overcome these challenges and pain points, ultimate
 
 As you read on, you will learn how to use and apply analytical skills to go beyond a single report and help impact and influence your organization by telling stories with data and driving that data culture.
 
-### **Overview of data analysis**
+### **b. Overview of data analysis**
 
 > Data analysis is the process of identifying, cleaning, transforming, and modeling data to discover meaningful and useful information.
 
@@ -112,7 +112,7 @@ While the process of data analysis focuses on the tasks of cleaning, modeling, a
 
 > As the amount of data grows, so does the need for data analysts. A data analyst knows how to organize information and distill it into something relevant and comprehensible. A data analyst knows how to gather the right data and what to do with it, in other words, making sense of the data in your data overload.
 
-### **Roles in data**
+### **c. Roles in data**
 
 * Business analyst
     
@@ -125,7 +125,7 @@ While the process of data analysis focuses on the tasks of cleaning, modeling, a
 * Database administrator
     
 
-### **Tasks of a data analyst**
+### **d. Tasks of a data analyst**
 
 * Data preparation - profiling, cleaning, and transforming your data to get it ready to model and visualize.
     
@@ -138,7 +138,7 @@ While the process of data analysis focuses on the tasks of cleaning, modeling, a
 * Manage - management of Power BI
     
 
-## Answers:
+## e. Answers:
 
 A data analyst uses appropriate visuals to help business decision makers gain deep and meaningful insights from data.
 
@@ -163,15 +163,15 @@ In this module, you'll:
 | --- | --- |
 | Module 2/17 | Get started building with Power BI |
 
-![](https://learn.microsoft.com/en-us/training/achievements/get-started-power-bi.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/get-started-power-bi.svg)
 
-## **Introduction**
+## **a. Introduction**
 
 **Microsoft Power BI** is a complete reporting solution that offers data preparation, data visualization, distribution, and management through development tools and an online platform.
 
 Use Power BI to create visually stunning, interactive reports requiring complex data modeling & to serve as the analytics and decision engine.
 
-## **Use Power BI**
+## **b. Use Power BI**
 
 Power BI Desktop - development tool available to data analysts and other report creators.  
 Power BI service - allows you to organize, manage, and distribute your reports and other Power BI items, create high-level dashboards that drill down to reports.
@@ -189,13 +189,13 @@ The flow of Power BI is:
 5. Distribute and manage reports in the Power BI service.
     
 
-## **Building blocks of Power BI**
+## **c. Building blocks of Power BI**
 
 The building blocks of Power BI are **semantic models** and **visualizations**.
 
 semantic model - consists of all connected data, transformations, relationships, and calculations.
 
-## **Tour and use the Power BI service**
+## **d. Tour and use the Power BI service**
 
 **Workspaces** are the foundation of the Power BI service.
 
@@ -203,14 +203,14 @@ Distribute content - Apps are the ideal sharing solution within any organization
 
 Refresh a semantic model - configure scheduled refreshes of your semantic models in the Power BI service.
 
-## Answers:
+## e. Answers:
 
 The Power BI service lets you view and interact with reports and dashboards, but doesn't let you shape data.  
 Without a semantic model, you can't create visualizations, and reports are made up of visualizations.
 
 An app is a collection of ready-made visuals, pre-arranged in dashboards and reports. You can get apps that connect to many online services from the AppSource.
 
-## **Summary**
+## **f. Summary**
 
 Microsoft Power BI offers a complete data analytics solution that includes data preparation, visualization, and distribution.
 
@@ -246,21 +246,21 @@ In this module, you'll learn:
 | --- | --- |
 | Module 3/17 | **Get data in Power BI** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/get-data.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/get-data.svg)
 
 You'll learn how to retrieve data from a variety of data sources, including Microsoft Excel, relational databases, and NoSQL data stores.
 
 You'll also learn how to improve performance while retrieving data.
 
-# **Introduction**
+# **a. Introduction**
 
 create a suite of reports that are dependent on data in several different locations.
 
 This module will focus on the first step of getting the data from the different data sources and importing it into Power BI by using Power Query.
 
-![](https://learn.microsoft.com/en-us/training/modules/get-data/media/1-data-source-scenario-c.png#lightbox align="center")
+![](https://learn.microsoft.com/en-us/training/modules/get-data/media/1-data-source-scenario-c.png#lightbox)
 
-## **Get data from files**
+## **b. Get data from files**
 
 A flat file is a type of file that has only one data table and every row of data is in the same structure.
 
@@ -270,7 +270,7 @@ Another type of file would be the output files from different applications, like
 
 Change the source file - Data source settings.
 
-## **Get data from relational data sources**
+## **c. Get data from relational data sources**
 
 SQL Server.
 
@@ -284,27 +284,27 @@ A view is an object in a relational database, similar to a table. Views have row
 
 If Power BI uses a view, when it retrieves data, it participates in query folding, a feature of Power Query. Query folding will be explained later, but in short, Power Query will optimize data retrieval according to how the data is being used later.
 
-## **Create dynamic reports with parameters**
+## **d. Create dynamic reports with parameters**
 
 Creating dynamic reports allows you to give users more power over the data that is displayed in your reports; they can change the data source and filter the data by themselves.
 
 Power Query Editor / Home tab, select Manage parameters &gt; New parameter.
 
-## **Create dynamic reports for multiple values**
+### **i. Create dynamic reports for multiple values**
 
 To accommodate multiple values at a time, you first need to create a Microsoft Excel worksheet that has a table consisting of one column that contains the list of values.
 
-## **Get data from a NoSQL database**
+## **e. Get data from a NoSQL database**
 
 A NoSQL database (also referred to as non-SQL, not only SQL or *non-relational*) is a flexible type of database that doesn't use tables to store data.
 
 If you're working with data stored in JSON format, it's often necessary to extract and normalize the data first. This is because JSON data is often stored in a nested or unstructured format, which makes it difficult to analyze or report on directly.
 
-## **Get data from online services**
+## **f. Get data from online services**
 
 To support their daily operations, organizations frequently use a range of software applications, such as SharePoint, OneDrive, Dynamics 365, Google Analytics and so on. These applications produce their own data. Power BI can combine the data from multiple applications to produce more meaningful insights and reports.
 
-## **Select a storage mode**
+## **g. Select a storage mode**
 
 business requirements are satisfied when you're importing data into Power BI.
 
@@ -341,7 +341,7 @@ The three different types of storage modes you can choose from:
     * Using the Dual mode allows Power BI to choose the most efficient form of data retrieval.
         
 
-## **Get data from Azure Analysis Services**
+## **h. Get data from Azure Analysis Services**
 
 Azure Analysis Services is a fully managed platform as a service (PaaS) that provides enterprise-grade semantic models in the cloud.
 
@@ -356,13 +356,13 @@ Notable differences between Azure Analysis Services and SQL Server are:
 * If you don’t need an entire table, you can query the data directly. Instead of using Transact-SQL (T-SQL) to query the data, like you would in SQL Server, you can use multi-dimensional expressions (MDX) or data analysis expressions (DAX).
     
 
-## **Fix performance issues**
+## **i. Fix performance issues**
 
 Occasionally, organizations will need to address performance issues when running reports.
 
 Power BI provides the Performance Analyzer tool to help fix problems and streamline the process.
 
-### **Optimize performance in Power Query**
+### **i. Optimize performance in Power Query**
 
 The performance in Power Query depends on the performance at the data source level.
 
@@ -374,7 +374,7 @@ These topics are beyond the scope here, and are covered only as an example to bu
 
 Power Query takes advantage of good performance at the data source through a technique called Query Folding.
 
-#### Query folding
+#### 1\. Query folding
 
 *Query folding* is the process by which the transformations and edits that you make in Power Query Editor are simultaneously tracked as native queries, or simple **Select** SQL statements, while you're actively making transformations.
 
@@ -406,13 +406,13 @@ A good guideline to remember is that if you can translate a transformation into 
 
 While query folding is one option to optimize performance when retrieving, importing, and preparing data, another option is query diagnostics.
 
-### **Query diagnostics**
+### **ii. Query diagnostics**
 
 Another tool that you can use to study query performance is *query diagnostics*. You can determine what bottlenecks may exist while loading and transforming your data, refreshing your data in Power Query, running SQL statements in Query Editor, and so on.
 
 This tool is useful when you want to analyze performance on the Power Query side for tasks such as loading semantic models, running data refreshes, or running other transformative tasks.
 
-## **Other techniques to optimize performance**
+## **iii. Other techniques to optimize performance**
 
 Other ways to optimize query performance in Power BI include:
 
@@ -423,7 +423,7 @@ Other ways to optimize query performance in Power BI include:
 * **Separate date and time, if bound together.** If any of your tables have columns that combine date and time, make sure that you separate them into distinct columns before importing them into Power BI. This approach will increase compression abilities.
     
 
-## **Resolve data import errors**
+## **j. Resolve data import errors**
 
 While importing data into Power BI, you may encounter errors resulting from factors such as:
 
@@ -438,15 +438,15 @@ While importing data into Power BI, you may encounter errors resulting from fact
 
 The following sections cover some of the more common error messages that you might encounter in Power BI.
 
-### **Query timeout expired**
+### **i. Query timeout expired**
 
 Relational source systems often have many people who are concurrently using the same data in the same database. Some relational systems and their administrators seek to limit a user from monopolizing all hardware resources by setting a query timeout. These timeouts can be configured for any timespan, from as little as five seconds to as much as 30 minutes or more.
 
 For instance, if you’re pulling data from your organization’s SQL Server, you might see the error shown in the following figure.
 
-[![Screenshot of the data import errors for query timeout.](https://learn.microsoft.com/en-us/training/modules/get-data/media/9-data-import-query-timeout-ss.png align="left")](https://learn.microsoft.com/en-us/training/modules/get-data/media/9-data-import-query-timeout-ss.png#lightbox)
+![Screenshot of the data import errors for query timeout.](https://learn.microsoft.com/en-us/training/modules/get-data/media/9-data-import-query-timeout-ss.png#lightbox)
 
-### **Power BI Query Error: Timeout expired**
+### **ii. Power BI Query Error: Timeout expired**
 
 This error indicates that you’ve pulled too much data according to your organization’s policies. Administrators incorporate this policy to avoid slowing down a different application or suite of applications that might also be using that database.
 
@@ -454,7 +454,7 @@ You can resolve this error by pulling fewer columns or rows from a single table.
 
 If you need the rows, columns, and complexity, consider taking small chunks of data and then bringing them back together by using Power Query. For instance, you can combine half the columns in one query and the other half in a different query. Power Query can merge those two queries back together after you're finished.
 
-### **We couldn't find any data formatted as a table**
+### **iii. We couldn't find any data formatted as a table**
 
 Occasionally, you may encounter the “We couldn’t find any data formatted as a table” error while importing data from Microsoft Excel. Fortunately, this error is self-explanatory. Power BI expects to find data formatted as a table from Excel. The error even tells you the resolution. Perform the following steps to resolve the issue:
 
@@ -464,14 +464,14 @@ Occasionally, you may encounter the “We couldn’t find any data formatted as 
     
 3. Verify that the column headers reflect how you want to name your columns. Then, try to import data from Excel again. This time, it should work.
     
-    [![Screenshot of the Power B I Excel error: We couldn't find any data formatted as a table.](https://learn.microsoft.com/en-us/training/modules/get-data/media/9-format-as-table-excel-ss.png align="left")](https://learn.microsoft.com/en-us/training/modules/get-data/media/9-format-as-table-excel-ss.png#lightbox)
+    ![Screenshot of the Power B I Excel error: We couldn't find any data formatted as a table.](https://learn.microsoft.com/en-us/training/modules/get-data/media/9-format-as-table-excel-ss.png#lightbox)
     
 
-### **Couldn't find file**
+### **iv. Couldn't find file**
 
 While importing data from a file, you may get the "Couldn't find file" error.
 
-[![Screenshot of the Could not find file error screen.](https://learn.microsoft.com/en-us/training/modules/get-data/media/9-file-location-ss.png align="left")](https://learn.microsoft.com/en-us/training/modules/get-data/media/9-file-location-ss.png#lightbox)
+![Screenshot of the Could not find file error screen.](https://learn.microsoft.com/en-us/training/modules/get-data/media/9-file-location-ss.png#lightbox)
 
 Usually, this error is caused by the file moving locations or the permissions to the file changing. If the cause is the former, you need to find the file and change the source settings.
 
@@ -481,14 +481,14 @@ Usually, this error is caused by the file moving locations or the permissions to
     
 3. On the left, under **Query Settings**, select the gear icon next to **Source**.
     
-    [![Screenshot of the query settings pane with Source selected under Applied Steps.](https://learn.microsoft.com/en-us/training/modules/get-data/media/9-query-changes-ss.png align="left")](https://learn.microsoft.com/en-us/training/modules/get-data/media/9-query-changes-ss.png#lightbox)
+    ![Screenshot of the query settings pane with Source selected under Applied Steps.](https://learn.microsoft.com/en-us/training/modules/get-data/media/9-query-changes-ss.png#lightbox)
     
 4. Change the file location to the new location.
     
-    [![Screenshot of the file location settings pane.](https://learn.microsoft.com/en-us/training/modules/get-data/media/9-file-location-new-location-ss.png align="left")](https://learn.microsoft.com/en-us/training/modules/get-data/media/9-file-location-new-location-ss.png#lightbox)
+    ![Screenshot of the file location settings pane.](https://learn.microsoft.com/en-us/training/modules/get-data/media/9-file-location-new-location-ss.png#lightbox)
     
 
-### **Data type errors**
+### **iv. Data type errors**
 
 Sometimes, when you import data into Power BI, the columns appear blank. This situation happens because of an error in interpreting the data type in Power BI. The resolution to this error is unique to the data source. For instance, if you're importing data from SQL Server and see blank columns, you could try to convert to the correct data type in the query.
 
@@ -504,11 +504,11 @@ By specifying the correct type at the data source, you eliminate many of these c
 
 You may encounter different types of errors in Power BI that are caused by the diverse data source systems where your data resides.
 
-## **Exercise - Prepare data in Power BI Desktop**
+## **k. Exercise - Prepare data in Power BI Desktop**
 
-# Get Data in Power BI Desktop
+Get Data in Power BI Desktop
 
-## **Lab story**
+Lab story
 
 This lab is designed to introduce you to Power BI Desktop application and how to connect to data and how to use data preview techniques to understand the characteristics and quality of the source data. The learning objectives are:
 
@@ -521,11 +521,11 @@ This lab is designed to introduce you to Power BI Desktop application and how to
 * Use data profiling features in Power Query
     
 
-## **Get data from SQL Server**
+## **i. Get data from SQL Server**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712293898196/d8665311-8a1c-4691-86c7-5a22cb46e839.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712293898196/d8665311-8a1c-4691-86c7-5a22cb46e839.png)
 
-### **Preview Data in Power Query Editor**
+### **ii. Preview Data in Power Query Editor**
 
 Observed:
 
@@ -545,7 +545,7 @@ Column Distribution for EmployeeKey column
 
 *When modeling, it’s important that some model tables have unique columns. These unique columns can be used to create one-to-many relationships, which you’ll do in the****Model Data in Power BI Desktop****lab.*
 
-[![Column distribution showing 296 distinct, 296 unique values](https://microsoftlearning.github.io/PL-300-Microsoft-Power-BI-Data-Analyst/Instructions/Labs/Linked_image_Files/01-prepare-data-with-power-query-in-power-bi-desktop_image26.png align="center")](https://microsoftlearning.github.io/PL-300-Microsoft-Power-BI-Data-Analyst/Instructions/Labs/Linked_image_Files/01-prepare-data-with-power-query-in-power-bi-desktop_image26.png)
+[![Column distribution showing 296 distinct, 296 unique values](https://microsoftlearning.github.io/PL-300-Microsoft-Power-BI-Data-Analyst/Instructions/Labs/Linked_image_Files/01-prepare-data-with-power-query-in-power-bi-desktop_image26.png)](https://microsoftlearning.github.io/PL-300-Microsoft-Power-BI-Data-Analyst/Instructions/Labs/Linked_image_Files/01-prepare-data-with-power-query-in-power-bi-desktop_image26.png)
 
 #### DimReseller query
 
@@ -559,7 +559,7 @@ Column Profile for BusinessType column header - Notice the data quality issue: t
 
 column quality for the TotalProductCost column, and notice that 8% of the rows are empty - Missing TotalProductCost column values is a data quality issue. **To address the issue, in the Load Transformed Data in Power BI Desktop lab, you’ll apply transformations to fill in missing values by using the product standard cost, which is stored in the related DimProduct table.**
 
-## **Get data from a CSV file**
+## **iii. Get data from a CSV file**
 
 ResellerSalesTargets query
 
@@ -567,7 +567,7 @@ Repeat the steps to create a query based on the **D:\\Allfiles\\Resources\\Color
 
 Save / apply later.
 
-# **Check your knowledge**
+# **l. Check your knowledge**
 
 T-SQL is the query language that you would use for SQL Server.
 
@@ -575,7 +575,7 @@ You're creating a Power BI report with data from an Azure Analysis Services MDX 
 
 What can you do to improve performance when you're getting data in Power BI?Always use the least amount of data needed for your project.
 
-# **Summary**
+# **m. Summary**
 
 In this module, you learned about pulling data from many different data sources and into Power BI.
 
@@ -626,7 +626,7 @@ By the end of this module, you'll be able to:
 | --- | --- |
 | Module 4/17 | Clean, transform, and load data in Power BI |
 
-![](https://learn.microsoft.com/en-us/training/achievements/clean-transform-and-load-data-in-power-bi.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/clean-transform-and-load-data-in-power-bi.svg)
 
 Power Query has an incredible number of features that are dedicated to helping you clean and prepare your data for analysis.
 
@@ -634,7 +634,7 @@ You'll learn how to simplify a complicated model, change data types, rename obje
 
 You'll also learn how to profile columns so that you know which columns have the valuable data that you’re seeking for deeper analytics.
 
-# **Introduction**
+# **a. Introduction**
 
 When examining the data, you discover several issues, including:
 
@@ -662,7 +662,7 @@ Clean data has the following advantages:
 * Codes and integers can be replaced with human readable values.
     
 
-## **Shape the initial data**
+## **b. Shape the initial data**
 
 Power Query Editor in Power BI Desktop allows you to shape (transform) your imported data.
 
@@ -681,11 +681,11 @@ You can accomplish actions such as
 
 It is important to shape your data to ensure that it meets your needs and is suitable for use in reports.
 
-## **Get started with Power Query Editor**
+## **i. Get started with Power Query Editor**
 
-Removing columns at an early stage in the process rather than later is best, especially when you have established relationships between your tables. Removing unnecessary columns will help you to focus on the data that you need and help improve the overall performance of your Power BI Desktop semantic models and reports.  
+Removing columns at an early stage in the process rather than later is best, especially when you have established relationships between your tables. Removing unnecessary columns will help you to focus on the data that you need and help improve the overall performance of your Power BI Desktop semantic models and reports.
 
-## **Simplify the data structure**
+## **c. Simplify the data structure**
 
 Rename a query
 
@@ -695,13 +695,12 @@ Replace null values
 
 Remove duplicates
 
-## **Evaluate and change column data types**
+## **d. Evaluate and change column data types**
 
 Implications of incorrect data types
 
 Incorrect data types will prevent you from creating certain calculations, deriving hierarchies, or creating proper relationships with other tables.
 
-  
 For example, if you try to calculate the Quantity of Orders YTD, you'll get the following error stating that the OrderDate column data type isn't Date, which is required in time-based calculations.
 
 Another issue with having an incorrect data type applied on a date field is the inability to create a date hierarchy, which would allow you to analyze your data on a yearly, monthly, or weekly basis.
@@ -710,7 +709,7 @@ Change the column data type in Power Query Editor
 
 the change that you make to the column data type is saved as a programmed step. This step is called Changed Type
 
-## **Combine multiple tables into a single table**
+## **e. Combine multiple tables into a single table**
 
 You can combine tables into a single table in the following circumstances:
 
@@ -725,17 +724,120 @@ You can combine tables into a single table in the following circumstances:
 
 You can combine the tables in two different ways: merging and appending.
 
-### **Append queries**
+### **i. Append queries**
 
 When you append queries, you'll be adding rows of data to another table or query.
 
 For example, you could have two tables, one with 300 rows and another with 100 rows, and when you append queries, you'll end up with 400 rows.
 
-### **Merge queries**
+### **ii. Merge queries**
 
 When you merge queries, you'll be adding columns from one table (or query) into another. To merge two tables, you must have a column that is the key between the two tables.
 
 This process is similar to the JOIN clause in SQL.
+
+## **f. Profile data in Power BI**
+
+Profiling data is about studying the nuances of the data: determining anomalies, examining and developing the underlying data structures, and querying data statistics such as row counts, value distributions, minimum and maximum values, averages, and so on.
+
+### **i. Find data anomalies and data statistics**
+
+**Column quality** shows you the percentages of data that is valid, in error, and empty.
+
+**Column profile** gives you a more in-depth look into the statistics within the columns for the first 1,000 rows of data.
+
+**Column distribution** shows you the distribution of the data within the column and the counts of distinct and unique values, both of which can tell you details about the data counts.
+
+## **g. Use Advanced Editor to modify M code**
+
+Each time you shape data in Power Query, you create a step in the Power Query process. Those steps can be reordered, deleted, and modified where it makes sense.
+
+## **h. Exercise - Load data in Power BI Desktop**
+
+Load Transformed Data in Power BI Desktop
+
+Lab story
+
+In this lab, you’ll use data cleansing and transformation techniques to start shaping your data model.
+
+You’ll then apply the queries to load each as a table to the data model.  
+
+In this lab you learn how to:
+
+* Apply various transformations
+    
+* Load queries to the data model
+    
+
+### **i. Configure the Salesperson query**
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712480218127/0e238424-d2d5-4a29-ab4f-8658e77aa89b.png)
+
+### **ii. Configure the SalespersonRegion query**
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712481165402/b066e26a-233a-4a92-9b0a-378692d601a8.png)
+
+### **iii. Configure the Product query**
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712481752856/ed5e6a86-9b59-4ac1-85ad-c52abe81b403.png)
+
+  
+
+### **iv. Configure the Reseller query**
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712481971964/dacf771a-87fd-4aad-b816-c59d62ca185f.png)
+
+### **v. Configure the Region query**
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712482180102/4c4fc606-d703-4008-ab0d-add0e9d4cb36.png)
+
+### **vi. Configure the Sales query**
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712482671890/653486da-969d-4ad5-be46-37adee1969f6.png)
+
+### **vii. Configure the Targets query**
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712483276542/8838f1cb-f29d-47ea-b361-e7717bdbc99d.png)
+
+### **viii. Configure the ColorFormats query**
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712483337624/8714c73c-f0ea-495d-94c6-dc0ac745ecfb.png)
+
+### **ix. Update the Product query**
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712483533905/5ee0980e-00ce-4638-a9cb-004380e53f59.png)
+
+### **x. Update the ColorFormats query**
+
+In the **Query Properties** window, uncheck the **Enable Load To Report** checkbox.
+
+*Disabling the load means it will not load as a table to the data model. This is done because the query was merged with the* ***Product*** *query, which is enabled to load to the data model.*
+
+### **xi. Finish up**
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712485872290/8ec23d3a-e1e5-4287-b591-31be54604396.png)
+
+## **i. Check your knowledge**
+
+What is a risk of having null values in a numeric column?
+
+AVERAGE takes the total and divides by the number of non-null values. If NULL is synonymous with zero in the data, the average will be different from the accurate average.
+
+If you have two queries that have different data but the same column headers, and you want to combine both tables into one query with all the combined rows, which operation should you perform?
+
+Append will take two tables and combine it into one query. The combined query will have more rows while keeping the same number of columns.
+
+Which of the following selections aren't best practices for naming conventions in Power BI?
+
+Abbreviations lead to confusion because they're often overused or not universally agreed on.
+
+## j. Summary
+
+This module explained how you can take data that is difficult to read, build calculations on, and discover and make it simpler for report authors and others to use.
+
+Additionally, you learned how to combine queries so that they were fewer in number, which makes data navigation more streamlined.
+
+You also replaced renamed columns into a human readable form and reviewed good naming conventions for objects in Power BI.
 
 ## **Learning objectives**
 
@@ -766,9 +868,212 @@ By the end of this module, you’ll be able to:
 | --- | --- |
 | Module 5/17 | **Design a semantic model in Power BI** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/design-a-data-model-in-power-bi.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/design-a-data-model-in-power-bi.svg)
 
-i
+Building a great semantic model is about simplifying the disarray.
+
+A star schema is one way to simplify a semantic model.
+
+You will also learn about why choosing the correct data granularity is important for performance and usability of your Power BI reports.
+
+Finally, you learn about improving performance with your Power BI semantic models.
+
+## a. Introduction
+
+A good semantic model offers the following benefits:
+
+* Data exploration is faster.
+    
+* Aggregations are simpler to build.
+    
+* Reports are more accurate.
+    
+* Writing reports takes less time.
+    
+* Reports are easier to maintain in the future.
+    
+
+Typically, a smaller semantic model is composed of fewer tables and fewer columns in each table that the user can see.
+
+To summarize, you should aim for simplicity when designing your semantic models.
+
+### **i. Star schemas**
+
+**Now that you have learned about the relationships that make up the data schema, you are able to explore a specific type of schema design, the star schema, which is optimized for high performance and usability.**
+
+### **ii. Fact tables**
+
+**Fact tables** contain observational or event data values: sales orders, product counts, prices, transactional dates and times, and quantities.
+
+> Fact tables can contain several repeated values.
+
+For example, one product can appear multiple times in multiple rows, for different customers on different dates. These values can be aggregated to create visuals.
+
+For instance, a visual of the total sales orders is an aggregation of all sales orders in the fact table.
+
+With fact tables, it is common to see columns that are filled with numbers and dates. The numbers can be units of measurement, such as sale amount, or they can be keys, such as a customer ID. The dates represent time that is being recorded, like order date or shipped date.
+
+> The Sales table contains the sales order values, which can be aggregated, it is considered a fact table.
+
+### **iii. Dimension tables**
+
+**Dimension tables** contain the details about the data in fact tables: products, locations, employees, and order types.
+
+These tables are connected to the fact table through key columns.
+
+> Dimension tables are used to filter and group the data in fact tables.
+
+The fact tables, on the other hand, contain the measurable data, such as sales and revenue, and each row represents a unique combination of values from the dimension tables.
+
+For the total sales orders visual, you could group the data so that you see total sales orders by product, in which product is data in the dimension table.
+
+Fact tables are much larger than dimension tables because numerous events occur in fact tables, such as individual sales.
+
+Dimension tables are typically smaller because you are limited to the number of items that you can filter and group on.
+
+For instance, a year contains only so many months, and the United States are composed of only a certain number of states.
+
+> The Employee table contains the specific employee name, which filters the sales orders, so it would be a dimension table.
+
+### Note:
+
+> The Sales table contains the sales order values, which can be aggregated, it is considered a fact table.
+
+> The Employee table contains the specific employee name, which filters the sales orders, so it would be a dimension table
+
+> Star schemas and the underlying semantic model are the foundation of organized reports; the more time you spend creating these connections and design, the easier it will be to create and maintain reports.
+
+## b. Work with tables
+
+This process of formatting and configuring tables can also be done in Power Query.
+
+## c. Create a date table
+
+During report creation in Power BI, a common business requirement is to make calculations based on date and time. Organizations want to know how their business is doing over months, quarters, fiscal years, and so on.
+
+You can create a common date table that can be used by multiple tables.
+
+### **i. Create a common date table**
+
+Ways that you can build a common date table are:
+
+* Source data
+    
+* DAX
+    
+* Power Query
+    
+
+## **ii. DAX**
+
+You can use the Data Analysis Expression (DAX) functions CALENDARAUTO() or CALENDAR() to build your common date table.
+
+The CALENDARAUTO() function returns a contiguous, complete range of dates that are automatically determined from your semantic model.
+
+The starting date is chosen as the earliest date that exists in your semantic model, and the ending date is the latest date that exists in your semantic model plus data that has been populated to the fiscal month that you can choose to include as an argument in the CALENDARAUTO() function.
+
+```sql
+Dates  = CALENDAR(DATE(2011, 5, 31), DATE(2022, 12, 31))
+```
+
+```sql
+Year = YEAR(Dates[Date])
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712474368697/7fba5578-5976-48db-b3fb-d098ed3a8e87.png)
+
+### iii. **Power Query**
+
+You can use M-language, the development language that is used to build queries in Power Query, to define a common date table.
+
+```sql
+= List.Dates(
+#date(2011,05,31), // start date
+365*10, //Dates for everyday for the next 10 years
+#duration(1,0,0,0) //Specifies duration of the period 1 = days, 0 = hours, 0 = minutes, 0 = seconds
+)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712475164272/13e4d88f-79fb-496b-8b17-61ed2a49d012.png)
+
+## d. Work with dimensions
+
+When building a star schema, you will have dimension and fact tables.
+
+Fact tables contain information about events such as sales orders, shipping dates, resellers, and suppliers.
+
+Dimension tables store details about business entities, such as products or time, and are connected back to fact tables through a relationship.
+
+You can use hierarchies as one source to help you find detail in dimension tables. These hierarchies form through natural segments in your data.
+
+For instance, you can have a hierarchy of dates in which your dates can be segmented into years, months, weeks, and days.
+
+Hierarchies are useful because they allow you to drill down into the specifics of your data instead of only seeing the data at a high level.
+
+### **i. Hierarchies**
+
+To create a hierarchy, go to the **Fields** pane on Power BI and then right-click the column that you want the hierarchy for. Select **New hierarchy**,
+
+Parent-child hierarchy
+
+Flatten parent-child hierarchy
+
+The process of viewing multiple child levels based on a top-level parent is known as *flattening the hierarchy*.
+
+In this process, you are creating multiple columns in a table to show the hierarchical path of the parent to the child in the same record. You will use PATH(), a simple DAX function that returns a text version of the managerial path for each employee, and PATHITEM() to separate this path into each level of managerial hierarchy.
+
+```sql
+Path = PATH(Employee[Employee ID], Employee[Manager ID])
+```
+
+To flatten the hierarchy, you can separate each level by using the PATHITEM function.  
+To view all three levels of the hierarchy separately, you can create four columns in the same way that you did previously, by entering the following equations. You will use the PATHITEM function to retrieve the value that resides in the corresponding level of your hierarchy.
+
+* *Level 1 = PATHITEM(Employee\[Path\],1)*
+    
+* *Level 2 = PATHITEM(Employee\[Path\],2)*
+    
+* *Level 3 = PATHITEM(Employee\[Path\],3)*
+    
+
+### **ii. Role-playing dimensions**
+
+Role-playing dimensions have multiple valid relationships with fact tables, meaning that the same dimension can be used to filter multiple columns or tables of data. As a result, you can filter data differently depending on what information you need to retrieve.
+
+Calendar is the dimension table, while Sales and Order are fact tables.
+
+The dimension table has two relationships: one with Sales and one with Order.
+
+This example is of a role-playing dimension because the Calendar table can be used to group data in both Sales and Order.
+
+If you wanted to build a visual in which the Calendar table references the Order and the Sales tables, the Calendar table would act as a role-playing dimension.
+
+## e. Define data granularity
+
+Data granularity is the detail that is represented within your data, meaning that the more granularity your data has, the greater the level of detail within your data.
+
+## f. Work with relationships and cardinality
+
+## g. Resolve modeling challenges
+
+## h. Exercise - Model data in Power BI Desktop
+
+## i. Check your knowledge
+
+## j. Summary
+
+## **k. Learning objectives**
+
+In this module, you will:
+
+* Create common date tables
+    
+* Configure many-to-many relationships
+    
+* Resolve circular relationships
+    
+* Design star schemas
+    
 
 ---
 
@@ -778,7 +1083,7 @@ i
 | --- | --- |
 | Module 6/17 |  |
 
-![](https://learn.microsoft.com/en-us/training/achievements/add-measures-power-bi-desktop.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/add-measures-power-bi-desktop.svg)
 
 i
 
@@ -790,7 +1095,7 @@ i
 | --- | --- |
 | Module 7/17 | **Add calculated tables and columns to Power BI Desktop models** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/dax-power-bi-add-calculated-tables.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/dax-power-bi-add-calculated-tables.svg)
 
 i
 
@@ -802,7 +1107,7 @@ i
 | --- | --- |
 | Module 8/17 | **Use DAX time intelligence functions in Power BI Desktop models** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/use-dax-power-bi-desktop.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/use-dax-power-bi-desktop.svg)
 
 ---
 
@@ -812,7 +1117,7 @@ i
 | --- | --- |
 | Module 9/17 | **Optimize a model for performance in Power BI** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/optimize-model-power-bi.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/optimize-model-power-bi.svg)
 
 ---
 
@@ -822,7 +1127,7 @@ i
 | --- | --- |
 | Module 10/17 | **Design Power BI reports** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/power-bi-effective-reports.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/power-bi-effective-reports.svg)
 
 ---
 
@@ -832,7 +1137,7 @@ i
 | --- | --- |
 | Module 11/17 | **Configure Power BI report filters** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/power-bi-effective-filters.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/power-bi-effective-filters.svg)
 
 ---
 
@@ -842,7 +1147,7 @@ i
 | --- | --- |
 | Module 12/17 | **Enhance Power BI report designs for the user experience** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/power-bi-effective-user-experience.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/power-bi-effective-user-experience.svg)
 
 ---
 
@@ -852,7 +1157,7 @@ i
 | --- | --- |
 | Module 13/17 | **Perform analytics in Power BI** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/perform-analytics-power-bi.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/perform-analytics-power-bi.svg)
 
 ---
 
@@ -862,7 +1167,7 @@ i
 | --- | --- |
 | Module 14/17 | **Create and manage workspaces in Power BI** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/create-manage-workspaces-power-bi.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/create-manage-workspaces-power-bi.svg)
 
 ---
 
@@ -872,7 +1177,7 @@ i
 | --- | --- |
 | Module 15/17 | **Manage semantic models in Power BI** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/manage-datasets-in-power-bi.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/manage-datasets-in-power-bi.svg)
 
 ---
 
@@ -882,7 +1187,7 @@ i
 | --- | --- |
 | Module 16/17 | **Create dashboards in Power BI** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/create-dashboards-power-bi.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/create-dashboards-power-bi.svg)
 
 ---
 
@@ -892,7 +1197,7 @@ i
 | --- | --- |
 | Module 17/17 | **Implement row-level security** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/row-level-security-power-bi.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/row-level-security-power-bi.svg)
 
 ---
 
@@ -909,7 +1214,7 @@ Learning Objectives,
 
 # Source: Microsoft Power BI Data Analyst \[[Link](https://learn.microsoft.com/en-us/training/courses/pl-300t00)\]
 
-# Author: Dheeraj.y
+# Author: Dheeraj.Yss
 
 # Connect with me:
 

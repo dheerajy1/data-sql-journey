@@ -431,13 +431,443 @@ display(road_bikes_df.limit(5))
 
 ## 5\. Work with data using Spark SQL
 
+The Dataframe API is part of a Spark library named Spark SQL, which enables data analysts to use SQL expressions to query and manipulate data.
+
+### **i. Creating database objects in the Spark catalog**
+
+```python
+df.createOrReplaceTempView("products_view")
+```
+
+```python
+df.createOrReplaceTempView("Vproducts")
+df2 = spark.sql("SELECT * FROM Vproducts")
+display(df2)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712550404595/7ccb7870-6369-4d56-b086-8fec3552823a.png)
+
+You can create an empty table by using the `spark.catalog.createTable` method, or you can save a dataframe as a table by using its `saveAsTable` method. Deleting a managed table also deletes its underlying data.
+
+```python
+spark.catalog.createTable("tEmpty",schema = spark.range(1).schema, source = 'parquet')
+```
+
+```python
+spark.catalog.listTables()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712554587241/8ce58dfd-b149-45df-b2b6-a1e1bad4f804.png)
+
+```python
+spark.sql("DROP TABLE tEmpty")
+```
+
+above code skipped taking &gt;50 min time.
+
+For example, the following code saves a dataframe as a new table named **products**:
+
+```python
+df.write.format("delta").saveAsTable("products")
+```
+
+```python
+%%pyspark
+
+df3 = spark.sql("SELECT * FROM productscopy")
+display(df3.limit(10))
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712558951143/c3a3d402-e2d7-4ee0-88d1-c7730771f2d5.png)
+
+Delta tables support features commonly found in relational database systems, including transactions, versioning, and support for streaming data.
+
+Additionally, you can create *external* tables by using the `spark.catalog.createExternalTable` method. External tables define metadata in the catalog but get their underlying data from an external storage location; typically a folder in the **Files** storage area of a lakehouse. Deleting an external table doesn't delete the underlying data.
+
+### **ii. Using the Spark SQL API to query data**
+
+```python
+bikes_df = spark.sql("SELECT * FROM productscopy WHERE Category IN ('Mountain Bikes', 'Road Bikes')")
+display(bikes_df)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712559268582/eceb2b96-b74b-4ed7-b1a6-b00235aaed87.png)
+
+### **iii. Using SQL code**
+
+```python
+%%sql
+
+SELECT
+    Category,
+    COUNT(ProductID) AS ProductCount
+FROM productscopy
+GROUP BY Category
+ORDER BY Category
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712559503834/e6bc2df3-c4f0-47e3-a259-d63056ca7bae.png)
+
 ## 6\. Visualize data in a Spark notebook
+
+### i. Using built-in notebook charts
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712559840956/fadf91e0-72b3-426c-bc5b-8b3bbbf98e56.png)
+
+### ii. **Using graphics packages in code**
+
+```python
+from matplotlib import pyplot as plt
+
+# Get the data as a Pandas dataframe
+data = spark.sql("SELECT Category, COUNT(ProductID) AS ProductCount \
+                  FROM products \
+                  GROUP BY Category \
+                  ORDER BY Category").toPandas()
+
+# Clear the plot area
+plt.clf()
+
+# Create a Figure
+fig = plt.figure(figsize=(12,8))
+
+# Create a bar plot of product counts by category
+plt.bar(x=data['Category'], height=data['ProductCount'], color='orange')
+
+# Customize the chart
+plt.title('Product Counts by Category')
+plt.xlabel('Category')
+plt.ylabel('Products')
+plt.grid(color='#95a5a6', linestyle='--', linewidth=2, axis='y', alpha=0.7)
+plt.xticks(rotation=70)
+
+# Show the plot area
+plt.show()
+```
+
+```python
+from matplotlib import pyplot as plt
+
+# Get the data as a Pandas dataframe
+data = spark.sql("SELECT Category, COUNT(ProductID) AS ProductCount FROM productscopy GROUP BY Category ORDER BY Category").toPandas()
+
+# Clear the plot area
+plt.clf()
+
+# Create a Figure
+fig = plt.figure(figsize=(12,8))
+
+# Create a bar plot of product counts by category
+plt.bar(x = data["Category"], height = data["ProductCount"])
+
+# Customize the chart
+plt.title("Products Count by Category")
+plt.xlabel("Category")
+plt.ylabel("Products")
+plt.xticks(rotation=70)
+
+# Show the plot area
+plt.show()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712563209876/2a32d2f9-3e18-4686-b9f0-1f75c30d0bbb.jpeg)
 
 ## 7\. Exercise - Analyze data with Apache Spark
 
+### i. Create a lakehouse and upload files
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712563686914/fdc35feb-a8a3-48b4-a328-21b872dadf5d.png)
+
+### ii. Create a notebook
+
+### iii. Load data into a dataframe
+
+```python
+from pyspark.sql.types import *
+
+orderSchema = StructType([
+    StructField("SalesOrderNumber", StringType()),
+    StructField("SalesOrderLineNumber",IntegerType()),
+    StructField("OrderDate",DateType()),
+    StructField("CustomerName",StringType()),
+    StructField("Email",StringType()),
+    StructField("Item", StringType()),
+    StructField("Quantity", IntegerType()),
+    StructField("UnitPrice", FloatType()),
+    StructField("Tax", FloatType())
+])
+
+df = spark.read.format("csv").schema(orderSchema).load("Files/orders/2019.csv")
+
+display(df)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712564696395/1c3a4946-5b35-414e-a9f9-cf2bed26a68c.png)
+
+Create view:
+
+```python
+df.createOrReplaceTempView("vOrders")
+
+data = spark.sql("SELECT * FROM vOrders")
+
+display(data)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712565179453/f3af631c-be78-40c5-a282-581f07b800ce.png)
+
+count:
+
+```python
+data = spark.sql("SELECT YEAR(OrderDate) AS OrderYear, COUNT(SalesOrderNumber) FROM vOrders GROUP BY YEAR(OrderDate) ORDER BY YEAR(OrderDate)")
+
+display(data)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712566266843/099c47ef-0ec0-44d7-a07d-e9e7a2ca1a24.png)
+
+### iv. Explore data in a dataframe
+
+#### a. Filter a dataframe
+
+```python
+customers = df["CustomerName","Email"]
+
+print(customers.count())
+print(customers.distinct().count())
+display(customers.distinct())
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712566603902/7b371cf9-4102-4724-a58c-c42c3c5c4bdd.png)
+
+```python
+customers = df["CustomerName","Email"].where(df["Item"] == 'Road-250 Red, 52')
+
+print(customers.count())
+print(customers.distinct().count())
+display(customers.distinct())
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712566828366/92facee2-1758-4264-a795-71ff0023c886.png)
+
+#### b. Aggregate and group data in a dataframe:
+
+```python
+yearlySales = df.select(year(col("OrderDate")).alias("Year")).groupBy("Year").count().orderBy("Year")
+display(yearlySales)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712567595034/3f8fe0e3-2786-42fa-bb00-2a9792f27412.png)
+
+### v. Use Spark to transform data files
+
+#### i. Use dataframe methods and functions to transform data
+
+```python
+
+## Create Year and Month columns
+transformed_df = df.withColumn("Year",year(col("OrderDate"))).withColumn("Month",month(col("OrderDate")))
+
+# Create the new FirstName and LastName fields
+transformed_df = transformed_df.withColumn("FirstName",split(col("customerName")," ").getItem(0)).withColumn("LastName",split(col("customerName")," ").getItem(1))
+
+# Filter and reorder columns
+transformed_df = transformed_df["SalesOrderNumber", "SalesOrderLineNumber", "OrderDate", "Year", "Month", "FirstName", "LastName", "Email", "Item", "Quantity", "UnitPrice", "Tax"]
+
+# Display the first five orders
+display(transformed_df.limit(5))
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712568346447/ee1e3deb-cd24-4c75-998a-6786e7e35f5f.png)
+
+#### ii. Save the transformed data
+
+```python
+transformed_df.write.mode("overwrite").parquet("Files/transformed_data/orders")
+print("Transformed Data Saved as a parquet file")
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712568742494/64335239-e091-43d5-8af9-69791fb77855.png)
+
+```python
+orders_df = spark.read.format("parquet").load("Files/transformed_data/orders")
+
+display(orders_df)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712569030980/1d4fba20-e101-4fc8-a926-7a5c4a2be0a7.png)
+
+#### iii. Save data in partitioned files
+
+```python
+orders_df.write.partitionBy("Year","Month").mode("overwrite").parquet("Files/partitioned_data")
+print("Transformed pratitioned data, saved in a parquet file format")
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712569500453/405ce355-3c51-4706-955c-096ee2792b6c.png)
+
+```python
+orders_2021_df = spark.read.format("parquet").load("Files/partitioned_data/Year=2021/Month=*")
+display(orders_2021_df)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712569732762/eed9ed9f-3cdb-43e3-9b4d-5982ca6ac874.png)
+
+Note that the partitioning columns specified in the path (**Year** and **Month**) are not included in the dataframe.
+
+### vi. Work with tables and SQL
+
+#### i. Create a table
+
+```python
+spark.sql("DROP TABLE salesorders")
+
+df.write.format("delta").saveAsTable("salesorders")
+
+spark.sql("DESCRIBE EXTENDED salesorders").show(truncate=False)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712573622030/06bfc7ff-6efc-4955-a373-37916712f2a4.png)
+
+```python
+df = spark.sql("SELECT * FROM [your_lakehouse].salesorders LIMIT 1000")
+display(df)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712573785726/eeeb2eab-4017-4367-88f6-9aeaba7894a1.png)
+
+#### ii. Run SQL code in a cell
+
+```sql
+%%sql
+SELECT YEAR(OrderDate) AS OrderYear,
+       SUM((UnitPrice * Quantity) + Tax) AS GrossRevenue
+FROM salesorders
+GROUP BY YEAR(OrderDate)
+ORDER BY OrderYear;
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712574081973/82ec6eeb-60af-4d72-86b9-736e50ffe5b7.png)
+
+### vii. Visualize data with Spark
+
+```sql
+%%sql
+
+SELECT
+    *
+FROM salesorders
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712575077400/bf898143-e953-4a06-8765-01fcdef43368.png)
+
+#### viii. Get started with matplotlib
+
+```sql
+sqlQuery = "SELECT CAST(YEAR(OrderDate) AS CHAR(4)) AS OrderYear, \
+                SUM((UnitPrice * Quantity) + Tax) AS GrossRevenue \
+            FROM salesorders \
+            GROUP BY CAST(YEAR(OrderDate) AS CHAR(4)) \
+            ORDER BY OrderYear"
+df_spark = spark.sql(sqlQuery)
+df_spark.show()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712575579503/0adc6a80-1ef2-4ea9-a865-1540d988eedf.png)
+
+```sql
+from matplotlib import pyplot as plt
+
+# matplotlib requires a Pandas dataframe, not a Spark one
+df_sales = df_spark.toPandas()
+
+# Create a bar plot of revenue by year
+plt.bar(x=df_sales['OrderYear'], height=df_sales['GrossRevenue'])
+
+# Display the plot
+plt.show()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712575641004/a5f6f06a-3dec-49d3-a53b-a2ea48e1acac.png)
+
+```sql
+from matplotlib import pyplot as plt
+
+# Clear the plot area
+plt.clf()
+
+# Create a Figure
+fig = plt.figure(figsize=(8,3))
+
+# Create a bar plot of revenue by year
+plt.bar(x=df_sales['OrderYear'], height=df_sales['GrossRevenue'], color='orange')
+
+# Customize the chart
+plt.title('Revenue by Year')
+plt.xlabel('Year')
+plt.ylabel('Revenue')
+plt.grid(color='#95a5a6', linestyle='--', linewidth=2, axis='y', alpha=0.7)
+plt.xticks(rotation=45)
+
+# Show the figure
+plt.show()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712575740825/64c68b67-b35f-4fab-b575-832edcfa73c0.png)
+
+```sql
+from matplotlib import pyplot as plt
+
+# Clear the plot area
+plt.clf()
+
+# Create a figure for 2 subplots (1 row, 2 columns)
+fig, ax = plt.subplots(1, 2, figsize = (10,4))
+
+# Create a bar plot of revenue by year on the first axis
+ax[0].bar(x=df_sales['OrderYear'], height=df_sales['GrossRevenue'], color='orange')
+ax[0].set_title('Revenue by Year')
+
+# Create a pie chart of yearly order counts on the second axis
+yearly_counts = df_sales['OrderYear'].value_counts()
+ax[1].pie(yearly_counts)
+ax[1].set_title('Orders per Year')
+ax[1].legend(yearly_counts.keys().tolist())
+
+# Add a title to the Figure
+fig.suptitle('Sales Data')
+
+# Show the figure
+plt.show()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712575857732/4903bce5-f394-4b7a-86b4-d25baa4bcb0f.png)
+
+#### ix. Use the seaborn library
+
+### viii. Save the notebook and end the Spark session
+
+### ix. Clean up resources
+
 ## 8\. Knowledge check
 
+You want to use Apache Spark to explore data interactively in Microsoft Fabric. What should you create?
+
+Notebooks enable you to run Spark code interactively.
+
+You need to use Spark to analyze data in a CSV file. What's the simplest way to accomplish this goal?
+
+You can load data from files in many formats, including CSV, into a Spark dataframe.  
+
+Which method is used to split the data across folders when saving a dataframe?
+
+The partitionBy method partitions the dataframe based on specified columns.
+
 ## 9\. Summary
+
+Apache Spark is a key technology used in big data analytics.
+
+Spark support in Microsoft Fabric enables you to integrate big data processing in Spark with the other data analytics and visualization capabilities of the platform.
 
 ## **Learning objectives**
 

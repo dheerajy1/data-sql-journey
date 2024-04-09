@@ -1464,6 +1464,174 @@ In this module, you'll learn how to:
 
 # V. Use Data Factory pipelines in Microsoft Fabric
 
+Microsoft Fabric includes Data Factory capabilities, including the ability to create pipelines that orchestrate data ingestion and transformation tasks.
+
+## 1\. Introduction
+
+Data pipelines define a sequence of activities that orchestrate an overall process, usually by extracting data from one or more sources and loading it into a destination; often transforming it along the way.
+
+Pipelines are commonly used to automate *extract*, *transform*, and *load* (ETL) processes that ingest transactional data from operational data stores into an analytical data store, such as a lakehouse or data warehouse.
+
+They use the same architecture of connected activities to define a process that can include multiple kinds of data processing tasks and control flow logic.
+
+You can run pipelines interactively in the Microsoft Fabric user interface, or schedule them to run automatically.
+
+## 2\. Understand pipelines
+
+Pipelines in Microsoft Fabric encapsulate a sequence of *activities* that perform data movement and processing tasks.
+
+You can use a pipeline to define data transfer and transformation activities, and orchestrate these activities through control flow activities that manage branching, looping, and other typical processing logic.
+
+The graphical pipeline *canvas* in the Fabric user interface enables you to build complex pipelines with minimal or no coding required.
+
+### i. Core pipeline concepts
+
+#### 1 Activities
+
+Activities are the executable tasks in a pipeline. You can define a flow of activities by connecting them in a sequence. The outcome of a particular activity (success, failure, or completion) can be used to direct the flow to the next activity in the sequence.
+
+There are two broad categories of activity in a pipeline.
+
+##### Data transformation activities -
+
+activities that encapsulate data transfer operations, including simple Copy Data activities that extract data from a source and load it to a destination, and more complex Data Flow activities that encapsulate dataflows (Gen2) that apply transformations to the data as it is transferred. Other data transformation activities include Notebook activities to run a Spark notebook, Stored procedure activities to run SQL code, Delete data activities to delete existing data, and others.
+
+##### Control flow activities -
+
+activities that you can use to implement loops, conditional branching, or manage variable and parameter values. The wide range of control flow activities enables you to implement complex pipeline logic to orchestrate data ingestion and transformation flow.
+
+#### 2 Parameters
+
+Pipelines can be parameterized, enabling you to provide specific values to be used each time a pipeline is run. For example, you might want to use a pipeline to save ingested data in a folder, but have the flexibility to specify a folder name each time the pipeline is run.
+
+Using parameters increases the reusability of your pipelines, enabling you to create flexible data ingestion and transformation processes.
+
+#### 3 Pipeline runs
+
+Each time a pipeline is executed, a data pipeline run is initiated. Runs can be initiated on-demand in the Fabric user interface or scheduled to start at a specific frequency. Use the unique run ID to review run details to confirm they completed successfully and investigate the specific settings used for each execution.
+
+## 3\. Use the Copy Data activity
+
+Many pipelines consist of a single **Copy Data** activity that is used to ingest data from an external source into a lakehouse file or table.
+
+You can also combine the Copy Data activity with other activities to create a repeatable data ingestion process - for example by using a Delete data activity to remove existing data, a Copy Data activity to replace the deleted data with a file containing data from an external source, and a Notebook activity to run Spark code that transforms the data in the file and loads it into a table.
+
+### i. The Copy Data tool
+
+### ii. Copy Data activity settings
+
+### iii. When to use the Copy Data activity
+
+Use the Copy Data activity when you need to copy data directly between a supported source and destination without applying any transformations, or when you want to import the raw data and apply transformations in later pipeline activities.
+
+If you need to apply transformations to the data as it is ingested, or merge data from multiple sources, consider using a Data Flow activity to run a dataflow (Gen2). You can use the Power Query user interface to define a dataflow (Gen2) that includes multiple transformation steps, and include it in a pipeline.
+
+## 4\. Use pipeline templates
+
+You can define pipelines from any combination of activities you choose, enabling to create custom data ingestion and transformation processes to meet your specific needs. However, there are many common pipeline scenarios for which Microsoft Fabric includes predefined pipeline templates that you can use and customize as required.
+
+## 5\. Run and monitor pipelines
+
+When you have completed a pipeline, you can use the Validate option to check that is configuration is valid, and then either run it interactively or specify a schedule.
+
+## 6\. Exercise - Ingest data with a pipeline
+
+### i. Create a workspace
+
+### ii. Create a lakehouse
+
+**new\_data**
+
+### iii. Create a pipeline
+
+Ingest Sales Data
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712673664693/ef39198d-6b08-409a-84b2-70bb4f654a0f.png)
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712673725921/e8c80e2d-1faf-4c5f-8e95-b315315ff110.png)
+
+In LH:
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712673754114/9ce73d42-fe8b-472c-bed9-a55533039675.png)
+
+### iv. Create a notebook
+
+In the … menu for the cell (at its top-right) select Toggle parameter cell. This configures the cell so that the variables declared in it are treated as parameters when running the notebook from a pipeline.
+
+This code loads the data from the sales.csv file that was ingested by the Copy Data activity, applies some transformation logic, and saves the transformed data as a table - appending the data if the table already exists.
+
+```sql
+from spark.sql.functions import *
+
+# Read the new sales data
+df = spark.read.format("csv").option("header","true").load("Files/new_data/*.csv")
+
+## Add month and year columns
+df = df.withColumn("Year",year(col("OrderDate"))).withColumn("Month",month(col("OrderDate")))
+
+# Derive FirstName and LastName columns
+df = df.withColumn("FirstName",split(col("CustomerName")," ").getItem(0)).withColumn("LastName",split(col("CustomerName")," ").getItem(1))
+
+# Filter and reorder columns
+df = df["SalesOrderNumber", "SalesOrderLineNumber", "OrderDate", "Year", "Month", "FirstName", "LastName", "EmailAddress", "Item", "Quantity", "UnitPrice", "TaxAmount"]
+
+# Load the data into a table
+df.write.format("delta").mode("append").saveAsTable("table_name")
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712677878712/10c6cc28-ca38-4632-8cbe-b59833c763dd.png)
+
+### v. Modify the pipeline
+
+Now that you’ve implemented a notebook to transform data and load it into a table, you can incorporate the notebook into a pipeline to create a reusable ETL process.
+
+The table\_name parameter will be passed to the notebook and override the default value assigned to the table\_name variable in the parameters cell.
+
+In this exercise, you implemented a data ingestion solution that uses a pipeline to copy data to your lakehouse from an external source, and then uses a Spark notebook to transform the data and load it into a table.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712678767671/af07710f-bde1-45d3-bd5c-f3da5663523c.png)
+
+### vi. Clean up resources
+
+## 7\. Knowledge check
+
+What is a data pipeline?
+
+A sequence of activities to orchestrate a data ingestion or transformation process
+
+A pipeline consists of activities to ingest and transform data.
+
+You want to use a pipeline to copy data to a folder with a specified name for each run. What should you do?
+
+Add a parameter to the pipeline and use it to specify the folder name for each run
+
+Using a parameter enables greater flexibility for your pipeline.
+
+You have previously run a pipeline containing multiple activities. What's the best way to check how long each individual activity took to complete?
+
+View the run details in the run history.
+
+The run history details show the time taken for each activity - optionally as a Gantt chart.
+
+## 8\. Summary
+
+With Microsoft Fabric, you can create pipelines that encapsulate complex data ingestion and transformation processes. Pipelines provide an effective way to orchestrate data processing tasks that can be run on-demand or at scheduled intervals.
+
+## **Learning objectives**
+
+In this module, you'll learn how to:
+
+* Describe pipeline capabilities in Microsoft Fabric
+    
+* Use the Copy Data activity in a pipeline
+    
+* Create pipelines based on predefined templates
+    
+* Run and monitor pipelines
+    
+
+implemented a data ingestion solution that uses a pipeline to copy data to lakehouse from an external source, and then a Spark notebook to transform the data and load it into a table.
+
 # VI. Ingest Data with Dataflows Gen2 in Microsoft Fabric
 
 # VII. Ingest data with Spark and Microsoft Fabric notebooks

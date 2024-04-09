@@ -69,7 +69,7 @@ You know how to assess data quality. Plus, you understand data security, includi
 
 # I. Module 1 Discover data analysis
 
-![](https://learn.microsoft.com/en-us/training/achievements/data-analytics-and-microsoft.svg)
+![](https://learn.microsoft.com/en-us/training/achievements/data-analytics-and-microsoft.svg align="center")
 
 | Course | Microsoft Power BI Data Analyst |
 | --- | --- |
@@ -163,7 +163,7 @@ In this module, you'll:
 | --- | --- |
 | Module 2/17 | Get started building with Power BI |
 
-![](https://learn.microsoft.com/en-us/training/achievements/get-started-power-bi.svg)
+![](https://learn.microsoft.com/en-us/training/achievements/get-started-power-bi.svg align="center")
 
 ## **1\. Introduction**
 
@@ -246,7 +246,7 @@ In this module, you'll learn:
 | --- | --- |
 | Module 3/17 | **Get data in Power BI** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/get-data.svg)
+![](https://learn.microsoft.com/en-us/training/achievements/get-data.svg align="center")
 
 You'll learn how to retrieve data from a variety of data sources, including Microsoft Excel, relational databases, and NoSQL data stores.
 
@@ -258,7 +258,7 @@ create a suite of reports that are dependent on data in several different locati
 
 This module will focus on the first step of getting the data from the different data sources and importing it into Power BI by using Power Query.
 
-![](https://learn.microsoft.com/en-us/training/modules/get-data/media/1-data-source-scenario-c.png#lightbox)
+![](https://learn.microsoft.com/en-us/training/modules/get-data/media/1-data-source-scenario-c.png#lightbox align="center")
 
 ## **2\. Get data from files**
 
@@ -523,7 +523,7 @@ This lab is designed to introduce you to Power BI Desktop application and how to
 
 ## **i. Get data from SQL Server**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712293898196/d8665311-8a1c-4691-86c7-5a22cb46e839.png)
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712293898196/d8665311-8a1c-4691-86c7-5a22cb46e839.png align="center")
 
 ### **ii. Preview Data in Power Query Editor**
 
@@ -545,7 +545,7 @@ Column Distribution for EmployeeKey column
 
 *When modeling, it’s important that some model tables have unique columns. These unique columns can be used to create one-to-many relationships, which you’ll do in the****Model Data in Power BI Desktop****lab.*
 
-[![Column distribution showing 296 distinct, 296 unique values](https://microsoftlearning.github.io/PL-300-Microsoft-Power-BI-Data-Analyst/Instructions/Labs/Linked_image_Files/01-prepare-data-with-power-query-in-power-bi-desktop_image26.png)](https://microsoftlearning.github.io/PL-300-Microsoft-Power-BI-Data-Analyst/Instructions/Labs/Linked_image_Files/01-prepare-data-with-power-query-in-power-bi-desktop_image26.png)
+[![Column distribution showing 296 distinct, 296 unique values](https://microsoftlearning.github.io/PL-300-Microsoft-Power-BI-Data-Analyst/Instructions/Labs/Linked_image_Files/01-prepare-data-with-power-query-in-power-bi-desktop_image26.png align="center")](https://microsoftlearning.github.io/PL-300-Microsoft-Power-BI-Data-Analyst/Instructions/Labs/Linked_image_Files/01-prepare-data-with-power-query-in-power-bi-desktop_image26.png)
 
 #### DimReseller query
 
@@ -626,7 +626,7 @@ By the end of this module, you'll be able to:
 | --- | --- |
 | Module 4/17 | Clean, transform, and load data in Power BI |
 
-![](https://learn.microsoft.com/en-us/training/achievements/clean-transform-and-load-data-in-power-bi.svg)
+![](https://learn.microsoft.com/en-us/training/achievements/clean-transform-and-load-data-in-power-bi.svg align="center")
 
 Power Query has an incredible number of features that are dedicated to helping you clean and prepare your data for analysis.
 
@@ -771,39 +771,39 @@ In this lab you learn how to:
 
 ### **i. Configure the Salesperson query**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712480218127/0e238424-d2d5-4a29-ab4f-8658e77aa89b.png)
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712480218127/0e238424-d2d5-4a29-ab4f-8658e77aa89b.png align="center")
 
 ### **ii. Configure the SalespersonRegion query**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712481165402/b066e26a-233a-4a92-9b0a-378692d601a8.png)
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712481165402/b066e26a-233a-4a92-9b0a-378692d601a8.png align="center")
 
 ### **iii. Configure the Product query**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712481752856/ed5e6a86-9b59-4ac1-85ad-c52abe81b403.png)
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712481752856/ed5e6a86-9b59-4ac1-85ad-c52abe81b403.png align="center")
 
 ### **iv. Configure the Reseller query**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712481971964/dacf771a-87fd-4aad-b816-c59d62ca185f.png)
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712481971964/dacf771a-87fd-4aad-b816-c59d62ca185f.png align="center")
 
 ### **v. Configure the Region query**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712482180102/4c4fc606-d703-4008-ab0d-add0e9d4cb36.png)
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712482180102/4c4fc606-d703-4008-ab0d-add0e9d4cb36.png align="center")
 
 ### **vi. Configure the Sales query**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712482671890/653486da-969d-4ad5-be46-37adee1969f6.png)
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712482671890/653486da-969d-4ad5-be46-37adee1969f6.png align="center")
 
 ### **vii. Configure the Targets query**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712483276542/8838f1cb-f29d-47ea-b361-e7717bdbc99d.png)
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712483276542/8838f1cb-f29d-47ea-b361-e7717bdbc99d.png align="center")
 
 ### **viii. Configure the ColorFormats query**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712483337624/8714c73c-f0ea-495d-94c6-dc0ac745ecfb.png)
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712483337624/8714c73c-f0ea-495d-94c6-dc0ac745ecfb.png align="center")
 
 ### **ix. Update the Product query**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712483533905/5ee0980e-00ce-4638-a9cb-004380e53f59.png)
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712483533905/5ee0980e-00ce-4638-a9cb-004380e53f59.png align="center")
 
 ### **x. Update the ColorFormats query**
 
@@ -813,7 +813,7 @@ In the **Query Properties** window, uncheck the **Enable Load To Report** checkb
 
 ### **xi. Finish up**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712485872290/8ec23d3a-e1e5-4287-b591-31be54604396.png)
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712485872290/8ec23d3a-e1e5-4287-b591-31be54604396.png align="center")
 
 ## **9\. Check your knowledge**
 
@@ -866,7 +866,7 @@ By the end of this module, you’ll be able to:
 | --- | --- |
 | Module 5/17 | **Design a semantic model in Power BI** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/design-a-data-model-in-power-bi.svg)
+![](https://learn.microsoft.com/en-us/training/achievements/design-a-data-model-in-power-bi.svg align="center")
 
 Building a great semantic model is about simplifying the disarray.
 
@@ -978,7 +978,7 @@ Dates  = CALENDAR(DATE(2011, 5, 31), DATE(2022, 12, 31))
 Year = YEAR(Dates[Date])
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712474368697/7fba5578-5976-48db-b3fb-d098ed3a8e87.png)
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712474368697/7fba5578-5976-48db-b3fb-d098ed3a8e87.png align="center")
 
 ### iii. **Power Query**
 
@@ -992,7 +992,7 @@ You can use M-language, the development language that is used to build queries i
 )
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712475164272/13e4d88f-79fb-496b-8b17-61ed2a49d012.png)
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712475164272/13e4d88f-79fb-496b-8b17-61ed2a49d012.png align="center")
 
 ## 4\. Work with dimensions
 
@@ -1154,9 +1154,9 @@ In this lab you learn how to:
 4. Hover the cursor over the relationship to highlight the related columns.
     
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712581134164/2f6d9550-3f33-484c-9475-a74a0150f556.png)
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712581134164/2f6d9550-3f33-484c-9475-a74a0150f556.png align="center")
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712581145370/d513062b-b8b4-429e-8c2a-643b62a7a975.png)
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712581145370/d513062b-b8b4-429e-8c2a-643b62a7a975.png align="center")
 
 ### ii. Configure Tables
 
@@ -1221,13 +1221,13 @@ Profit Margin =
 DIVIDE([Profit], SUM('Sales'[Sales]))
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712585394106/ef9db81a-f209-47c0-af47-52cc00247e73.png)
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712585394106/ef9db81a-f209-47c0-af47-52cc00247e73.png align="center")
 
 ### xii. Create a many-to-many relationship
 
 ### xiii. Relate the Targets table
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712586280722/796b43cf-a93f-4f6e-9b48-8b1fbbf2e0c6.png)
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712586280722/796b43cf-a93f-4f6e-9b48-8b1fbbf2e0c6.png align="center")
 
 ## 9\. Check your knowledge
 
@@ -1274,9 +1274,204 @@ In this module, you will:
 | --- | --- |
 | Module 6/17 |  |
 
-![](https://learn.microsoft.com/en-us/training/achievements/add-measures-power-bi-desktop.svg)
+![](https://learn.microsoft.com/en-us/training/achievements/add-measures-power-bi-desktop.svg align="center")
 
-i
+In this module,
+
+you'll learn how to work with implicit and explicit measures.
+
+You'll start by creating simple measures, which summarize a single column or table.
+
+Then, you'll create more complex measures based on other measures in the model.
+
+Additionally, you'll learn about the similarities of, and differences between, a calculated column and a measure.
+
+## **1\. Introduction**
+
+Implicit measures are automatic behaviors that allow visuals to summarize model column data.
+
+Explicit measures, also known simply as *measures*, are calculations that you can add to your model.
+
+a column that's shown with the sigma symbol ( ∑ ) indicates two facts:
+
+* It's a numeric column.
+    
+* It will summarize column values when it is used in a visual (when added to a field well that supports summarization).
+    
+
+Implicit measures allow the report author to start with a default summarization technique and lets them modify it to suit their visual requirements.
+
+### i. Summarize non-numeric columns
+
+Non-numeric columns can be summarized.
+
+However, the sigma symbol does not show next to non-numeric columns in the Fields pane because they don't summarize by default.
+
+Text columns allow the following aggregations:
+
+First (alphabetically) Last (alphabetically) Count (Distinct) Count
+
+Date columns allow the following aggregations:
+
+Earliest Latest Count (Distinct) Count
+
+Boolean columns allow the following aggregations:
+
+Count (Distinct) Count
+
+### ii. Benefits of implicit measures
+
+Several benefits are associated with implicit measures. Implicit measures are simple concepts to learn and use, and they provide flexibility in the way that report authors visualize model data.
+
+Additionally, they mean less work for you as a data modeler because you don't have to create explicit calculations.
+
+### iii. Limitations of implicit measures
+
+The most significant limitation of implicit measures is that they only work for simple scenarios, meaning that they can only summarize column values that use a specific aggregation function. Therefore, in situations when you need to calculate the ratio of each month's sales amount over the yearly sales amount, you'll need to produce an explicit measure by writing a Data Analysis Expressions (DAX) formula to achieve that more sophisticated requirement.
+
+Implicit measures don't work when the model is queried by using Multidimensional Expressions (MDX). This language expects explicit measures and can't summarize column data. It's used when a Power BI semantic model is queried by using Analyze in Excel or when a Power BI paginated report uses a query that is generated by the MDX graphical query designer.
+
+## 2\. Create simple measures
+
+A measure formula must return a scalar or single value.
+
+In tabular modeling, no such concept as a calculated measure exists. The word calculated is used to describe calculated tables and calculated columns. It distinguishes them from tables and columns that originate from Power Query, which doesn't have the concept of an explicit measure.
+
+Measures don't store values in the model. Instead, they're used at query time to return summarizations of model data. Additionally, measures can't reference a table or column directly; they must pass the table or column into a function to produce a summarization.
+
+A simple measure is one that aggregates the values of a single column; it does what implicit measures do automatically.
+
+### Measures:
+
+```sql
+Revenue =
+SUM(Sales[Sales Amount])
+```
+
+```sql
+Cost =
+SUM(Sales[Total Product Cost])
+```
+
+```sql
+Profit =
+SUM(Sales[Profit Amount])
+```
+
+```sql
+Quantity =
+SUM(Sales[Order Quantity])
+```
+
+```sql
+Minimum Price =
+MIN(Sales[Unit Price])
+```
+
+```sql
+Maximum Price =
+MAX(Sales[Unit Price])
+```
+
+```sql
+Average Price =
+AVERAGE(Sales[Unit Price])
+```
+
+```sql
+Order Line Count =
+COUNT(Sales[SalesOrderLineKey])
+```
+
+```sql
+Order Count =
+DISTINCTCOUNT('Sales Order'[Sales Order])
+```
+
+```sql
+Order Line Count =
+COUNTROWS(Sales)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712663986366/9359c533-4057-4fb3-bdc4-7abd911ee13f.png align="center")
+
+## 3\. Create compound measures
+
+When a measure references one or more measures, it's known as a compound measure.
+
+```sql
+Profit =
+[Revenue] - [Cost]
+```
+
+By removing this calculated column, you've optimized the semantic model. Removing this columns results in a decreased semantic model size and shorter data refresh times.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712664134779/3b3e3a8d-5b78-4fa0-b5fe-3f6a5c18e5dc.png align="center")
+
+## 4\. Create quick measures
+
+a feature named Quick Measures. This feature helps you to quickly perform common, powerful calculations by generating the DAX expression for you.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712664402102/05527eb9-1d5d-4e9e-9ff8-5a17687442b7.png align="center")
+
+## 5\. Compare calculated columns with measures
+
+Regarding similarities between calculated columns and measures, both are:
+
+Calculations that you can add to your semantic model. Defined by using a DAX formula. Referenced in DAX formulas by enclosing their names within square brackets.
+
+**The areas where calculated columns and measures differ include:**
+
+* **Purpose** - Calculated columns extend a table with a new column, while measures define how to summarize model data.
+    
+* **Evaluation** - Calculated columns are evaluated by using *row context* at data refresh time, while measures are evaluated by using *filter context* at query time. Filter context is introduced in a later module; it's an important topic to understand and master so that you can achieve complex summarizations.
+    
+* **Storage** - Calculated columns (in Import storage mode tables) store a value for each row in the table, but a measure never stores values in the model.
+    
+* **Visual use** - Calculated columns (like any column) can be used to filter, group, or summarize (as an implicit measure), whereas measures are designed to summarize.
+    
+
+## 6\. Check your knowledge
+
+Which statement about measures is correct?
+
+Measures can reference other measures. It's known as a compound measure.
+
+* Measures don't need to be added to the semantic model. The concept of an implicit measure allows visuals to summarize column values.
+    
+
+Which DAX function can summarize a table?
+
+The COUNTROWS function summarizes a table by returning the number of rows.
+
+* The SUM function can only summarize a column.
+    
+
+Which of the following statements describing similarity of measures and calculated columns in an Import model is true?
+
+They can achieve summarization of model data. A calculated column can be summarized (implicit measure) and a measure always achieves summarization.
+
+* While measures can be quickly created by using the Quick measures feature, no equivalent feature exists to create calculated columns.
+    
+
+## 7\. Exercise - Create DAX Calculations in Power BI Desktop
+
+## 8\. Summary
+
+## Learning objectives
+
+By the end of this module, you'll be able to:
+
+* Determine when to use implicit and explicit measures.
+    
+* Create simple measures.
+    
+* Create compound measures.
+    
+* Create quick measures.
+    
+* Describe similarities of, and differences between, a calculated column and a measure.
+    
 
 ---
 
@@ -1286,7 +1481,7 @@ i
 | --- | --- |
 | Module 7/17 | **Add calculated tables and columns to Power BI Desktop models** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/dax-power-bi-add-calculated-tables.svg)
+![](https://learn.microsoft.com/en-us/training/achievements/dax-power-bi-add-calculated-tables.svg align="center")
 
 i
 
@@ -1298,7 +1493,7 @@ i
 | --- | --- |
 | Module 8/17 | **Use DAX time intelligence functions in Power BI Desktop models** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/use-dax-power-bi-desktop.svg)
+![](https://learn.microsoft.com/en-us/training/achievements/use-dax-power-bi-desktop.svg align="center")
 
 ---
 
@@ -1308,7 +1503,7 @@ i
 | --- | --- |
 | Module 9/17 | **Optimize a model for performance in Power BI** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/optimize-model-power-bi.svg)
+![](https://learn.microsoft.com/en-us/training/achievements/optimize-model-power-bi.svg align="center")
 
 ---
 
@@ -1318,7 +1513,7 @@ i
 | --- | --- |
 | Module 10/17 | **Design Power BI reports** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/power-bi-effective-reports.svg)
+![](https://learn.microsoft.com/en-us/training/achievements/power-bi-effective-reports.svg align="center")
 
 ---
 
@@ -1328,7 +1523,7 @@ i
 | --- | --- |
 | Module 11/17 | **Configure Power BI report filters** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/power-bi-effective-filters.svg)
+![](https://learn.microsoft.com/en-us/training/achievements/power-bi-effective-filters.svg align="center")
 
 ---
 
@@ -1338,7 +1533,7 @@ i
 | --- | --- |
 | Module 12/17 | **Enhance Power BI report designs for the user experience** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/power-bi-effective-user-experience.svg)
+![](https://learn.microsoft.com/en-us/training/achievements/power-bi-effective-user-experience.svg align="center")
 
 ---
 
@@ -1348,7 +1543,7 @@ i
 | --- | --- |
 | Module 13/17 | **Perform analytics in Power BI** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/perform-analytics-power-bi.svg)
+![](https://learn.microsoft.com/en-us/training/achievements/perform-analytics-power-bi.svg align="center")
 
 ---
 
@@ -1358,7 +1553,7 @@ i
 | --- | --- |
 | Module 14/17 | **Create and manage workspaces in Power BI** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/create-manage-workspaces-power-bi.svg)
+![](https://learn.microsoft.com/en-us/training/achievements/create-manage-workspaces-power-bi.svg align="center")
 
 ---
 
@@ -1368,7 +1563,7 @@ i
 | --- | --- |
 | Module 15/17 | **Manage semantic models in Power BI** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/manage-datasets-in-power-bi.svg)
+![](https://learn.microsoft.com/en-us/training/achievements/manage-datasets-in-power-bi.svg align="center")
 
 ---
 
@@ -1378,7 +1573,7 @@ i
 | --- | --- |
 | Module 16/17 | **Create dashboards in Power BI** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/create-dashboards-power-bi.svg)
+![](https://learn.microsoft.com/en-us/training/achievements/create-dashboards-power-bi.svg align="center")
 
 ---
 
@@ -1388,7 +1583,7 @@ i
 | --- | --- |
 | Module 17/17 | **Implement row-level security** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/row-level-security-power-bi.svg)
+![](https://learn.microsoft.com/en-us/training/achievements/row-level-security-power-bi.svg align="center")
 
 ---
 

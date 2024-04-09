@@ -21,31 +21,31 @@ The schema : Project Name : SQL File Location , src, Blog
 
 3. Cast and Convert functions in SQL Server :
 [.sql - [Link¹](sql/castandconvert.sql)]
-[ src - [Link²](src/castnconvert.md)]
+[ src - [Link²](src/3castnconvert.md)]
 [ Blog - [Link³]()]
 
 4. Building Analytics by establishing a bridge between Power BI & SQL:
 [.sql - [Link¹](sql/chocolatesdbsqlfile.sql)]
-[ src - [Link²](src/bridgePowerBI&SQL.md)]
+[ src - [Link²](src/4bridgePowerBI&SQL.md)]
 [ Blog - [Link³](https://dheerajy1.hashnode.dev/building-analytics-by-establishing-a-bridge-between-power-bi-sql)] 
 
 5. Power BI and Fabric - Developer of the Future:
 [.sql - [Link¹]()]
-[ src - [Link²](src/PowerBI&FabricDeveloper.md)]
+[ src - [Link²](src/5PowerBI&FabricDeveloper.md)]
 [ Blog - [Link³](https://dheerajy1.hashnode.dev/power-bi-and-fabric-developer-of-the-future)]
 
 6. Data Engineering in Microsoft Fabric:
 [.sql - [Link¹]()]
-[ src - [Link²](src/DataEngineeringinMSfabric.md)]
+[ src - [Link²](src/6DataEngineeringinMSfabric.md)]
 [ Blog - [Link³](https://dheerajy1.hashnode.dev/data-engineering-in-microsoft-fabric)]
 
 7. Microsoft Power BI Data Analyst
 [.sql - [Link¹]()]
-[ src - [Link²](src/MicrosoftPowerBIDatAnalyst.md)]
+[ src - [Link²](src/7MicrosoftPowerBIDatAnalyst.md)]
 [ Blog - [Link³]()]
 
 
 8. AI Skills Challenge: Fabric Analytics Engineer
 [.sql - [Link¹]()]
-[ src - [Link²](src/AISkillsChallengeFabricAnalyticsEngineer.md)]
+[ src - [Link²](src/8AISkillsChallengeFabricAnalyticsEngineer.md)]
 [ Blog - [Link³]()]

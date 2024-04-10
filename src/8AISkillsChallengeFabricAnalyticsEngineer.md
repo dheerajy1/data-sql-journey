@@ -1634,6 +1634,200 @@ implemented a data ingestion solution that uses a pipeline to copy data to lakeh
 
 # VI. Ingest Data with Dataflows Gen2 in Microsoft Fabric
 
+Data ingestion is crucial in analytics.
+
+Microsoft Fabric's Data Factory offers Dataflows for visually creating multi-step data ingestion and transformation using Power Query Online.
+
+## 1\. Introduction
+
+Dataflows Gen2 are used to ingest and transform data from multiple sources, and then land the cleansed data to another destination.
+
+They can be incorporated into data pipelines for additional data movement, and used as a data source in Power BI.
+
+## 2\. Understand Dataflows Gen2 in Microsoft Fabric
+
+By using Dataflows Gen2, you can connect to the various data sources, and then prep and transform the data.
+
+To allow access, you can land the data directly into your Lakehouse or use a data pipeline for other destinations.
+
+### i. What is a dataflow?
+
+Dataflows are a type of cloud-based ETL (Extract, Transform, Load) tool for building and executing scalable data transformation processes.
+
+Dataflows Gen2 allow you to extract data from various sources, transform it using a wide range of transformation operations, and load it into a destination. Using Power Query Online also allows for a visual interface to perform these tasks.
+
+Fundamentally, a dataflow includes all of the transformations to reduce data prep time and then can be loaded into a new table, included in a Data Pipeline, or used as a data source by data analysts.
+
+### ii. How to use Dataflows Gen2
+
+Traditionally, data engineers spend significant time extracting, transforming, and loading data into a consumable format for downstream analytics.
+
+The goal of Dataflows Gen2 is to provide an easy, reusable way to perform ETL tasks using Power Query Online.
+
+If you only choose to use a Data Pipeline, you copy data, then use your preferred coding language to extract, transform, and load the data.
+
+Alternatively, you can create a Dataflow Gen2 first to extract and transform the data. You can also load the data into a Lakehouse, and other destinations.
+
+To perform other tasks or load data to a different destination after transformation, create a Data Pipeline and add the Dataflow Gen2 activity to your orchestration.
+
+Another option might be to use a Data Pipeline and Dataflow Gen2 for ELT (Extract, Load, Transform) process.
+
+For this order, you'd use a Pipeline to extract and load the data into your preferred destination, such as the Lakehouse.
+
+Then you'd create a Dataflow Gen2 to connect to Lakehouse data to cleanse and transform data. In this case, you'd offer the Dataflow as a curated semantic model for data analysts to develop reports.
+
+Dataflows allow you to promote reusable ETL logic that prevents the need to create more connections to your data source.
+
+Dataflows offer a wide variety of transformations, and can be run manually, on a refresh schedule, or as part of a Data Pipeline orchestration.
+
+### iii Benefits and limitations
+
+There's more than one way to ETL or ELT data in Microsoft Fabric. Consider the benefits and limitations for using Dataflows Gen2.
+
+Benefits:
+
+* Extend data with consistent data, such as a standard date dimension table.
+    
+* Allow self-service users access to a subset of data warehouse separately.
+    
+* Optimize performance with dataflows, which enable extracting data once for reuse, reducing data refresh time for slower sources.
+    
+* Simplify data source complexity by only exposing dataflows to larger analyst groups.
+    
+* Ensure consistency and quality of data by enabling users to clean and transform data before loading it to a destination.
+    
+* Simplify data integration by providing a low-code interface that ingests data from various sources.
+    
+
+Limitations:
+
+* Not a replacement for a data warehouse.
+    
+* Row-level security isn't supported.
+    
+* Fabric capacity workspace is required.
+    
+
+## 3\. Explore Dataflows Gen2 in Microsoft Fabric
+
+In Microsoft Fabric, you can create a Dataflow Gen2 in the Data Factory workload or Power BI workspace, or directly in the lakehouse.
+
+Since our scenario is focused on data ingestion, let's look at the **Data Factory** workload experience.
+
+Dataflows Gen2 use Power Query Online to visualize transformations.
+
+### **i. Power Query ribbon**
+
+### **ii. Queries pane**
+
+### **iii. Diagram view**
+
+### **iv. Data Preview pane**
+
+### **v. Query Settings pane**
+
+In the Query settings pane, you can see a Data Destination field where you can set the Lakehouse as your destination
+
+## 4\. Integrate Dataflows Gen2 and Pipelines in Microsoft Fabric
+
+The combination of dataflows and pipelines is useful when you need to perform additional operations on the transformed data.
+
+Data pipelines are easily created in the Data Factory and Data Engineering workloads. Pipelines are a common concept in data engineering and offer a wide variety of activities to orchestrate. Some common activities include:
+
+* Copy data
+    
+* Incorporate Dataflow
+    
+* Add Notebook
+    
+* Get metadata
+    
+* Execute a script or stored procedure
+    
+
+Pipelines provide a visual way to complete activities in a specific order. You can use a dataflow for data ingestion and transformation, and landing into a Lakehouse using dataflows.
+
+Then incorporate the dataflow into a pipeline to orchestrate extra activities, like execute scripts or stored procedures after the dataflow has completed.
+
+## 5\. Exercise - Create and use a Dataflow Gen2 in Microsoft Fabric
+
+In this module, we walked through a scenario where both data engineers and data analysts have a need to prepare data for consumption and expand semantic models.
+
+We identified Dataflows Gen2 as the best solution for the data transformation steps.
+
+In this exercise, you create and use a Dataflow Gen2 to ingest transformed data into a Lakehouse.
+
+In Microsoft Fabric, Dataflows (Gen2) connect to various data sources and perform transformations in Power Query Online. They can then be used in Data Pipelines to ingest data into a lakehouse or other analytical store, or to define a dataset for a Power BI report.
+
+This lab is designed to introduce the different elements of Dataflows (Gen2), and not create a complex solution that may exist in an enterprise.
+
+### i. Create a workspace
+
+### ii. Create a lakehouse
+
+### iii. Create a Dataflow (Gen2) to ingest data
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712724285172/e9203a1a-e136-47d3-a971-01bc7c024555.png)
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712724377025/766b5e4d-2a8c-44e3-8cc8-972f486fef76.png)
+
+### iv. Add data destination for Dataflow
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712724925903/a727cde5-b06b-4ca1-a7af-f6823614752b.png)
+
+### v. Add a dataflow to a pipeline
+
+You can include a dataflow as an activity in a pipeline.
+
+Pipelines are used to orchestrate data ingestion and processing activities, enabling you to combine dataflows with other kinds of operation in a single, scheduled process.
+
+Pipelines can be created in a few different experiences, including Data Factory experience.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712725462098/26a9a9d7-1b14-483e-95eb-61d0c559c34d.png)
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712725520699/7a33da5d-f206-4fd7-989d-6e0f8ccb9361.png)
+
+### vi. Clean up resources
+
+## 6\. Knowledge check
+
+What is a Dataflow Gen2?
+
+A way to import and transform data with Power Query Online.
+
+Dataflow Gen2 allows you to get and transform data, then optionally ingest to a Lakehouse.
+
+Which workload experience lets you create a Dataflow Gen2?
+
+Data Factory.
+
+Data Factory and Power BI workloads allow Dataflow Gen2 creation.
+
+You need to connect to and transform data to be loaded into a Fabric Lakehouse and also loaded into a KQL Database for Real-time Analytics. You aren't comfortable using Spark notebooks, so decide to use Dataflows Gen2. How would you complete this task?
+
+Connect to Data Factory workload &gt; Create Dataflows Gen2 to transform data &gt; Create Data pipeline to include your dataflow and then land data to a KQL Database.
+
+These are the high-level steps to accomplish your task.
+
+## 7\. Summary
+
+With Microsoft Fabric, you can create Dataflows Gen2 to perform data integration for your Lakehouse, and optionally include the dataflow in a Data Pipeline as well.
+
+In this module, you learned about Dataflows Gen2 and how to use them as part of your data integration process.
+
+Power Query Online offers a visual interface to perform complex data transformations without writing any code.
+
+## **Learning objectives**
+
+In this module, you'll learn how to:
+
+* Describe Dataflow Gen2 capabilities in Microsoft Fabric
+    
+* Create Dataflow Gen2 solutions to ingest and transform data
+    
+* Include a Dataflow Gen2 in a pipeline
+    
+
 # VII. Ingest data with Spark and Microsoft Fabric notebooks
 
 # VIII. Organize a Fabric lakehouse using medallion architecture design

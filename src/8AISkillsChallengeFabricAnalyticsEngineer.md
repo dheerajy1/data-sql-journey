@@ -1560,7 +1560,7 @@ In the … menu for the cell (at its top-right) select Toggle parameter cell. Th
 
 This code loads the data from the sales.csv file that was ingested by the Copy Data activity, applies some transformation logic, and saves the transformed data as a table - appending the data if the table already exists.
 
-```sql
+```apache
 from spark.sql.functions import *
 
 # Read the new sales data
@@ -1829,6 +1829,388 @@ In this module, you'll learn how to:
     
 
 # VII. Ingest data with Spark and Microsoft Fabric notebooks
+
+Discover how to use Apache Spark and Python for data ingestion into a Microsoft Fabric lakehouse. Fabric notebooks provide a scalable and systematic solution.
+
+## 1\. Introduction
+
+Fabric notebooks offer the flexibility to extract, load, and transform external data into your lakehouse, adapting to your workflow.
+
+Fabric notebooks are the best choice if you:
+
+Handle large external data Need complex transformations.
+
+By the end of this module, you'll be able to use Spark and Fabric notebooks to ingest external data into your lakehouse. You'll also learn fundamental transformations and optimization techniques for a more efficient ETL process.
+
+## 2\. Connect to data with Spark
+
+First, let's discuss what Fabric notebooks offer over the other ingestion options.
+
+Unlike manual uploads, notebooks provide automation, ensuring a smooth and systematic approach.
+
+Dataflows offer a UI experience; however, they aren't as performant with large semantic models.
+
+Pipelines allow you to orchestrate the Copy Data, and may require dataflows or notebooks for transformations.
+
+Therefore, notebooks provide a comprehensive, automated solution for ingestion and transformation.
+
+### i. Explore Fabric notebooks
+
+By default, Fabric notebooks use PySpark, which uses the Spark engine to allow a multi-threaded, distributed transaction for speedy processes.
+
+You can use Html, Spark (Scala), Spark SQL, and SparkR (R) as well, however they may not have the full benefit of the distributed system.
+
+### ii. Connect to external sources
+
+connecting to Azure blob storage with Spark:
+
+The PySpark code defines the parameters and constructs the connection path, then reads the data into a DataFrame and shows the data in the DataFrame.
+
+```apache
+# Azure Blob Storage access info
+blob_account_name = "azureopendatastorage"
+blob_container_name = "nyctlc"
+blob_relative_path = "yellow"
+blob_sas_token = "sv=2022-11-02&ss=bfqt&srt=c&sp=rwdlacupiytfx&se=2023-09-08T23:50:02Z&st=2023-09-08T15:50:02Z&spr=https&sig=abcdefg123456" 
+
+# Construct the path for connection
+wasbs_path = f'wasbs://{blob_container_name}@{blob_account_name}.blob.core.windows.net/{blob_relative_path}?{blob_sas_token}'
+
+# Read parquet data from Azure Blob Storage path
+blob_df = spark.read.parquet(wasbs_path)
+
+# Show the Azure Blob DataFrame
+blob_df.show()
+```
+
+### iii. Configure alternate authentication
+
+The previous example connects to the source and reads the data into a DataFrame.
+
+Depending on your source, you may need a different authentication type, such as Service Principal, OAuth, etc.
+
+Here's an example connecting to an Azure SQL Database with a Service Principal:
+
+```apache
+# Placeholders for Azure SQL Database connection info
+server_name = "your_server_name.database.windows.net"
+port_number = 1433  # Default port number for SQL Server
+database_name = "your_database_name"
+table_name = "YourTableName" # Database table
+client_id = "YOUR_CLIENT_ID"  # Service principal client ID
+client_secret = "YOUR_CLIENT_SECRET"  # Service principal client secret
+tenant_id = "YOUR_TENANT_ID"  # Azure Active Directory tenant ID
+
+
+# Build the Azure SQL Database JDBC URL with Service Principal (Active Directory Integrated)
+jdbc_url = f"jdbc:sqlserver://{server_name}:{port_number};database={database_name};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;Authentication=ActiveDirectoryIntegrated"
+
+# Properties for the JDBC connection
+properties = {
+    "user": client_id, 
+    "password": client_secret,  
+    "driver": "com.microsoft.sqlserver.jdbc.SQLServerDriver",
+    "tenantId": tenant_id  
+}
+
+# Read entire table from Azure SQL Database using AAD Integrated authentication
+sql_df = spark.read.jdbc(url=jdbc_url, table=table_name, properties=properties)
+
+# Show the Azure SQL DataFrame
+sql_df.show()
+```
+
+## 3\. Write data into a lakehouse
+
+Now that we've connected to data, we need to save it into the lakehouse. You can either save as a file or load as a Delta table.
+
+### iv. **Write to a file**
+
+Lakehouses support structured, semi-structured, and unstructured files.
+
+Load as a parquet file or Delta table to take advantage of the Spark engine.
+
+#### 1\. Write DataFrame to Parquet file format
+
+```apache
+# Write DataFrame to Parquet file format
+parquet_output_path = "your_folder/your_file_name"
+df.write.mode("overwrite").parquet(parquet_output_path)
+print(f"DataFrame has been written to Parquet file: {parquet_output_path}")
+```
+
+#### 2\. Write DataFrame to Delta table
+
+```apache
+# Write DataFrame to Delta table
+delta_table_name = "your_delta_table_name"
+df.write.format("delta").mode("overwrite").saveAsTable(delta_table_name)
+print(f"DataFrame has been written to Delta table: {delta_table_name}")
+```
+
+OneLake supports a wide variety of file formats, including many formats that are commonly used in Spark code - such as delimited text, JSON, Parquet, Avro, ORC, and others.
+
+In most cases, Parquet is the preferred format because of its optimized columnar storage structure and efficient compression capabilities. Parquet is also the base format on which Delta tables in a lakehouse are based.
+
+### v. Write to a Delta table
+
+Delta tables are one of the key features of Fabric lakehouses. Easily ingest and load your external data into a Delta table via notebooks.
+
+```apache
+# Use format and save to load as a Delta table
+table_name = "nyctaxi_raw"
+filtered_df.write.mode("overwrite").format("delta").save(f"Tables/{table_name}")
+
+# Confirm load as Delta table
+print(f"Spark DataFrame saved to Delta table: {table_name}")
+```
+
+### vi. Optimize Delta table writes
+
+Fabric notebooks easily scale for large data, therefore read and write optimization is key.
+
+Consider these optimization functions for even more performant data ingestion.
+
+#### 1\. V-Order
+
+enables faster and more efficient reads by various compute engines, such as Power BI, SQL, and Spark.V-order applies special sorting, distribution, encoding, and compression on parquet files at write-time.
+
+```apache
+# Enable V-Order 
+spark.conf.set("spark.sql.parquet.vorder.enabled", "true")
+```
+
+#### 2\. Optimize write
+
+improves the performance and reliability by reducing the number of files written and increasing their size. It's useful for scenarios where the Delta tables have suboptimal or nonstandard file sizes, or where the extra write latency is tolerable.
+
+```apache
+# Enable automatic Delta optimized write
+spark.conf.set("spark.microsoft.delta.optimizeWrite.enabled", "true")
+```
+
+## 4\. Consider uses for ingested data
+
+You've now ingested raw data in the Fabric lakehouse, also known as the bronze layer of a Medallion architecture.
+
+Before moving to the transformation and modeling steps, consider where to transform and how users interact with the data.
+
+### i. Transform for different users
+
+When you load data, it's a good idea to do some basic cleaning like removing duplicates, handling errors, converting null values, and getting rid of empty entries to ensure data quality and consistency.
+
+Also thinking about the different people who use the data is crucial.
+
+Data scientists usually prefer fewer changes so they can explore wide tables. They would likely want access to the raw ingested data. Fabric's Data Wrangler then let's them explore the data and generate transformation code for their specific needs.
+
+Whereas Power BI data analysts may require more transformation and modeling before they can use the data. While Power BI can transform data, starting with well-prepared data allows analysts to develop reports and insights more efficiently.
+
+## 5\. Exercise - Ingest data with Spark and Microsoft Fabric notebooks
+
+In this lab, you'll create a Microsoft Fabric notebook and use PySpark to connect to an Azure Blob Storage path, then load the data into a lakehouse using write optimizations.
+
+For this experience, you’ll build the code across multiple notebook code cells, which may not reflect how you will do it in your environment; however, it can be useful for debugging.
+
+Because you’re also working with a sample dataset, the optimization doesn’t reflect what you may see in production at scale; however, you can still see improvement and when every millisecond counts, optimization is key.
+
+### i. Create a workspace
+
+### ii. Create workspace and lakehouse destination
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712752485033/aaa18188-0c52-4162-8e1f-f0020b45c4e9.png)
+
+### iii. Create a Fabric notebook and load external data
+
+Insert the following code into the code cell, which will:
+
+* Declare parameters for connection string
+    
+* Build the connection string
+    
+* Read data into a DataFrame
+    
+
+#### 1\. Azure Blob Storage connection string:
+
+```apache
+ # Azure Blob Storage access info
+ blob_account_name = "....."
+ blob_container_name = "......."
+ blob_relative_path = "......"
+    
+ # Construct connection path
+ wasbs_path = f'wasbs://{blob_container_name}@{blob_account_name}.blob.core.windows.net/{blob_relative_path}'
+ print(wasbs_path)
+    
+ # Read parquet data from Azure Blob Storage path
+ blob_df = spark.read.parquet(wasbs_path)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712753081271/43ab4cc1-40ba-4257-9a55-e2e56d3520f3.png)
+
+#### 2\. To write the data to a file, you now need that ABFS Path for your RawData folder.
+
+```apache
+# Declare file name    
+file_name = "yellow_taxi"
+
+# Construct destination path
+output_parquet_path = f"**InsertABFSPathHere**/{file_name}"
+print(output_parquet_path)
+
+# Load the first 1000 rows as a Parquet file
+blob_df.limit(1000).write.mode("overwrite").parquet(output_parquet_path)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712754093932/b8750cc8-4223-499d-b1bc-98b8fcfb3258.png)
+
+### iv. Transform and load data to a Delta table
+
+Likely, your data ingestion task doesn’t end with only loading a file.
+
+Delta tables in a lakehouse allows scalable, flexible querying and storage, so we’ll create one as well.
+
+* This will add a timestamp column **dataload\_datetime** to log when the data was loaded to a Delta table
+    
+* Filter NULL values in **storeAndFwdFlag**
+    
+* Load filtered data into a Delta table
+    
+* Display a single row for validation
+    
+
+```apache
+ from pyspark.sql.functions import col, to_timestamp, current_timestamp, year, month
+    
+ # Read the parquet data from the specified path
+ raw_df = spark.read.parquet(output_parquet_path)   
+    
+ # Add dataload_datetime column with current timestamp
+ filtered_df = raw_df.withColumn("dataload_datetime", current_timestamp())
+    
+ # Filter columns to exclude any NULL values in storeAndFwdFlag
+ filtered_df = filtered_df.filter(raw_df["storeAndFwdFlag"].isNotNull())
+    
+ # Load the filtered data into a Delta table
+ table_name = "yellow_taxi"  # Replace with your desired table name
+ filtered_df.write.format("delta").mode("append").saveAsTable(table_name)
+    
+ # Display results
+ display(filtered_df.limit(1))
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712766663131/c74d5152-139b-45e4-89d1-33edb15871f5.png)
+
+### v. Optimize Delta table writes
+
+You’re probably using big data in your organization and that’s why you chose Fabric notebooks for data ingestion, so let’s also cover how to optimize the ingestion and reads for your data. First, we’ll repeat the steps to transform and write to a Delta table with write optimizations included.
+
+```apache
+ from pyspark.sql.functions import col, to_timestamp, current_timestamp, year, month
+ 
+ # Read the parquet data from the specified path
+ raw_df = spark.read.parquet(output_parquet_path)    
+
+ # Add dataload_datetime column with current timestamp
+ opt_df = raw_df.withColumn("dataload_datetime", current_timestamp())
+    
+ # Filter columns to exclude any NULL values in storeAndFwdFlag
+ opt_df = opt_df.filter(opt_df["storeAndFwdFlag"].isNotNull())
+    
+ # Enable V-Order
+ spark.conf.set("spark.sql.parquet.vorder.enabled", "true")
+    
+ # Enable automatic Delta optimized write
+ spark.conf.set("spark.microsoft.delta.optimizeWrite.enabled", "true")
+    
+ # Load the filtered data into a Delta table
+ table_name = "yellow_taxi_opt"  # New table name
+ opt_df.write.format("delta").mode("append").saveAsTable(table_name)
+    
+ # Display results
+ display(opt_df.limit(1))
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712767004112/e70a9031-8962-4bb9-a062-cd7d25506c4c.png)
+
+Now, take note of the run times for both code blocks. Your times will vary, but you can see a clear performance boost with the optimized code.
+
+### vi. Analyze Delta table data with SQL queries
+
+```apache
+ # Load table into df
+ delta_table_name = "yellow_taxi"
+ table_df = spark.read.format("delta").table(delta_table_name)
+    
+ # Create temp SQL table
+ table_df.createOrReplaceTempView("yellow_taxi_temp")
+    
+ # SQL Query
+ table_df = spark.sql('SELECT * FROM yellow_taxi_temp')
+    
+ # Display 10 results
+ display(table_df.limit(10))
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712769251179/af852c12-35cd-4826-9fd3-5f283f40e994.png)
+
+opt table:
+
+```apache
+ # Load table into df
+ delta_table_name = "yellow_taxi_opt"
+ opttable_df = spark.read.format("delta").table(delta_table_name)
+    
+ # Create temp SQL table
+ opttable_df.createOrReplaceTempView("yellow_taxi_opt")
+    
+ # SQL Query to confirm
+ opttable_df = spark.sql('SELECT * FROM yellow_taxi_opt')
+    
+ # Display results
+ display(opttable_df.limit(10))
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712769249705/5dee7ecc-b4a1-468f-8d2a-f0a27153453a.png)
+
+Notice the execution time difference between querying the table with non optimized data and a table with optimized data.
+
+### vii. Clean up resources
+
+## 6\. Knowledge check
+
+What is the benefit of using Fabric notebooks over manual uploads for data ingestion?
+
+Notebooks provide an automated approach to ingestion and transformation.
+
+What is the purpose of V-Order and Optimize Write in Delta tables?
+
+V-Order and Optimize Write enhance Delta tables by sorting data and creating fewer, larger Parquet files.
+
+Why consider basic data cleansing when loading data into Fabric lakehouse?
+
+Basic cleaning is done to ensure data quality and consistency before moving on to transformation and modeling steps.
+
+## 7\. Summary
+
+In this module, you learned how to use Spark and Fabric notebooks to ingest data into a lakehouse.
+
+Fabric notebooks offer automation and a comprehensive solution for ingestion and transformation. Fabric notebooks use a Spark engine to allow a multi-threaded, distributed transaction for speedy processes. Lakehouses support structured, semi-structured, and unstructured files and Delta tables. Optimize Delta table configuration for more performant reads and writes.
+
+Before moving to the transformation and modeling steps, consider where to transform and how users interact with the data.
+
+## **Learning objectives**
+
+By the end of this module, you’ll be able to:
+
+* Ingest external data to Fabric lakehouses using Spark
+    
+* Configure external source authentication and optimization
+    
+* Load data into lakehouse as files or as Delta tables
+    
+* Optimize Delta table writes: V-Order, Optimize write
+    
 
 # VIII. Organize a Fabric lakehouse using medallion architecture design
 

@@ -1456,7 +1456,171 @@ They can achieve summarization of model data. A calculated column can be summari
 
 ## 7\. Exercise - Create DAX Calculations in Power BI Desktop
 
+In this exercise, you’ll create calculated tables, calculated columns, and simple measures using Data Analysis Expressions (DAX).
+
+In this exercise you'll learn how to:
+
+* Create calculated tables
+    
+* Create calculated columns
+    
+* Create measures
+    
+
+### i. Create Calculated Tables
+
+In the formula bar (which opens directly beneath the ribbon when creating or editing calculations), type Salesperson =, press Shift+Enter, type ‘Salesperson (Performance)’, and then press Enter.
+
+Note: Calculated tables are defined by using a DAX formula that returns a table. It’s important to understand that calculated tables increase the size of the data model because they materialize and store values. They’re recomputed whenever formula dependencies are refreshed, as will be the case for this data model when new (future) date values are loaded into tables.
+
+Unlike Power Query-sourced tables, calculated tables can’t be used to load data from external data sources. They can only transform data based on what has already been loaded into the data model.
+
+### ii. Create the Salesperson table
+
+```sql
+Salesperson = 'Salesperson (Performance)'
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712729522478/71f013dc-16b4-499a-bb00-3c00bc44019a.png align="center")
+
+### iii. Create the Date table
+
+```sql
+ Date =  
+ CALENDARAUTO(6)
+```
+
+The CALENDARAUTO() function returns a single-column table consisting of date values. The “auto” behavior scans all data model date columns to determine the earliest and latest date values stored in the data model. It then creates one row for each date within this range, extending the range in either direction to ensure full years of data is stored.
+
+This function can take a single optional argument that is the last month number of a year. When omitted, the value is 12, meaning that December is the last month of the year. In this case, 6 is entered, meaning that June is the last month of the year.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712729922047/21f37f38-297a-4bd6-9903-9a456440b81d.png align="center")
+
+### iv. Create calculated columns
+
+In this task, you’ll add more columns to enable filtering and grouping by different time periods. You’ll also create a calculated column to control the sort order of other columns.
+
+```sql
+ Year =
+ "FY" & YEAR('Date'[Date]) + IF(MONTH('Date'[Date]) > 6, 1)
+```
+
+A calculated column is created by first entering the column name, followed by the equals symbol (=), followed by a DAX formula that returns a single-value result. The column name can’t already exist in the table.
+
+The formula uses the date’s year value but adds one to the year value when the month is after June. It’s how fiscal years at Adventure Works are calculated.
+
+```sql
+Quarter = 
+ 'Date'[Year] & " Q"
+ & IF(
+        MONTH('Date'[Date]) IN {7,8,9},1,
+        IF(
+            MONTH('Date'[Date]) IN {10,11,12},2,
+            IF(
+                MONTH('Date'[Date]) IN {1,2,3},3,
+                IF(
+                    MONTH('Date'[Date]) IN {4,5,6},4
+                )
+            )
+        )
+    )
+```
+
+simpler:
+
+```sql
+Quarter = 
+ 'Date'[Year] & " Q"
+ & SWITCH(
+    TRUE(),
+    MONTH('Date'[Date]) IN {7,8,9}, 1,
+    MONTH('Date'[Date]) IN {10,11,12}, 2,
+    MONTH('Date'[Date]) IN {1,2,3}, 3,
+    MONTH('Date'[Date]) IN {4,5,6}, 4
+ )
+```
+
+```sql
+Month = 
+FORMAT('Date'[Date],"yyyy mmm")
+```
+
+By default, text values sort alphabetically, numbers sort from smallest to largest, and dates sort from earliest to latest.
+
+```sql
+ MonthKey =
+ (YEAR('Date'[Date]) * 100) + MONTH('Date'[Date])
+```
+
+On the Column Tools contextual ribbon, from inside the Sort group, select Sort by Column, and then select MonthKey.
+
+### v. Complete the Date table
+
+In this task, you’ll complete the design of the Date table by hiding a column and creating a hierarchy. You’ll then create relationships to the Sales and Targets tables.
+
+### vi. Mark the Date table
+
+On the **Table Tools** contextual ribbon, from inside the **Calendars** group, select **Mark as Date Table**, and then select **Mark as Date Table**.
+
+### vii. Create simple measures
+
+Visible numeric columns allow report authors at report design time to decide how column values will summarize (or not). It can result in inappropriate reporting. Some data modelers don’t like leaving things to chance, however, and choose to hide these columns and instead expose aggregation logic defined in measures. It’s the approach you’ll now take in this lab.
+
+```sql
+ Avg Price =  
+ AVERAGE(Sales[Unit Price])
+```
+
+### **Note:**
+
+It’s not possible to modify the aggregation behavior of a measure.
+
+```sql
+Median Price =
+MEDIAN(Sales[Unit Price])
+```
+
+```sql
+Min Price =
+MIN(Sales[Unit Price])
+```
+
+```sql
+Max Price =
+MAX(Sales[Unit Price])
+```
+
+```sql
+Orders =
+DISTINCTCOUNT(Sales[SalesOrderNumber])
+```
+
+```sql
+Order Lines =
+COUNTROWS(Sales)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712738834622/77a11ce6-6c85-4e84-8e4e-7bb4e52b015d.png align="center")
+
+### viii. Create additional measures
+
+The HASONEVALUE() function tests whether a single value in the Salesperson column is filtered. When true, the expression returns the sum of target amounts (for just that salesperson). When false, BLANK is returned.
+
+```sql
+ Target =
+ IF(
+ HASONEVALUE('Salesperson (Performance)'[Salesperson]),
+ SUM(Targets[TargetAmount])
+ )
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712740167071/59bee427-ec5b-4328-89d1-995c0eb3f0ab.png align="center")
+
 ## 8\. Summary
+
+In this module, you learned that Power BI measures are either implicit or explicit. Implicit measures are automatic behaviors that are supported by visuals, while explicit measures use DAX formulas that summarize model data.
+
+Explicit measures are important because they allow you to create complex DAX formulas to achieve the precise calculations that your report visuals need. While you learned to create simple and compound measures in this module, in later modules you'll learn to create more powerful measures by using filter modification functions and iterator functions.
 
 ## Learning objectives
 

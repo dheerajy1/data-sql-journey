@@ -2214,6 +2214,856 @@ By the end of this module, you’ll be able to:
 
 # VIII. Organize a Fabric lakehouse using medallion architecture design
 
+Explore the potential of the medallion architecture design in Microsoft Fabric. Organize and transform your data across Bronze, Silver, and Gold layers of a lakehouse for optimized analytics.
+
+## 1\. Introduction
+
+The Fabric lakehouse, blending data lakes and data warehouses, offers an ideal platform to manage and analyze this data.
+
+The medallion architecture has become a standard across the industry for lakehouse-based analytics.
+
+In this module, you'll explore and build a medallion architecture for Fabric lakehouses, query and report on data in your Fabric lakehouse, and describe best practices for security and governance of your Fabric lakehouse.
+
+## 2\. Describe medallion architecture
+
+Data lakehouses in Fabric are built on the [Delta Lake format](https://learn.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-what-is-delta-lake), [which natively s](https://learn.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-what-is-delta-lake)upports ACID (Atomicity, Consistency, Isolation, Durability) transactions.
+
+Within this framework, the *medallion architecture* is a recommended data design pattern used to organize data in a lakehouse logically.
+
+It aims to improve data quality as it moves through different layers. The architecture typically has three layers – bronze (raw), silver (validated), and gold (enriched), each representing higher data quality levels.
+
+Some people also call it a "multi-hop" architecture, meaning that data can move between layers as needed.
+
+### i. Understand the medallion architecture format
+
+#### 1\. Bronze layer
+
+The bronze or raw layer of the medallion architecture is the first layer of the lakehouse.
+
+It's the landing zone for all data, whether it's structured, semi-structured, or unstructured.
+
+The data is stored in its original format, and no changes are made to it.
+
+#### 2\. Silver layer
+
+The silver or validated layer is the second layer of the lakehouse. It's where you'll validate and refine your data.
+
+Typical activities in the silver layer include combining and merging data and enforcing data validation rules like removing nulls and deduplicating.
+
+The silver layer can be thought of as a central repository across an organization or team, where data is stored in a consistent format and can be accessed by multiple teams.
+
+In the silver layer you're cleaning your data enough so that everything is in one place and ready to be refined and modeled in the gold layer.
+
+#### 3\. Gold layer
+
+The gold or enriched layer is the third layer of the lakehouse.
+
+In the gold layer, data undergoes further refinement to align with specific business and analytics needs. This could involve aggregating data to a particular granularity, such as daily or hourly, or enriching it with external information.
+
+Once the data reaches the gold stage, it becomes ready for use by downstream teams, including analytics, data science, or MLOps.
+
+### ii. Customize your medallion architecture
+
+Depending on your organization's specific use case, you may have a need for more layers.
+
+For example, you might have an additional "raw" layer for landing data in a specific format before it's transformed into the bronze layer. Or you might have a "platinum" layer for data that's been further refined and enriched for a specific use case.
+
+Regardless of the names and number of layers, the medallion architecture is flexible and can be tailored to meet your organization's particular requirements.
+
+### iii. Move data across layers in Fabric
+
+Moving data across medallion layers refines, organizes, and prepares it for downstream data activities.
+
+Within Fabric's lakehouse, there's more than one way to move data between layers, ensuring that you can choose the method that works for your team.
+
+There are a few things to consider when deciding how to move and transform data across layers.
+
+* How much data are you working with?
+    
+* How complex are the transformations you need to make?
+    
+* How often will you need to move data between layers?
+    
+* What tools are you most comfortable with?
+    
+
+Understanding the difference between data transformation and data orchestration helps you select the right tools for the job within Fabric.
+
+#### 1\. Data transformation
+
+Data transformation involves altering the structure or content of data to meet specific requirements.
+
+Tools for data transformation in Fabric include Dataflows (Gen2) and notebooks.
+
+##### i. Dataflows (Gen2)
+
+Dataflows are a great option for smaller semantic models and simple transformations. Notebooks are a better option for larger semantic models and more complex transformations.
+
+##### i. Notebooks
+
+Notebooks also allow you to save your transformed data as a managed Delta table in the lakehouse, ready for reporting.
+
+#### 2\. Data orchestration
+
+Data orchestration refers to the coordination and management of multiple data-related processes, ensuring they work together to achieve a desired outcome.
+
+The primary tool for data orchestration in Fabric is pipelines.
+
+##### i. Pipeline
+
+A pipeline is a series of steps that move data from one place to another, in this case, from one layer of the medallion architecture to the next.
+
+Pipelines can be automated to run on a schedule or triggered by an event.
+
+## 3\. Implement a medallion architecture in Fabric
+
+Now that you have a solid understanding of the medallion architecture, let's explore how to put it into action within Fabric.
+
+### **i. Set up the foundation**:
+
+Create your Fabric lakehouse. You can use the same lakehouse for multiple medallion architectures, or alternatively, you can use different lakehouses and even different lakehouses in different workspaces, depending on your use case. We'll dive more into this in unit 5.
+
+### **ii.** Design your architecture
+
+Create your architecture layout, define your layers, and determine how data will flow between them.
+
+The most straightforward implementation is to use Bronze as the raw layer, Silver as the curated layer, and gold as the presentation layer.
+
+Your gold layer should be modeled in a star schema and optimized for reporting.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712811392546/147bd5f9-edb1-4084-af56-60d316791891.png)
+
+### **iii.** Ingest data into bronze
+
+Determine how you'll ingest data into your bronze layer.
+
+You can do this using pipelines, dataflows, or notebooks.
+
+### **iv.** Transform data and load to silver
+
+Determine how you'll transform data in your silver layer. You can do this using dataflows or notebooks.
+
+Transformations at the silver level should be focused on data quality and consistency, not on data modeling.
+
+### **v.** Generate a gold layer
+
+Determine how you'll generate your gold layer(s), what it will contain, and how it will be used.
+
+* The gold layer is where you'll model your data for reporting using a dimensional model. Here you'll establish relationships, define measures, and incorporate any other elements essential for effective reporting.
+    
+* You can have multiple gold layers for different audiences or domains. For example, you might have a gold layer for your finance team and a separate gold layer for your sales team. You might also have a gold layer for your data scientists that is optimized for machine learning.
+    
+* Depending on your needs, you might also use a Data Warehouse as your gold layer. See [Get started with data warehouses in Microsoft Fabric to learn more.](https://learn.microsoft.com/en-us/training/modules/get-started-data-warehouse/)
+    
+* In Fabric, you can transform your data using dataflows or notebooks, and then load it into a gold Delta table in the lakehouse. You can then connect to the Delta table using a SQL analytics endpoint and use SQL to model your data for reporting. Alternatively, you can use Power BI to connect to the SQL analytics endpoint of the gold layer and model your data for reporting.
+    
+
+### **vi. Enable downstream consumption**
+
+Determine how you'll enable downstream consumption of your data. You can do this using workspace or item permissions, or by connecting to the SQL analytics endpoint.
+
+## 4\. Query and report on data in your Fabric lakehouse
+
+Now that your medallion architecture is in place, data teams and the business can start using it to query and report on data.
+
+Fabric has several tools and technologies that enable you to query and report on data in your lakehouse, including SQL analytics endpoints and Direct Lake mode in Power BI semantic models.
+
+### **i.** Query data in your lakehouse
+
+Teams can use SQL to explore and query data in the gold layer.
+
+You can analyze data in delta tables at any layer of the medallion architecture using the T-SQL language, save functions, generate views, and apply SQL security.
+
+You can also use the SQL analytics endpoint to connect to your lakehouse from third-party tools and applications.
+
+The SQL analytics endpoint in Fabric enables you to write queries, manage the semantic model, and query data using the new visual query experience.
+
+### Note:
+
+The SQL analytics endpoint operates in **read-only** mode over lakehouse delta tables. To modify data in your lakehouse you can use dataflows, notebooks, or pipelines.
+
+In addition to using the SQL analytics endpoint for data exploration, you can also create a Power BI semantic model in Direct Lake mode to query data in your lakehouse.
+
+When you create a lakehouse, the system also provisions an associated default semantic model. The default semantic model is a semantic model with metrics on top of lakehouse data.
+
+### Direct Lake mode
+
+When a Power BI report displays a data element, it fetches it from the underlying semantic model, which in turn accesses a lakehouse for data retrieval.
+
+To enhance efficiency, the default semantic model preloads frequently requested data into the cache and updates it as necessary.
+
+This approach is called Direct Lake mode and truly gives you the best of both worlds: the performance of a semantic model and the freshness of lakehouse data.
+
+### ii. Tailor your medallion layers for different needs
+
+Tailoring medallion layers to different needs allows you to optimize data processing and access for specific use cases. By customizing these layers, you can ensure that each layer's structure and organization align with the requirements of different user groups, improving performance, ease of use, and data relevance for diverse stakeholders.
+
+Creating multiple Gold layers tailored for diverse audiences or domains highlights the flexibility of the medallion architecture. Finance, sales, data science – each can have its optimized Gold layer, serving specific analytical requirements.
+
+Some applications, third-party tools, or systems require specific data formats. You can utilize your medallion architecture to generate cleansed and properly formatted data.
+
+## 5\. Considerations for managing your lakehouse
+
+There are a couple of considerations to keep in mind when managing your lakehouse, including
+
+* how to secure your lakehouse and
+    
+* how to handle continuous integration and continuous delivery (CI/CD).
+    
+
+### **i.** Secure your lakehouse
+
+Secure your lakehouse by ensuring that only authorized users can access data.
+
+In Fabric, you can do this by setting permissions at the *workspace* or *item* level.
+
+### ii. Considerations for Continuous Integration and Continuous Delivery (CI/CD)
+
+Designing a Continuous Integration/Continuous Deployment (CI/CD) process for a lakehouse architecture involves several considerations to ensure a smooth and efficient deployment process.
+
+Considerations include implementing data quality checks, version control, automated deployments, monitoring, and security measures.
+
+Considerations should also include scalability, disaster recovery, collaboration, compliance, and continuous improvement to ensure reliable and efficient data pipeline deployments.
+
+While some of these are related to processes and practices, others are related to the tools and technologies used to implement CI/CD.
+
+Fabric natively provides several tools and technologies to support CI/CD processes.
+
+## 6\. Exercise - Organize your Fabric lakehouse using a medallion architecture
+
+create a lakehouse in Fabric and move data through the medallion architecture.
+
+You'll also learn how to query and report on data in your Fabric lakehouse.
+
+In this exercise you will build out a medallion architecture in a Fabric lakehouse using notebooks. You will create a workspace, create a lakehouse, upload data to the bronze layer, transform the data and load it to the silver Delta table, transform the data further and load it to the gold Delta tables, and then explore the semantic model and create relationships.
+
+### i. Create a workspace
+
+Navigate to the workspace settings and enable the **Data model editing** preview feature.
+
+This will enable you to create relationships between tables in your lakehouse using a Power BI semantic model.
+
+### ii. Create a lakehouse and upload data to bronze layer
+
+Data: orders zip \[[Link](https://github.com/MicrosoftLearning/dp-data/blob/main/orders.zip)\]
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712816715655/3ddf0071-b8d7-4b49-a058-b6650ddb7dc2.png)
+
+### iii. Transform data and load to silver Delta table
+
+use a notebook to transform the data and load it to a delta table in the silver layer.
+
+```apache
+ from pyspark.sql.types import *
+    
+ # Create the schema for the table
+ orderSchema = StructType([
+     StructField("SalesOrderNumber", StringType()),
+     StructField("SalesOrderLineNumber", IntegerType()),
+     StructField("OrderDate", DateType()),
+     StructField("CustomerName", StringType()),
+     StructField("Email", StringType()),
+     StructField("Item", StringType()),
+     StructField("Quantity", IntegerType()),
+     StructField("UnitPrice", FloatType()),
+     StructField("Tax", FloatType())
+     ])
+    
+ # Import all files from bronze folder of lakehouse
+ df = spark.read.format("csv").option("header", "true").schema(orderSchema).load("Files/bronze/*.csv")
+    
+ # Display the first 10 rows of the dataframe to preview your data
+ display(df.head(10))
+```
+
+The code ran loaded the data from the CSV files in the **bronze** folder into a Spark dataframe, and then displayed the first few rows of the dataframe.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712817478930/13ef32b2-5ab5-4ac3-9f04-7ea3729232f1.png)
+
+Now you’ll **add columns for data validation and cleanup**, using a PySpark dataframe to add columns and update the values of some of the existing columns.
+
+```apache
+ from pyspark.sql.functions import when, lit, col, current_timestamp, input_file_name
+    
+ # Add columns IsFlagged, CreatedTS and ModifiedTS
+ df = df.withColumn("FileName", input_file_name()) \
+     .withColumn("IsFlagged", when(col("OrderDate") < '2019-08-01',True).otherwise(False)) \
+     .withColumn("CreatedTS", current_timestamp()).withColumn("ModifiedTS", current_timestamp())
+    
+ # Update CustomerName to "Unknown" if CustomerName null or empty
+ df = df.withColumn("CustomerName", when((col("CustomerName").isNull() | (col("CustomerName")=="")),lit("Unknown")).otherwise(col("CustomerName")))
+```
+
+Finally, you’re updating the CustomerName column to “Unknown” if it’s null or empty.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712818072544/7e558bbb-b03f-4e5a-81f0-cac0a3a05ca0.png)
+
+Define the schema for the **sales\_silver** table in the sales database using Delta Lake format.
+
+```apache
+ # Define the schema for the sales_silver table
+    
+ from pyspark.sql.types import *
+ from delta.tables import *
+    
+ DeltaTable.createIfNotExists(spark) \
+     .tableName("sales.sales_silver") \
+     .addColumn("SalesOrderNumber", StringType()) \
+     .addColumn("SalesOrderLineNumber", IntegerType()) \
+     .addColumn("OrderDate", DateType()) \
+     .addColumn("CustomerName", StringType()) \
+     .addColumn("Email", StringType()) \
+     .addColumn("Item", StringType()) \
+     .addColumn("Quantity", IntegerType()) \
+     .addColumn("UnitPrice", FloatType()) \
+     .addColumn("Tax", FloatType()) \
+     .addColumn("FileName", StringType()) \
+     .addColumn("IsFlagged", BooleanType()) \
+     .addColumn("CreatedTS", DateType()) \
+     .addColumn("ModifiedTS", DateType()) \
+     .execute()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712831650721/aec5d240-9840-4b96-a25b-bdafbd26d50d.png)
+
+#### **Upsert operation** on a Delta table, updating existing records based on specific conditions and inserting new records when no match is found.
+
+Now you’re going to perform an **upsert operation** on a Delta table, updating existing records based on specific conditions and inserting new records when no match is found.
+
+```apache
+# Update existing records and insert new ones based on a condition defined by the columns SalesOrderNumber, OrderDate, CustomerName, and Item.
+
+from delta.tables import *
+    
+deltaTable = DeltaTable.forPath(spark, 'Tables/sales_silver')
+    
+dfUpdates = df
+    
+deltaTable.alias('silver') \
+  .merge(
+    dfUpdates.alias('updates'),
+    'silver.SalesOrderNumber = updates.SalesOrderNumber and silver.OrderDate = updates.OrderDate and silver.CustomerName = updates.CustomerName and silver.Item = updates.Item'
+  ) \
+   .whenMatchedUpdate(set =
+    {
+          
+    }
+  ) \
+ .whenNotMatchedInsert(values =
+    {
+      "SalesOrderNumber": "updates.SalesOrderNumber",
+      "SalesOrderLineNumber": "updates.SalesOrderLineNumber",
+      "OrderDate": "updates.OrderDate",
+      "CustomerName": "updates.CustomerName",
+      "Email": "updates.Email",
+      "Item": "updates.Item",
+      "Quantity": "updates.Quantity",
+      "UnitPrice": "updates.UnitPrice",
+      "Tax": "updates.Tax",
+      "FileName": "updates.FileName",
+      "IsFlagged": "updates.IsFlagged",
+      "CreatedTS": "updates.CreatedTS",
+      "ModifiedTS": "updates.ModifiedTS"
+    }
+  ) \
+  .execute()
+```
+
+This operation is important because it enables you to update existing records in the table based on the values of specific columns, and insert new records when no match is found.
+
+This is a common requirement when you’re loading data from a source system that may contain updates to existing and new records.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712831931577/439658ef-b3a0-4379-914b-9da1d30ccd4f.png)
+
+### iv. Explore data in the silver layer using the SQL endpoint
+
+Now that you have data in your silver layer, you can use the SQL endpoint to explore the data and perform some basic analysis.
+
+This is a nice option for you if you’re familiar with SQL and want to do some basic exploration of your data. In this exercise we’re using the SQL endpoint view in Fabric, but note that you can also use other tools like SQL Server Management Studio (SSMS) and Azure Data Explorer.
+
+```sql
+SELECT
+    YEAR(OrderDate) AS Year,
+    CAST (SUM(Quantity * (UnitPrice + Tax)) AS DECIMAL(12, 2)) AS TotalSales
+FROM sales_silver
+GROUP BY YEAR(OrderDate) 
+ORDER BY YEAR(OrderDate)
+```
+
+This query calculates the total sales for each year in the sales\_silver table.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712833093059/874b8373-5c26-403d-b062-5b26e1de1a33.png)
+
+Now we’ll take a look at which customers are purchasing the most (in terms of quantity)
+
+```sql
+ SELECT TOP 10 CustomerName, SUM(Quantity) AS TotalQuantity
+ FROM sales_silver
+ GROUP BY CustomerName
+ ORDER BY TotalQuantity DESC
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712833095510/6f289556-82bb-45a7-bdad-22d6cec688b6.png)
+
+Data exploration at the silver layer is useful for basic analysis, but you’ll need to transform the data further and model it into a star schema to enable more advanced analysis and reporting. You’ll do that in the next section.
+
+### v. Transform data for gold layer
+
+You have successfully taken data from your bronze layer, transformed it, and loaded it into a silver Delta table.
+
+Now you’ll use a new notebook to transform the data further, model it into a star schema, and load it into gold Delta tables.
+
+Note that you could have done all of this in a single notebook, but for the purposes of this exercise you’re using separate notebooks to demonstrate the process of transforming data from bronze to silver and then from silver to gold.
+
+This can help with debugging, troubleshooting, and reuse.
+
+#### 1\. Code to load data to your dataframe and start building out your star schema:
+
+```apache
+ # Load data to the dataframe as a starting point to create the gold layer
+ df = spark.read.table("sales_silver")
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712837286529/6327290d-b8cb-4b11-b615-423f8e061799.png)
+
+Date dimension table:
+
+#### 2\. code to create your date dimension table:
+
+```apache
+ from pyspark.sql.types import *
+ from delta.tables import *
+    
+ # Define the schema for the dimdate_gold table
+ DeltaTable.createIfNotExists(spark) \
+     .tableName("dimdate_gold") \
+     .addColumn("OrderDate", DateType()) \
+     .addColumn("Day", IntegerType()) \
+     .addColumn("Month", IntegerType()) \
+     .addColumn("Year", IntegerType()) \
+     .addColumn("mmmyyyy", StringType()) \
+     .addColumn("yyyymm", StringType()) \
+     .execute()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712841122740/36bec102-edef-4c63-bf98-3d6b740f382c.png)
+
+#### 3\. Code to create a dataframe for your date dimension, dimdate\_gold
+
+```apache
+ from pyspark.sql.functions import col, dayofmonth, month, year, date_format
+    
+ # Create dataframe for dimDate_gold
+    
+ dfdimDate_gold = df.dropDuplicates(["OrderDate"]).select(col("OrderDate"), \
+         dayofmonth("OrderDate").alias("Day"), \
+         month("OrderDate").alias("Month"), \
+         year("OrderDate").alias("Year"), \
+         date_format(col("OrderDate"), "MMM-yyyy").alias("mmmyyyy"), \
+         date_format(col("OrderDate"), "yyyyMM").alias("yyyymm"), \
+     ).orderBy("OrderDate")
+
+ # Display the first 10 rows of the dataframe to preview your data
+
+ display(dfdimDate_gold.head(10))
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712841192961/6766e661-46a2-45ff-b5de-2265bf3e3f77.png)
+
+#### 4\. Code to update the date dimension as new data comes in:
+
+```apache
+ from delta.tables import *
+    
+ deltaTable = DeltaTable.forPath(spark, 'Tables/dimdate_gold')
+    
+ dfUpdates = dfdimDate_gold
+    
+ deltaTable.alias('silver') \
+   .merge(
+     dfUpdates.alias('updates'),
+     'silver.OrderDate = updates.OrderDate'
+   ) \
+    .whenMatchedUpdate(set =
+     {
+          
+     }
+   ) \
+  .whenNotMatchedInsert(values =
+     {
+       "OrderDate": "updates.OrderDate",
+       "Day": "updates.Day",
+       "Month": "updates.Month",
+       "Year": "updates.Year",
+       "mmmyyyy": "updates.mmmyyyy",
+       "yyyymm": "yyyymm"
+     }
+   ) \
+   .execute()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712841309569/835062bf-72ea-4be7-ada4-5c5213c92258.png)
+
+Customer dimension table:
+
+#### 5\. Code to build out the customer dimension table
+
+```apache
+ from pyspark.sql.types import *
+ from delta.tables import *
+    
+ # Create customer_gold dimension delta table
+ DeltaTable.createIfNotExists(spark) \
+     .tableName("dimcustomer_gold") \
+     .addColumn("CustomerName", StringType()) \
+     .addColumn("Email",  StringType()) \
+     .addColumn("First", StringType()) \
+     .addColumn("Last", StringType()) \
+     .addColumn("CustomerID", LongType()) \
+     .execute()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712841399740/280af35c-6e1f-4a3f-a543-c868a77bba4f.png)
+
+#### 6\. Code to drop duplicate customers, select specific columns, and split the “CustomerName” column to create “First” and “Last” name columns:
+
+Here you have created a new DataFrame dfdimCustomer\_silver by performing various transformations such as dropping duplicates, selecting specific columns, and splitting the “CustomerName” column to create “First” and “Last” name columns.
+
+The result is a DataFrame with cleaned and structured customer data, including separate “First” and “Last” name columns extracted from the “CustomerName” column.
+
+```apache
+ from pyspark.sql.functions import col, split
+    
+ # Create customer_silver dataframe
+    
+ dfdimCustomer_silver = df.dropDuplicates(["CustomerName","Email"]).select(col("CustomerName"),col("Email")) \
+     .withColumn("First",split(col("CustomerName"), " ").getItem(0)) \
+     .withColumn("Last",split(col("CustomerName"), " ").getItem(1)) 
+    
+ # Display the first 10 rows of the dataframe to preview your data
+
+ display(dfdimCustomer_silver.head(10))
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712841483587/03d2a112-09ea-451b-8d0b-64315d2e84cf.png)
+
+#### 7\. Code to create the ID column for our customers
+
+Here you’re cleaning and transforming customer data (dfdimCustomer\_silver) by performing a left anti join to exclude duplicates that already exist in the dimCustomer\_gold table, and then generating unique CustomerID values using the monotonically\_increasing\_id() function.
+
+```apache
+ from pyspark.sql.functions import monotonically_increasing_id, col, when, coalesce, max, lit
+    
+ dfdimCustomer_temp = spark.read.table("dimcustomer_gold")
+    
+ MAXCustomerID = dfdimCustomer_temp.select(coalesce(max(col("CustomerID")),lit(0)).alias("MAXCustomerID")).first()[0]
+    
+ dfdimCustomer_gold = dfdimCustomer_silver.join(dfdimCustomer_temp,(dfdimCustomer_silver.CustomerName == dfdimCustomer_temp.CustomerName) & (dfdimCustomer_silver.Email == dfdimCustomer_temp.Email), "left_anti")
+    
+ dfdimCustomer_gold = dfdimCustomer_gold.withColumn("CustomerID",monotonically_increasing_id() + MAXCustomerID + 1)
+
+ # Display the first 10 rows of the dataframe to preview your data
+
+ display(dfdimCustomer_gold.head(10))
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712842792613/bae33205-9091-47a1-a10b-9e6f9f813b8c.png)
+
+#### 8\. Code to ensure that your customer table remains up-to-date as new data comes in
+
+```apache
+from delta.tables import *
+
+deltaTable = DeltaTable.forPath(spark, 'Tables/dimcustomer_gold')
+    
+dfUpdates = dfdimCustomer_gold
+    
+deltaTable.alias('silver') \
+  .merge(
+    dfUpdates.alias('updates'),
+    'silver.CustomerName = updates.CustomerName AND silver.Email = updates.Email'
+  ) \
+   .whenMatchedUpdate(set =
+    {
+          
+    }
+  ) \
+ .whenNotMatchedInsert(values =
+    {
+      "CustomerName": "updates.CustomerName",
+      "Email": "updates.Email",
+      "First": "updates.First",
+      "Last": "updates.Last",
+      "CustomerID": "updates.CustomerID"
+    }
+  ) \
+  .execute()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712843056068/d3591dfe-273b-421a-a85b-090450cb6495.png)
+
+customer table
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712843678013/59c2899c-4f3e-4ae3-ae5e-d3c82db0cd1a.png)
+
+Product dimension table:
+
+#### 9\. Code to create your product dimension
+
+```apache
+from pyspark.sql.types import *
+from delta.tables import *
+    
+DeltaTable.createIfNotExists(spark) \
+    .tableName("dimproduct_gold") \
+    .addColumn("ItemName", StringType()) \
+    .addColumn("ItemID", LongType()) \
+    .addColumn("ItemInfo", StringType()) \
+    .execute()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712844327878/dd611579-6263-450c-847f-6a48746b3d03.png)
+
+#### 10\. Code to to create the product\_silver dataframe
+
+```apache
+from pyspark.sql.functions import col, split, lit
+    
+# Create product_silver dataframe
+    
+dfdimProduct_silver = df.dropDuplicates(["Item"]).select(col("Item")) \
+    .withColumn("ItemName",split(col("Item"), ", ").getItem(0)) \
+    .withColumn("ItemInfo",when((split(col("Item"), ", ").getItem(1).isNull() | (split(col("Item"), ", ").getItem(1)=="")),lit("")).otherwise(split(col("Item"), ", ").getItem(1))) 
+    
+# Display the first 10 rows of the dataframe to preview your data
+
+display(dfdimProduct_silver.head(10))
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712844597438/9b5e06b2-7c89-46af-9cf6-5daf63a708ef.png)
+
+#### 11\. Code to create IDs for your dimProduct\_gold table
+
+This calculates the next available product ID based on the current data in the table, assigns these new IDs to the products, and then displays the updated product information.
+
+```apache
+from pyspark.sql.functions import monotonically_increasing_id, col, lit, max, coalesce
+    
+#dfdimProduct_temp = dfdimProduct_silver
+dfdimProduct_temp = spark.read.table("dimproduct_gold")
+    
+MAXProductID = dfdimProduct_temp.select(coalesce(max(col("ItemID")),lit(0)).alias("MAXItemID")).first()[0]
+    
+dfdimProduct_gold = dfdimProduct_silver.join(dfdimProduct_temp,(dfdimProduct_silver.ItemName == dfdimProduct_temp.ItemName) & (dfdimProduct_silver.ItemInfo == dfdimProduct_temp.ItemInfo), "left_anti")
+    
+dfdimProduct_gold = dfdimProduct_gold.withColumn("ItemID",monotonically_increasing_id() + MAXProductID + 1)
+    
+# Display the first 10 rows of the dataframe to preview your data
+
+display(dfdimProduct_gold.head(10))
+```
+
+from her
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712850821032/a8e50070-b9fb-4528-b9fa-674c1725140b.png)
+
+#### 12\. Code to ensure that your product table remains up-to-date as new data comes in
+
+```apache
+from delta.tables import *
+    
+deltaTable = DeltaTable.forPath(spark, 'Tables/dimproduct_gold')
+            
+dfUpdates = dfdimProduct_gold
+            
+deltaTable.alias('silver') \
+  .merge(
+        dfUpdates.alias('updates'),
+        'silver.ItemName = updates.ItemName AND silver.ItemInfo = updates.ItemInfo'
+        ) \
+        .whenMatchedUpdate(set =
+        {
+               
+        }
+        ) \
+        .whenNotMatchedInsert(values =
+         {
+          "ItemName": "updates.ItemName",
+          "ItemInfo": "updates.ItemInfo",
+          "ItemID": "updates.ItemID"
+          }
+          ) \
+          .execute()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712850894343/4ba15096-0b5d-4419-b648-2c24bf8439c5.png)
+
+Refresh LH
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712850948673/4fa5e4bd-7cea-4057-81db-2ad6186631f6.png)
+
+  
+Fact table:
+
+#### 13\. Code to create the fact table
+
+```apache
+from pyspark.sql.types import *
+from delta.tables import *
+    
+DeltaTable.createIfNotExists(spark) \
+    .tableName("factsales_gold") \
+    .addColumn("CustomerID", LongType()) \
+    .addColumn("ItemID", LongType()) \
+    .addColumn("OrderDate", DateType()) \
+    .addColumn("Quantity", IntegerType()) \
+    .addColumn("UnitPrice", FloatType()) \
+    .addColumn("Tax", FloatType()) \
+    .execute()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712851134115/ec7d0052-6130-4bb5-8af4-6f22603770b2.png)
+
+#### 14\. Code to create a new dataframe to combine sales data with customer and product information include customer ID, item ID, order date, quantity, unit price, and tax
+
+```apache
+from pyspark.sql.functions import col, split, when, lit
+    
+dfdimCustomer_temp = spark.read.table("dimcustomer_gold")
+dfdimProduct_temp = spark.read.table("dimproduct_gold")
+    
+df = df.withColumn("ItemName",split(col("Item"), ", ").getItem(0)) \
+    .withColumn("ItemInfo",when((split(col("Item"), ", ").getItem(1).isNull() | (split(col("Item"), ", ").getItem(1)=="")),lit("")).otherwise(split(col("Item"), ", ").getItem(1))) \
+    
+    
+# Create Sales_gold dataframe
+    
+dffactSales_gold = df.alias("df1").join(dfdimCustomer_temp.alias("df2"),(df.CustomerName == dfdimCustomer_temp.CustomerName) & (df.Email == dfdimCustomer_temp.Email), "left") \
+        .join(dfdimProduct_temp.alias("df3"),(df.ItemName == dfdimProduct_temp.ItemName) & (df.ItemInfo == dfdimProduct_temp.ItemInfo), "left") \
+    .select(col("df2.CustomerID") \
+        , col("df3.ItemID") \
+        , col("df1.OrderDate") \
+        , col("df1.Quantity") \
+        , col("df1.UnitPrice") \
+        , col("df1.Tax") \
+    ).orderBy(col("df1.OrderDate"), col("df2.CustomerID"), col("df3.ItemID"))
+    
+# Display the first 10 rows of the dataframe to preview your data
+    
+display(dffactSales_gold.head(10))
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712853663626/15467a2d-e30d-47ac-be03-d044fb12f9c9.png)
+
+#### 15\. Code to ensure that sales data remains up-to-date
+
+Here you’re using Delta Lake’s merge operation to synchronize and update the factsales\_gold table with new sales data (dffactSales\_gold).
+
+The operation compares the order date, customer ID, and item ID between the existing data (silver table) and the new data (updates DataFrame), updating matching records and inserting new records as needed.
+
+```apache
+from delta.tables import *
+    
+deltaTable = DeltaTable.forPath(spark, 'Tables/factsales_gold')
+    
+dfUpdates = dffactSales_gold
+    
+deltaTable.alias('silver') \
+  .merge(
+    dfUpdates.alias('updates'),
+    'silver.OrderDate = updates.OrderDate AND silver.CustomerID = updates.CustomerID AND silver.ItemID = updates.ItemID'
+  ) \
+   .whenMatchedUpdate(set =
+    {
+          
+    }
+  ) \
+ .whenNotMatchedInsert(values =
+    {
+      "CustomerID": "updates.CustomerID",
+      "ItemID": "updates.ItemID",
+      "OrderDate": "updates.OrderDate",
+      "Quantity": "updates.Quantity",
+      "UnitPrice": "updates.UnitPrice",
+      "Tax": "updates.Tax"
+    }
+  ) \
+  .execute()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712853738963/c9f5b657-3dd1-4dc5-b173-b0d0e823709a.png)
+
+You now have a curated, modeled **gold** layer that can be used for reporting and analysis.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712853761106/e6b937b3-9525-41fa-a56d-85635a4cc1e0.png)
+
+### vi. Create a semantic model
+
+In your workspace, you can now use the gold layer to create a report and analyze the data.
+
+You can access the semantic model directly in your workspace to create relationships and measures for reporting.
+
+Note that you can’t use the default semantic model that is automatically created when you create a lakehouse.
+
+You must create a new semantic model that includes the gold tables you created in this exercise, from the lakehouse explorer.
+
+### Error:
+
+Unexpected error dispatching create semantic model to portal action handler
+
+Sales\_Gold to your new semantic model.
+
+From here, you or other members of your data team can create reports and dashboards based on the data in your lakehouse.
+
+These reports will be connected directly to the gold layer of your lakehouse, so they’ll always reflect the latest data.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712854170201/91a058c5-8d5e-47ca-8c69-2a141b6d9497.png)
+
+### vii. Clean up resources
+
+you’ve learned how to create a medallion architecture in a Microsoft Fabric lakehouse.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712854568678/63da4cf8-03e3-4c54-aafa-aa0964575f64.png)
+
+## 7\. Knowledge check
+
+Which of the following sets of layers are typically associated with the Medallion Architecture for data management?
+
+Bronze, Silver, Gold
+
+Bronze, silver, gold is the correct sequence of layers typically used in the medallion architecture. Data flows from the raw and unrefined state (bronze) to a curated and validated state (silver), and finally to an enriched and well-structured presentation state (gold).
+
+Which tool is best suited for data transformation in Fabric when dealing with large-scale data that will continue to grow?
+
+Notebooks
+
+Notebooks are a more suitable tool for data transformation with big data in Fabric.
+
+What is the benefit of storing different layers of your lakehouse in separate workspaces?
+
+Storing different layers of your lakehouse in separate workspaces enhances security and optimizes cost-effectiveness.
+
+## 8\. Summary
+
+You now understand how the medallion architecture offers a structured approach to logically organize lakehouse data. Once you integrate this architecture into your Fabric setup, you're on your way to ensuring an organized, refined, and curated data system.
+
+You'll eliminate data silos and ensure that downstream teams and apps can access and use the data seamlessly. With this effective setup, you're not just storing data; you're setting it up to be quickly and easily analyzed by whenever it's needed.
+
+
+
+## **Learning objectives**
+
+In this module, you'll learn how to:
+
+* Describe the principles of using the medallion architecture in data management.
+    
+* Apply the medallion architecture framework within the Microsoft Fabric environment.
+    
+* Analyze data stored in the lakehouse using DirectLake in Power BI.
+    
+* Describe best practices for ensuring the security and governance of data stored in the medallion architecture.
+    
+
 # IX. Get started with data warehouses in Microsoft Fabric
 
 # X. Load data into a Microsoft Fabric data warehouse

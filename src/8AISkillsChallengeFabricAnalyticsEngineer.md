@@ -1,12 +1,16 @@
 In this article, I am going to log my learnings completed as part of the AI Skills Challenge: Fabric Analytics Engineer.
 
+> Microsoft Fabric enables data engineers and analysts to ingest, store, transform, and visualize data all in one tool with both a low-code and traditional experience.
+
 # Foreword:
 
 > The entire content is owned by Microsoft, and I am logging for practice and it is for educational purposes only.
 
 # **I. Introduction to end-to-end analytics using Microsoft Fabric**
 
-Discover how Microsoft Fabric can meet your enterprise's analytics needs in one platform. Learn about Microsoft Fabric, how it works, and identify how you can use it for your analytics needs.
+Discover how Microsoft Fabric can meet your enterprise's analytics needs in one platform.
+
+Learn about Microsoft Fabric, how it works, and identify how you can use it for your analytics needs.
 
 ## **1\. Introduction**
 
@@ -32,6 +36,8 @@ Fabric includes the following services:
 Scalable analytics can be complex, fragmented, and expensive.
 
 Fabric is a unified *software-as-a-service* (SaaS) offering, with all your data stored in a single open format in OneLake. OneLake is accessible by all of the analytics engines in the platform.
+
+Microsoft Fabric enables data engineers and analysts to ingest, store, transform, and visualize data all in one tool with both a low-code and traditional experience.
 
 ### **i. Explore OneLake**
 
@@ -2902,7 +2908,6 @@ Refresh LH
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712850948673/4fa5e4bd-7cea-4057-81db-2ad6186631f6.png)
 
-  
 Fact table:
 
 #### 13\. Code to create the fact table
@@ -3023,7 +3028,7 @@ These reports will be connected directly to the gold layer of your lakehouse, so
 
 you’ve learned how to create a medallion architecture in a Microsoft Fabric lakehouse.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712854568678/63da4cf8-03e3-4c54-aafa-aa0964575f64.png)
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712854685689/e9c88d27-60f2-4b5a-b214-053c553550fa.png)
 
 ## 7\. Knowledge check
 
@@ -3049,8 +3054,6 @@ You now understand how the medallion architecture offers a structured approach t
 
 You'll eliminate data silos and ensure that downstream teams and apps can access and use the data seamlessly. With this effective setup, you're not just storing data; you're setting it up to be quickly and easily analyzed by whenever it's needed.
 
-
-
 ## **Learning objectives**
 
 In this module, you'll learn how to:
@@ -3065,6 +3068,585 @@ In this module, you'll learn how to:
     
 
 # IX. Get started with data warehouses in Microsoft Fabric
+
+Data warehouses are analytical stores built on a relational schema to support SQL queries.
+
+Microsoft Fabric enables you to create a relational data warehouse in your workspace and integrate it easily with other elements of your end-to-end analytics solution.
+
+## 1\. Introduction
+
+Relational data warehouses are at the center of most enterprise business intelligence (BI) solutions.
+
+While the specific details may vary across data warehouse implementations, a common pattern based on a denormalized, multidimensional schema has emerged as the standard design for a relational data warehouse.
+
+Microsoft Fabric's data warehouse is a modern version of the traditional data warehouse.
+
+It centralizes and organizes data from different departments, systems, and databases into a single, unified view for analysis and reporting purposes.
+
+Fabric's data warehouse provides full SQL semantics, including the ability to insert, update, and delete data in the tables.
+
+Fabric's data warehouse is unique because it's built on the Lakehouse, which is stored in Delta format and can be queried using SQL. It's designed for use by the whole data team, not just data engineers.
+
+Fabric's data warehouse experience is designed to address these challenges. Fabric enables data engineers, analysts, and data scientists to work together to create and query a data warehouse that is optimized for their specific needs.
+
+In this module, you'll learn about data warehouses in Fabric, create a data warehouse, load, query, and visualize data.
+
+## 2\. Understand data warehouse fundamentals
+
+The process of building a modern data warehouse typically consists of:
+
+* Data ingestion - moving data from source systems into a data warehouse.
+    
+* Data storage - storing the data in a format that is optimized for analytics.
+    
+* Data processing - transforming the data into a format that is ready for consumption by analytical tools.
+    
+* Data analysis and delivery - analyzing the data to gain insights and delivering those insights to the business.
+    
+
+Microsoft Fabric enables data engineers and analysts to ingest, store, transform, and visualize data all in one tool with both a low-code and traditional experience.
+
+### i. Understand Fabric's data warehouse experience
+
+Fabric's data warehouse is a relational data warehouse that supports the full transactional T-SQL capabilities you'd expect from an enterprise data warehouse.
+
+It's a fully managed, scalable, and highly available data warehouse that can be used to store and query data in the Lakehouse.
+
+Using the data warehouse, you're fully in control of creating tables, loading, transforming, and querying data using either the Fabric portal or T-SQL commands. You can use SQL to query and analyze the data, or use Spark to process the data and create machine learning models.
+
+Data warehouses in Fabric facilitate collaboration between data engineers and data analysts, working together in the same experience. Data engineers build a relational layer on top of data in the Lakehouse, where analysts can use T-SQL and Power BI to explore the data.
+
+### ii. Design a data warehouse
+
+Like all relational databases, Fabric's data warehouse contains tables to store your data for analytics later.
+
+Most commonly, these tables are organized in a schema that is optimized for multidimensional modeling. In this approach, numerical data related to events (e.g. sales orders) are grouped by different attributes (e.g. date, customer, store).
+
+For instance, you can analyze the total amount paid for sales orders that occurred on a specific date or at a particular store.
+
+#### 1\. Tables in a data warehouse (fact tables and dimension tables.)
+
+Tables in a data warehouse are typically organized in a way that supports efficient and effective analysis of large amounts of data.
+
+This way of organizing tables is often referred to as dimensional modeling, which involves structuring tables into fact tables and dimension tables.
+
+##### i. Fact tables
+
+Fact tables contain the numerical data that you want to analyze. Fact tables typically have a large number of rows and are the primary source of data for analysis.
+
+For example, a fact table might contain the total amount paid for sales orders that occurred on a specific date or at a particular store.
+
+##### ii. Dimension tables
+
+Dimension tables contain descriptive information about the data in the fact tables.
+
+Dimension tables typically have a small number of rows and are used to provide context for the data in the fact tables.
+
+For example, a dimension table might contain information about the customers who placed sales orders.
+
+In addition to attribute columns, a dimension table contains a unique key column that uniquely identifies each row in the table.
+
+In fact, it's common for a dimension table to include two key columns:
+
+* A *surrogate key* is a unique identifier for each row in the dimension table. It's often an integer value that is automatically generated by the database management system when a new row is inserted into the table.
+    
+* An *alternate key* is often a natural or business key that identifies a specific instance of an entity in the transactional source system - such as a product code or a customer ID.
+    
+
+You need both surrogate and alternate keys in a data warehouse, because they serve different purposes.
+
+Surrogate keys are specific to the data warehouse and help to maintain consistency and accuracy in the data.
+
+Alternate keys on the other hand are specific to the source system and help to maintain traceability between the data warehouse and the source system.
+
+#### 2\. Special types of dimension tables
+
+Special types of dimensions provide additional context and enable more comprehensive data analysis.
+
+Time dimensions provide information about the time period in which an event occurred. This table enables data analysts to aggregate data over temporal intervals. For example, a time dimension might include columns for the year, quarter, month, and day in which a sales order was placed.
+
+Slowly changing dimensions are dimension tables that track changes to dimension attributes over time, like changes to a customer's address or a product's price. They're significant in a data warehouse because they enable users to analyze and understand changes to data over time. Slowly changing dimensions ensure that data stays up-to-date and accurate, which is imperative to making good business decisions.
+
+### ii. Data warehouse schema designs
+
+In most transactional databases that are used in business applications, the data is normalized to reduce duplication. In a data warehouse however, the dimension data is generally de-normalized to reduce the number of joins required to query the data.
+
+Often, a data warehouse is organized as a star schema, in which a fact table is directly related to the dimension tables, as shown in this example:
+
+![Diagram of a star schema design displaying a FactSales table with five dimensions that form the shape of a star.](https://learn.microsoft.com/en-us/training/wwl/get-started-data-warehouse/media/star-schema.png)
+
+You can use the attributes of something to group together numbers in the fact table at different levels.
+
+For example, you could find the total sales revenue for a whole region or just for one customer. The information for each level can be stored in the same dimension table.
+
+If there are lots of levels or some information is shared by different things, it might make sense to use a snowflake schema instead. Here's an example:
+
+![Diagram of a snowflake schema design displaying multiple dimensions.](https://learn.microsoft.com/en-us/training/wwl/get-started-data-warehouse/media/snowflake-schema.png)
+
+In this case, the DimProduct table has been split up (normalized) to create separate dimension tables for product categories and suppliers.
+
+Each row in the DimProduct table contains key values for the corresponding rows in the DimCategory and DimSupplier tables. A DimGeography table has been added containing information on where customers and stores are located.
+
+Each row in the DimCustomer and DimStore tables contains a key value for the corresponding row in the DimGeography table.
+
+## 3\. Understand data warehouses in Fabric
+
+Fabric's Lakehouse is a collection of files, folders, tables, and shortcuts that act like a database over a data lake.
+
+It's used by the Spark engine and SQL engine for big data processing and has features for ACID transactions when using the open-source Delta formatted tables.
+
+The Lakehouse is a great place to store data, but it's not the best place to serve data to business users.
+
+For that, you need a data warehouse.
+
+Fabric's data warehouse experience allows you to transition from the lake view of the Lakehouse (which supports data engineering and Apache Spark) to the SQL experiences that a traditional data warehouse would provide.
+
+The Lakehouse gives you the ability to read tables and use the SQL analytics endpoint, whereas the **data warehouse enables you to manipulate the data.**
+
+In the data warehouse experience, you'll model data using tables and views, run T-SQL to query data across the data warehouse and Lakehouse, use T-SQL to perform DML operations on data inside the data warehouse, and serve reporting layers like Power BI.
+
+Now that you understand the basic architectural principles for a relational data warehouse schema, let's explore how to create a data warehouse.
+
+### i. Describe a data warehouse in Fabric
+
+In the data warehouse experience in Fabric, you can build a relational layer on top of physical data in the Lakehouse and expose it to analysis and reporting tools.
+
+You can create your data warehouse directly in Fabric from the create hub or within a workspace. After creating an empty warehouse, you can add objects to it.
+
+**In the data warehouse experience in Fabric, you can build a relational layer on top of physical data in the Lakehouse and expose it to analysis and reporting tools.**
+
+You can create your data warehouse directly in Fabric from the **create hub** or within a **workspace**. After creating an empty warehouse, you can add objects to it.
+
+Once your warehouse is created, you can create tables using T-SQL directly in the Fabric interface.
+
+### ii. Ingest data into your data warehouse
+
+There are a few ways to ingest data into a Fabric data warehouse, including *Pipelines*, *Dataflows*, *cross-database querying*, and the *COPY INTO* command.
+
+After ingestion, the data becomes available for analysis by multiple business groups, who can use features such as cross-database querying and sharing to access it.
+
+#### 1\. Create tables
+
+To create a table in the data warehouse, you can use SQL Server Management Studio (SSMS) or another SQL client to connect to the data warehouse and run a CREATE TABLE statement.
+
+You can also create tables directly in the Fabric UI.
+
+You can copy data from an external location into a table in the data warehouse using the `COPY INTO` syntax.
+
+```sql
+COPY INTO dbo.Region 
+FROM 'https://mystorageaccountxxx.blob.core.windows.net/private/Region.csv' WITH ( 
+            FILE_TYPE = 'CSV'
+            ,CREDENTIAL = ( 
+                IDENTITY = 'Shared Access Signature'
+                , SECRET = 'xxx'
+                )
+            ,FIRSTROW = 2
+            )
+GO
+```
+
+This SQL query loads data from a CSV file stored in Azure Blob Storage into a table called "Region" in the Fabric data warehouse.
+
+#### 2\. Table considerations
+
+After creating tables in a data warehouse, it's important to consider the process of loading data into those tables. A common approach is to use *staging tables*. In Fabric, you can use T-SQL commands to load data from files into staging tables in the data warehouse.
+
+Staging tables are temporary tables that can be used to perform data cleansing, data transformations, and data validation. You can also use staging tables to load data from multiple sources into a single destination table.
+
+Usually, data loading is performed as a periodic batch process in which inserts and updates to the data warehouse are coordinated to occur at a regular interval (for example, daily, weekly, or monthly).
+
+Generally, you should implement a data warehouse load process that performs tasks in the following order:
+
+1. Ingest the new data to be loaded into a data lake, applying pre-load cleansing or transformations as required.
+    
+2. Load the data from files into staging tables in the relational data warehouse.
+    
+3. Load the dimension tables from the dimension data in the staging tables, updating existing rows or inserting new rows and generating surrogate key values as necessary.
+    
+4. Load the fact tables from the fact data in the staging tables, looking up the appropriate surrogate keys for related dimensions.
+    
+5. Perform post-load optimization by updating indexes and table distribution statistics.
+    
+
+If you have tables in the lakehouse, and you want to be able to query it in your warehouse - but not make changes -
+
+With a Fabric data warehouse, you don't have to copy data from the lakehouse to the data warehouse. You can query data in the lakehouse directly from the data warehouse using cross-database querying.
+
+## 4\. Query and transform data
+
+Now that you know how to implement a data warehouse in Fabric, let's prepare the data for analytics.
+
+There are two ways to query data from your data warehouse. The *Visual query editor* provides a no-code, drag-and-drop experience to create your queries. If you're comfortable with T-SQL, you may prefer to use the *SQL query editor* to write your queries. In both cases, you can create tables, views, and stored procedures to query data in the data warehouse and Lakehouse.
+
+There's also a SQL analytics endpoint, where you can connect from any tool.
+
+### i. Query data using the SQL query editor
+
+### ii. Query data using the Visual query editor
+
+## 5\. Prepare data for analysis and reporting
+
+A semantic model defines the relationships between the different tables in the semantic model, the rules for how data is aggregated and summarized, and the calculations or measures that are used to derive insights from the data.
+
+These relationships and measures are included in the semantic model, which is then used to create reports in Power BI.
+
+### i. Build relationships
+
+### ii. Create measures
+
+Measures are the metrics that you want to analyze in your data warehouse.
+
+Measures are calculated fields that are based on the data in the tables in your data warehouse using the Data Analysis Expressions (DAX) formula language.
+
+### iii. Hide fields
+
+### iv. Understand semantic models
+
+Every time a data warehouse is created, Fabric creates a semantic model for analysts and/or business users to connect to for reporting.
+
+Semantic model has metrics that are used to create reports. Simply put, analysts use the semantic model you created in your warehouse, which is stored in a semantic model.
+
+Semantic models are automatically kept in sync with the data warehouse, so you don't have to worry about maintaining them. You can also create custom semantic models to meet your specific needs.
+
+### v. Understand the default semantic model
+
+There's also a default semantic model automatically created for you in Fabric.
+
+It inherits business logic from the parent lakehouse or warehouse, which initiates the downstream analytics experience for business intelligence and analysis.
+
+This semantic model is managed, optimized, and kept in sync for you.
+
+### vi. Visualize data
+
+## 6\. Secure and monitor your data warehouse
+
+### i. **Security**
+
+Data warehouse security is important to protect your data from unauthorized access.
+
+Fabric provides a number of security features to help you secure your data warehouse.
+
+These include:
+
+* Role-based access control (RBAC) to control access to the warehouse and its data.
+    
+* SSL encryption to secure the communication between the warehouse and the client applications.
+    
+* Azure Storage Service Encryption to protect the data in transit and at rest.
+    
+* Azure Monitor and Azure Log Analytics to monitor the warehouse activity and audit the access to the data.
+    
+* Multifactor authentication (MFA) to add an extra layer of security to user accounts.
+    
+* Microsoft Entra ID integration to manage the user identities and access to the warehouse.
+    
+
+### ii. Workspace permissions
+
+Appropriate workspace roles are the first line of defense in securing your data warehouse.
+
+In addition to workspace roles, you can grant item permissions and access through SQL.
+
+### iii. Item permissions
+
+You can grant permissions to users via T-SQL or in the Fabric portal. Grant the following permissions to users who need to access your data warehouse:
+
+* Read: Allows the user to CONNECT using the SQL connection string.
+    
+* ReadData: Allows the user to read data from any table/view within the warehouse.
+    
+* ReadAll: Allows user to read data the raw parquet files in OneLake that can be consumed by Spark.
+    
+
+A user connection to the SQL analytics endpoint will fail without Read permission at a minimum.
+
+### iv. Monitoring
+
+Monitoring activities in your data warehouse is crucial to ensure optimal performance, efficient resource utilization, and security. It helps you identify issues, detect anomalies, and take action to keep the data warehouse running smoothly and securely.
+
+You can use *dynamic management views* (DMVs) to monitor connection, session, and request status to see live SQL query lifecycle insights. With DMVs, you can get details like the number of active queries and identify which queries are running for an extended period and require termination.
+
+There are currently three DMVs available to use in Fabric:
+
+* sys.dm\_exec\_connections: Returns information about each connection established between the warehouse and the engine.
+    
+* sys.dm\_exec\_sessions: Returns information about each session authenticated between the item and engine.
+    
+* sys.dm\_exec\_requests: Returns information about each active request in a session.
+    
+
+### v. Query monitoring
+
+Use 'sys.dm\_exec\_requests' to identify long-running queries that may be impacting the overall performance of the database, and take appropriate action to optimize or terminate those queries.
+
+Start by identifying the queries that have been running for a long time. Use the following query to identify which queries have been running the longest, in descending order:
+
+```sql
+SELECT request_id, session_id, start_time, total_elapsed_time
+FROM sys.dm_exec_requests
+WHERE status = 'running'
+ORDER BY total_elapsed_time DESC;
+```
+
+You can continue investigating to understand which user ran the session with the long-running query, by running:
+
+```sql
+SELECT login_name
+FROM sys.dm_exec_sessions
+WHERE 'session_id' = 'SESSION_ID WITH LONG-RUNNING QUERY';
+```
+
+use the `KILL` command to terminate the session with the long-running query:
+
+```sql
+KILL 'SESSION_ID WITH LONG-RUNNING QUERY';
+```
+
+### Note:
+
+You must be a workspace Admin to run the `KILL` command. Workspace Admins can execute all three DMVs.
+
+Member role, Contributor role, and Viewer role can see their own results within the warehouse, but cannot see other users' results.
+
+## 7\. Exercise - Analyze data in a data warehouse
+
+create a data warehouse in Fabric and analyze your data.
+
+In Microsoft Fabric, a data warehouse provides a relational database for large-scale analytics.
+
+Unlike the default read-only SQL endpoint for tables defined in a lakehouse, a data warehouse provides full SQL semantics; including the ability to insert, update, and delete data in the tables.
+
+### i. Create a workspace
+
+### ii. Create a data warehouse
+
+### iii. Create tables and insert data
+
+A warehouse is a relational database in which you can define tables and other objects.
+
+**Create tables with T-SQL** tile
+
+CREATE TABLE statement
+
+```sql
+CREATE TABLE dbo.DimProduct
+(
+    ProductKey INTEGER NOT NULL,
+    ProductAltKey VARCHAR(25) NULL,
+    ProductName VARCHAR(50) NOT NULL,
+    Category VARCHAR(50) NULL,
+    ListPrice DECIMAL(5,2) NULL
+);
+GO
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712905850073/8fa07399-584a-4e77-820b-1382e4f5410f.png)
+
+INSERT statement
+
+```sql
+INSERT INTO dbo.DimProduct
+VALUES
+(1, 'RING1', 'Bicycle bell', 'Accessories', 5.99),
+(2, 'BRITE1', 'Front light', 'Accessories', 15.49),
+(3, 'BRITE2', 'Rear light', 'Accessories', 15.49);
+GO
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712906083784/103b7bec-9788-4dac-8973-e5d7398310da.png)
+
+creates a simple data warehouse schema and loads some data
+
+**Data:**
+
+create-dw.txt \[[Link](https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/create-dw.txt)\]
+
+verify that the **dbo** schema in the data warehouse now contains the following four tables:
+
+* **DimCustomer**
+    
+* **DimDate**
+    
+* **DimProduct**
+    
+* **FactSalesOrder**
+    
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712906639194/cdb9c13d-0d31-4c3e-b90f-46390519378f.png)
+
+### iv. Define a data model
+
+A relational data warehouse typically consists of fact and dimension tables.
+
+The fact tables contain numeric measures you can aggregate to analyze business performance (for example, sales revenue), and
+
+The dimension tables contain attributes of the entities by which you can aggregate the data (for example, product, customer, or time).
+
+In a Microsoft Fabric data warehouse, you can use these keys to define a data model that encapsulates the relationships between the tables.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712907174711/e34c44aa-990c-4b46-9771-c7154593af48.png)
+
+### v. Query data warehouse tables
+
+```sql
+SELECT  d.[Year] AS CalendarYear,
+         d.[Month] AS MonthOfYear,
+         d.MonthName AS MonthName,
+        SUM(so.SalesTotal) AS SalesRevenue
+FROM FactSalesOrder AS so
+JOIN DimDate AS d ON so.SalesOrderDateKey = d.DateKey
+GROUP BY d.[Year], d.[Month], d.MonthName
+ORDER BY CalendarYear, MonthOfYear;
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712909166375/4c429827-b158-4e8d-903f-41da658183e5.png)
+
+```sql
+SELECT  d.[Year] AS CalendarYear,
+        d.[Month] AS MonthOfYear,
+        d.MonthName AS MonthName,
+        c.CountryRegion AS SalesRegion,
+       SUM(so.SalesTotal) AS SalesRevenue
+FROM FactSalesOrder AS so
+JOIN DimDate AS d ON so.SalesOrderDateKey = d.DateKey
+JOIN DimCustomer AS c ON so.CustomerKey = c.CustomerKey
+GROUP BY d.[Year], d.[Month], d.MonthName, c.CountryRegion
+ORDER BY CalendarYear, MonthOfYear, SalesRegion;
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712909197994/db8681ca-66fd-4336-91c4-a08402009f3f.png)
+
+### vi. Create a view
+
+A data warehouse in Microsoft Fabric has many of the same capabilities you may be used to in relational databases.
+
+For example, you can create database objects like views and stored procedures to encapsulate SQL logic.
+
+```sql
+IF EXISTS (
+    SELECT * FROM sys.sysobjects
+    WHERE name = 'vSalesByRegion')
+DROP VIEW dbo.vSalesByRegion;
+GO
+
+CREATE VIEW vSalesByRegion
+AS
+SELECT  d.[Year] AS CalendarYear,
+        d.[Month] AS MonthOfYear,
+        d.MonthName AS MonthName,
+        c.CountryRegion AS SalesRegion,
+       SUM(so.SalesTotal) AS SalesRevenue
+FROM FactSalesOrder AS so
+JOIN DimDate AS d ON so.SalesOrderDateKey = d.DateKey
+JOIN DimCustomer AS c ON so.CustomerKey = c.CustomerKey
+GROUP BY d.[Year], d.[Month], d.MonthName, c.CountryRegion;
+```
+
+```sql
+SELECT CalendarYear, MonthName, SalesRegion, SalesRevenue
+FROM vSalesByRegion
+ORDER BY CalendarYear, MonthOfYear, SalesRegion;
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712909685422/34268835-3536-405d-8377-a42de1dd3757.png)
+
+### vii. Create a visual query
+
+Instead of writing SQL code, you can use the graphical query designer to query the tables in your data warehouse.
+
+This experience is similar to Power Query online, where you can create data transformation steps with no code.
+
+For more complex tasks, you can use Power Query’s M (Mashup) language.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712910079701/b7eccf4c-85cd-4d0c-bcab-010f28908aab.png)
+
+### viii. Visualize your data
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712910757681/b7bb1a4d-4dfa-40f1-8cae-5ca2a7306baa.png)
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712910769428/d611d34f-a501-4062-a5d5-4cc3e1b91370.png)
+
+### ix. Clean up resources
+
+## 8\. Knowledge check
+
+Which type of table should an insurance company use to store supplier attribute details for aggregating claims?
+
+A dimension table stores attributes used to group numeric measures.
+
+What is a semantic model in the data warehouse experience?
+
+A semantic model in the data warehouse experience provides a way to organize and structure data in a way that is meaningful to business users, enabling them to easily access and analyze data.
+
+What is the purpose of item permissions in a workspace?
+
+By granting access to a single data warehouse using item permissions, you can enable downstream consumption of data.
+
+## 9\. Summary
+
+In this module, you learned about data warehouses and dimensional modeling, created a data warehouse, loaded, queried, and visualized data, and described semantic models and how they're used for downstream reporting.
+
+data warehouses in Fabric, create a data warehouse, load, query, and visualize data.
+
+Fabric's data warehouse provides full SQL semantics, including the ability to insert, update, and delete data in the tables.
+
+fact tables(numerical data, large number of rows) and dimension tables(descriptive information, small number of rows, surrogate key, alternate key),
+
+Star schema, snowflake schema,
+
+data warehouse enables you to manipulate the data
+
+data warehouse experience in Fabric, you can build a relational layer on top of physical data in the Lakehouse and expose it to analysis and reporting tools.
+
+ingest data into data warehouse  = Pipelines, Dataflows, cross-database querying, and the COPY INTO command
+
+copy data from an external location into a table in the data warehouse using the COPY INTO syntax
+
+SQL query loads data from a CSV file stored in Azure Blob Storage into a table called "Region" in the Fabric data warehouse.
+
+staging tables - process of loading data into those tables, use T-SQL commands to load data from files into staging tables in the data warehouse,
+
+Staging tables are temporary tables that can be used to perform data cleansing, data transformations, and data validation.
+
+implement a data warehouse load process
+
+query data in the lakehouse directly from the data warehouse using cross-database querying
+
+create tables, views, and stored procedures to query data in the data warehouse and Lakehouse.
+
+Visual query editor provides a no-code, drag-and-drop experience to create your queries
+
+SQL query editor to write your queries.
+
+A semantic model defines the relationships between the different tables in the semantic model, the rules for how data is aggregated and summarized, and the calculations or measures that are used to derive insights from the data.
+
+semantic model defines - relationships/cardinality, rules for how data is aggregated and summarized, calculations or measures
+
+Measures are the metrics that you want to analyze in your data warehouse.
+
+Measures are calculated fields that are based on the data in the tables in your data warehouse using the Data Analysis Expressions (DAX) formula language.
+
+sys.dm\_exec\_requests
+
+a data warehouse provides a relational database for large-scale analytics. Unlike the default read-only SQL endpoint for tables defined in a lakehouse, a data warehouse provides full SQL semantics; including the ability to insert, update, and delete data in the tables.
+
+A warehouse is a relational database in which you can define tables and other objects.
+
+buildreport.
+
+## **Learning objectives**
+
+In this module, you'll learn how to:
+
+* Describe data warehouses in Fabric
+    
+* Understand a data warehouse vs a data Lakehouse
+    
+* Work with data warehouses in Fabric
+    
+* Create and manage fact tables and dimensions within a data warehouse
+    
 
 # X. Load data into a Microsoft Fabric data warehouse
 

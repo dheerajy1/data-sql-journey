@@ -69,7 +69,7 @@ You know how to assess data quality. Plus, you understand data security, includi
 
 # I. Module 1 Discover data analysis
 
-![](https://learn.microsoft.com/en-us/training/achievements/data-analytics-and-microsoft.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/data-analytics-and-microsoft.svg)
 
 | Course | Microsoft Power BI Data Analyst |
 | --- | --- |
@@ -163,7 +163,7 @@ In this module, you'll:
 | --- | --- |
 | Module 2/17 | Get started building with Power BI |
 
-![](https://learn.microsoft.com/en-us/training/achievements/get-started-power-bi.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/get-started-power-bi.svg)
 
 ## **1\. Introduction**
 
@@ -246,7 +246,7 @@ In this module, you'll learn:
 | --- | --- |
 | Module 3/17 | **Get data in Power BI** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/get-data.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/get-data.svg)
 
 You'll learn how to retrieve data from a variety of data sources, including Microsoft Excel, relational databases, and NoSQL data stores.
 
@@ -258,7 +258,7 @@ create a suite of reports that are dependent on data in several different locati
 
 This module will focus on the first step of getting the data from the different data sources and importing it into Power BI by using Power Query.
 
-![](https://learn.microsoft.com/en-us/training/modules/get-data/media/1-data-source-scenario-c.png#lightbox align="center")
+![](https://learn.microsoft.com/en-us/training/modules/get-data/media/1-data-source-scenario-c.png#lightbox)
 
 ## **2\. Get data from files**
 
@@ -523,7 +523,7 @@ This lab is designed to introduce you to Power BI Desktop application and how to
 
 ## **i. Get data from SQL Server**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712293898196/d8665311-8a1c-4691-86c7-5a22cb46e839.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712293898196/d8665311-8a1c-4691-86c7-5a22cb46e839.png)
 
 ### **ii. Preview Data in Power Query Editor**
 
@@ -545,7 +545,7 @@ Column Distribution for EmployeeKey column
 
 *When modeling, it’s important that some model tables have unique columns. These unique columns can be used to create one-to-many relationships, which you’ll do in the****Model Data in Power BI Desktop****lab.*
 
-[![Column distribution showing 296 distinct, 296 unique values](https://microsoftlearning.github.io/PL-300-Microsoft-Power-BI-Data-Analyst/Instructions/Labs/Linked_image_Files/01-prepare-data-with-power-query-in-power-bi-desktop_image26.png align="center")](https://microsoftlearning.github.io/PL-300-Microsoft-Power-BI-Data-Analyst/Instructions/Labs/Linked_image_Files/01-prepare-data-with-power-query-in-power-bi-desktop_image26.png)
+[![Column distribution showing 296 distinct, 296 unique values](https://microsoftlearning.github.io/PL-300-Microsoft-Power-BI-Data-Analyst/Instructions/Labs/Linked_image_Files/01-prepare-data-with-power-query-in-power-bi-desktop_image26.png)](https://microsoftlearning.github.io/PL-300-Microsoft-Power-BI-Data-Analyst/Instructions/Labs/Linked_image_Files/01-prepare-data-with-power-query-in-power-bi-desktop_image26.png)
 
 #### DimReseller query
 
@@ -626,7 +626,7 @@ By the end of this module, you'll be able to:
 | --- | --- |
 | Module 4/17 | Clean, transform, and load data in Power BI |
 
-![](https://learn.microsoft.com/en-us/training/achievements/clean-transform-and-load-data-in-power-bi.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/clean-transform-and-load-data-in-power-bi.svg)
 
 Power Query has an incredible number of features that are dedicated to helping you clean and prepare your data for analysis.
 
@@ -771,39 +771,39 @@ In this lab you learn how to:
 
 ### **i. Configure the Salesperson query**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712480218127/0e238424-d2d5-4a29-ab4f-8658e77aa89b.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712480218127/0e238424-d2d5-4a29-ab4f-8658e77aa89b.png)
 
 ### **ii. Configure the SalespersonRegion query**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712481165402/b066e26a-233a-4a92-9b0a-378692d601a8.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712481165402/b066e26a-233a-4a92-9b0a-378692d601a8.png)
 
 ### **iii. Configure the Product query**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712481752856/ed5e6a86-9b59-4ac1-85ad-c52abe81b403.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712481752856/ed5e6a86-9b59-4ac1-85ad-c52abe81b403.png)
 
 ### **iv. Configure the Reseller query**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712481971964/dacf771a-87fd-4aad-b816-c59d62ca185f.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712481971964/dacf771a-87fd-4aad-b816-c59d62ca185f.png)
 
 ### **v. Configure the Region query**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712482180102/4c4fc606-d703-4008-ab0d-add0e9d4cb36.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712482180102/4c4fc606-d703-4008-ab0d-add0e9d4cb36.png)
 
 ### **vi. Configure the Sales query**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712482671890/653486da-969d-4ad5-be46-37adee1969f6.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712482671890/653486da-969d-4ad5-be46-37adee1969f6.png)
 
 ### **vii. Configure the Targets query**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712483276542/8838f1cb-f29d-47ea-b361-e7717bdbc99d.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712483276542/8838f1cb-f29d-47ea-b361-e7717bdbc99d.png)
 
 ### **viii. Configure the ColorFormats query**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712483337624/8714c73c-f0ea-495d-94c6-dc0ac745ecfb.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712483337624/8714c73c-f0ea-495d-94c6-dc0ac745ecfb.png)
 
 ### **ix. Update the Product query**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712483533905/5ee0980e-00ce-4638-a9cb-004380e53f59.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712483533905/5ee0980e-00ce-4638-a9cb-004380e53f59.png)
 
 ### **x. Update the ColorFormats query**
 
@@ -813,7 +813,7 @@ In the **Query Properties** window, uncheck the **Enable Load To Report** checkb
 
 ### **xi. Finish up**
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712485872290/8ec23d3a-e1e5-4287-b591-31be54604396.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712485872290/8ec23d3a-e1e5-4287-b591-31be54604396.png)
 
 ## **9\. Check your knowledge**
 
@@ -866,7 +866,7 @@ By the end of this module, you’ll be able to:
 | --- | --- |
 | Module 5/17 | **Design a semantic model in Power BI** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/design-a-data-model-in-power-bi.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/design-a-data-model-in-power-bi.svg)
 
 Building a great semantic model is about simplifying the disarray.
 
@@ -978,7 +978,7 @@ Dates  = CALENDAR(DATE(2011, 5, 31), DATE(2022, 12, 31))
 Year = YEAR(Dates[Date])
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712474368697/7fba5578-5976-48db-b3fb-d098ed3a8e87.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712474368697/7fba5578-5976-48db-b3fb-d098ed3a8e87.png)
 
 ### iii. **Power Query**
 
@@ -992,7 +992,7 @@ You can use M-language, the development language that is used to build queries i
 )
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712475164272/13e4d88f-79fb-496b-8b17-61ed2a49d012.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712475164272/13e4d88f-79fb-496b-8b17-61ed2a49d012.png)
 
 ## 4\. Work with dimensions
 
@@ -1154,9 +1154,9 @@ In this lab you learn how to:
 4. Hover the cursor over the relationship to highlight the related columns.
     
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712581134164/2f6d9550-3f33-484c-9475-a74a0150f556.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712581134164/2f6d9550-3f33-484c-9475-a74a0150f556.png)
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712581145370/d513062b-b8b4-429e-8c2a-643b62a7a975.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712581145370/d513062b-b8b4-429e-8c2a-643b62a7a975.png)
 
 ### ii. Configure Tables
 
@@ -1221,13 +1221,13 @@ Profit Margin =
 DIVIDE([Profit], SUM('Sales'[Sales]))
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712585394106/ef9db81a-f209-47c0-af47-52cc00247e73.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712585394106/ef9db81a-f209-47c0-af47-52cc00247e73.png)
 
 ### xii. Create a many-to-many relationship
 
 ### xiii. Relate the Targets table
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712586280722/796b43cf-a93f-4f6e-9b48-8b1fbbf2e0c6.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712586280722/796b43cf-a93f-4f6e-9b48-8b1fbbf2e0c6.png)
 
 ## 9\. Check your knowledge
 
@@ -1274,7 +1274,7 @@ In this module, you will:
 | --- | --- |
 | Module 6/17 |  |
 
-![](https://learn.microsoft.com/en-us/training/achievements/add-measures-power-bi-desktop.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/add-measures-power-bi-desktop.svg)
 
 In this module,
 
@@ -1393,7 +1393,7 @@ Order Line Count =
 COUNTROWS(Sales)
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712663986366/9359c533-4057-4fb3-bdc4-7abd911ee13f.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712663986366/9359c533-4057-4fb3-bdc4-7abd911ee13f.png)
 
 ## 3\. Create compound measures
 
@@ -1406,13 +1406,13 @@ Profit =
 
 By removing this calculated column, you've optimized the semantic model. Removing this columns results in a decreased semantic model size and shorter data refresh times.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712664134779/3b3e3a8d-5b78-4fa0-b5fe-3f6a5c18e5dc.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712664134779/3b3e3a8d-5b78-4fa0-b5fe-3f6a5c18e5dc.png)
 
 ## 4\. Create quick measures
 
 a feature named Quick Measures. This feature helps you to quickly perform common, powerful calculations by generating the DAX expression for you.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712664402102/05527eb9-1d5d-4e9e-9ff8-5a17687442b7.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712664402102/05527eb9-1d5d-4e9e-9ff8-5a17687442b7.png)
 
 ## 5\. Compare calculated columns with measures
 
@@ -1481,7 +1481,7 @@ Unlike Power Query-sourced tables, calculated tables can’t be used to load dat
 Salesperson = 'Salesperson (Performance)'
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712729522478/71f013dc-16b4-499a-bb00-3c00bc44019a.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712729522478/71f013dc-16b4-499a-bb00-3c00bc44019a.png)
 
 ### iii. Create the Date table
 
@@ -1494,7 +1494,7 @@ The CALENDARAUTO() function returns a single-column table consisting of date val
 
 This function can take a single optional argument that is the last month number of a year. When omitted, the value is 12, meaning that December is the last month of the year. In this case, 6 is entered, meaning that June is the last month of the year.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712729922047/21f37f38-297a-4bd6-9903-9a456440b81d.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712729922047/21f37f38-297a-4bd6-9903-9a456440b81d.png)
 
 ### iv. Create calculated columns
 
@@ -1600,7 +1600,7 @@ Order Lines =
 COUNTROWS(Sales)
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712738834622/77a11ce6-6c85-4e84-8e4e-7bb4e52b015d.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712738834622/77a11ce6-6c85-4e84-8e4e-7bb4e52b015d.png)
 
 ### viii. Create additional measures
 
@@ -1614,7 +1614,7 @@ The HASONEVALUE() function tests whether a single value in the Salesperson colum
  )
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712740167071/59bee427-ec5b-4328-89d1-995c0eb3f0ab.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712740167071/59bee427-ec5b-4328-89d1-995c0eb3f0ab.png)
 
 ## 8\. Summary
 
@@ -1645,9 +1645,215 @@ By the end of this module, you'll be able to:
 | --- | --- |
 | Module 7/17 | **Add calculated tables and columns to Power BI Desktop models** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/dax-power-bi-add-calculated-tables.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/dax-power-bi-add-calculated-tables.svg)
 
-i
+By the end of this module,
+
+you'll be able to add calculated tables and calculated columns to your semantic model.
+
+You'll also be able to describe row context, which is used to evaluated calculated column formulas. Because it's possible to add columns to a table using Power Query,
+
+you'll also learn when it's best to create calculated columns instead of Power Query custom columns.
+
+## 1\. Introduction
+
+You can write a Data Analysis Expressions (DAX) formula to add a calculated table to your model. The formula can duplicate or transform existing model data to produce a new table
+
+A calculated table can't connect to external data; you must use Power Query to accomplish that task.
+
+A calculated table formula must return a table object. The simplest formula can duplicate an existing model table.
+
+Calculated tables have a cost: They increase the model storage size and they can prolong the data refresh time. The reason is because calculated tables recalculate when they have formula dependencies to refreshed tables.
+
+### i. Duplicate a table
+
+Data:
+
+Download and open the [**Adventure Works DW 2020 M03.pbix**](https://github.com/MicrosoftDocs/mslearn-dax-power-bi/raw/main/activities/Adventure%20Works%20DW%202020%20M03.pbix)
+
+```sql
+Ship Date = 'Date'
+```
+
+Mark the Ship Date table as a date table by using the Ship Date column.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712913717991/907a5ed7-4b49-4371-99a7-2eef306823dd.png)
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712913763467/e82c79f8-c4ba-499a-a4d3-a87831d745e4.png)
+
+Calculated tables are useful to work in scenarios when multiple relationships between two tables exist, as previously described.
+
+They can also be used to add a date table to your model. Date tables are required to apply special time filters known as time intelligence.
+
+### ii. Create a date table
+
+```sql
+Due Date = CALENDARAUTO(6)
+```
+
+When the table rows and distinct values are the same, it means that the column contains unique values. That factor is important for two reasons: It satisfies the requirements to mark a date table, and it allows this column to be used in a model relationship as the one-side.
+
+## 2\. Create calculated columns
+
+```sql
+Due Fiscal Year =
+"FY"
+    & YEAR('Due Date'[Due Date])
+        + IF(
+            MONTH('Due Date'[Due Date]) > 6,
+            1
+        )
+```
+
+The calculated column definition adds the **Due Fiscal Year** column to the **Due Date** table.
+
+The following steps describe how Microsoft Power BI evaluates the calculated column formula:
+
+1. The addition operator (+) is evaluated before the text concatenation operator (&).
+    
+2. The `YEAR` DAX function returns the whole number value of the due date year.
+    
+3. The `IF` DAX function returns the value when the due date month number is 7-12 (July to December); otherwise, it returns BLANK. (For example, because the Adventure Works financial year is July-June, the last six months of the calendar year will use the next calendar year as their financial year.)
+    
+4. The year value is added to the value that is returned by the `IF` function, which is the value one or BLANK. If the value is BLANK, it's implicitly converted to zero (0) to allow the addition to produce the fiscal year value.
+    
+5. The literal text value `"FY"` concatenated with the fiscal year value, which is implicitly converted to text.
+    
+
+```sql
+Due Fiscal Quarter = 
+'Due Date'[Due Fiscal Year] & " Q"
+    & SWITCH(
+        TRUE(),
+        MONTH('Due Date'[Due Date]) IN {1, 2, 3}, 3,
+        MONTH('Due Date'[Due Date]) IN {4, 5, 6}, 4,
+        MONTH('Due Date'[Due Date]) IN {7, 8, 9}, 1,
+        MONTH('Due Date'[Due Date]) IN {10, 11, 12}, 2
+    )
+```
+
+The calculated column definition adds the **Due Fiscal Quarter** column to the **Due Date** table. The `IF` function returns the quarter number (Quarter 1 is July-September), and the result is concatenated to the **Due Fiscal Year** column value and the literal text `Q`.
+
+```sql
+Due Month =
+FORMAT('Due Date'[Due Date], "yyyy mmm")
+```
+
+The calculated column definition adds the **Due Month** column to the **Due Date** table. The [`FORMAT`](https://learn.microsoft.com/en-us/dax/format-function-dax/) [DAX fu](https://learn.microsoft.com/en-us/dax/format-function-dax/)nction converts the **Due Date** column value to text by using a format string. In this case, the format string produces a label that describes the year and abbreviated month name.
+
+```sql
+Due Full Date =
+FORMAT('Due Date'[Due Date], "yyyy mmm, dd")
+```
+
+```sql
+MonthKey =
+(YEAR('Due Date'[Due Date]) * 100) + MONTH('Due Date'[Due Date])
+```
+
+The **MonthKey** calculated column multiplies the due date year by the value 100 and then adds the month number of the due date. It produces a numeric value that can be used to sort the **Due Month** text values in chronological order.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712919890875/17464b0e-ed61-4e44-8f99-55163a4e3d90.png)
+
+## 3\. Learn about row context
+
+The formula for a calculated column is evaluated for each table row. Furthermore, it's evaluated within row context, which means the current row.
+
+However, row context doesn't extend beyond the table. If your formula needs to reference columns in other tables, you have two options:
+
+* If the tables are related, directly or indirectly, you can use the `RELATED` or `RELATEDTABLE` DAX function. The `RELATED` function retrieves the value at the one-side of the relationship, while the `RELATED`retrieves values on the many-side. The `RELATEDTABLE` function returns a table object.
+    
+* When the tables aren't related, you can use the `LOOKUPVALUE` DAX function.
+    
+
+Sales table:
+
+```sql
+Discount Amount =
+(
+    Sales[Order Quantity]
+        * RELATED('Product'[List Price])
+) - Sales[Sales Amount]
+```
+
+The calculated column definition adds the **Discount Amount** column to the **Sales** table. Power BI evaluates the calculated column formula for each row of the **Sales** table. The values for the **Order Quantity** and **Sales Amount** columns are retrieved within row context. However, because the **List Price** column belongs to the **Product** table, the `RELATED` function is required to retrieve the list price value *for the sale product*.
+
+Row context is used when calculated column formulas are evaluated. It's also used when a class of functions, known as *iterator functions*, are used. Iterator functions provide you with flexibility to create sophisticated summarizations. Iterator functions are described in a later module.
+
+## 4\. Choose a technique to add a column
+
+There are three techniques that you can use to add columns to a model table:
+
+* Add columns to a view or table (as a persisted column), and then source them in Power Query. This option only makes sense when your data source is a relational database and if you have the skills and permissions to do so. However, it's a good option because it supports ease of maintenance and allows reuse of the column logic in other models or reports.
+    
+* Add custom columns (using M) to Power Query queries.
+    
+* Add calculated columns (using DAX) to model tables.
+    
+
+When you need to add a column to a calculated table, make sure that you create a calculated column. Otherwise, we recommend that you only use a calculated column when the calculated column formula:
+
+* Depends on summarized model data.
+    
+* Needs to use specialized modeling functions that are only available in DAX, such as the `RELATED` and `RELATEDTABLE` functions. Specialized functions can also include the DAX parent and child hierarchies, which are designed to naturalize a recursive relationship into columns, for example, in an employee table where each row stores a reference to the row of the manager (who is also an employee).
+    
+
+## 5\. Check your knowledge
+
+Which statement about calculated tables is true?
+
+Calculated tables increase the size of the semantic model.'
+
+Calculated tables store data inside the model, and adding them results in a larger model size.
+
+Which statement about calculated columns is true?
+
+Calculated column formulas are evaluated by using row context.
+
+You're developing a Power BI desktop model that sources data from an Excel workbook. The workbook has an employee table that stores one row for each employee. Each row has a reference to the employee's manager, which is also a row in the employee table. You need to add several columns to the Employee table in your model to analyze payroll data within the organization hierarchy (like, executive level, manager level, and so on). Which technique will you use to add the columns?
+
+Add calculated columns by using DAX.
+
+You can use the DAX parent-child functions to naturalize the recursive (employee-manager) relationship into columns.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712922175863/6e020c21-9388-40c9-bbb4-477615a9993b.png)
+
+## 6\. Summary
+
+In this module,
+
+you learned how to use DAX to extend your model designs with calculated tables and calculated columns.
+
+You also learned that calculated columns are evaluated within row context, and you learned how to correctly reference columns that belong to different tables.
+
+Finally, you learned that while many ways are available for adding new columns to your model, it's best to create Power Query custom columns whenever possible.
+
+A calculated table can't connect to external data; you must use Power Query to accomplish that task.
+
+increase the model storage size and prolong the data refresh time
+
+Calculated tables are useful to work in scenarios when multiple relationships between two tables exist, as previously described.
+
+When the table rows and distinct values are the same, it means that the column contains unique values. That factor is important for two reasons: It satisfies the requirements to mark a date table, and it allows this column to be used in a model relationship as the one-side.
+
+The formula for a calculated column is evaluated for each table row. Furthermore, it's evaluated within row context, which means the current row.
+
+row context doesn't extend beyond the table - RELATED() , RELATEDTABLE() , LOOKUPVALUE().
+
+## **Learning objectives**
+
+By the end of this module, you'[l](https://learn.microsoft.com/en-us/dax/year-function-dax/)l be able to:
+
+* Create calculated tables.
+    
+* Create calculated columns[.](https://learn.microsoft.com/en-us/dax/if-function-dax/)
+    
+* Identify row context.
+    
+* Determine when to use a calculated column in place of a Power Query custom column.
+    
+* Add a date table to your model by using DAX calculations.
+    
 
 ---
 
@@ -1657,7 +1863,7 @@ i
 | --- | --- |
 | Module 8/17 | **Use DAX time intelligence functions in Power BI Desktop models** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/use-dax-power-bi-desktop.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/use-dax-power-bi-desktop.svg)
 
 ---
 
@@ -1667,7 +1873,7 @@ i
 | --- | --- |
 | Module 9/17 | **Optimize a model for performance in Power BI** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/optimize-model-power-bi.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/optimize-model-power-bi.svg)
 
 ---
 
@@ -1677,7 +1883,7 @@ i
 | --- | --- |
 | Module 10/17 | **Design Power BI reports** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/power-bi-effective-reports.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/power-bi-effective-reports.svg)
 
 ---
 
@@ -1687,7 +1893,7 @@ i
 | --- | --- |
 | Module 11/17 | **Configure Power BI report filters** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/power-bi-effective-filters.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/power-bi-effective-filters.svg)
 
 ---
 
@@ -1697,7 +1903,7 @@ i
 | --- | --- |
 | Module 12/17 | **Enhance Power BI report designs for the user experience** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/power-bi-effective-user-experience.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/power-bi-effective-user-experience.svg)
 
 ---
 
@@ -1707,7 +1913,7 @@ i
 | --- | --- |
 | Module 13/17 | **Perform analytics in Power BI** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/perform-analytics-power-bi.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/perform-analytics-power-bi.svg)
 
 ---
 
@@ -1717,7 +1923,7 @@ i
 | --- | --- |
 | Module 14/17 | **Create and manage workspaces in Power BI** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/create-manage-workspaces-power-bi.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/create-manage-workspaces-power-bi.svg)
 
 ---
 
@@ -1727,7 +1933,7 @@ i
 | --- | --- |
 | Module 15/17 | **Manage semantic models in Power BI** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/manage-datasets-in-power-bi.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/manage-datasets-in-power-bi.svg)
 
 ---
 
@@ -1737,7 +1943,7 @@ i
 | --- | --- |
 | Module 16/17 | **Create dashboards in Power BI** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/create-dashboards-power-bi.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/create-dashboards-power-bi.svg)
 
 ---
 
@@ -1747,7 +1953,7 @@ i
 | --- | --- |
 | Module 17/17 | **Implement row-level security** |
 
-![](https://learn.microsoft.com/en-us/training/achievements/row-level-security-power-bi.svg align="center")
+![](https://learn.microsoft.com/en-us/training/achievements/row-level-security-power-bi.svg)
 
 ---
 

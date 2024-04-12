@@ -3650,6 +3650,590 @@ In this module, you'll learn how to:
 
 # X. Load data into a Microsoft Fabric data warehouse
 
+Data warehouse in Microsoft Fabric is a comprehensive platform for data and analytics, featuring advanced query processing and full transactional T-SQL capabilities for easy data management and analysis.
+
+## 1\. Introduction
+
+Microsoft Fabric Data Warehouse is a complete platform for data, analytics, and AI (Artificial Intelligence).
+
+It refers to the process of storing, organizing, and managing large volumes of structured and semi-structured data.
+
+Microsoft Fabric Data Warehouse is a complete platform for data, analytics, and AI (Artificial Intelligence). It refers to the process of storing, organizing, and managing large volumes of structured and semi-structured data.
+
+Data warehouse in Microsoft Fabric is powered up with Synapse Analytics by offering a rich set of features that make it easier to manage and analyze data. It includes advanced query processing capabilities, and supports the full transactional T-SQL capabilities like an enterprise data warehouse.
+
+Unlike a dedicated SQL pool in Synapse Analytics, a warehouse in Microsoft Fabric is centered around a single data lake. The data in the Microsoft Fabric warehouse is stored in the Parquet file format. This setup allows users to focus on tasks such as data preparation, analysis, and reporting. It takes advantage of the SQL engine’s extensive capabilities, where a unique copy of their data is stored in Microsoft OneLake.
+
+### i. Understand the ETL (Extract, Transform and Load) process
+
+ETL provides the foundation for data analytics and data warehouse workstreams.
+
+Let's review some aspects of data manipulation in an ETL process.
+
+|  | Description |
+| --- | --- |
+| Data extraction | It involves connecting to the source system and collecting necessary data for analytical processing. |
+| Data transformation | It involves a series of steps performed on the extracted data to convert it into a standard format. Combining data from different tables, cleaning data, deduplicating data and performing data validations. |
+| Data loading | The extracted and transformed data are loaded into the fact and dimension tables. For an incremental load, this involves periodically applying ongoing changes as per requirement. This process often involves reformatting the data to ensure its quality and compatibility with the data warehouse schema. |
+| Post-load optimizations | Once the data is loaded, certain optimizations can be performed to enhance the performance of the data warehouse. |
+
+All these steps in the ETL process can run in parallel depending on the scenario. As soon as some data is ready, it's loaded without waiting for the previous steps to be completed.
+
+In the next units, we'll explore various ways of loading data in a warehouse, and how they can facilitate the tasks of building a data warehouse workload.
+
+## 2\. Explore data load strategies
+
+In Microsoft Fabric, there are many ways you can choose to load data in a warehouse.
+
+This step is fundamental as it ensures that high-quality, transformed or processed data is integrated into a single repository.
+
+Also, the efficiency of data loading directly impacts the timeliness and accuracy of analytics, making it vital for real-time decision-making processes.
+
+Investing time and resources in designing and implementing a robust data loading strategy is essential for the success of the data warehouse project.
+
+### i. Understand data ingestion and data load operations
+
+While both processes are part of the ETL (Extract, Transform, Load) pipeline in a data warehouse scenario, they usually serve different purposes.
+
+Data ingestion/extract is about moving raw data from various sources into a central repository.
+
+On the other hand, data loading involves taking the transformed or processed data and loading it into the final storage destination for analysis and reporting.
+
+All Fabric data items like data warehouses and lakehouses store their data automatically in OneLake in Delta Parquet format.
+
+### ii. Stage your data
+
+You may have to build and work with auxiliary objects involved in a load operation such as tables, stored procedures, and functions. These auxiliary objects are commonly referred to as staging. Staging objects act as temporary storage and transformation areas. They can share resources with a data warehouse, or live in its own storage area.
+
+Staging serves as an abstraction layer, simplifying and facilitating the load operation to the final tables in the data warehouse.
+
+Also, staging area provides a buffer that can help to minimize the impact of the load operation on the performance of the data warehouse. This is important in environments where the data warehouse needs to remain operational and responsive during the data loading process.
+
+### iii. Review type of data loads
+
+There are two types of data loads to consider when loading a data warehouse.
+
+| Load Type | Description | Operation | Duration | Complexity | Best used |
+| --- | --- | --- | --- | --- | --- |
+| **Full (initial) load** | The process of populating the data warehouse for the first time. | All the tables are truncated and reloaded, and the old data is lost | It may take longer to complete due to the amount of data being handled | Easier to implement as there's no history preserved | This method is typically used when setting up a new data warehouse, or when a complete refresh of the data is required |
+| **Incremental load** | The process of updating the data warehouse with the changes since the last update | The history is preserved, and tables are updated with new information | Takes less time than the initial load | Implementation is more complex than the initial load | This method is commonly used for regular updates to the data warehouse, such as daily or hourly updates. It requires mechanisms to track changes in the source data since the last load. |
+
+An ETL (Extract, Transform, Load) process for a data warehouse doesn't always need both the full load and the incremental load. In some cases, a combination of both methods might be used.
+
+The choice between a full load and an incremental load depends on many factors such as the amount of data, the characteristics of the data, and the requirements of the data warehouse.
+
+### iv. Load a dimension table
+
+Think of a dimension table as the *"who, what, where, when, why”* of your data warehouse.
+
+It’s like the descriptive backdrop that gives context to the raw numbers found in the fact tables.
+
+For example, if you’re running an online store, your fact table might contain the raw sales data - how many units of each product were sold. But without a dimension table, you wouldn’t know who bought those products, when they were bought, or where the buyer is located.
+
+### v. Slowly changing dimensions (SCD)
+
+Slowly Changing Dimensions change over time, but at a slow pace and unpredictably. For example, a customer’s address in a retail business. When a customer moves, their address changes. If you overwrite the old address with the new one, you lose the history. But if you want to analyze historical sales data, you might need to know where the customer lived at the time of each sale. This is where SCDs come into play.
+
+There are several types of slowly changing dimensions in a data warehouse, with type 1 and type 2 being the most frequently used.
+
+* **Type 0 SCD:** The dimension attributes never change.
+    
+* **Type 1 SCD**: Overwrites existing data, doesn't keep history.
+    
+* **Type 2 SCD**: Adds new records for changes, keeps full history for a given natural key.
+    
+* **Type 3 SCD:** History is added as a new column.
+    
+* **Type 4 SCD**: A new dimension is added.
+    
+* **Type 5 SCD**: When certain attributes of a large dimension change over time, but using type 2 isn't feasible due to the dimension’s large size.
+    
+* **Type 6 SCD**: Combination of type 2 and type 3.
+    
+
+In type 2 SCD, when a new version of the same element is brought to the data warehouse, the old version is considered expired and the new one becomes active.
+
+The following example shows how to handle changes in a type 2 SCD for the *Dim\_Products* table using T-SQL.
+
+```sql
+IF EXISTS (SELECT 1 FROM Dim_Products WHERE SourceKey = @ProductID AND IsActive = 'True')
+BEGIN
+    -- Existing product record
+    UPDATE Dim_Products
+    SET ValidTo = GETDATE(), IsActive = 'False'
+    WHERE SourceKey = @ProductID AND IsActive = 'True';
+END
+ELSE
+BEGIN
+    -- New product record
+    INSERT INTO Dim_Products (SourceKey, ProductName, StartDate, EndDate, IsActive)
+    VALUES (@ProductID, @ProductName, GETDATE(), '9999-12-31', 'True');
+END
+```
+
+The mechanism for detecting changes in source systems is crucial for determining when records are inserted, updated, or deleted.
+
+[Change Data Capture (CDC)](https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/about-change-data-capture-sql-server), [change tracking,](https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/about-change-data-capture-sql-server)[and triggers](https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/about-change-tracking-sql-server) are all features available for managing data tracking in source systems such as SQL Server.
+
+### vi. Load a fact table
+
+Let's consider an example where we load a `Fact_Sales` table in a data warehouse. This table contains sales transactions data with columns such as `FactKey`, `DateKey`, `ProductKey`, `OrderID`, `Quantity`, `Price`, and `LoadTime`.
+
+Assume we have a source table `Order_Detail` in an OLTP system with columns: `OrderID`, `OrderDate`, `ProductID`, `Quantity`, and `Price`.
+
+The following T-SQL script example load the `Fact_Sales` table.
+
+```sql
+-- Lookup keys in dimension tables
+INSERT INTO Fact_Sales (DateKey, ProductKey, OrderID, Quantity, Price, LoadTime)
+SELECT d.DateKey, p.ProductKey, o.OrderID, o.Quantity, o.Price, GETDATE()
+FROM Order_Detail o
+JOIN Dim_Date d ON o.OrderDate = d.Date
+JOIN Dim_Product p ON o.ProductID = p.ProductID;
+```
+
+## 3\. Use data pipelines to load a warehouse
+
+Microsoft Fabric’s Warehouse provides integrated data ingestion tools, enabling users to load and ingest data into warehouses on a large scale through either coding or noncoding experiences.
+
+Data pipeline is the cloud-based service for data integration, which enables the creation of workflows for data movement and data transformation at scale.
+
+You can create and schedule data pipelines that can ingest and load data from disparate data stores.
+
+You can build complex ETL, or ELT processes that transform data visually with data flows.
+
+Most of the functionality of data pipelines in Microsoft Fabric comes from Azure Data Factory, allowing for seamless integration and utilization of its features within the Microsoft Fabric ecosystem.
+
+### i. Create a data pipeline
+
+From the workspace: Select + New, then select Data pipeline. If it's not visible in the list, select More options, then find Data pipeline under the Data Factory section.
+
+From the warehouse asset - Select Get Data, and then New data pipeline.
+
+There are three options available when creating a pipeline.
+
+| Option | Description |
+| --- | --- |
+| **1\. Add pipeline activity** | Launches the pipeline editor where you can create your own pipeline. |
+| **2\. Copy data** | Launches an assistant to copy data from various data sources to a data destination. A new pipeline activity is generated at the end with a preconfigured **Copy Data** task. |
+| **3\. Choose a task to start** | You can choose from a collection of predefined templates to assist you in initiating pipelines based on many scenarios. |
+
+### ii. Configure the copy data assistant
+
+The copy data assistant provides a step-by-step interface that facilitates the configuration of a Copy Data task.
+
+* **Choose data source:** Select a connector, and provide the connection information.
+    
+* **Connect to a data source:** Select, preview, and choose the data. This can be done from tables or views, or you can customize your selection by providing your own query.
+    
+* **Choose data destination:** Select the data store as the destination.
+    
+* **Connect to data destination:** Select and map columns from source to destination. You can load to a new or existing table.
+    
+* **Settings:** Configure other settings like staging, and default values.
+    
+
+After you copy the data, you can use other tasks to further transform and analyze it. You can also use the Copy Data task to publish transformation and analysis results for business intelligence (BI) and application consumption.
+
+### iii. Schedule a data pipeline
+
+You can schedule your data pipeline by selecting **Schedule** from the data pipeline editor.
+
+We recommend data pipelines for a code-free or low-code experience due to the graphical user interface. They're ideal for data workflows that run at a schedule, or that connects to different data sources.
+
+## 4\. Load data using T-SQL
+
+SQL developers or citizen developers, who are often well-versed in the SQL engine and adept at using T-SQL, will find the Warehouse in Microsoft Fabric favorable.
+
+This is because the Warehouse is powered by the same SQL engine they're familiar with, enabling them to perform complex queries and data manipulations.
+
+These operations include filtering, sorting, aggregating, and joining data from different tables.
+
+The SQL engine’s wide range of functions and operators further allows for sophisticated data analysis and transformations at the database level.
+
+### i. Use COPY statement
+
+The [COPY statement](https://learn.microsoft.com/en-us/sql/t-sql/statements/copy-into-transact-sql) serves as the main method for importing data into the Warehouse. It facilitates efficient data ingestion from an external Azure storage account.
+
+It offers flexibility, allowing you to specify the format of the source file, designate a location for storing rows that are rejected during the import process, skip header rows, among other configurable options.
+
+The option to store rejected rows separately is useful for data cleaning and quality control. It allows you to easily identify and investigate any issues with the data that weren't successfully imported.
+
+To connect to an Azure storage account, you need to use either Shared Access Signature (SAS) or Storage Account Key (SAK).
+
+### Note:
+
+The COPY statement currently supports the PARQUET and CSV file formats.
+
+### ii. Handle error
+
+The option to use a different storage account for the ERRORFILE location (REJECTED\_ROW\_LOCATION) allows for better error handling and debugging.
+
+It makes it easier to isolate and investigate any issues that occur during the data loading process. ERRORFILE only applies to CSV.
+
+### iii. Load multiple files
+
+The ability to specify wildcards and multiple files in the storage location path allows the COPY statement to handle bulk data loading efficiently.
+
+This is useful when dealing with large datasets distributed across multiple files.
+
+Multiple file locations can only be specified from the same storage account and container via a comma-separated list.
+
+```sql
+COPY my_table
+FROM 'https://myaccount.blob.core.windows.net/myblobcontainer/folder0/*.csv, 
+    https://myaccount.blob.core.windows.net/myblobcontainer/folder1/'
+WITH (
+    FILE_TYPE = 'CSV',
+    CREDENTIAL=(IDENTITY= 'Shared Access Signature', SECRET='<Your_SAS_Token>')
+    FIELDTERMINATOR = '|'
+)
+```
+
+The following example shows how to load a PARQUET file.
+
+```sql
+COPY INTO test_parquet
+FROM 'https://myaccount.blob.core.windows.net/myblobcontainer/folder1/*.parquet'
+WITH (
+    CREDENTIAL=(IDENTITY= 'Shared Access Signature', SECRET='<Your_SAS_Token>')
+)
+```
+
+Ensure that all the files have the same structure (that is, same columns in the same order) and that this structure matches the structure of the target table.
+
+### iv. Load table from other warehouses and lakehouses
+
+You can load data from various data assets in a workspace, such as other warehouses and lakehouses.
+
+To reference the data asset, ensure that you use [three-part naming](https://learn.microsoft.com/en-us/sql/t-sql/language-elements/transact-sql-syntax-conventions-transact-sql) to combine data from tables on these workspace assets.
+
+You can then use `CREATE TABLE AS SELECT` (CTAS) and `INSERT...SELECT` to load the data into the warehouse.
+
+| SQL Statement | Description |
+| --- | --- |
+| `CREATE TABLE AS SELECT` | Allows you to create a new table based on the output of a `SELECT` statement. This operation is often used for creating a copy of a table or for transforming and loading the results of complex queries. |
+| `INSERT...SELECT` | Allows you to insert data from one table into another. It’s useful when you want to copy data from one table to another without creating a new table. |
+
+In a scenario where an analyst needs data from both a warehouse and a lakehouse, they can use this feature to combine the data. They can then load this combined data into the warehouse for analysis. This feature is useful when data is distributed across many assets in a workspace.
+
+he following query creates a new table in the `analysis_warehouse` that combines data from the `sales_warehouse` and the `social_lakehouse` using the *product\_id* as the common key. The new table can then be used for further analysis.
+
+```sql
+CREATE TABLE [analysis_warehouse].[dbo].[combined_data]
+AS
+SELECT 
+FROM [sales_warehouse].[dbo].[sales_data] sales
+INNER JOIN [social_lakehouse].[dbo].[social_data] social
+ON sales.[product_id] = social.[product_id];
+```
+
+All the Warehouses that share the same workspace are integrated into the same logical SQL server. If you use SQL client tools such as SQL Server Management Studio, you can easily perform a cross-database query like in any SQL Server instance.
+
+MyWarehouse and Sales are both warehouse assets that share the same workspace.
+
+If you’re using the object Explorer from the workspace to query your Warehouses, you need to add them explicitly. The warehouses added will also be visible from the Visual query editor.
+
+When using T-SQL, data can be efficiently loaded into a warehouse in Microsoft Fabric through the COPY statement, or from other warehouses and lakehouses within the same workspace, allowing for seamless data management and analysis.
+
+## 5\. Load and transform data with Dataflow Gen2
+
+[Dataflow Gen2](https://learn.microsoft.com/en-us/fabric/data-factory/dataflows-gen2-overview) is the new generation of dataflows. It provides a comprehensive Power Query experience, guiding you through each step of importing data into your dataflow. The process of creating dataflows has been simplified, reducing the number of steps involved.
+
+You can use dataflows in data pipelines to ingest data into a lakehouse or warehouse, or to define a dataset for a Power BI report.
+
+### i. Create a dataflow
+
+### ii. Import data
+
+### iii. Transform data with Copilot
+
+### iv. Add a data destination
+
+With the Add data destination feature, you can separate your ETL logic and destination storage. This separation can lead to cleaner, more maintainable code and can make it easier to modify either the ETL process or the storage configuration without affecting the other.
+
+Once the data is transformed, the next step is to add a destination step. On the Query settings tab, select + to add a destination step in your dataflow.
+
+### v. Publish a dataflow
+
+Publishing makes your transformations and data loading operations live, allowing the dataflow to be executed either manually or on a schedule. This process encapsulates your ETL operations into a single and reusable unit, streamlining your data management workflow.
+
+Any changes made in the dataflow take effect when it’s published. So, always ensure to publish your dataflow after making any relevant modifications.
+
+## 6\. Exercise: Load data into a warehouse in Microsoft Fabric
+
+In Microsoft Fabric, a data warehouse provides a relational database for large-scale analytics.
+
+Unlike the default read-only SQL endpoint for tables defined in a lakehouse, a data warehouse provides full SQL semantics; including the ability to insert, update, and delete data in the tables.
+
+### i. Create a workspace
+
+### ii. Create a lakehouse and upload files
+
+In our scenario, since we don’t have any available data, we must ingest data to be used for loading the warehouse.
+
+You’ll create a data lakehouse for the data files you’re going to use to load the warehouse.
+
+Download the file for this exercise from [`https://github.com/MicrosoftLearning/dp-data/raw/main/sales.csv`](https://github.com/MicrosoftLearning/dp-data/raw/main/sales.csv)
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712932013300/a0e2e47a-3b87-4374-8b6b-ea16800b00e7.png)
+
+### iii. Create a table in the lakehouse
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712932142653/5e62f8da-d558-4a0e-a94e-ee1c2290665d.png)
+
+### iv. Create a warehouse
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712932310871/c8459d67-1549-4dcb-a94f-76999aca11a2.png)
+
+### v. Create fact table, dimensions and view
+
+Let’s create the fact tables and dimensions for the Sales data. You’ll also create a view pointing to a lakehouse, this simplifies the code in the stored procedure we’ll use to load.
+
+```sql
+IF EXISTS (SELECT * FROM sys.schemas WHERE name ='Sales')
+ DROP SCHEMA [Sales]
+GO
+
+CREATE SCHEMA [Sales]
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name='Fact_Sales' AND SCHEMA_NAME(schema_id)='Sales')
+CREATE TABLE Sales.Fact_Sales (
+    CustomerID VARCHAR(255) NOT NULL,
+    ItemID VARCHAR(255) NOT NULL,
+    SalesOrderNumber VARCHAR(30),
+    SalesOrderLineNumber INT,
+    OrderDate DATE,
+    Quantity INT,
+    TaxAmount FLOAT,
+    UnitPrice FLOAT
+);
+
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name='Dim_Customer' AND SCHEMA_NAME(schema_id)='Sales')
+    CREATE TABLE Sales.Dim_Customer (
+        CustomerID VARCHAR(255) NOT NULL,
+        CustomerName VARCHAR(255) NOT NULL,
+        EmailAddress VARCHAR(255) NOT NULL
+    );
+    
+ALTER TABLE Sales.Dim_Customer add CONSTRAINT PK_Dim_Customer PRIMARY KEY NONCLUSTERED (CustomerID) NOT ENFORCED
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name='Dim_Item' AND SCHEMA_NAME(schema_id)='Sales')
+    CREATE TABLE Sales.Dim_Item (
+        ItemID VARCHAR(255) NOT NULL,
+        ItemName VARCHAR(255) NOT NULL
+    );
+    
+ALTER TABLE Sales.Dim_Item add CONSTRAINT PK_Dim_Item PRIMARY KEY NONCLUSTERED (ItemID) NOT ENFORCED
+GO
+```
+
+Note:
+
+In a data warehouse, foreign key constraints are not always necessary at the table level.
+
+While foreign key constraints can help ensure data integrity, they can also add overhead to the ETL (Extract, Transform, Load) process and slow down data loading.
+
+The decision to use foreign key constraints in a data warehouse should be based on a careful consideration of the trade-offs between data integrity and performance.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712933579596/497ae439-1223-4283-b0c3-bcc7019fc53d.png)
+
+```sql
+CREATE VIEW Sales.Staging_Sales
+AS
+SELECT * FROM [<your lakehouse name>].[dbo].[staging_sales];
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712933738332/cb5d131b-8eef-419b-a783-eb1ffcf5d5fe.png)
+
+### vi. Load data to the warehouse
+
+Now that the fact and dimensions tables are created, let’s create a stored procedure to load the data from our lakehouse into the warehouse.
+
+Because of the automatic SQL endpoint created when we create the lakehouse, you can directly access the data in your lakehouse from the warehouse using T-SQL and cross-database queries.
+
+```sql
+CREATE OR ALTER PROCEDURE Sales.LoadDataFromStaging (@OrderYear INT)
+AS
+BEGIN
+-- Load data into the Customer dimension table
+    INSERT INTO Sales.Dim_Customer (CustomerID, CustomerName, EmailAddress)
+    SELECT DISTINCT CustomerName, CustomerName, EmailAddress
+    FROM [Sales].[Staging_Sales]
+    WHERE YEAR(OrderDate) = @OrderYear
+    AND NOT EXISTS (
+        SELECT 1
+        FROM Sales.Dim_Customer
+        WHERE Sales.Dim_Customer.CustomerName = Sales.Staging_Sales.CustomerName
+        AND Sales.Dim_Customer.EmailAddress = Sales.Staging_Sales.EmailAddress
+    );
+    
+    -- Load data into the Item dimension table
+    INSERT INTO Sales.Dim_Item (ItemID, ItemName)
+    SELECT DISTINCT Item, Item
+    FROM [Sales].[Staging_Sales]
+    WHERE YEAR(OrderDate) = @OrderYear
+    AND NOT EXISTS (
+        SELECT 1
+        FROM Sales.Dim_Item
+        WHERE Sales.Dim_Item.ItemName = Sales.Staging_Sales.Item
+    );
+    
+    -- Load data into the Sales fact table
+    INSERT INTO Sales.Fact_Sales (CustomerID, ItemID, SalesOrderNumber, SalesOrderLineNumber, OrderDate, Quantity, TaxAmount, UnitPrice)
+    SELECT CustomerName, Item, SalesOrderNumber, CAST(SalesOrderLineNumber AS INT), CAST(OrderDate AS DATE), CAST(Quantity AS INT), CAST(TaxAmount AS FLOAT), CAST(UnitPrice AS FLOAT)
+    FROM [Sales].[Staging_Sales]
+    WHERE YEAR(OrderDate) = @OrderYear;
+END
+```
+
+```sql
+ EXEC Sales.LoadDataFromStaging 2021
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712939351657/d2d9cf10-ab27-43ce-bb6a-11612cc22f54.png)
+
+### vii. Run analytical queries
+
+This query shows the customers by total sales for the year of 2021. The customer with the highest total sales for the specified year is Jordan Turner, with total sales of 14686.69.
+
+```sql
+ SELECT c.CustomerName, SUM(s.UnitPrice * s.Quantity) AS TotalSales
+ FROM Sales.Fact_Sales s
+ JOIN Sales.Dim_Customer c
+ ON s.CustomerID = c.CustomerID
+ WHERE YEAR(s.OrderDate) = 2021
+ GROUP BY c.CustomerName
+ ORDER BY TotalSales DESC;
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712940141592/7aa8acc4-695c-4803-bda8-228fa6bbf219.png)
+
+This query shows the top-selling items by total sales for the year of 2021.
+
+These results suggest that the Mountain-200 bike model, in both black and silver colors, was the most popular item among customers in 2021.
+
+```sql
+ SELECT i.ItemName, SUM(s.UnitPrice * s.Quantity) AS TotalSales
+ FROM Sales.Fact_Sales s
+ JOIN Sales.Dim_Item i
+ ON s.ItemID = i.ItemID
+ WHERE YEAR(s.OrderDate) = 2021
+ GROUP BY i.ItemName
+ ORDER BY TotalSales DESC;
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712940152781/bd21478e-218f-4d51-bc61-03656c922043.png)
+
+The results of this query show the top customer for each of the categories: Bike, Helmet, and Gloves, based on their total sales. For example, **Joan Coleman** is the top customer for the **Gloves** category
+
+```sql
+WITH CategorizedSales AS (
+SELECT
+    CASE
+        WHEN i.ItemName LIKE '%Helmet%' THEN 'Helmet'
+        WHEN i.ItemName LIKE '%Bike%' THEN 'Bike'
+        WHEN i.ItemName LIKE '%Gloves%' THEN 'Gloves'
+        ELSE 'Other'
+    END AS Category,
+    c.CustomerName,
+    s.UnitPrice * s.Quantity AS Sales
+FROM Sales.Fact_Sales s
+JOIN Sales.Dim_Customer c
+ON s.CustomerID = c.CustomerID
+JOIN Sales.Dim_Item i
+ON s.ItemID = i.ItemID
+WHERE YEAR(s.OrderDate) = 2021
+),
+RankedSales AS (
+    SELECT
+        Category,
+        CustomerName,
+        SUM(Sales) AS TotalSales,
+        ROW_NUMBER() OVER (PARTITION BY Category ORDER BY SUM(Sales) DESC) AS SalesRank
+    FROM CategorizedSales
+    WHERE Category IN ('Helmet', 'Bike', 'Gloves')
+    GROUP BY Category, CustomerName
+)
+SELECT Category, CustomerName, TotalSales
+FROM RankedSales
+WHERE SalesRank = 1
+ORDER BY TotalSales DESC;
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712940178465/e5d0db4e-4e92-4167-8a3b-68b73ef9892f.png)
+
+### viii. Clean up resources
+
+## 7\. Knowledge check
+
+What are the four data ingestion options available in Microsoft Fabric for loading data into a data warehouse?
+
+COPY (Transact-SQL) statement, data pipelines, dataflows, and cross-warehouse.
+
+COPY (Transact-SQL) statement, data pipelines, dataflows, and cross-warehouse are the four data ingestion options available in Microsoft Fabric for loading data into a data warehouse.
+
+What are the supported data sources and file formats for the COPY (Transact-SQL) statement in Warehouse?
+
+Azure Data Lake Storage (ADLS) Gen2 and Azure Blob Storage, with PARQUET and CSV file formats.
+
+The COPY (Transact-SQL) statement currently supports the PARQUET and CSV file formats, and Azure Data Lake Storage (ADLS) Gen2 and Azure Blob Storage as data sources.
+
+What is the recommended minimum file size when working with external data on files in Microsoft Fabric?
+
+At least 4 MB.
+
+When working with external data on files, we recommend that files are at least 4 MB in size.
+
+## 8\. Summary
+
+There’s no one-size-fits-all solution for loading your data. The best approach depends on the specifics of your business requirement and the question you’re trying to answer.
+
+When it comes to loading data in a data warehouse, there are several considerations to keep in mind.
+
+|  | Description |
+| --- | --- |
+| Load volume & frequency | Assess data volume and load frequency to optimize performance. |
+| Governance | Any data that lands in OneLake is governed by default. |
+| Data mapping | Manage mapping from source to staging to warehouse. |
+| Dependencies | Understand dependencies in the data model for loading dimensions. |
+| Script design | Design efficient import scripts considering column names, filtering rules, value mapping, and database indexing. |
+
+Think of a dimension table as the "who, what, where, when, why” of your data warehouse.
+
+It’s like the descriptive backdrop that gives context to the raw numbers found in the fact tables.
+
+type 1 and type 2  the most frequently used slowly changing dimensions in a data warehouse
+
+Load a Fact\_Sales table in a data warehouse using INSERT INTO
+
+All data in a Warehouse is automatically stored in the Delta Parquet format in OneLake.
+
+data pipelines to load a warehouse
+
+The COPY statement currently supports the PARQUET and CSV file formats.
+
+Load data using T-SQL
+
+COPY statement to handle bulk data loading efficiently.
+
+Load table from other warehouses and lakehouses - CREATE TABLE AS SELECT (CTAS) and INSERT...SELECT
+
+## **Learning objectives**
+
+In this module, you'll:
+
+* Learn different strategies to load data into a data warehouse in Microsoft Fabric.
+    
+* Learn how to build a data pipeline to load a warehouse in Microsoft Fabric.
+    
+* Learn how to load data in a warehouse using T-SQL, exercise.
+    
+* Learn how to load and transform data with dataflow (Gen 2).
+    
+
 # XI. Use tools to optimize Power BI performance
 
 # XII. Create and manage a Power BI deployment pipeline

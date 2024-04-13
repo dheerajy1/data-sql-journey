@@ -1739,7 +1739,7 @@ Due Month =
 FORMAT('Due Date'[Due Date], "yyyy mmm")
 ```
 
-The calculated column definition adds the **Due Month** column to the **Due Date** table. The [`FORMAT`](https://learn.microsoft.com/en-us/dax/format-function-dax/) [DAX fu](https://learn.microsoft.com/en-us/dax/format-function-dax/)nction converts the **Due Date** column value to text by using a format string. In this case, the format string produces a label that describes the year and abbreviated month name.
+The calculated column definition adds the **Due Month** column to the **Due Date** table. The [`FORMAT`DAX fu](https://learn.microsoft.com/en-us/dax/format-function-dax/)nction converts the **Due Date** column value to text by using a format string. In this case, the format string produces a label that describes the year and abbreviated month name.
 
 ```sql
 Due Full Date =
@@ -1864,6 +1864,259 @@ By the end of this module, you'[l](https://learn.microsoft.com/en-us/dax/year-fu
 | Module 8/17 | **Use DAX time intelligence functions in Power BI Desktop models** |
 
 ![](https://learn.microsoft.com/en-us/training/achievements/use-dax-power-bi-desktop.svg)
+
+By the end of this module,
+
+you'll learn the meaning of time intelligence and
+
+how to add time intelligence DAX calculations to your model.
+
+## 1\. Introduction
+
+Time intelligence relates to calculations over time.
+
+Specifically, it relates to calculations over dates, months, quarters, or years, and possibly time.
+
+In Data Analysis Expressions (DAX) calculations, time intelligence means modifying the filter context for date filters.
+
+For example, at the Adventure Works company, their financial year begins on July 1 and ends on June 30 of the following year. They produce a table visual that displays monthly revenue and year-to-date (YTD) revenue.
+
+![](https://learn.microsoft.com/en-us/training/modules/dax-power-bi-time-intelligence/media/dax-matrix-revenue-ytd-ss.png#lightbox)
+
+The filter context for 2017 August contains each of the 31 dates of August, which are stored in the Date table.
+
+However, the calculated year-to-date revenue for 2017 August applies a different filter context.
+
+It's the first date of the year through to the last date in filter context. In this example, that's July 1, 2017 through to August 31, 2017.
+
+Time intelligence calculations modify date filter contexts. They can help you answer these time-related questions:
+
+* What's the accumulation of revenue for the year, quarter, or month?
+    
+* What revenue was produced for the same period last year?
+    
+* What growth in revenue has been achieved over the same period last year?
+    
+* How many new customers made their first order in each month?
+    
+* What's the inventory stock on-hand value for the company's products?
+    
+
+This module describes how to create time intelligence measures to answer these questions.
+
+## 2\. Use DAX time intelligence functions
+
+### i. Date table requirement
+
+To work with time intelligence DAX functions, you need to meet the prerequisite model requirement of having at least one *date table* in your model. A date table is a table that meets the following requirements:
+
+* It must have a column of data type Date (or date/time), known as the *date column*.
+    
+* The date column must contain unique values.
+    
+* The date column must not contain BLANKs.
+    
+* The date column must not have any missing dates.
+    
+* The date column must span full years. A year isn't necessarily a calendar year (January-December).
+    
+* The date table must be indicated as a date table.
+    
+
+Download and open the [**Adventure Works DW 2020 M07.pbix**](https://github.com/MicrosoftDocs/mslearn-dax-power-bi/raw/main/activities/Adventure%20Works%20DW%202020%20M07.pbix) file.
+
+measure definition to the Sales table that calculates YTD revenue:
+
+```sql
+Revenue YTD =
+TOTALYTD([Revenue], 'Date'[Date], "6-30")
+```
+
+The year-end date value of "6-30" represents June 30.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713002184715/71b2df5a-2932-4811-a12a-7a9cadd17139.png)
+
+### ii. Summarizations over time
+
+One group of DAX time intelligence functions is concerned with summarizations over time:
+
+```sql
+Revenue YTD =
+TOTALYTD([Revenue], 'Date'[Date], "6-30")
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713012320848/24f3b23a-9c30-4703-ae5a-ebc4155aea97.png)
+
+### iii. Comparisons over time
+
+Another group of DAX time intelligence functions is concerned with shifting time periods:
+
+you will add a measure to the Sales table that calculates revenue for the prior year by using the SAMEPERIODLASTYEAR function. Format the measure as currency with two decimal places.
+
+```sql
+Revenue PY =
+VAR RevenuePriorYear = CALCULATE([Revenue], SAMEPERIODLASTYEAR('Date'[Date]))
+RETURN
+    RevenuePriorYear
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713012571619/3612622b-c775-4cf1-8b0a-74ebefa79edd.png)
+
+Next, you will modify the measure by renaming it to Revenue YoY % and then updating the RETURN clause to calculate the change ratio. Be sure to change the format to a percentage with two decimals places.
+
+```sql
+Revenue YoY % =
+VAR RevenuePriorYear = CALCULATE([Revenue], SAMEPERIODLASTYEAR('Date'[Date]))
+RETURN
+    DIVIDE(
+        [Revenue] - RevenuePriorYear,
+        RevenuePriorYear
+    )
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713012710106/9aa4ea21-be66-46b9-9f9d-fba5fc26025c.png)
+
+## 3\. Additional time intelligence calculations
+
+### i. Calculate new occurrences
+
+Another use of time intelligence functions is to count new occurrences.
+
+The following example shows how you can calculate the number of new customers for a time period. A new customer is counted in the time period in which they made their first purchase.
+
+Your first task is to add the following measure to the **Sales** table that counts the number of distinct customers *life-to-date* (LTD).
+
+Life-to-date means from the beginning of time until the last date in filter context. Format the measure as a whole number by using the thousands separator.
+
+```sql
+Customers LTD =
+VAR CustomersLTD =
+    CALCULATE(
+        DISTINCTCOUNT(Sales[CustomerKey]),
+        DATESBETWEEN(
+            'Date'[Date],
+            BLANK(),
+            MAX('Date'[Date])
+        ),
+        'Sales Order'[Channel] = "Internet"
+    )
+RETURN
+    CustomersLTD
+```
+
+produces a result of distinct customers LTD until the end of each month.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713013927572/a2f288b4-49d3-47ed-b861-3ebd0f0907af.png)
+
+The DATESBETWEEN function returns a table that contains a column of dates that begins with a given start date and continues until a given end date.
+
+When the start date is BLANK, it will use the first date in the date column (Conversely, when the end date is BLANK, it will use the last date in the date column.) In this case, the end date is determined by the MAX function, which returns the last date in filter context.
+
+Therefore, if the month of August 2017 is in filter context, then the MAX function will return August 31, 2017 and the DATESBETWEEN function will return all dates through to August 31, 2017.
+
+Next, you will modify the measure by renaming it to **New Customers** and by adding a second variable to store the count of distinct customers *before* the time period in filter context. The `RETURN` clause now subtracts this value from LTD customers to produce a result, which is the number of new customers in the time period.
+
+```sql
+New Customers =
+VAR CustomersLTD =
+    CALCULATE(
+        DISTINCTCOUNT(Sales[CustomerKey]),
+        DATESBETWEEN(
+            'Date'[Date],
+            BLANK(),
+            MAX('Date'[Date])
+        ),
+    'Sales Order'[Channel] = "Internet"
+    )
+VAR CustomersPrior =
+    CALCULATE(
+        DISTINCTCOUNT(Sales[CustomerKey]),
+        DATESBETWEEN(
+            'Date'[Date],
+            BLANK(),
+            MIN('Date'[Date]) - 1
+        ),
+        'Sales Order'[Channel] = "Internet"
+    )
+RETURN
+    CustomersLTD - CustomersPrior
+```
+
+For the **CustomersPrior** variable, notice that the `DATESBETWEEN` function includes dates until the first date in filter context *minus* one. Because Microsoft Power BI internally stores dates as numbers, you can add or subtract numbers to shift a date.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713014158481/1ee96fe4-698d-4623-9631-11c9bc180c9c.png)
+
+### ii. Snapshot calculations
+
+Occasionally, fact data is stored as snapshots in time. Common examples include inventory stock levels or account balances. A snapshot of values is loaded into the table on a periodic basis.
+
+When summarizing snapshot values (like inventory stock levels), you can summarize values across any dimension except date. Adding stock level counts across product categories produces a meaningful summary, but adding stock level counts across dates does not. Adding yesterday's stock level to today's stock level isn't a useful operation to perform (unless you want to average that result).
+
+When you are summarizing snapshot tables, measure formulas can rely on DAX time intelligence functions to enforce a single date filter.
+
+Now, you'll add a measure to the **Inventory** table that sums the **UnitsBalance** value *for a single date*. The date will be the last date of each time period. It's achieved by using the `LASTDATE` function. Format the measure as a whole number with the thousands separator.
+
+```sql
+Stock on Hand =
+CALCULATE(
+    SUM(Inventory[UnitsBalance]),
+    LASTDATE('Date'[Date])
+)
+```
+
+Notice that the measure formula uses the `SUM` function. An aggregate function must be used (measures don't allow direct references to columns), but given that only one row exists for each product for each date, the `SUM` function will only operate over a single row.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713014860553/fac95047-aa06-4bb9-a4e0-8d545097f420.png)
+
+The measure returns BLANKs for June 2020 because no record exists for the last date in June. According to the data, it hasn't happened yet.
+
+Filtering by the last date in filter context has inherent problems: A recorded date might not exist because it hasn't yet happened, or perhaps because stock balances aren't recorded on weekends.
+
+Your next step is to adjust the measure formula to determine the last date *that has a non-BLANK result* and then filter by that date. You can achieve this task by using the `LASTNONBLANK` DAX function.
+
+```sql
+Stock on Hand =
+CALCULATE(
+    SUM(Inventory[UnitsBalance]),
+    LASTNONBLANK(
+        'Date'[Date],
+        CALCULATE(SUM(Inventory[UnitsBalance]))
+    )
+)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713015200230/e7622fc9-ae63-4660-b5a5-9fadf01b7088.png)
+
+## 4\. Exercise - Create Advanced DAX Calculations in Power BI Desktop
+
+### i. Lab story
+
+### ii. Work with Filter Context
+
+### iii. Create a matrix visual
+
+### iv. Manipulate filter context
+
+### v. Work with Time Intelligence
+
+### vi. Create a YTD measure
+
+### vii. Create a YoY growth measure
+
+## 5\. Check your knowledge
+
+## 6\. Summary
+
+## **Learning objectives**
+
+By the end of this module, you'll be able to:
+
+* Define time intelligence.
+    
+* Use common DAX time intelligence functions.
+    
+* Create useful intelligence calculations.
+    
 
 ---
 

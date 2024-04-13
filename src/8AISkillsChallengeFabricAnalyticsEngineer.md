@@ -4513,9 +4513,125 @@ After completing this module, you'll be able to:
 * Optimize a data model using Tabular Editor, using BPA rules.
     
 
-  
-
 # XII. Create and manage a Power BI deployment pipeline
+
+Deployment pipelines enable creators to develop and test Power BI content in the Power BI service before the content is made available for consumption by users.
+
+It offers creators improved productivity, faster delivery of content updates, and reduced manual work and errors.
+
+The tool is designed as a pipeline with three stages: development, test, and production.
+
+## 1\. Introduction
+
+With increasing consumption, users also demand more from their analytics – more information in a single report, new and easier ways to answer questions, as well as fresh, reliable, and constantly updated data.
+
+## 2\. Understand the deployment process
+
+The Deployment Pipeline tool enables users to manage the development lifecycle of content within their tenant.
+
+Pipelines enable a continuous integration/continuous deployment (CI/CD) approach that ensures content is updated, well-tested, and regularly refreshed as needed.
+
+Pipelines are an efficient and durable way to automate the movement of content (reports, paginated reports, dashboards, semantic models, and dataflows) through the development, test, and production stages of the content development lifecycle:
+
+## 3\. Create a deployment pipeline
+
+### i. Create a pipeline from the Deployment pipelines tab
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713018674572/e3270d50-a615-42ec-a08c-c6b28e3300a3.png)
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713018737305/26589d88-ddbc-4de8-a28b-7d49f0ce8510.png)
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713020091725/a4bef3b9-a556-4a2c-bcf7-32725a2b4455.png)
+
+### ii. Create a pipeline from a workspace
+
+unable to find.
+
+## 4\. Assign a workspace
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713020083601/35bcf8eb-e95c-482d-94e2-b46b9bc0441e.png)
+
+## 5\. Deploy content
+
+The deployment process lets you clone content from one stage in the pipeline to another, typically from development to test, and from test to production.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713020074162/ed1cc545-d9bb-4a3a-a795-8b3a29529524.png)
+
+## 6\. Work with deployment pipelines
+
+### i. Compare stages
+
+added table
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713027216630/521ff209-c728-4f16-8fd5-41b5b7a8caf1.png)
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713027246769/8f42e398-ca79-47de-b833-98c600f8ac61.png)
+
+Error:
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713027269936/e0e21915-d61b-40a8-b0e0-fe65e84c8f47.png)
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713027294857/62bee62a-8b5a-499d-95c2-3bf4b1be626c.png)
+
+complete:
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713027363701/c8566410-fbc3-4ad5-b75f-83b2347977ae.png)
+
+:
+
+### ii. Deployment rules enable customization of stages
+
+Configuring deployment rules enables you to allow changes to content when you deploy content between pipeline stages.
+
+For example, if you want a semantic model in a production stage to point to a production database, you can define a rule for semantic model.
+
+The rule is defined in the production stage, under the appropriate semantic model.
+
+Once the rule is defined, content deployed from test to production will inherit the value as defined in the deployment rule, and will always apply it as long as the rule is unchanged and valid.
+
+## 7\. Check your knowledge
+
+Which of the following is a key benefit of deployment pipelines?
+
+Deployment pipelines result in less manual work and fewer errors. They were not designed to help configure semantic models, publish from multiple workspaces, or enhance user access to BI report source data
+
+Correct. Using deployment pipelines leads to less manual work and fewer errors.
+
+After creating a pipeline, what step must you take to add content to your pipeline?
+
+Assign a workspace containing the content you wish to manage in your pipeline.
+
+What is the primary advantage of the Compare view capability between pipeline stages?
+
+Using the Compare view option helps you identify and track changes between items in each pipeline stage.
+
+## 8\. Summary
+
+Power BI deployment pipelines allow you to:
+
+* Create multiple Power BI deployment pipelines and share them with others.
+    
+* Easily deploy content and copy it across Development, Test and Production environments.
+    
+* Approve/deny the changes or updates made by others for the next deployment pipeline.
+    
+* Configure the parameter and data source rules settings for each of the environments to keep the connections to the data.
+    
+
+## **Learning objectives**
+
+By the end of this module, you’ll be able to:
+
+* Articulate the benefits of deployment pipelines
+    
+* Create a deployment pipeline using Premium workspaces
+    
+* Assign and deploy content to pipeline stages, compare
+    
+* Describe the purpose of deployment rules
+    
+* Deploy content from one pipeline stage to another
+    
 
 # XIII. Administer Microsoft Fabric
 

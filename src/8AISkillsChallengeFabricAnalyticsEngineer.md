@@ -5,6 +5,8 @@ In this article, I am going to log my learnings completed as part of the AI Skil
 # Foreword:
 
 > The entire content is owned by Microsoft, and I am logging for practice and it is for educational purposes only.
+> 
+> All presented information is owned by Microsoft and intended solely for learning about the covered products and services in my Microsoft Learn AI Skills Challenge: Fabric Analytics Engineer Journey.
 
 # **I. Introduction to end-to-end analytics using Microsoft Fabric**
 
@@ -4236,6 +4238,283 @@ In this module, you'll:
 
 # XI. Use tools to optimize Power BI performance
 
+Use tools to develop, manage, and optimize Power BI data model and DAX query performance.
+
+## 1\. Introduction
+
+You've built Power BI reports and they're running slow.
+
+How do you identify the source of the problem?
+
+The report could be slow because of
+
+* issues at the source,
+    
+* the structure of the data model,
+    
+* the visuals on the report page, or the environment.
+    
+
+In this module you'll learn how to use tools to optimize a data model, and which tools are useful in which scenarios.
+
+## 2\. Use Performance analyzer
+
+Performance analyzer helps you understand how report elements like visuals and DAX queries are performing, helps you optimize at two of the four architecture levels, the data model and report visuals. EndFragment
+
+### i. Understand performance using Performance analyzer
+
+The Performance Analyzer captures operations that occur in several major subsystems involved in executing a Power BI Report:
+
+Operations that occur in several major subsystems:
+
+#### 1\. Report Canvas
+
+**Report Canvas** provides the user interface for Power BI reports including hosting visuals and filters, managing user interactions for consuming and authoring reports, and retrieving data for display.
+
+The Report Canvas is written using web technologies and runs in web browsers or web browser components. The Report Canvas retrieves data using a high-level, internal, Power BI query language known as *Semantic Query*.
+
+#### 2\. Data Shape Engine (DSE)
+
+**Data Shape Engine (DSE)** evaluates Semantic Queries by generating and running one, or more DAX queries against a data model hosted inside Power BI, Power BI Desktop, Azure Analysis Services, or SQL Server Analysis Services.
+
+#### 3\. **Data Model Engine (AS)**
+
+**Data Model Engine (AS)** stores the data model and provides services to reports, such as DAX query evaluation.
+
+The model may be hosted in Power BI, Power BI Desktop, Azure Analysis Services, or SQL Server Analysis Services.
+
+Depending on the data model host, a model may be tabular or multidimensional.
+
+Tabular models may contain in-memory tables, Direct Query tables, or a mix of such tables.
+
+DAX queries against tables in Direct Query mode will trigger queries to the Direct Query data source.
+
+For example, a DAX query against a Direct Query table backed by a SQL Server database will trigger one, or more, SQL queries.
+
+### ii. Use Performance analyzer
+
+As users interact with visuals in Power BI reports, DAX queries are submitted to the dataset and cached into memory.
+
+Because of this, you may need to clear the DAX query cache to get accurate results in the Performance analyzer.
+
+You can clear the cache by either closing and re-opening your report, or using DAX Studio.
+
+### iii. Evaluate performance data further
+
+For DAX queries with long duration times, means
+
+* it's likely that a measure is written poorly or
+    
+* an issue has occurred with the data model.
+    
+* The issue might be caused by the relationships, columns, or metadata in your model,
+    
+* or it could be the status of the Auto date/time option.
+    
+
+## 3\. Troubleshoot DAX performance by using DAX Studio
+
+### i. Understand the VertiPaq engine
+
+By using compression algorithms and a multi-threaded query processor, the Analysis Services *VertiPaq engine* delivers fast access to tabular model objects and data by Power BI.
+
+Power BI reads the content of your data source and transforms it in the internal VertiPaq columnar data structure, where each column is encoded and compressed. Dictionaries and indexes are created for each column.
+
+Finally, data structures are created for relationships and computation and compression of calculated columns occurs.
+
+DAX queries are being processed by two engines, the *formula engine* and the *storage engine.*
+
+### ii. Describe DAX Studio
+
+### iii. Optimize the data model
+
+#### 1\. Optimize DAX queries
+
+### iv. View model metrics using VertiPaq Analyzer
+
+VertiPaq Analyzer reports the memory consumption of the data model and can be used to quickly identify where you're spending the most memory.
+
+The VertiPaq engine only stores data in memory in import models. If you're using DirectQuery, the VertiPaq engine simply sends that query to the source. This means that viewing the VertiPaq Analyzer Metrics will only be helpful for import or composite models.
+
+Using the VertiPaq Analyzer in DAX Studio can help you easily identify and eliminate columns with high cardinality (including auto Date/time and floating-point decimal data types), and identify and remove columns that aren't used for anything.
+
+## 4\. Optimize a data model by using Best Practice Analyzer
+
+The Best Practice Analyzer (BPA) in Tabular Editor can be used during the development of tabular models in Power BI or Analysis Services models.
+
+### i. Describe Tabular Editor
+
+using Tabular Editor to run the BPA to ensure you're implementing data modeling best practices as you build.
+
+### ii. Describe the Best Practice Analyzer (BPA)
+
+BPA is a set of rules run in Tabular Editor that notify you of potential modeling missteps or changes that you can make to improve your model design and performance. It includes recommendations for naming, user experience, and common optimizations that you can apply to improve performance.
+
+### iii. Run BPA in Tabular Editor
+
+### iv. Customize BPA for your organization
+
+### v. Incorporate the use of BPA into your Continuous Integration/Continuous Deployment (CI/CD) process
+
+## 5\. Exercise: Use tools to optimize Power BI performance
+
+Exercise HTML page \[[Link](https://microsoftlearning.github.io/mslearn-fabric/Instructions/Labs/16-use-tools-to-optimize-power-bi-performance.html)\]
+
+`https://microsoftlearning.github.io/mslearn-fabric/Instructions/Labs/16-use-tools-to-optimize-power-bi-performance.html`
+
+In this lab, you will learn how to use two external tools to help you develop, manage, and optimize data models and DAX queries.
+
+In this lab, you learn how to:
+
+* Use Best Practice Analyzer (BPA).
+    
+* Use DAX Studio.
+    
+
+Lab Files: \[[Link](https://github.com/MicrosoftLearning/mslearn-fabric/tree/main/Allfiles/Labs/16)\]
+
+[`https://github.com/MicrosoftLearning/mslearn-fabric/tree/main/Allfiles/Labs/16`](https://github.com/MicrosoftLearning/mslearn-fabric/tree/main/Allfiles/Labs/16)
+
+### i. Use Best Practice Analyzer
+
+In this exercise, you will install Tabular Editor 2 and load Best Practice Analyzer (BPA) rules. You will review the BPA rules, and then address specific issues found in the data model.
+
+#### 1\. Download and Install Tabular Editor 2
+
+Download and install Tabular Editor 2 to enable the creation of calculation groups. \[[Link](https://github.com/TabularEditor/TabularEditor/releases)\]
+
+#### 2\. Set up Power BI Desktop
+
+Download the [Sales Analysis starter file](https://aka.ms/fabric-optimize-starter) from `https://aka.ms/fabric-optimize-starter`
+
+#### 3\. Review the data model
+
+you will review the data model.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712992925002/e4fc9d68-8b3d-4786-9562-849332fbf8a8.png)
+
+use BPA to detect model issues and fix them.
+
+#### 4\. Load BPA rules
+
+you will load BPA rules.
+
+```csharp
+ System.Net.WebClient w = new System.Net.WebClient(); 
+
+ string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
+ string url = "https://raw.githubusercontent.com/microsoft/Analysis-Services/master/BestPracticeRules/BPARules.json";
+ string downloadLoc = path+@"\TabularEditor\BPARules.json";
+ w.DownloadFile(url, downloadLoc);
+```
+
+#### 5\. Review the BPA rules
+
+you will review the BPA rules that you loaded in the previous task.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712993204998/a52ba069-5c0e-4605-8420-ea2675a89a8c.png)
+
+#### 6\. Address BPA issues
+
+you will open BPA and review the results of the checks.
+
+### ii. Use DAX Studio
+
+you’ll use DAX Studio to optimize DAX queries in the Power BI report file.
+
+#### 1\. Download DAX Studio
+
+\[[Link](https://daxstudio.org/downloads/)\]
+
+#### 2\. Use DAX studio to optimize a query
+
+you will optimize a query by using an improved measure formula.
+
+Download the [Monthly Profit Growth.dax](https://aka.ms/fabric-optimize-dax) files from `https://aka.ms/fabric-optimize-dax`
+
+[`https://github.com/MicrosoftLearning/mslearn-fabric/blob/main/Allfiles/Labs/16/Assets/Monthly%20Profit%20Growth.dax`](https://github.com/MicrosoftLearning/mslearn-fabric/blob/main/Allfiles/Labs/16/Assets/Monthly%20Profit%20Growth.dax)
+
+The query defines two measures that determine monthly profit growth. Currently, the query only uses the first measure (at line 72). When a measure isn’t used, it doesn’t impact on the query execution.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712994112748/cf85d081-1084-46da-ab9b-5f529c19da2c.png)
+
+*From top left to bottom right, the statistics tell you how many milliseconds it took to run the query, and the duration the storage engine (SE) CPU took. In this case (your results will differ), the formula engine (FE) took 69.2% of the time, while the SE took the remaining 30.8% of the time. There were 34 individual SE queries and 23 cache hits.*
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712994192796/1a52236e-bc0a-4ba6-9bf8-69755d97e255.png)
+
+The second measure definition provides a more efficient result. You will now update the query to use the second measure.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712994379844/709f51c6-fc2c-4659-8f7c-51d7a1c833b9.png)
+
+Run it a second time to result in full cache hits.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712994397182/f543c33e-fd2e-41dd-b386-dba31d6dd77c.png)
+
+In this case, you can determine that the “better” query, which uses variables and a time intelligence function, performs better-almost a 50% reduction in query execution time.
+
+## 6\. Knowledge check
+
+Stephanie is an enterprise data analyst, working as a resource to data analysts sitting in the finance department. One of the finance analysts asked Stephanie to help troubleshoot why report visuals take 5 seconds to render after a slicer selection is made. What tool should Stephanie use first to begin troubleshooting?
+
+Performance analyzer.
+
+The Performance analyzer is a great tool to start investigating performance issues with visuals in a report.
+
+James has been asked to troubleshoot a report that contains a matrix visual that renders visibly slower than any other visuals on the page. After James runs the Performance analyzer, he notices the need to dig further into the DAX query for the matrix using DAX Studio to understand what's causing the trouble. That same query is running in less than a second in DAX Studio. Has James solved the problem?
+
+No. James needs to clear the model cache to ensure that query results aren't cached in the model.
+
+James may be seeing inaccurate results in either DAX Studio or the Performance analyzer because the query results have been cached.
+
+Mary-Jo is responsible for managing the maintenance and deployment of Power BI assets for the entire organization. What tool can Mary-Jo use to ensure all data models adhere to data modeling best practices?
+
+Best Practice Analyzer in Tabular Editor.
+
+The Best Practice Analyzer in Tabular Editor can be run manually or automated to ensure all models adhere to best practices.
+
+## 7\. Summary
+
+You've been introduced to three tools that you can use to troubleshoot and improve data models.
+
+To optimize a slow report, first you can run the Performance analyzer to measure how each of the report elements performs when users interact with them.
+
+From there, you can dig into DAX query performance in DAX Studio, where you can view, sort, and filter performance data.
+
+You can also troubleshoot single measures or queries and/or evaluate the overall performance of your data model.
+
+To design data models proactively, you can use the Best Practice Analyzer rules in Tabular Editor to implement data modeling best practices as you go.
+
+Performance analyzer helps you understand how report elements like visuals and DAX queries are performing, helps you optimize at two of the four architecture levels, the data model and report visuals.
+
+The Report Canvas retrieves data using a high-level, internal, Power BI query language known as Semantic Query.
+
+DAX queries against tables in Direct Query mode will trigger queries to the Direct Query data source.
+
+As users interact with visuals in Power BI reports, DAX queries are submitted to the dataset and cached into memory. Because of this, you may need to clear the DAX query cache to get accurate results in the Performance analyzer. You can clear the cache by either closing and re-opening your report, or using DAX Studio.
+
+use DAX Studio to investigate your queries in more detail by copying your query from the performance analyzer.
+
+VertiPaq engine - compression algorithms and a multi-threaded query processor
+
+using Tabular Editor to run the BPA to ensure you're implementing data modeling best practices as you build.
+
+When BPA rules are run on your tabular model, you'll get a list of rules that your model violates, and can fix them using Tabular Editor.
+
+install and use Tabular Editor, and DAX Studio to optimize a semantic model.
+
+## **Learning objectives**
+
+After completing this module, you'll be able to:
+
+* Optimize queries using performance analyzer.
+    
+* Troubleshoot DAX performance using DAX Studio.
+    
+* Optimize a data model using Tabular Editor, using BPA rules.
+    
+
+  
+
 # XII. Create and manage a Power BI deployment pipeline
 
 # XIII. Administer Microsoft Fabric
@@ -4253,7 +4532,7 @@ Learning Objectives,
 
 # Connect with me:
 
-* [My Twitter](https://twitter.com/yssdheeraj)
+* [My Tw](https://twitter.com/yssdheeraj)[itter](https://learn.microsoft.com/en-us/training/modules/use-tools-optimize-power-bi-performance/1-introduction/)
     
 * [My LinkedIn](https://www.linkedin.com/in/dheerajy1/)
     

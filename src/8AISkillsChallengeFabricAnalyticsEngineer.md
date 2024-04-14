@@ -4635,11 +4635,238 @@ By the end of this module, you’ll be able to:
 
 # XIII. Administer Microsoft Fabric
 
+Microsoft Fabric is a SaaS solution for end-to-end data analytics. As an administrator, you can configure features and manage access to suit your organization's needs.
+
+## 1\. Introduction
+
+Fabric administrator (admin) - architecture, security and governance features, analytics capabilities, and various deployment and licensing options available
+
+By the end of this module, you'll have an understanding of the Fabric administrator role and the tasks and tools involved in administering Fabric.
+
+## 2\. Understand the Fabric Architecture
+
+Microsoft Fabric - SaaS foundation, simple and integrated approach, all-in-one analytics solution for data movement to data science, real-time analytics, and business intelligence.
+
+Microsoft Fabric - data warehousing, data engineering, data integration, data science, real-time analytics, business intelligence.
+
+Fabric architecture, with OneLake as the foundation, and each *experience* built on top.
+
+### i. Understand Fabric concepts: tenant, capacity, domain, workspace, and item
+
+#### 1\. Fabric tenant
+
+create, store, and manage Fabric items.
+
+single instance of Fabric aligned with Microsoft Entra ID.
+
+The Fabric *tenant* maps to the root of OneLake and is at the top level of the hierarchy.
+
+#### 2\. Fabric capacity
+
+Fabric offers capacity through the Fabric SKU and Trials.
+
+#### 3\. Fabric domain
+
+is a logical grouping of workspaces.
+
+For example, you might have a domain for sales, another for marketing, and another for finance.
+
+#### 4\. Fabric workspace
+
+is a collection of items that brings together different functionality in a single tenant.
+
+For example, in a sales workspace, users associated with the sales organization can create a data warehouse, run notebooks, create semantic models, create reports, etc.
+
+#### 5\. Fabric items
+
+different types of items, such as data warehouses, data pipelines, semantic models, reports, and dashboards.
+
+## 3\. Understand the Fabric administrator role
+
+Power BI admin role - Fabric admin.
+
+### i. Describe admin tasks
+
+Security and access control: RBAC, data gateways
+
+Data governance: inbound and outbound connectivity
+
+Customization and configuration: configuring private links, defining data classification policies
+
+Monitoring and optimization: configuring monitoring and alerting settings, optimizing query performance, managing capacity and scaling, and troubleshooting data refresh and connectivity issues
+
+### ii. Describe admin tools
+
+Fabric admins can perform most admin tasks using the tools: the Fabric admin portal, PowerShell cmdlets, admin APIs and SDKs, and the admin monitoring workspace.
+
+#### 1\. Fabric admin portal
+
+#### 2\. PowerShell cmdlets
+
+#### 3\. Admin APIs and SDKs
+
+An admin API and SDK are tools that allow developers to interact with a software system programmatically.
+
+An API (Application Programming Interface) is a set of protocols and tools that enable communication between different software applications.
+
+An SDK (Software Development Kit) is a set of tools and libraries that helps developers create software applications that can interact with a specific system or platform.
+
+You can use APIs and SDKs to automate common administrative tasks and integrate Fabric with other systems.
+
+#### 4\. Admin monitoring workspace
+
+## 4\. Manage Fabric security
+
+Microsoft Fabric security is based on Power BI security.
+
+### i. **Manage users: assign and manage licenses**
+
+License management for Fabric is handled in the Microsoft 365 admin center.
+
+### ii. **Manage items and sharing**
+
+Items in workspaces are best distributed through a workspace app or the workspace directly.  
+Granting the least permissive rights is the first step is securing the data.
+
+## 5\. Govern data in Fabric
+
+*Endorsement* is a way for you as an admin to designate specific Fabric items as trusted and approved for use across the organization.
+
+Admins can also make use of the *scanner API* to scan Fabric items for sensitive data, and the *data lineage* feature to track the flow of data through Fabric.
+
+### i. Endorse Fabric content
+
+Content endorsement is an essential governance feature that helps you establish trust in your data assets by promoting and certifying specific Fabric items as trusted and approved for use across the organization. All Fabric items can be endorsed except dashboards.
+
+Endorsed assets are identified with a badge that indicates they have been reviewed and approved. Endorsement helps your users know which assets they can trust and rely on for accurate information
+
+*Promoted* Fabric content appears with a Promoted badge in the Fabric portal. Workspace members with the contributor or admin role can promote content within a workspace. The Fabric admin can promote content across the organization.
+
+### ii. Scan for sensitive data
+
+*Metadata scanning* facilitates governance of data by enabling cataloging and reporting on all the metadata of your organization's Fabric items.
+
+The *scanner API* is a set of Admin REST APIs that allows you to scan Fabric items for sensitive data. Use the scanner API to scan data warehouses, data pipelines, semantic models, reports, and dashboards for sensitive data. The scanner API can be used to scan both structured and unstructured data.
+
+### iii. Track data lineage
+
+*Data lineage* is the ability to track the flow of data through Fabric. Data lineage allows you to see where data comes from, how it's transformed, and where it goes. This helps you understand the data that is available in Fabric, and how it's being used.
+
+## 6\. Knowledge check
+
+Which of the following statements best describes the concept of capacity in Fabric?
+
+Capacity defines the ability of a resource to perform an activity or to produce output.
+
+Capacity refers to the resources available at a given time to perform activities and produce output.
+
+Which of the following statements is true about the difference between promotion and certification in Fabric?
+
+Certification must be enabled in the tenant by the admin, while promotion can be done by a workspace member.
+
+Certification must be enabled in the tenant by the admin, and only designated certifiers can perform the endorsement. In contrast, promotion can be done by any workspace member who has been granted the necessary permissions.
+
+## 7\. Summary
+
+In this module,
+
+you learned about the Fabric architecture and the role of an admin in managing the Fabric platform.
+
+You also explored the different tools available for managing security and sharing, as well as the governance features that can be used to enforce standards and ensure compliance.
+
+Your understanding of how to manage a Fabric environment ensures that it is secure, compliant, and well-governed.
+
+With this knowledge, you are well-equipped to help your organization get the most out of Fabric and derive valuable insights from all your data.
+
+Fabric administrator (admin) - architecture, security and governance features, analytics capabilities, and various deployment and licensing options available
+
+tenant, capacity, domain, workspace, and item
+
+Fabric admin tasks - Security and access control(RBAC, data gateways), Data governance(inbound and outbound connectivity), Customization and configuration, Monitoring and optimization,
+
+Fabric admins can perform most admin tasks using the tools: the Fabric admin portal, PowerShell cmdlets, admin APIs and SDKs, and the admin monitoring workspace.
+
+License management for Fabric is handled in the Microsoft 365 admin center
+
+Endorsed assets -  reviewed and approved, can trust and rely on for accurate information
+
+Promoted Fabric content -  contributor or admin role can promote content within a workspace. The Fabric admin can promote content across the organization.
+
+The scanner API -  Admin REST APIs,  scan Fabric items for sensitive data,  scan data warehouses, data pipelines, semantic models, reports, and dashboards for sensitive data, scan both structured and unstructured data.
+
+Data lineage - to track the flow of data,  see where data comes from, how it's transformed, and where it goes.
+
+## **Learning objectives**
+
+In this module, you'll learn how to:
+
+* Describe Fabric admin tasks
+    
+* Navigate the admin center
+    
+* Manage user access
+    
+
+---
+
+I completed AI Skills Challenge: Fabric Analytics Engineer journey! in 9 days.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713072453488/178e0cc3-477e-4876-842d-0b65a6bba540.png)
+
 # Conclusion
 
 Learning Objectives,
 
 1. Describe end-to-end analytics in Microsoft Fabric
+    
+2. Get started with lakehouses in Microsoft Fabric
+    
+3. Use Apache Spark in Microsoft Fabric
+    
+4. Work with Delta Lake tables in Microsoft Fabric
+    
+5. Use Data Factory pipelines in Microsoft Fabric
+    
+6. Ingest Data with Dataflows Gen2 in Microsoft Fabric
+    
+7. Ingest data with Spark and Microsoft Fabric notebooks
+    
+8. Organize a Fabric lakehouse using medallion architecture design
+    
+9. Get started with data warehouses in Microsoft Fabric
+    
+10. Load data into a Microsoft Fabric data warehouse
+    
+11. Use tools to optimize Power BI performance
+    
+12. Create and manage a Power BI deployment pipeline
+    
+13. Administer Microsoft Fabric
+    
+
+and Exercises completed:
+
+1. Create and ingest data with a Microsoft Fabric lakehouse
+    
+2. Analyze data with Apache Spark
+    
+3. Use delta tables in Apache Spark
+    
+4. Ingest data with a pipeline
+    
+5. Create and use a Dataflow Gen2 in Microsoft Fabric
+    
+6. Ingest data with Spark and Microsoft Fabric notebooks
+    
+7. Organize your Fabric lakehouse using a medallion architecture notebook to transform the data, Upsert operation on a Delta table
+    
+8. Analyze data in a data warehouse
+    
+9. Load data into a warehouse in Microsoft Fabric
+    
+10. use two external tools to help you develop, manage, and optimize data models and DAX queries.
+    
+11. Create a deployment pipeline
     
 
 # Source: AI Skills Challenge: Fabric Analytics Engineer \[[Link](https://learn.microsoft.com/en-us/collections/jkqrh725262g?WT.mc_id=cloudskillschallenge_b696c18d-7201-4aff-9c7d-d33014d93b25)\]

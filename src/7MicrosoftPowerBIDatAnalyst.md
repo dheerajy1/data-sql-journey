@@ -1,11 +1,10 @@
 In this article, contains info about #MicrosoftPowerBIDataAnalyst and get prepared about for Exam PL-300.
 
-Foreword:
+# Foreword:
 
-<div data-node-type="callout">
-<div data-node-type="callout-emoji">📖</div>
-<div data-node-type="callout-text">The entire content is owned by Microsoft, and I am logging for practice and it is for educational purposes only.</div>
-</div>
+> The entire content is owned by Microsoft, and I am logging for practice and it is for educational purposes only.
+> 
+> All presented information is owned by Microsoft and intended solely for learning about the covered products and services in my Microsoft Learn AI Skills Challenge: Fabric Analytics Engineer Journey.
 
 # Overview:
 
@@ -2091,21 +2090,186 @@ CALCULATE(
 
 ### i. Lab story
 
+In this lab, you’ll create measures with DAX expressions involving filter context manipulation.
+
+In this lab you learn how to:
+
+* Use the CALCULATE() function to manipulate filter context
+    
+* Use Time Intelligence functions
+    
+
 ### ii. Work with Filter Context
 
 ### iii. Create a matrix visual
 
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713093878572/fdd779ba-d53b-4436-b387-10d18417d94a.png)
+
 ### iv. Manipulate filter context
+
+use the CALCULATE() function to manipulate filter context.
+
+```sql
+ Sales All Region =
+
+ CALCULATE(SUM(Sales[Sales]), REMOVEFILTERS(Region))
+```
+
+*The CALCULATE() function is a powerful function used to manipulate the filter context. The first argument takes an expression or a measure (a measure is just a named expression). Subsequent arguments allow modifying the filter context.*
+
+*The REMOVEFILTERS() function removes active filters. It can take either no arguments, or a table, a column, or multiple columns as its argument.*
+
+*In this formula, the measure evaluates the sum of the****Sales****column in a modified filter context, which removes any filters applied to the columns of the****Region****table.*
+
+```sql
+ Sales % All Region =  
+ DIVIDE(  
+  SUM(Sales[Sales]),  
+  CALCULATE(  
+  SUM(Sales[Sales]),  
+  REMOVEFILTERS(Region)  
+  )  
+ )
+```
+
+The DIVIDE() function divides the Sales measure (not modified by filter context) by the Sales measure in a modified context, which removes any filters applied to the Region table.
+
+```sql
+ Sales % Country =  
+ DIVIDE(  
+  SUM(Sales[Sales]),  
+  CALCULATE(  
+  SUM(Sales[Sales]),  
+  REMOVEFILTERS(Region[Region])  
+  )  
+ )
+```
+
+*The difference is that the denominator modifies the filter context by removing filters on the****Region****column of the****Region****table, not all columns of the****Region****table. It means that any filters applied to the group or country columns are preserved. It will achieve a result that represents the sales as a percentage of country.*
+
+```sql
+ Sales % Country =  
+ IF(  
+  ISINSCOPE(Region[Region]),  
+  DIVIDE(  
+  SUM(Sales[Sales]),  
+  CALCULATE(  
+  SUM(Sales[Sales]),  
+  REMOVEFILTERS(Region[Region])  
+  )  
+  )  
+ )
+```
+
+*The IF() function uses the ISINSCOPE() function to test whether the region column is the level in a hierarchy of levels. When true, the DIVIDE() function is evaluated. When false, a blank value is returned because the region column isn’t in scope.*
+
+```sql
+ Sales % Group =  
+ DIVIDE(  
+  SUM(Sales[Sales]),  
+  CALCULATE(  
+  SUM(Sales[Sales]),  
+  REMOVEFILTERS(  
+  Region[Region],  
+  Region[Country]  
+  )  
+  )  
+ )
+```
+
+*To achieve sales as a percentage of group, two filters can be applied to effectively remove the filters on two columns.*
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713096997352/f92bac91-7295-4870-b39d-1ce1f4adc45a.png)
 
 ### v. Work with Time Intelligence
 
 ### vi. Create a YTD measure
 
+```sql
+ Sales YTD =  
+ TOTALYTD(SUM(Sales[Sales]), 'Date'[Date], "6-30")
+```
+
+*The TOTALYTD() function evaluates an expression—in this case the sum of the* ***Sales*** *column—over a given date column. The date column must belong to a date table marked as a date table, as was done in the* ***Create DAX Calculations in Power BI Desktop*** *lab.*
+
+*The function can also take a third optional argument representing the last date of a year. The absence of this date means that December 31 is the last date of the year. For Adventure Works, June in the last month of their year, and so “6-30” is used.*
+
+*The TOTALYTD() function performs filter manipulation, specifically time filter manipulation. For example, to compute YTD sales for September 2017 (the third month of the fiscal year), all filters on the* ***Date*** *table are removed and replaced with a new filter of dates commencing at the beginning of the year (July 1, 2017) and extending through to the last date of the in-context date period (September 30, 2017).*
+
+*Many Time Intelligence functions are available in DAX to support common time filter manipulations.*
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713104525769/03a1250e-ce46-43e5-9c77-83ab080284b2.png)
+
 ### vii. Create a YoY growth measure
+
+```sql
+ Sales YoY Growth =  
+ VAR SalesPriorYear =  
+  CALCULATE(  
+  SUM(Sales[Sales]),  
+  PARALLELPERIOD(  
+  'Date'[Date],  
+  -12,  
+  MONTH  
+  )  
+  )  
+ RETURN  
+  SalesPriorYear
+```
+
+*The* ***SalesPriorYear*** *variable is assigned an expression that calculates the sum of the* ***Sales*** *column in a modified context that uses the PARALLELPERIOD() function to shift 12 months back from each date in filter context.*
+
+modified
+
+```sql
+ Sales YoY Growth =  
+ VAR SalesPriorYear =  
+  CALCULATE(  
+  SUM(Sales[Sales]),  
+  PARALLELPERIOD(  
+  'Date'[Date],  
+  -12,  
+  MONTH  
+  )  
+  )  
+ RETURN  
+  DIVIDE(  
+  (SUM(Sales[Sales]) - SalesPriorYear),  
+  SalesPriorYear  
+  )
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713104660016/63a777c3-07e5-4915-9e35-edb4f7e24d19.png)
 
 ## 5\. Check your knowledge
 
+In the context of semantic model calculations, which statement best describes time intelligence?
+
+Filter context modifications involving a date table
+
+Time intelligence calculations modify date filter contexts.
+
+You're developing a semantic model in Power BI Desktop. You've just added a date table by using the CALENDARAUTO function. You've extended it with calculated columns, and you've related it to other model tables. What else should you do to ensure that DAX time intelligence calculations work correctly?
+
+Mark as a Date table.
+
+You must mark the date table so that Power BI can correctly filter its dates.
+
+You have a table that stores account balance snapshots for each date, excluding weekends. You need to ensure that your measure formula only filters by a single date. Also, if no record is on the last date of a time period, it should use the latest account balance. Which DAX time intelligence function should you use?
+
+LASTNONBLANK
+
+The LASTNONBLANK function will return the last date in the filter context where a snapshot record exists. This option will help you achieve the objective.
+
 ## 6\. Summary
+
+In this module,
+
+you learned that time intelligence calculations are concerned with modifying the filter context for date filters.
+
+You were introduced to many DAX time intelligence functions, which support the creation of calculations, such as year-to-date (YTD) or year-over-year (YoY).
+
+You also learned that life-to-date (LTD) calculations can help you count new occurrences over your fact data, and that snapshot data can be filtered in a way to help guarantee that only a single snapshot value is returned.
 
 ## **Learning objectives**
 

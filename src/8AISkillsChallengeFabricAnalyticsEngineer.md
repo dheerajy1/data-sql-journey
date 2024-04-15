@@ -90,7 +90,7 @@ Which of the following Fabric workloads is used to move and transform data?
 
 The Data Factory workload combines Power Query with the scale of Azure Data Factory to move and transform data.
 
-# **6\. Summary**
+## **6\. Summary**
 
 Data professionals are increasingly expected to be able to work with data at scale, and to be able to do so in a way that is secure, compliant, and cost-effective.
 
@@ -169,7 +169,7 @@ You create and configure a new lakehouse in the Data Engineering workload. Each 
 
 **Shortcuts** enable you to integrate data into your lakehouse while keeping it stored in external storage.
 
-### **4\. Ingest data into a lakehouse**
+## **4\. Ingest data into a lakehouse**
 
 There are many ways to load data into a Fabric lakehouse, including:
 
@@ -182,7 +182,7 @@ There are many ways to load data into a Fabric lakehouse, including:
 * **Data Factory pipelines**: Copy data and orchestrate data processing activities, loading the results into tables or files in the lakehouse.
     
 
-### **5\. Grant access to a lakehouse**
+## **5\. Grant access to a lakehouse**
 
 Fabric lakehouse permissions are granted either at the workspace or item level.
 
@@ -248,7 +248,7 @@ ORDER BY Revenue DESC;
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712466216745/3a1cce01-41fe-48d6-8ae8-3d6b496b5660.png)
 
-## viii. Create a report
+### viii. Create a report
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712466562480/ec1df57a-15a5-4f8d-a323-f0162e77f64f.png)
 
@@ -311,7 +311,7 @@ This module explores how you can use Spark in Microsoft Fabric to ingest, proces
 
 While the core techniques and code described in this module are common to all Spark implementations, the integrated tools and ability to work with Spark in the same environment as other data services in Microsoft Fabric makes it easier to incorporate Spark-based data processing into your overall data analytics solution.
 
-## 3\. Prepare to use Apache Spark
+## 2\. Prepare to use Apache Spark
 
 Apache Spark is a distributed data processing framework that enables large-scale data analytics by coordinating work across multiple processing nodes in a cluster.
 
@@ -669,7 +669,7 @@ display(yearlySales)
 
 ### v. Use Spark to transform data files
 
-#### i. Use dataframe methods and functions to transform data
+#### a. Use dataframe methods and functions to transform data
 
 ```python
 
@@ -688,7 +688,7 @@ display(transformed_df.limit(5))
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712568346447/ee1e3deb-cd24-4c75-998a-6786e7e35f5f.png)
 
-#### ii. Save the transformed data
+#### b. Save the transformed data
 
 ```python
 transformed_df.write.mode("overwrite").parquet("Files/transformed_data/orders")
@@ -705,7 +705,7 @@ display(orders_df)
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712569030980/1d4fba20-e101-4fc8-a926-7a5c4a2be0a7.png)
 
-#### iii. Save data in partitioned files
+#### c. Save data in partitioned files
 
 ```python
 orders_df.write.partitionBy("Year","Month").mode("overwrite").parquet("Files/partitioned_data")
@@ -725,7 +725,7 @@ Note that the partitioning columns specified in the path (**Year** and **Month**
 
 ### vi. Work with tables and SQL
 
-#### i. Create a table
+#### a. Create a table
 
 ```python
 spark.sql("DROP TABLE salesorders")
@@ -744,7 +744,7 @@ display(df)
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712573785726/eeeb2eab-4017-4367-88f6-9aeaba7894a1.png)
 
-#### ii. Run SQL code in a cell
+#### b. Run SQL code in a cell
 
 ```sql
 %%sql
@@ -769,7 +769,7 @@ FROM salesorders
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712575077400/bf898143-e953-4a06-8765-01fcdef43368.png)
 
-#### viii. Get started with matplotlib
+#### a. Get started with matplotlib
 
 ```sql
 sqlQuery = "SELECT CAST(YEAR(OrderDate) AS CHAR(4)) AS OrderYear, \
@@ -851,7 +851,7 @@ plt.show()
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712575857732/4903bce5-f394-4b7a-86b4-d25baa4bcb0f.png)
 
-#### ix. Use the seaborn library
+#### b. Use the seaborn library
 
 ### viii. Save the notebook and end the Spark session
 
@@ -929,7 +929,7 @@ When you create a table in a Microsoft Fabric lakehouse, a delta table is define
 
 ### i. Creating a delta table from a dataframe
 
-#### 1\. Managed table
+#### a\. Managed table
 
 In the below example, the dataframe was saved as a managed table; meaning that the table definition in the metastore and the underlying data files are both managed by the Spark runtime for the Fabric lakehouse.
 
@@ -943,7 +943,7 @@ df = spark.read.load('Files/mydata.csv', format='csv', header=True)
 df.write.format("delta").saveAsTable("mytable")
 ```
 
-#### 2\. External tables
+#### b\. External tables
 
 create tables as external tables, in which the relational table definition in the metastore is mapped to an alternative file storage location. For example, the following code creates an external table for which the data is stored in the folder in the Files storage location for the lakehouse:
 
@@ -965,7 +965,7 @@ Deleting an external table from the lakehouse metastore does not delete the asso
 
 While it's common to create a table from existing data in a dataframe, there are often scenarios where you want to create a table definition in the metastore that will be populated with data in other ways.
 
-#### 1\. Use the DeltaTableBuilder API
+#### a\. Use the DeltaTableBuilder API
 
 ```apache
 from delta.tables import *
@@ -979,9 +979,9 @@ DeltaTable.create(spark) \
   .execute()
 ```
 
-#### 2\. Use Spark SQL
+#### b\. Use Spark SQL
 
-##### a. Managed table
+##### 1. Managed table
 
 ```apache
 %%sql
@@ -996,7 +996,7 @@ CREATE TABLE salesorders
 USING DELTA
 ```
 
-##### b. External table
+##### 2. External table
 
 ```apache
 %%sql
@@ -1132,7 +1132,7 @@ You can use a delta table as a source or a sink for Spark Structured Streaming.
 
 For example, you could capture a stream of real time data from an IoT device and write the stream directly to a delta table as a sink - enabling you to query the table to see the latest streamed data. Or, you could read a delta as a streaming source, enabling you to constantly report new data as it is added to the table.
 
-#### 1\. Using a delta table as a streaming source
+#### a\. Using a delta table as a streaming source
 
 In the following PySpark example, a delta table is used to store details of Internet sales orders.
 
@@ -1152,7 +1152,7 @@ stream_df = spark.readStream.format("delta") \
 stream_df.show()
 ```
 
-#### 2\. Using a delta table as a streaming sink
+#### b\. Using a delta table as a streaming sink
 
 In the following PySpark example, a stream of data is read from JSON files in a folder.
 
@@ -1219,13 +1219,13 @@ display(df)
 
 ### iv. Create delta tables
 
-#### 1\. Create a managed table
+#### a\. Create a managed table
 
 ```apache
 df.write.format("delta").saveAsTable("managed_products")
 ```
 
-#### 2\. Create an external table
+#### b\. Create an external table
 
 ```apache
 df.write.format("delta").saveAsTable("external_products", path="abfs_path/external_products")
@@ -1233,7 +1233,7 @@ df.write.format("delta").saveAsTable("external_products", path="abfs_path/extern
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712651801381/b3926244-07f8-4211-83ad-93f61d7d6a06.png)
 
-#### 3 Compare managed and external tables
+#### c\. Compare managed and external tables
 
 ```apache
 %%sql
@@ -1268,7 +1268,7 @@ DROP TABLE external_products;
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712655068907/a5886720-0354-4242-9a76-6d5094362254.png)
 
-#### 4\. Use SQL to create a table
+#### d\. Use SQL to create a table
 
 ```apache
 %%sql
@@ -1494,27 +1494,27 @@ The graphical pipeline *canvas* in the Fabric user interface enables you to buil
 
 ### i. Core pipeline concepts
 
-#### 1 Activities
+#### a\. Activities
 
 Activities are the executable tasks in a pipeline. You can define a flow of activities by connecting them in a sequence. The outcome of a particular activity (success, failure, or completion) can be used to direct the flow to the next activity in the sequence.
 
 There are two broad categories of activity in a pipeline.
 
-##### Data transformation activities -
+##### 1\. Data transformation activities -
 
 activities that encapsulate data transfer operations, including simple Copy Data activities that extract data from a source and load it to a destination, and more complex Data Flow activities that encapsulate dataflows (Gen2) that apply transformations to the data as it is transferred. Other data transformation activities include Notebook activities to run a Spark notebook, Stored procedure activities to run SQL code, Delete data activities to delete existing data, and others.
 
-##### Control flow activities -
+##### 2\. Control flow activities -
 
 activities that you can use to implement loops, conditional branching, or manage variable and parameter values. The wide range of control flow activities enables you to implement complex pipeline logic to orchestrate data ingestion and transformation flow.
 
-#### 2 Parameters
+#### b Parameters
 
 Pipelines can be parameterized, enabling you to provide specific values to be used each time a pipeline is run. For example, you might want to use a pipeline to save ingested data in a folder, but have the flexibility to specify a folder name each time the pipeline is run.
 
 Using parameters increases the reusability of your pipelines, enabling you to create flexible data ingestion and transformation processes.
 
-#### 3 Pipeline runs
+#### c Pipeline runs
 
 Each time a pipeline is executed, a data pipeline run is initiated. Runs can be initiated on-demand in the Fabric user interface or scheduled to start at a specific frequency. Use the unique run ID to review run details to confirm they completed successfully and investigate the specific settings used for each execution.
 
@@ -1938,7 +1938,7 @@ Lakehouses support structured, semi-structured, and unstructured files.
 
 Load as a parquet file or Delta table to take advantage of the Spark engine.
 
-#### 1\. Write DataFrame to Parquet file format
+#### a\. Write DataFrame to Parquet file format
 
 ```apache
 # Write DataFrame to Parquet file format
@@ -1947,7 +1947,7 @@ df.write.mode("overwrite").parquet(parquet_output_path)
 print(f"DataFrame has been written to Parquet file: {parquet_output_path}")
 ```
 
-#### 2\. Write DataFrame to Delta table
+#### b\. Write DataFrame to Delta table
 
 ```apache
 # Write DataFrame to Delta table
@@ -1979,7 +1979,7 @@ Fabric notebooks easily scale for large data, therefore read and write optimizat
 
 Consider these optimization functions for even more performant data ingestion.
 
-#### 1\. V-Order
+#### a\. V-Order
 
 enables faster and more efficient reads by various compute engines, such as Power BI, SQL, and Spark.V-order applies special sorting, distribution, encoding, and compression on parquet files at write-time.
 
@@ -1988,7 +1988,7 @@ enables faster and more efficient reads by various compute engines, such as Powe
 spark.conf.set("spark.sql.parquet.vorder.enabled", "true")
 ```
 
-#### 2\. Optimize write
+#### b\. Optimize write
 
 improves the performance and reliability by reducing the number of files written and increasing their size. It's useful for scenarios where the Delta tables have suboptimal or nonstandard file sizes, or where the extra write latency is tolerable.
 
@@ -2038,7 +2038,7 @@ Insert the following code into the code cell, which will:
 * Read data into a DataFrame
     
 
-#### 1\. Azure Blob Storage connection string:
+#### a\. Azure Blob Storage connection string:
 
 ```apache
  # Azure Blob Storage access info
@@ -2056,7 +2056,7 @@ Insert the following code into the code cell, which will:
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712753081271/43ab4cc1-40ba-4257-9a55-e2e56d3520f3.png)
 
-#### 2\. To write the data to a file, you now need that ABFS Path for your RawData folder.
+#### b\. To write the data to a file, you now need that ABFS Path for your RawData folder.
 
 ```apache
 # Declare file name    
@@ -2244,7 +2244,7 @@ Some people also call it a "multi-hop" architecture, meaning that data can move 
 
 ### i. Understand the medallion architecture format
 
-#### 1\. Bronze layer
+#### a\. Bronze layer
 
 The bronze or raw layer of the medallion architecture is the first layer of the lakehouse.
 
@@ -2252,7 +2252,7 @@ It's the landing zone for all data, whether it's structured, semi-structured, or
 
 The data is stored in its original format, and no changes are made to it.
 
-#### 2\. Silver layer
+#### b\. Silver layer
 
 The silver or validated layer is the second layer of the lakehouse. It's where you'll validate and refine your data.
 
@@ -2262,7 +2262,7 @@ The silver layer can be thought of as a central repository across an organizatio
 
 In the silver layer you're cleaning your data enough so that everything is in one place and ready to be refined and modeled in the gold layer.
 
-#### 3\. Gold layer
+#### c\. Gold layer
 
 The gold or enriched layer is the third layer of the lakehouse.
 
@@ -2297,21 +2297,21 @@ There are a few things to consider when deciding how to move and transform data 
 
 Understanding the difference between data transformation and data orchestration helps you select the right tools for the job within Fabric.
 
-#### 1\. Data transformation
+#### a\. Data transformation
 
 Data transformation involves altering the structure or content of data to meet specific requirements.
 
 Tools for data transformation in Fabric include Dataflows (Gen2) and notebooks.
 
-##### i. Dataflows (Gen2)
+##### 1. Dataflows (Gen2)
 
 Dataflows are a great option for smaller semantic models and simple transformations. Notebooks are a better option for larger semantic models and more complex transformations.
 
-##### i. Notebooks
+##### 2. Notebooks
 
 Notebooks also allow you to save your transformed data as a managed Delta table in the lakehouse, ready for reporting.
 
-#### 2\. Data orchestration
+#### b\. Data orchestration
 
 Data orchestration refers to the coordination and management of multiple data-related processes, ensuring they work together to achieve a desired outcome.
 
@@ -2625,7 +2625,7 @@ Note that you could have done all of this in a single notebook, but for the purp
 
 This can help with debugging, troubleshooting, and reuse.
 
-#### 1\. Code to load data to your dataframe and start building out your star schema:
+#### a\. Code to load data to your dataframe and start building out your star schema:
 
 ```apache
  # Load data to the dataframe as a starting point to create the gold layer
@@ -2636,7 +2636,7 @@ This can help with debugging, troubleshooting, and reuse.
 
 Date dimension table:
 
-#### 2\. code to create your date dimension table:
+#### b\. code to create your date dimension table:
 
 ```apache
  from pyspark.sql.types import *
@@ -2656,7 +2656,7 @@ Date dimension table:
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712841122740/36bec102-edef-4c63-bf98-3d6b740f382c.png)
 
-#### 3\. Code to create a dataframe for your date dimension, dimdate\_gold
+#### c\. Code to create a dataframe for your date dimension, dimdate\_gold
 
 ```apache
  from pyspark.sql.functions import col, dayofmonth, month, year, date_format
@@ -2678,7 +2678,7 @@ Date dimension table:
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712841192961/6766e661-46a2-45ff-b5de-2265bf3e3f77.png)
 
-#### 4\. Code to update the date dimension as new data comes in:
+#### d\. Code to update the date dimension as new data comes in:
 
 ```apache
  from delta.tables import *
@@ -2714,7 +2714,7 @@ Date dimension table:
 
 Customer dimension table:
 
-#### 5\. Code to build out the customer dimension table
+#### e\. Code to build out the customer dimension table
 
 ```apache
  from pyspark.sql.types import *
@@ -2733,7 +2733,7 @@ Customer dimension table:
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712841399740/280af35c-6e1f-4a3f-a543-c868a77bba4f.png)
 
-#### 6\. Code to drop duplicate customers, select specific columns, and split the “CustomerName” column to create “First” and “Last” name columns:
+#### f\. Code to drop duplicate customers, select specific columns, and split the “CustomerName” column to create “First” and “Last” name columns:
 
 Here you have created a new DataFrame dfdimCustomer\_silver by performing various transformations such as dropping duplicates, selecting specific columns, and splitting the “CustomerName” column to create “First” and “Last” name columns.
 
@@ -2755,7 +2755,7 @@ The result is a DataFrame with cleaned and structured customer data, including s
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712841483587/03d2a112-09ea-451b-8d0b-64315d2e84cf.png)
 
-#### 7\. Code to create the ID column for our customers
+#### g\. Code to create the ID column for our customers
 
 Here you’re cleaning and transforming customer data (dfdimCustomer\_silver) by performing a left anti join to exclude duplicates that already exist in the dimCustomer\_gold table, and then generating unique CustomerID values using the monotonically\_increasing\_id() function.
 
@@ -2777,7 +2777,7 @@ Here you’re cleaning and transforming customer data (dfdimCustomer\_silver) by
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712842792613/bae33205-9091-47a1-a10b-9e6f9f813b8c.png)
 
-#### 8\. Code to ensure that your customer table remains up-to-date as new data comes in
+#### h\. Code to ensure that your customer table remains up-to-date as new data comes in
 
 ```apache
 from delta.tables import *
@@ -2816,7 +2816,7 @@ customer table
 
 Product dimension table:
 
-#### 9\. Code to create your product dimension
+#### i\. Code to create your product dimension
 
 ```apache
 from pyspark.sql.types import *
@@ -2832,7 +2832,7 @@ DeltaTable.createIfNotExists(spark) \
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712844327878/dd611579-6263-450c-847f-6a48746b3d03.png)
 
-#### 10\. Code to to create the product\_silver dataframe
+#### j\. Code to to create the product\_silver dataframe
 
 ```apache
 from pyspark.sql.functions import col, split, lit
@@ -2850,7 +2850,7 @@ display(dfdimProduct_silver.head(10))
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712844597438/9b5e06b2-7c89-46af-9cf6-5daf63a708ef.png)
 
-#### 11\. Code to create IDs for your dimProduct\_gold table
+#### k\. Code to create IDs for your dimProduct\_gold table
 
 This calculates the next available product ID based on the current data in the table, assigns these new IDs to the products, and then displays the updated product information.
 
@@ -2875,7 +2875,7 @@ from her
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712850821032/a8e50070-b9fb-4528-b9fa-674c1725140b.png)
 
-#### 12\. Code to ensure that your product table remains up-to-date as new data comes in
+#### l\. Code to ensure that your product table remains up-to-date as new data comes in
 
 ```apache
 from delta.tables import *
@@ -2912,7 +2912,7 @@ Refresh LH
 
 Fact table:
 
-#### 13\. Code to create the fact table
+#### m\. Code to create the fact table
 
 ```apache
 from pyspark.sql.types import *
@@ -2931,7 +2931,7 @@ DeltaTable.createIfNotExists(spark) \
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712851134115/ec7d0052-6130-4bb5-8af4-6f22603770b2.png)
 
-#### 14\. Code to create a new dataframe to combine sales data with customer and product information include customer ID, item ID, order date, quantity, unit price, and tax
+#### n\. Code to create a new dataframe to combine sales data with customer and product information include customer ID, item ID, order date, quantity, unit price, and tax
 
 ```apache
 from pyspark.sql.functions import col, split, when, lit
@@ -2962,7 +2962,7 @@ display(dffactSales_gold.head(10))
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712853663626/15467a2d-e30d-47ac-be03-d044fb12f9c9.png)
 
-#### 15\. Code to ensure that sales data remains up-to-date
+#### o\. Code to ensure that sales data remains up-to-date
 
 Here you’re using Delta Lake’s merge operation to synchronize and update the factsales\_gold table with new sales data (dffactSales\_gold).
 
@@ -3126,19 +3126,19 @@ Most commonly, these tables are organized in a schema that is optimized for mult
 
 For instance, you can analyze the total amount paid for sales orders that occurred on a specific date or at a particular store.
 
-#### 1\. Tables in a data warehouse (fact tables and dimension tables.)
+#### a\. Tables in a data warehouse (fact tables and dimension tables)
 
 Tables in a data warehouse are typically organized in a way that supports efficient and effective analysis of large amounts of data.
 
 This way of organizing tables is often referred to as dimensional modeling, which involves structuring tables into fact tables and dimension tables.
 
-##### i. Fact tables
+##### 1. Fact tables
 
 Fact tables contain the numerical data that you want to analyze. Fact tables typically have a large number of rows and are the primary source of data for analysis.
 
 For example, a fact table might contain the total amount paid for sales orders that occurred on a specific date or at a particular store.
 
-##### ii. Dimension tables
+##### 2. Dimension tables
 
 Dimension tables contain descriptive information about the data in the fact tables.
 
@@ -3161,7 +3161,7 @@ Surrogate keys are specific to the data warehouse and help to maintain consisten
 
 Alternate keys on the other hand are specific to the source system and help to maintain traceability between the data warehouse and the source system.
 
-#### 2\. Special types of dimension tables
+#### b\. Special types of dimension tables
 
 Special types of dimensions provide additional context and enable more comprehensive data analysis.
 
@@ -3227,7 +3227,7 @@ There are a few ways to ingest data into a Fabric data warehouse, including *Pip
 
 After ingestion, the data becomes available for analysis by multiple business groups, who can use features such as cross-database querying and sharing to access it.
 
-#### 1\. Create tables
+#### a\. Create tables
 
 To create a table in the data warehouse, you can use SQL Server Management Studio (SSMS) or another SQL client to connect to the data warehouse and run a CREATE TABLE statement.
 
@@ -3250,7 +3250,7 @@ GO
 
 This SQL query loads data from a CSV file stored in Azure Blob Storage into a table called "Region" in the Fabric data warehouse.
 
-#### 2\. Table considerations
+#### b\. Table considerations
 
 After creating tables in a data warehouse, it's important to consider the process of loading data into those tables. A common approach is to use *staging tables*. In Fabric, you can use T-SQL commands to load data from files into staging tables in the data warehouse.
 
@@ -4267,17 +4267,17 @@ The Performance Analyzer captures operations that occur in several major subsyst
 
 Operations that occur in several major subsystems:
 
-#### 1\. Report Canvas
+#### a\. Report Canvas
 
 **Report Canvas** provides the user interface for Power BI reports including hosting visuals and filters, managing user interactions for consuming and authoring reports, and retrieving data for display.
 
 The Report Canvas is written using web technologies and runs in web browsers or web browser components. The Report Canvas retrieves data using a high-level, internal, Power BI query language known as *Semantic Query*.
 
-#### 2\. Data Shape Engine (DSE)
+#### b\. Data Shape Engine (DSE)
 
 **Data Shape Engine (DSE)** evaluates Semantic Queries by generating and running one, or more DAX queries against a data model hosted inside Power BI, Power BI Desktop, Azure Analysis Services, or SQL Server Analysis Services.
 
-#### 3\. **Data Model Engine (AS)**
+#### c\. **Data Model Engine (AS)**
 
 **Data Model Engine (AS)** stores the data model and provides services to reports, such as DAX query evaluation.
 
@@ -4328,7 +4328,7 @@ DAX queries are being processed by two engines, the *formula engine* and the *st
 
 ### iii. Optimize the data model
 
-#### 1\. Optimize DAX queries
+#### a\. Optimize DAX queries
 
 ### iv. View model metrics using VertiPaq Analyzer
 
@@ -4379,15 +4379,15 @@ Lab Files: \[[Link](https://github.com/MicrosoftLearning/mslearn-fabric/tree/mai
 
 In this exercise, you will install Tabular Editor 2 and load Best Practice Analyzer (BPA) rules. You will review the BPA rules, and then address specific issues found in the data model.
 
-#### 1\. Download and Install Tabular Editor 2
+#### a\. Download and Install Tabular Editor 2
 
 Download and install Tabular Editor 2 to enable the creation of calculation groups. \[[Link](https://github.com/TabularEditor/TabularEditor/releases)\]
 
-#### 2\. Set up Power BI Desktop
+#### b\. Set up Power BI Desktop
 
 Download the [Sales Analysis starter file](https://aka.ms/fabric-optimize-starter) from `https://aka.ms/fabric-optimize-starter`
 
-#### 3\. Review the data model
+#### c\. Review the data model
 
 you will review the data model.
 
@@ -4395,7 +4395,7 @@ you will review the data model.
 
 use BPA to detect model issues and fix them.
 
-#### 4\. Load BPA rules
+#### d\. Load BPA rules
 
 you will load BPA rules.
 
@@ -4408,13 +4408,13 @@ you will load BPA rules.
  w.DownloadFile(url, downloadLoc);
 ```
 
-#### 5\. Review the BPA rules
+#### e\. Review the BPA rules
 
 you will review the BPA rules that you loaded in the previous task.
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712993204998/a52ba069-5c0e-4605-8420-ea2675a89a8c.png)
 
-#### 6\. Address BPA issues
+#### f\. Address BPA issues
 
 you will open BPA and review the results of the checks.
 
@@ -4422,11 +4422,11 @@ you will open BPA and review the results of the checks.
 
 you’ll use DAX Studio to optimize DAX queries in the Power BI report file.
 
-#### 1\. Download DAX Studio
+#### a\. Download DAX Studio
 
 \[[Link](https://daxstudio.org/downloads/)\]
 
-#### 2\. Use DAX studio to optimize a query
+#### b\. Use DAX studio to optimize a query
 
 you will optimize a query by using an improved measure formula.
 
@@ -4653,7 +4653,7 @@ Fabric architecture, with OneLake as the foundation, and each *experience* built
 
 ### i. Understand Fabric concepts: tenant, capacity, domain, workspace, and item
 
-#### 1\. Fabric tenant
+#### a\. Fabric tenant
 
 create, store, and manage Fabric items.
 
@@ -4661,23 +4661,23 @@ single instance of Fabric aligned with Microsoft Entra ID.
 
 The Fabric *tenant* maps to the root of OneLake and is at the top level of the hierarchy.
 
-#### 2\. Fabric capacity
+#### b\. Fabric capacity
 
 Fabric offers capacity through the Fabric SKU and Trials.
 
-#### 3\. Fabric domain
+#### c\. Fabric domain
 
 is a logical grouping of workspaces.
 
 For example, you might have a domain for sales, another for marketing, and another for finance.
 
-#### 4\. Fabric workspace
+#### d\. Fabric workspace
 
 is a collection of items that brings together different functionality in a single tenant.
 
 For example, in a sales workspace, users associated with the sales organization can create a data warehouse, run notebooks, create semantic models, create reports, etc.
 
-#### 5\. Fabric items
+#### e\. Fabric items
 
 different types of items, such as data warehouses, data pipelines, semantic models, reports, and dashboards.
 
@@ -4699,11 +4699,11 @@ Monitoring and optimization: configuring monitoring and alerting settings, optim
 
 Fabric admins can perform most admin tasks using the tools: the Fabric admin portal, PowerShell cmdlets, admin APIs and SDKs, and the admin monitoring workspace.
 
-#### 1\. Fabric admin portal
+#### a\. Fabric admin portal
 
-#### 2\. PowerShell cmdlets
+#### b\. PowerShell cmdlets
 
-#### 3\. Admin APIs and SDKs
+#### c\. Admin APIs and SDKs
 
 An admin API and SDK are tools that allow developers to interact with a software system programmatically.
 
@@ -4713,7 +4713,7 @@ An SDK (Software Development Kit) is a set of tools and libraries that helps dev
 
 You can use APIs and SDKs to automate common administrative tasks and integrate Fabric with other systems.
 
-#### 4\. Admin monitoring workspace
+#### d\. Admin monitoring workspace
 
 ## 4\. Manage Fabric security
 
@@ -4809,7 +4809,7 @@ In this module, you'll learn how to:
 
 ---
 
-I completed AI Skills Challenge: Fabric Analytics Engineer journey! in 9 days.
+I Completed AI Skills Challenge: Fabric Analytics Engineer journey! in 9 days.
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713072453488/178e0cc3-477e-4876-842d-0b65a6bba540.png)
 

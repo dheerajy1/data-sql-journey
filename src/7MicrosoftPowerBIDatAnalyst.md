@@ -1,9 +1,9 @@
 In this article, contains info about #MicrosoftPowerBIDataAnalyst and get prepared about for Exam PL-300.
 
-# Foreword:
+Foreword:
 
 > The entire content is owned by Microsoft, and I am logging for practice and it is for educational purposes only.
-> 
+>
 > All presented information is owned by Microsoft and intended solely for learning about the covered products and services in my Microsoft Learn AI Skills Challenge: Fabric Analytics Engineer Journey.
 
 # Overview:
@@ -76,7 +76,7 @@ You know how to assess data quality. Plus, you understand data security, includi
 
 Would you like to explore the journey of a data analyst and learn how a data analyst tells a story with data?
 
-### **1\. Introduction**
+## **1\. Introduction**
 
 > As a data analyst, you are on a journey.
 
@@ -90,7 +90,7 @@ Data analysis exists to help overcome these challenges and pain points, ultimate
 
 As you read on, you will learn how to use and apply analytical skills to go beyond a single report and help impact and influence your organization by telling stories with data and driving that data culture.
 
-### **2\. Overview of data analysis**
+## **2\. Overview of data analysis**
 
 > Data analysis is the process of identifying, cleaning, transforming, and modeling data to discover meaningful and useful information.
 
@@ -111,7 +111,7 @@ While the process of data analysis focuses on the tasks of cleaning, modeling, a
 
 > As the amount of data grows, so does the need for data analysts. A data analyst knows how to organize information and distill it into something relevant and comprehensible. A data analyst knows how to gather the right data and what to do with it, in other words, making sense of the data in your data overload.
 
-### **3\. Roles in data**
+## **3\. Roles in data**
 
 * Business analyst
     
@@ -124,7 +124,7 @@ While the process of data analysis focuses on the tasks of cleaning, modeling, a
 * Database administrator
     
 
-### **4\. Tasks of a data analyst**
+## **4\. Tasks of a data analyst**
 
 * Data preparation - profiling, cleaning, and transforming your data to get it ready to model and visualize.
     
@@ -251,7 +251,7 @@ You'll learn how to retrieve data from a variety of data sources, including Micr
 
 You'll also learn how to improve performance while retrieving data.
 
-# **1\. Introduction**
+## **1\. Introduction**
 
 create a suite of reports that are dependent on data in several different locations.
 
@@ -520,7 +520,7 @@ This lab is designed to introduce you to Power BI Desktop application and how to
 * Use data profiling features in Power Query
     
 
-## **i. Get data from SQL Server**
+### **i. Get data from SQL Server**
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1712293898196/d8665311-8a1c-4691-86c7-5a22cb46e839.png)
 
@@ -566,7 +566,7 @@ Repeat the steps to create a query based on the **D:\\Allfiles\\Resources\\Color
 
 Save / apply later.
 
-# **13\. Check your knowledge**
+## **13\. Check your knowledge**
 
 T-SQL is the query language that you would use for SQL Server.
 
@@ -574,7 +574,7 @@ You're creating a Power BI report with data from an Azure Analysis Services MDX 
 
 What can you do to improve performance when you're getting data in Power BI?Always use the least amount of data needed for your project.
 
-# **14\. Summary**
+## **14\. Summary**
 
 In this module, you learned about pulling data from many different data sources and into Power BI.
 
@@ -633,7 +633,7 @@ You'll learn how to simplify a complicated model, change data types, rename obje
 
 You'll also learn how to profile columns so that you know which columns have the valuable data that you’re seeking for deeper analytics.
 
-# **1\. Introduction**
+## **1\. Introduction**
 
 When examining the data, you discover several issues, including:
 
@@ -680,7 +680,7 @@ You can accomplish actions such as
 
 It is important to shape your data to ensure that it meets your needs and is suitable for use in reports.
 
-## **i. Get started with Power Query Editor**
+### **i. Get started with Power Query Editor**
 
 Removing columns at an early stage in the process rather than later is best, especially when you have established relationships between your tables. Removing unnecessary columns will help you to focus on the data that you need and help improve the overall performance of your Power BI Desktop semantic models and reports.
 
@@ -2190,11 +2190,11 @@ The DIVIDE() function divides the Sales measure (not modified by filter context)
  TOTALYTD(SUM(Sales[Sales]), 'Date'[Date], "6-30")
 ```
 
-*The TOTALYTD() function evaluates an expression—in this case the sum of the* ***Sales*** *column—over a given date column. The date column must belong to a date table marked as a date table, as was done in the* ***Create DAX Calculations in Power BI Desktop*** *lab.*
+*The TOTALYTD() function evaluates an expression—in this case the sum of the****Sales****column—over a given date column. The date column must belong to a date table marked as a date table, as was done in the****Create DAX Calculations in Power BI Desktop****lab.*
 
 *The function can also take a third optional argument representing the last date of a year. The absence of this date means that December 31 is the last date of the year. For Adventure Works, June in the last month of their year, and so “6-30” is used.*
 
-*The TOTALYTD() function performs filter manipulation, specifically time filter manipulation. For example, to compute YTD sales for September 2017 (the third month of the fiscal year), all filters on the* ***Date*** *table are removed and replaced with a new filter of dates commencing at the beginning of the year (July 1, 2017) and extending through to the last date of the in-context date period (September 30, 2017).*
+*The TOTALYTD() function performs filter manipulation, specifically time filter manipulation. For example, to compute YTD sales for September 2017 (the third month of the fiscal year), all filters on the****Date****table are removed and replaced with a new filter of dates commencing at the beginning of the year (July 1, 2017) and extending through to the last date of the in-context date period (September 30, 2017).*
 
 *Many Time Intelligence functions are available in DAX to support common time filter manipulations.*
 
@@ -2217,7 +2217,7 @@ The DIVIDE() function divides the Sales measure (not modified by filter context)
   SalesPriorYear
 ```
 
-*The* ***SalesPriorYear*** *variable is assigned an expression that calculates the sum of the* ***Sales*** *column in a modified context that uses the PARALLELPERIOD() function to shift 12 months back from each date in filter context.*
+*The****SalesPriorYear****variable is assigned an expression that calculates the sum of the****Sales****column in a modified context that uses the PARALLELPERIOD() function to shift 12 months back from each date in filter context.*
 
 modified
 
@@ -2291,6 +2291,263 @@ By the end of this module, you'll be able to:
 | Module 9/17 | **Optimize a model for performance in Power BI** |
 
 ![](https://learn.microsoft.com/en-us/training/achievements/optimize-model-power-bi.svg)
+
+Performance optimization, also known as performance tuning, involves making changes to the current state of the semantic model so that it runs more efficiently. Essentially, when your semantic model is optimized, it performs better.
+
+## 1\. Introduction to performance optimization
+
+As a data analyst, you will spend approximately 90 percent of your time working with your data, and nine times out of ten, poor performance is a direct result of a bad semantic model, bad Data Analysis Expressions (DAX), or the mix of the two.
+
+A smaller sized semantic model uses less resources (memory) and achieves faster data refresh, calculations, and rendering of visuals in reports. Therefore, the performance optimization process involves minimizing the size of the semantic model and making the most efficient use of the data in the model, which includes:
+
+* Ensuring that the correct data types are used.
+    
+* Deleting unnecessary columns and rows.
+    
+* Avoiding repeated values.
+    
+* Replacing numeric columns with measures.
+    
+* Reducing cardinalities.
+    
+* Analyzing model metadata.
+    
+* Summarizing data where possible.
+    
+
+In this module, you will be introduced to the steps, processes, and concepts that are necessary to optimize a semantic model for enterprise-level performance.
+
+By the end of this module, you're able to:
+
+* Review the performance of measures, relationships, and visuals.
+    
+* Use variables to improve performance and troubleshooting.
+    
+* Improve performance by reducing cardinality levels.
+    
+* Optimize DirectQuery models with table level storage.
+    
+* Create and manage aggregations.
+    
+
+## 2\. Review performance of measures, relationships, and visuals
+
+semantic model - multiple tables, complex relationships, intricate calculations, multiple visuals, or redundant data - a potential exists for poor report performance
+
+### **i. Identify report performance bottlenecks**
+
+optimal performance - create efficient semantic model - has fast running queries and measures.
+
+improve the model - analyzing the query plans and dependencies and then making changes to further optimize performance.
+
+#### 1\. Analyze performance
+
+Performance analyzer - how long a visual to refresh when initiated by a user
+
+Performance analyzer - accurate results - clear visual cache, clear data engine cache
+
+#### 2\. Review results
+
+DAX query - The time it took for the visual to send the query, along with the time it took Analysis Services to return the results.
+
+Visual display - The time it took for the visual to render on the screen, including the time required to retrieve web images or geocoding.
+
+Other - The time it took the visual to prepare queries, wait for other visuals to complete, or perform other background processing tasks. If this category displays a long duration, the only real way to reduce this duration is to optimize DAX queries for other visuals, or reduce the number of visuals in the report.
+
+### ii. Resolve issues and optimize performance
+
+#### 1\. Visuals
+
+number of visuals on the report page,
+
+use drill-through pages and report page tooltips.
+
+#### 2\. DAX query
+
+Performance analyzer highlights potential issues but does not tell you what needs to be done to improve them. - use Dax studio to analyse further
+
+try using different DAX functions
+
+#### 3\. Semantic model
+
+Performance analyzer - DAX query - high duration value &gt; 120ms - relationships, columns, or metadata in your model, or it could be the status of the Auto date/time option
+
+#### 4\. Relationships
+
+relationship cardinality properties are correctly configured.
+
+#### 5\. Columns
+
+remove an unnecessary column
+
+try to deal with them at the source when loading data
+
+#### 6\. Metadata
+
+Metadata is information about other data.
+
+Power BI metadata contains information on your semantic model, such as
+
+* the name,
+    
+* data type and
+    
+* format of each of the columns,
+    
+* the schema of the database,
+    
+* the report design,
+    
+* when the file was last modified,
+    
+* the data refresh rates, and much more.
+    
+
+use Power Query Editor: Unnecessary columns, Unnecessary rows, Data type, Query, names,
+
+Column details
+
+Column quality - percentage of items in the column are valid
+
+Column distribution - frequency and distribution of the values
+
+Column profile - statistics chart and a column distribution chart
+
+Column profiling based on top 1000 rows &gt; Column profiling based on entire data set.
+
+data - compressed and stored to the disk by the VertiPaq storage engine
+
+#### 7\. Auto date/time feature
+
+Auto date/time option - enabled globally - automatically creates a hidden calculated table for each date column
+
+Disabling Auto date/time option - lower the size of your semantic model and reduce the refresh time.
+
+## 3\. Use variables to improve performance and troubleshooting
+
+Variables in your DAX formulas to help you write less complex and more efficient calculations.
+
+Variables in your semantic model:
+
+Improved performance - remove the need to evaluate the same expression multiple times, reduce query processing time.
+
+Improved readability -
+
+Simplified debugging
+
+Reduced complexity
+
+### i. Use variables to improve performance
+
+```sql
+Sales YoY Growth =
+DIVIDE (
+    ( [Sales] - CALCULATE ( [Sales], PARALLELPERIOD ( 'Date'[Date], -12, MONTH ) ) ),
+    CALCULATE ( [Sales], PARALLELPERIOD ( 'Date'[Date], -12, MONTH ) )
+)
+```
+
+```sql
+Sales YoY Growth =
+VAR SalesPriorYear =
+    CALCULATE ( [Sales], PARALLELPERIOD ( 'Date'[Date], -12, MONTH ) )
+VAR SalesVariance =
+    DIVIDE ( ( [Sales] - SalesPriorYear ), SalesPriorYear )
+RETURN
+    SalesVariance
+```
+
+### ii. Use variables to improve readability
+
+### iii. Use variables to troubleshoot multiple steps
+
+## 4\. Reduce cardinality
+
+Cardinality is a term that is used to describe the uniqueness of the values in a column.
+
+Cardinality is also used in the context of the relationships between two tables, where it describes the direction of the relationship.
+
+### i. Identify cardinality levels in columns
+
+Power Query Editor to analyze the metadata, the **Column distribution** - display statistics on how many distinct and unique items were in each column in the data.
+
+* **Distinct values count** - The total number of different values found in a given column.
+    
+* **Unique values count** - The total number of values that only appear once in a given column.
+    
+
+![](https://learn.microsoft.com/en-us/training/modules/optimize-model-power-bi/media/4-column-distribution-statistics-ssm.png#lightbox)
+
+Low level of cardinality - more optimized performance; column that has a lot of repeated values in its range (unique count is low).
+
+High level of cardinality - column that has a lot of unique values in its range (unique count is high).
+
+Optimized performance - have more Lower cardinality columns & less high cardinally columns in your semantic model.
+
+### ii. Reduce relationship cardinality
+
+### iii. Improve performance by reducing cardinality levels
+
+Reducing data - loaded into your model - improve the relationship cardinality of the report.
+
+Reduce a model size - use a summary table from the data source - A disadvantage - might lose the ability to drill into data because the detail no longer exists. This tradeoff could be mitigated by using a mixed model design.
+
+each table can have its Storage Mode property set as Import or DirectQuery.
+
+Reduce the model size - set the Storage Mode property for larger fact-type tables to DirectQuery.
+
+### LO
+
+Performance optimization -  performance tuning, changes to the current state of the semantic model -  runs more efficiently. -  semantic model - optimized -  performs better.
+
+smaller sized semantic model - uses less resources (memory) and achieves faster data refresh, calculations, and rendering of visuals in reports
+
+performance optimization process - Ensuring the correct data types, Deleting unnecessary columns and rows, Avoiding repeated values,
+
+Replacing numeric columns with measures, Reducing cardinalities, Analyzing model metadata,
+
+semantic model - multiple tables, complex relationships, intricate calculations, multiple visuals, or redundant data - a potential exists for poor report performance
+
+Performance analyzer - for ccaurate results - clear visual cache, clear data engine cache ; highlights potential issues but does not tell you what needs to be done to improve them
+
+Column profiling based on top 1000 rows &gt; Column profiling based on entire data set.
+
+Disabling  Auto date/time option - lower the size of your semantic model and reduce the refresh time.
+
+Use variables
+
+Cardinality - uniqueness of the values in a column, direction of the relationship
+
+Low level of cardinality - more optimized performance; column that has a lot of repeated values in its range (unique count is low).
+
+High level of cardinality - column that has a lot of unique values in its range (unique count is high).
+
+Optimized performance - have more Lower cardinality columns & less high cardinally columns in your semantic model.
+
+Reduce the model size - mixed model design -  set the Storage Mode property for larger fact-type tables to DirectQuery.
+
+## 5\. Optimize DirectQuery models with table level storage
+
+## 6\. Create and manage aggregations
+
+## 7\. Check your knowledge
+
+## 8\. Summary
+
+## **Learning objectives**
+
+By the end of this module, you will be able to:
+
+* Review the performance of measures, relationships, and visuals.
+    
+* Use variables to improve performance and troubleshooting.
+    
+* Improve performance by reducing cardinality levels.
+    
+* Optimize DirectQuery models with table level storage.
+    
+* Create and manage aggregations.
+    
 
 ---
 

@@ -3,7 +3,7 @@ In this article, contains info about #MicrosoftPowerBIDataAnalyst and get prepar
 Foreword:
 
 > The entire content is owned by Microsoft, and I am logging for practice and it is for educational purposes only.
->
+> 
 > All presented information is owned by Microsoft and intended solely for learning about the covered products and services in my Microsoft Learn AI Skills Challenge: Fabric Analytics Engineer Journey.
 
 # Overview:
@@ -289,7 +289,7 @@ Creating dynamic reports allows you to give users more power over the data that 
 
 Power Query Editor / Home tab, select Manage parameters &gt; New parameter.
 
-### **5\. Create dynamic reports for multiple values**
+## **5\. Create dynamic reports for multiple values**
 
 To accommodate multiple values at a time, you first need to create a Microsoft Excel worksheet that has a table consisting of one column that contains the list of values.
 
@@ -528,7 +528,7 @@ This lab is designed to introduce you to Power BI Desktop application and how to
 
 Observed:
 
-#### DimEmployee Query
+#### a\. DimEmployee Query
 
 table - Notice that the last five columns contain Table or Value links.
 
@@ -546,19 +546,19 @@ Column Distribution for EmployeeKey column
 
 [![Column distribution showing 296 distinct, 296 unique values](https://microsoftlearning.github.io/PL-300-Microsoft-Power-BI-Data-Analyst/Instructions/Labs/Linked_image_Files/01-prepare-data-with-power-query-in-power-bi-desktop_image26.png)](https://microsoftlearning.github.io/PL-300-Microsoft-Power-BI-Data-Analyst/Instructions/Labs/Linked_image_Files/01-prepare-data-with-power-query-in-power-bi-desktop_image26.png)
 
-#### DimReseller query
+#### b\. DimReseller query
 
 Column Profile for BusinessType column header - Notice the data quality issue: there are two labels for warehouse (Warehouse, and the misspelled Ware House) - Y**ou’ll apply a transformation to relabel these five rows in the Load Transformed Data in Power BI Desktop lab.**
 
-#### DimSalesTerritory query
+#### c\. DimSalesTerritory query
 
 **In the Model Data in Power BI Desktop lab, you’ll create a hierarchy to support analysis at region, country, or group level.**
 
-#### FactResellerSales query
+#### d\. FactResellerSales query
 
 column quality for the TotalProductCost column, and notice that 8% of the rows are empty - Missing TotalProductCost column values is a data quality issue. **To address the issue, in the Load Transformed Data in Power BI Desktop lab, you’ll apply transformations to fill in missing values by using the product standard cost, which is stored in the related DimProduct table.**
 
-## **iii. Get data from a CSV file**
+### **iii. Get data from a CSV file**
 
 ResellerSalesTargets query
 
@@ -2528,11 +2528,81 @@ Reduce the model size - mixed model design -  set the Storage Mode property for
 
 ## 5\. Optimize DirectQuery models with table level storage
 
+DirectQuery - connecting directly to data in its source repository, queries might time out, only the schema is loaded.
+
+### i. Implications of using DirectQuery
+
+as data changes frequently and near real-time reporting
+
+large data without the need to pre-aggregate
+
+data sovereignty restrictions to comply with legal requirements.
+
+multidimensional data source that contains measures such as SAP Business Warehouse (BW)
+
+### ii. Behavior of DirectQuery connections
+
+### iii. Limitations of DirectQuery connections
+
+Performance - depends on the performance of the underlying data source.
+
+Security
+
+Data transformation - data that is sourced from DirectQuery has limitations
+
+Modeling - modeling capabilities aren't available, or are limited
+
+### iv. Optimize performance
+
+examine the queries - sent to the underlying source
+
+#### a. Optimize data in Power BI Desktop
+
+reduce the number of visuals on report page; reduce the number of fields in visual; remove unnecessary columns and rows.
+
+#### b. Optimize the underlying data source (connected database)
+
+Avoid the use of complex calculated columns because the calculation expression will be embedded into the source queries.
+
+It is more efficient to push the expression back to the source because it avoids the push down. You could also consider adding surrogate key columns to dimension-type tables.
+
+### v. Customize the Query reduction options
+
+Power BI Desktop gives you the option to send fewer queries and to disable certain interactions that will result in a poor experience if the resulting queries take a long time to run.
+
+Applying these options prevents queries from continuously hitting the data source, which should improve performance.
+
 ## 6\. Create and manage aggregations
+
+aggregation - reduces the table sizes in the semantic model - improve the query performance; data is cached - smaller cache; speed up the refresh process.
 
 ## 7\. Check your knowledge
 
+What benefit do you get from analyzing the metadata?
+
+The benefit of analyzing the metadata is that you can clearly identify data inconsistences with your semantic model.
+
+What can be achieved by removing unnecessary rows and columns?
+
+Deleting unnecessary rows and columns will reduce a semantic model size and it's good practice to load only necessary data into your semantic model.
+
+Which of the following statements about relationships in Power BI Desktop is true?
+
+A working relationship can be created as long as there is at least one common column between them.
+
 ## 8\. Summary
+
+optimize performance and reduce the size of the model.
+
+You started the optimization process by using Performance analyzer and other tools to review the performance of measures, relationships, and visuals, and then made improvements based on the analysis results.
+
+Next, you used variables to write less complex and more efficient calculations. You then took a closer look at the column distribution and reduced the cardinality of your relationships.
+
+At that stage, the semantic model was more optimized.
+
+You considered how the situation would be different if your organization used a DirectQuery model, and then you identified how to optimize performance from Power BI Desktop and the source database.
+
+Finally, you used aggregations to significantly reduce the size of the semantic model.
 
 ## **Learning objectives**
 

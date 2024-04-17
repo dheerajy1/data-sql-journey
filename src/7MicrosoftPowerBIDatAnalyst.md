@@ -528,7 +528,7 @@ This lab is designed to introduce you to Power BI Desktop application and how to
 
 Observed:
 
-#### a\. DimEmployee Query
+#### a. DimEmployee Query
 
 table - Notice that the last five columns contain Table or Value links.
 
@@ -546,15 +546,15 @@ Column Distribution for EmployeeKey column
 
 [![Column distribution showing 296 distinct, 296 unique values](https://microsoftlearning.github.io/PL-300-Microsoft-Power-BI-Data-Analyst/Instructions/Labs/Linked_image_Files/01-prepare-data-with-power-query-in-power-bi-desktop_image26.png)](https://microsoftlearning.github.io/PL-300-Microsoft-Power-BI-Data-Analyst/Instructions/Labs/Linked_image_Files/01-prepare-data-with-power-query-in-power-bi-desktop_image26.png)
 
-#### b\. DimReseller query
+#### b. DimReseller query
 
 Column Profile for BusinessType column header - Notice the data quality issue: there are two labels for warehouse (Warehouse, and the misspelled Ware House) - Y**ou’ll apply a transformation to relabel these five rows in the Load Transformed Data in Power BI Desktop lab.**
 
-#### c\. DimSalesTerritory query
+#### c. DimSalesTerritory query
 
 **In the Model Data in Power BI Desktop lab, you’ll create a hierarchy to support analysis at region, country, or group level.**
 
-#### d\. FactResellerSales query
+#### d. FactResellerSales query
 
 column quality for the TotalProductCost column, and notice that 8% of the rows are empty - Missing TotalProductCost column values is a data quality issue. **To address the issue, in the Load Transformed Data in Power BI Desktop lab, you’ll apply transformations to fill in missing values by using the product standard cost, which is stored in the related DimProduct table.**
 
@@ -2628,6 +2628,108 @@ By the end of this module, you will be able to:
 | Module 10/17 | **Design Power BI reports** |
 
 ![](https://learn.microsoft.com/en-us/training/achievements/power-bi-effective-reports.svg)
+
+Power BI - 30 core visuals
+
+This module will guide you through selecting the most appropriate visual type to meet your design and report layout requirements.
+
+## 1\. Introduction
+
+### i. Report structure
+
+![](https://learn.microsoft.com/en-us/training/modules/power-bi-effective-reports/media/1-report-structure.png#lightbox)
+
+### ii. Report pages
+
+## 2\. Design the analytical report layout
+
+## 3\. Design visually appealing reports
+
+## 4\. Report objects
+
+## 5\. Select report visuals
+
+## 6\. Select report visuals to suit the report layout
+
+## 7\. Format and configure visualizations
+
+## 8\. Work with key performance indicators
+
+## 9\. Exercise - Design a report in Power BI desktop
+
+### i. Lab story
+
+In this lab, you’ll create a three-page report. You’ll then publish it to Power BI, where you’ll open and interact with the report.
+
+In this lab you learn how to:
+
+* Design a report
+    
+* Configure visual fields and format properties
+    
+
+### ii. Create a Report
+
+### iii. Design page 1
+
+In the visual fields pane, in the X-axis well/area, for the Month field, select the down-arrow, and then select Show Items With No Data.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713334585699/822dc7dd-ce54-43f6-9a9c-9fa8469056af.png)
+
+### iv. Design page 2
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713337608344/77c09520-d4aa-41ca-9269-adf74ae55118.png)
+
+### v. Design page 3
+
+simulate the performance of row-level security filters
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713339592838/0889f00a-6fc0-4e71-897f-f2e8a98471c0.png)
+
+### vi. Publish the report
+
+### vii. Explore the report
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713342576214/d6b33cc5-8cac-4bb4-bab6-1c4de3d6b1ac.png)
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713342577070/0774e064-a24c-46d3-a390-f13a560e4f2a.png)
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713341965005/31d38be2-c60d-49c4-9210-3af26f678da0.png)
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713341985444/78c8ba53-9fcd-44f4-b768-dcd6577bfb7c.png)
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713342208664/3d79f03c-ae8f-4312-9d5d-228191f9f414.png)
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713342368336/569ae50d-0673-4058-8348-6b9ca123867d.png)
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713342471989/bcab485c-2ccd-4cf7-86c6-758bd876415a.png)
+
+## 10\. Check your knowledge
+
+At the Contoso Skateboard Company, Brandon is designing a dashboard report to show inventory stock levels over time. What type of report visual should Brandon choose to effectively show the stock levels?
+
+A line chart is probably the most effective way to visualize a time series, such as stock inventory levels over time.
+
+At the Contoso Skateboard Company, Sakura is designing an analytical report. It must include a visual that allows report consumers to explore and discover detailed sales values over time and by store. What type of report visual should Sakura choose to support the report consumer requirement?
+
+A matrix visual allows the report consumer to drill down on the columns and rows to reveal detailed values.
+
+At the Contoso Skateboard Company, James is designing a dashboard report. It must prominently show values of sales revenue, units sold, cost of goods sold, and profit, and each value should be compared to a target value. What type of report visual should James choose to support the report consumer requirement?
+
+A KPI visual can show and compare actual and target values.
+
+## 11\. Summary
+
+## **Learning objectives**
+
+In this module, you will:
+
+* Learn about the structure of a Power BI report.
+    
+* Learn about report objects.
+    
+* Select the appropriate visual type to use.
+    
 
 ---
 

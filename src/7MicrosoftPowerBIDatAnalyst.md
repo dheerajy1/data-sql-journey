@@ -373,7 +373,7 @@ These topics are beyond the scope here, and are covered only as an example to bu
 
 Power Query takes advantage of good performance at the data source through a technique called Query Folding.
 
-#### 1\. Query folding
+#### a\. Query folding
 
 *Query folding* is the process by which the transformations and edits that you make in Power Query Editor are simultaneously tracked as native queries, or simple **Select** SQL statements, while you're actively making transformations.
 
@@ -2340,13 +2340,13 @@ optimal performance - create efficient semantic model - has fast running queries
 
 improve the model - analyzing the query plans and dependencies and then making changes to further optimize performance.
 
-#### 1\. Analyze performance
+#### a\. Analyze performance
 
 Performance analyzer - how long a visual to refresh when initiated by a user
 
 Performance analyzer - accurate results - clear visual cache, clear data engine cache
 
-#### 2\. Review results
+#### b\. Review results
 
 DAX query - The time it took for the visual to send the query, along with the time it took Analysis Services to return the results.
 
@@ -2356,33 +2356,33 @@ Other - The time it took the visual to prepare queries, wait for other visuals t
 
 ### ii. Resolve issues and optimize performance
 
-#### 1\. Visuals
+#### a\. Visuals
 
 number of visuals on the report page,
 
 use drill-through pages and report page tooltips.
 
-#### 2\. DAX query
+#### b\. DAX query
 
 Performance analyzer highlights potential issues but does not tell you what needs to be done to improve them. - use Dax studio to analyse further
 
 try using different DAX functions
 
-#### 3\. Semantic model
+#### c\. Semantic model
 
 Performance analyzer - DAX query - high duration value &gt; 120ms - relationships, columns, or metadata in your model, or it could be the status of the Auto date/time option
 
-#### 4\. Relationships
+#### d\. Relationships
 
 relationship cardinality properties are correctly configured.
 
-#### 5\. Columns
+#### e\. Columns
 
 remove an unnecessary column
 
 try to deal with them at the source when loading data
 
-#### 6\. Metadata
+#### f\. Metadata
 
 Metadata is information about other data.
 
@@ -2417,7 +2417,7 @@ Column profiling based on top 1000 rows &gt; Column profiling based on entire da
 
 data - compressed and stored to the disk by the VertiPaq storage engine
 
-#### 7\. Auto date/time feature
+#### g\. Auto date/time feature
 
 Auto date/time option - enabled globally - automatically creates a hidden calculated table for each date column
 
@@ -2740,6 +2740,164 @@ In this module, you will:
 | Module 11/17 | **Configure Power BI report filters** |
 
 ![](https://learn.microsoft.com/en-us/training/achievements/power-bi-effective-filters.svg)
+
+## 1\. Introduction to designing reports for filtering
+
+Filtering - semantic model (RLS), Report, Page, Visual, Measure.
+
+### i. semantic model (RLS)
+
+Power BI report queries a single semantic model
+
+semantic model can enforce row-level security (RLS) to restrict access to a subset of data, and different users will see different data
+
+report - can't override RLS
+
+### ii. Report structure
+
+Power BI report is hierarchical
+
+### iii. Measure
+
+measure is a model object that is designed to summarize data
+
+Measure DAX formulas - modify filter context by using the CALCULATE or CALCULATETABLE functions, intelligence functions - flexibility to add, remove, or modify filters - override filters applied to report structure.
+
+A good example of a measure that overrides report filters is a three-month moving average calculation.
+
+To compute the result for March, the filter context for month must expand to encompass January, February, and March.
+
+The CALCULATE function or a time intelligence function can modify the filter context to produce that result.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713412030795/92f5f51e-53c9-413b-a002-2eaa28006aed.png)
+
+## 2\. Apply filters to the report structure
+
+## 3\. Apply filters with slicers
+
+slicers filter - by default filter all other visuals on the page, edit visual interactions to restrict filtering between two visuals
+
+slicer is a visual that propagates filters to other visuals on the same page or (when synced) across other pages.
+
+The slicer layout is responsive to the data type of the field. Field data types are either text, numeric, or date.
+
+By default, a text field will produce a list slicer, a numeric field will produce a numeric range "between" filter, and a date field will produce a date range "between" filter, allowing value selection with calendar controls.
+
+## 4\. Design reports with advanced filtering techniques
+
+Beyond filters and slicers, report authors can employ other filtering techniques, such as:
+
+* Visual interactions
+    
+* Drillthrough
+    
+* Report tooltip
+    
+* Bookmarks
+    
+* Report options
+    
+* Query reduction options
+    
+
+### i. Visual interactions
+
+disabling cros filtering filter propagation.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713418362073/d11c898f-4e6a-438e-ad0b-8875cf479337.png)
+
+cross filters propagated
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713418511216/27ea2ee9-68cb-4a89-8dc4-0ec01146306e.png)
+
+no cross filters propagated
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713418515663/ea1af321-6fb1-45dc-887a-8fe445695165.png)
+
+### ii. Drillthrough
+
+Add drillthrough pages to allow report consumers to drill from visuals. By default, the drillthrough action propagates all filters that apply to the visual to the drillthrough page.
+
+### iii. Report tooltip
+
+By default, the report tooltip receives all filters that apply to the visual.
+
+### iv. Bookmarks
+
+Bookmarks capture a specific view of a report, including filters, slicers, the page selection, and the state of visuals
+
+### v. Report options
+
+### vi. Query reduction options
+
+can configure report settings to reduce the number of queries that are sent to the semantic model. Fewer queries will result in better responsiveness as report consumers update filters or slicers or cross filter report pages.
+
+Consider enabling the query reduction options when the semantic model uses DirectQuery table storage or when imported data volumes are large and calculations are complex and slow.
+
+## 5\. Consumption-time filtering
+
+In reading view, report consumers can use many different filter techniques when viewing a Power BI report, such as:
+
+Using slicers.
+
+Using filters.
+
+Applying interactive filtering actions.
+
+Determining applied filters.
+
+Working with persistent filters.- Persistent filters is a feature that saves report consumer's slicer and filter settings. It automatically applies the settings when the report consumer reopens the report. That way, Power BI remembers previously applied filters. You can revert to default filters (that are saved in the report by the report author) by selecting Reset to default.
+
+## 6\. Select report filter techniques
+
+## 7\. Case study - Configure report filters based on feedback
+
+## 8\. Check your knowledge
+
+Which of the following capabilities is unique to the Filters pane?
+
+Top N filtering can only be achieved in the Filters pane.
+
+Which of the following capabilities is unique to slicers?
+
+Horizontal orientation can only be achieved with slicers.
+
+At the Contoso Skateboard Company, John is responsible for developing a report for the sales director. One report page includes a date slicer and many visuals. When the sales director uses the slicer, all but one of the visuals, a Decomposition Tree visual, should receive the slicer filters. How should John configure the requirement?
+
+By editing visual interactions, John can restrict the slicer from filtering the Decomposition Tree visual.
+
+## 9\. Summary
+
+After you have gained an understanding of how filters work in Power BI reports, you'll be on your way to developing reports that allow report consumers to focus on the data that interests them. The main takeaway is that, at design time, you will have two main techniques to apply filters: the Filters pane and slicers. Make sure that you avoid using both techniques in the same report because it can create confusion for your report consumers.
+
+When you're ready to deliver your report, it might be helpful to provide a demonstration (or video) to show how you intend report consumers to use the report. That approach will allow you to show how to apply filters and provide lessons on how to apply interactive filtering actions, such as include/exclude groups, cross filtering, report page drillthrough, and bookmarks.
+
+Filtering - semantic model (RLS), Report, Page, Visual, Measure.
+
+report - can't override RLS
+
+Measure DAX formulas - modify filter context by using the CALCULATE or CALCULATETABLE functions, intelligence functions - flexibility to add, remove, or modify filters - override filters applied to report structure.
+
+slicers filter - by default filter all other visuals on the page, edit visual interactions to restrict filtering between two visuals
+
+Beyond filters and slicers, other  filtering techniques - Visual interactions, Drillthrough, Report tooltip, Bookmarks, Report options, Query reduction options
+
+Bookmarks capture a specific view of a report, including filters, slicers, the page selection, and the state of visuals
+
+## **Learning objectives**
+
+In this module, you will:
+
+* Design reports for filtering.
+    
+* Design reports with slicers.
+    
+* Design reports by using advanced filtering techniques.
+    
+* Apply consumption-time filtering.
+    
+* Select appropriate report filtering techniques.
+    
 
 ---
 

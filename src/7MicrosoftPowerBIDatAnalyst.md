@@ -373,7 +373,7 @@ These topics are beyond the scope here, and are covered only as an example to bu
 
 Power Query takes advantage of good performance at the data source through a technique called Query Folding.
 
-#### a\. Query folding
+#### a. Query folding
 
 *Query folding* is the process by which the transformations and edits that you make in Power Query Editor are simultaneously tracked as native queries, or simple **Select** SQL statements, while you're actively making transformations.
 
@@ -2340,13 +2340,13 @@ optimal performance - create efficient semantic model - has fast running queries
 
 improve the model - analyzing the query plans and dependencies and then making changes to further optimize performance.
 
-#### a\. Analyze performance
+#### a. Analyze performance
 
 Performance analyzer - how long a visual to refresh when initiated by a user
 
 Performance analyzer - accurate results - clear visual cache, clear data engine cache
 
-#### b\. Review results
+#### b. Review results
 
 DAX query - The time it took for the visual to send the query, along with the time it took Analysis Services to return the results.
 
@@ -2356,33 +2356,33 @@ Other - The time it took the visual to prepare queries, wait for other visuals t
 
 ### ii. Resolve issues and optimize performance
 
-#### a\. Visuals
+#### a. Visuals
 
 number of visuals on the report page,
 
 use drill-through pages and report page tooltips.
 
-#### b\. DAX query
+#### b. DAX query
 
 Performance analyzer highlights potential issues but does not tell you what needs to be done to improve them. - use Dax studio to analyse further
 
 try using different DAX functions
 
-#### c\. Semantic model
+#### c. Semantic model
 
 Performance analyzer - DAX query - high duration value &gt; 120ms - relationships, columns, or metadata in your model, or it could be the status of the Auto date/time option
 
-#### d\. Relationships
+#### d. Relationships
 
 relationship cardinality properties are correctly configured.
 
-#### e\. Columns
+#### e. Columns
 
 remove an unnecessary column
 
 try to deal with them at the source when loading data
 
-#### f\. Metadata
+#### f. Metadata
 
 Metadata is information about other data.
 
@@ -2417,7 +2417,7 @@ Column profiling based on top 1000 rows &gt; Column profiling based on entire da
 
 data - compressed and stored to the disk by the VertiPaq storage engine
 
-#### g\. Auto date/time feature
+#### g. Auto date/time feature
 
 Auto date/time option - enabled globally - automatically creates a hidden calculated table for each date column
 
@@ -2908,6 +2908,192 @@ In this module, you will:
 | Module 12/17 | **Enhance Power BI report designs for the user experience** |
 
 ![](https://learn.microsoft.com/en-us/training/achievements/power-bi-effective-user-experience.svg)
+
+## 1\. Design reports to show details
+
+An analytical report layout can integrate a guided analytical experience. That way, the report design is aligned to the automatic and unconscious processes that take place when the report consumer looks at the report.
+
+The guided analytical experience allows navigation between three levels:
+
+* High-level metrics
+    
+* Supporting visuals
+    
+* Details, when required
+    
+
+You can show details by using four different techniques:
+
+* Use drillable visuals
+    
+* Add tooltips
+    
+* Add drillthrough
+    
+* Embed paginated reports
+    
+
+## 2\. Design reports to highlight values
+
+Power BI supports several techniques to highlight values:
+
+* Conditional formatting
+    
+* Overlaid analytics
+    
+* Anomaly detection
+    
+* Specialized visuals
+    
+
+## 3\. Design reports that behave like apps
+
+## 4\. Work with bookmarks
+
+Bookmarks capture different state, relating to data, display, and the current page. By default, a new bookmark captures all state types, but you can decide to disable any of them.
+
+## 5\. Design reports for navigation
+
+## 6\. Work with visual headers
+
+## 7\. Design reports with built-in assistance
+
+## 8\. Tune report performance
+
+test your report in the Power BI Report Server to see how it works from a user's perspective
+
+## 9\. Optimize reports for mobile use
+
+## 10\. Exercise - Enhance Power BI reports
+
+### i. Lab story
+
+In this lab you learn how to:
+
+* Sync slicers
+    
+* Create a drill through page
+    
+* Apply conditional formatting
+    
+* Create and use bookmarks
+    
+
+### ii. Get started – Sign in
+
+### iii. Get started – Open report
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713518467500/09d25ef1-4860-4ad2-b360-84aac68f9df9.png)
+
+### iv. Sync slicers
+
+you’ll sync the Year and Region slicers
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713518599810/34da7b7a-c2d0-4a02-96b6-83fe47942f96.png)
+
+### v. Configure drill through
+
+you’ll create a new page and configure it as a drill through page
+
+### vi. Create a drill through page
+
+you’ll create a new page and configure it as a drill through page
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713519325461/80856c3f-aa3f-49b0-a975-326f73a18583.png)
+
+### vii. Add Conditional Formatting
+
+### viii. Add conditional formatting
+
+you’ll enhance the drill through page with conditional formatting.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713519767659/da17f1eb-e5d2-4b4f-9821-c9415aac4d1e.png)
+
+### ix. Add Bookmarks and Buttons
+
+you’ll enhance the My Performance page with buttons, allowing the report user to select the visual type to display
+
+### x. Add bookmarks
+
+you’ll add two bookmarks, one to display each of the monthly sales/targets visuals.
+
+Disabling the Data option means the bookmark won’t use the current filter state. That’s important because otherwise the bookmark would permanently lock in the filter currently applied by the Year slicer
+
+bookmark to ignore filters (Data option off)
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713520436407/fc1c5c94-b8a5-487c-a765-191a17dce8ab.png)
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713520433049/07e99122-fe3a-4456-9bed-91854faa96b7.png)
+
+### xi. Add buttons
+
+you’ll add two buttons, and assign bookmark actions to each.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713520820353/a57a237e-5f3b-4963-a481-770e041460c1.png)
+
+### xii. Publish the report
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713521061768/708c8f8d-8e35-4279-9552-c1e900ef73b0.png)
+
+### xiii. Explore the report
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713521127580/f288ad62-dbf7-43f2-9b3a-edc81f8a2b3f.png)
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713521210503/a6a3f15c-e517-4d66-bfc1-a7a27b9c3c1c.png)
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713521218185/48f84abe-2cde-42c6-86e5-fbbb8849f1f2.png)
+
+## 11\. Check your knowledge
+
+At the Contoso Skateboard Company, Sally is creating a report to show sales over time. Sally is aware that occasional spikes occur in sales revenue that could be attributed to many different reasons, such as a marketing campaign. Sally needs to ensure that supporting visuals provide explanation for the spikes. What type of visual should Sally use?
+
+Adding anomaly detection to a line chart visual will highlight anomalies and provide accompanying explanations as data visuals.
+
+The Q&A visual allows for the entry of natural language questions that are answered by data visuals. It can’t provide explanation for spikes in data.
+
+At the Contoso Skateboard Company, Sanjay is authoring a report that will be distributed to sales managers. The report contains some sensitive data that shouldn’t be exported. Which report design feature can Sanjay configure to ensure that data isn’t exported?
+
+Correct. By disabling the More options (…) icon, report consumers can’t export data.
+
+Page tooltips allow your report consumers to gain deeper insights quickly and efficiently from a visual. It can’t restrict the exporting of data.
+
+What is the purpose of the Display state in bookmarks?
+
+The Display state captures the visibility of report objects, such as shapes, images, buttons, and text boxes.
+
+## 12\. Summary
+
+* Sync slicers
+    
+* drill through page
+    
+* conditional formatting
+    
+* bookmarks
+    
+* buttons
+    
+
+## **Learning objectives**
+
+In this module, you will:
+
+* Design reports to show details.
+    
+* Design reports to highlight values.
+    
+* Design reports that behave like apps.
+    
+* Work with bookmarks.
+    
+* Design reports for navigation.
+    
+* Work with visual headers.
+    
+* Design reports with built-in assistance.
+    
+* Use specialized visuals.
+    
 
 ---
 

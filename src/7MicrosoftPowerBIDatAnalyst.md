@@ -3105,6 +3105,208 @@ In this module, you will:
 
 ![](https://learn.microsoft.com/en-us/training/achievements/perform-analytics-power-bi.svg)
 
+You'll learn how to use Power BI to perform data analytical functions, how to identify outliers in your data, how to group data together, and how to bin data for analysis. You'll also learn how to perform time series analysis.
+
+Finally, you'll work with advanced analytic features of Power BI, such as Quick Insights, AI Insights, and the Analyze feature.
+
+## 1\. Introduction to analytics
+
+Analytics - data mining, big data analytics, machine learning, AI, and predictive analytics.
+
+technical aspects of analytics - predictive capabilities, solve business problems.
+
+Additionally, analytics can help with fraud detection, image recognition, sentiment analysis
+
+## 2\. Explore statistical summary
+
+statistical summary - quick and simple description of data.
+
+Power BI - statistical analysis - DAX functions, visuals: histograms, bell curves, advanced analytics visuals, statistical programming languages: Python, R.
+
+TOPN DAX function
+
+```sql
+Top 10 Products =
+SUMX ( TOPN ( 10, Product, Product[Total Sales]), [Total Sales] )
+```
+
+## 3\. Identify outliers with Power BI visuals
+
+outlier - anomaly in data.
+
+### i. Use a visual to identify outliers
+
+scatter chart - relationship between two numerical, display patterns in large sets of data, displaying outliers
+
+### ii. Use DAX to identify outliers
+
+```sql
+Outliers =
+CALCULATE (
+    [Order Qty],
+    FILTER (
+        VALUES ( Product[Product Name] ),
+        COUNTROWS ( FILTER ( Sales, [Order Qty] >= [Min Qty] ) ) > 0
+    )
+)
+```
+
+## 4\. Group and bin data for analysis
+
+putting values into equal-sized groups (binning).
+
+Grouping - categories of data.
+
+Binning - grouping continuous fields, such as numbers and dates.
+
+## 5\. Apply clustering techniques
+
+Clustering - identify a segment (cluster) of data that is similar to each other but dissimilar to the rest of the data
+
+## 6\. Conduct time series analysis
+
+Time series analysis - analyzing a series of data in time order - trends and make predictions
+
+## 7\. Use the Analyze feature
+
+Analyze feature - analyzing why your data distribution looks the way that it does.
+
+## 8\. Create what-if parameters
+
+what-if parameters to run scenarios and scenario-type analysis on your data
+
+what-if parameters - look at historical data to analyze potential outcomes
+
+what-if parameters - look forward, to predict or forecast what could happen in the future.
+
+## 9\. Use specialized visuals
+
+specialized visuals - AI visuals - Power BI uses machine learning to discover and display insights from data
+
+The three main AI visuals are:
+
+* Key influencers
+    
+* Decomposition tree
+    
+* Q&A
+    
+
+### i. Key influencers
+
+Key influencers visual - understand the factors that drive a particular metric - will analyze the data, rank the factors that matter, and then present them as key influencers.
+
+### ii. Decomposition tree
+
+Decomposition Tree - visualize data across multiple dimensions, automatically aggregates data, enables to drill down into dimensions in any order - ad hoc exploration and conducting root cause analysis
+
+### iii. Q&A
+
+Q&A visual - ask questions of their data and receive responses as data visualizations
+
+## 10\. Exercise - Perform Advanced Analytics with AI Visuals
+
+In this lab, you’ll create the Sales Exploration report.
+
+In this lab you learn how to:
+
+Create animated scatter charts Use a visual to forecast values
+
+### i. Lab story
+
+### ii. Get started – Sign in
+
+### iii. Get started – Create a semantic model
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713595908437/d59f57b9-c057-4fe2-bdc9-8aaa10413b56.png)
+
+### iv. Create the report
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713595916437/0b36e974-d751-4490-afaf-e23b6e3e96a1.png)
+
+### v. Create an animated scatter chart
+
+you’ll create a scatter chart that can be animated.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713596210660/399d78e1-e289-4915-b569-a6cf7c32de24.png)
+
+### vi. Create a forecast
+
+you’ll create a forecast to determine possible future sales revenue.
+
+When forecasting over a time line, you’ll need at least two cycles (years) of data to produce an accurate and stable forecast.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713596495417/4e36fd6e-c2bd-41d9-b29e-45f7423eb757.png)
+
+## 11\. Check your knowledge
+
+What Power BI feature can give an in-depth analysis of the distribution of data?
+
+The Analyze feature allows a user to understand why the distribution looks the way that it does. Correct. The Analyze feature gives an in-depth analysis of the distribution of data.
+
+How can you access the time series chart visual?
+
+Time series charts can be imported from AppSource. Correct. Time series charts can be imported from AppSource.
+
+What visual should be used to display outliers?
+
+The scatter chart is best to display outliers. Correct. The scatter chart displays outliers best.
+
+## 12\. Summary
+
+Additionally, analytics can help with fraud detection, image recognition, sentiment analysis
+
+outlier - anomaly in data.
+
+scatter chart - relationship between two numerical, display patterns in large sets of data, displaying outliers
+
+Grouping - categories of data.
+
+Binning - grouping continuous fields, such as numbers and dates.
+
+Clustering - identify a segment (cluster) of data that is similar to each other but dissimilar to the rest of the data
+
+Time series analysis - analyzing a series of data in time order - trends and make predictions
+
+Analyze feature - analyzing why your data distribution looks the way that it does.
+
+what-if parameters to run scenarios and scenario-type analysis on your data
+
+what-if parameters - look at historical data to analyze potential outcomes
+
+what-if parameters - look forward, to predict or forecast what could happen in the future.
+
+specialized visuals -  AI visuals - Power BI uses machine learning to discover and display insights from data - Key influencers, Decomposition tree, Q&A.
+
+Decomposition Tree - visualize data across multiple dimensions, automatically aggregates data, enables to drill down into dimensions in any order - ad hoc exploration and conducting root cause analysis
+
+Q&A visual - ask questions of their data and receive responses as data visualizations
+
+When forecasting over a time line, you’ll need at least two cycles (years) of data to produce an accurate and stable forecast.
+
+## **Learning objectives**
+
+In this module, you'll:
+
+* Explore statistical summary.
+    
+* Identify outliers with Power BI visuals.
+    
+* Group and bin data for analysis.
+    
+* Apply clustering techniques.
+    
+* Conduct time series analysis.
+    
+* Use the Analyze feature.
+    
+* Use advanced analytics custom visuals.
+    
+* Review Quick insights.
+    
+* Apply AI Insights.
+    
+
 ---
 
 # XIV. Module 14 **Create and manage workspaces in Power BI**

@@ -3317,6 +3317,71 @@ In this module, you'll:
 
 ![](https://learn.microsoft.com/en-us/training/achievements/create-manage-workspaces-power-bi.svg)
 
+Learn how to navigate the Power BI service, create and manage workspaces and related items, and distribute reports to users.
+
+## 1\. Introduction
+
+load and transform data from numerous sources - build visuals - create DAX equations - publish report to Power BI - share these reports - workspace
+
+A workspace is a centralized repository in which you can collaborate with colleagues and teams to create collections of reports and dashboards.
+
+workspaces to house reports and dashboards for use by multiple teams
+
+highest level of security is maintained by controlling who can access semantic models, reports, and dashboards.
+
+## 2\. Distribute a report or dashboard
+
+## 3\. Monitor usage and performance
+
+## 4\. Recommend a development life cycle strategy
+
+Deployment pipeline
+
+## 5\. Troubleshoot data by viewing its lineage
+
+Lineage view - relationships between the artifacts in a workspace and their external dependencies.
+
+## 6\. Configure data protection
+
+## 7\. Check your knowledge
+
+How is the Admin workspace role different from other types of workspace roles?
+
+Admin is the only role that can remove any users. Only Admins can add and remove users from a workspace.
+
+Which one of the following options is the best description of a workspace?
+
+A workspace is a centralized location or repository that allows you to collaborate with colleagues and teams to create collections of reports, dashboards, and so on. A workspace is a centralized location or repository that allows you to collaborate with colleagues and teams to create collections of reports, dashboards, and so on.
+
+What feature in Power BI service can you use to troubleshoot the flow of data from its source to its destination?
+
+Lineage view Lineage view allows you to view and troubleshoot the data flow from source to destination.
+
+## 8\. Summary
+
+A workspace is a crucial feature of Power BI that allows you to share reports, build dashboards, and collaborate with your teams.
+
+Power BI workspaces can help increase performance in your reports, ensure that appropriate security requirements are applied, make it easier for you to share content, and more.
+
+With this information, you can add to your toolkit the ability to manage workspaces in Power BI service so that you can build your dashboards in the most efficient way possible.
+
+## **Learning objectives**
+
+In this module, you will:
+
+* Create and manage Power BI workspaces and items.
+    
+* Distribute a report or dashboard.
+    
+* Monitor usage and performance.
+    
+* Recommend a development lifecycle strategy.
+    
+* Troubleshoot data by viewing its lineage.
+    
+* Configure data protection.
+    
+
 ---
 
 # XV. Module 15 **Manage semantic models in Power BI**

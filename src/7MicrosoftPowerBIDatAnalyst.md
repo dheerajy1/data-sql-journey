@@ -3392,6 +3392,137 @@ In this module, you will:
 
 ![](https://learn.microsoft.com/en-us/training/achievements/manage-datasets-in-power-bi.svg)
 
+Microsoft Power BI - single semantic model to build many reports.
+
+scheduled semantic model refreshes and resolving connectivity errors.
+
+## 1\. Introduction
+
+one semantic model can be used by multiple users
+
+make the reports more dynamic so that they can filter the data themselves
+
+## 2\. Use a Power BI gateway to connect to on-premises data sources
+
+Two types of on-premises gateways are:
+
+* **Organization mode** - multiple users to connect to multiple on-premises data sources and is suitable for complex scenarios.
+    
+* **Personal mode** - one user to connect to data sources. This type of gateway can be used only with Power BI and it can't be shared with other users, so it is suitable in situations where you're the only one in your organization who creates reports. You will install the gateway on your local computer, which needs to stay online for the gateway to work.
+    
+
+### i. on-premises gateway
+
+When you are working in the cloud and interacting with an element that is connected to an on-premises data source, the following actions occur:
+
+* The cloud service creates a query and the encrypted credentials for the on-premises data source. The query and credentials are sent to the gateway queue for processing.
+    
+* The gateway cloud service analyzes the query and pushes the request to Microsoft Azure Service Bus.
+    
+* Service Bus sends the pending requests to the gateway.
+    
+* The gateway gets the query, decrypts the credentials, and then connects to one or more data sources with those credentials.
+    
+* The gateway sends the query to the data source to be run.
+    
+* The results are sent from the data source back to the gateway and then to the cloud service. The service then uses the results.
+    
+
+![](https://learn.microsoft.com/en-us/training/modules/manage-datasets-power-bi/media/4-how-gateway-works-ss.png#lightbox)
+
+### ii. Troubleshoot an on-premises data gateway
+
+how to run a network port test
+
+how to provide proxy information for your gateway
+
+current data center region that you're in
+
+## 3\. Configure a semantic model scheduled refresh
+
+Power BI deactivates your refresh schedule after four consecutive failures or when the service detects an unrecoverable error that requires a configuration update, such as invalid or expired credentials. It is not possible to change the consecutive failures threshold.
+
+If a semantic model displays a small warning icon, you'll know that the semantic model is currently experiencing an issue. Select the warning icon to get more information.
+
+## 4\. Configure incremental refresh settings
+
+Incremental refresh should only be used on data sources and queries that support query folding
+
+Quicker refreshes - Only data that needs to be changed gets refreshed
+
+Reduced resource consumption - Because you only need to refresh the smaller the amount of data, the overall consumption of memory and other resources is reduced.
+
+You can define an incremental refresh policy to solve this business problem. This process involves the following steps:
+
+### i. Define the filter parameters.
+
+### ii. Use the parameters to apply a filter.
+
+### iii. Define the incremental refresh policy.
+
+### iv. Publish changes to Power BI service.
+
+## 5\. Manage and promote semantic models
+
+Power BI provides two ways to endorse your semantic models:
+
+* **Promotion** - Promote your semantic models when they're ready for broad usage.
+    
+* **Certification** - Request certification for a promoted semantic model. Certification can be a highly selective process, so only the truly reliable and authoritative semantic models are used across the organization.
+    
+
+## 6\. Troubleshoot service connectivity
+
+If your data source credentials are not up to date, you'll need to take further action to investigate and resolve the issue.
+
+## 7\. Boost performance with query caching (Premium)
+
+Query Caching is a local caching feature that maintains results on a user and report basis. Query caching reduces load time and increases query speed, especially for semantic models that aren't refreshed often and are accessed frequently.
+
+## 8\. Check your knowledge
+
+Where are semantic model-scheduled refreshes configured?
+
+Power BI service semantic model-scheduled refreshes are configured in Power BI service.
+
+What reserved parameters configure the start and end of where Incremental refresh should occur?
+
+RangeStart and RangeEnd RangeStart and RangeEnd configure the start and end of where Incremental refresh should occur.
+
+What is the difference between Promotion and Certification when you are endorsing a semantic model?
+
+Promotion is for broad usage while Certification needs permission granted on the Admin Tenant settings. Promotion does not need specific permissions while Certification requires permission from the semantic model owner to access to the semantic model.
+
+## 9\. Summary
+
+This module allowed you to take advantage of the following features of Power BI to help you manage your semantic models:
+
+* Two data refresh options to help you automate the refresh process and make it more efficient.
+    
+* Endorsement features for your most critical semantic models to help your users identify the semantic models that they should use.
+    
+* The on-premises gateway and ideas on how to troubleshoot potential connectivity issues.
+    
+
+These semantic model management techniques will help you to increase the ease of access and up-to-date nature of your semantic models, and will help you build high-quality reports and dashboards so that your users can make real-time decisions.
+
+## **Learning objectives**
+
+In this module, you will:
+
+* Use a Power BI gateway to connect to on-premises data sources.
+    
+* Configure a scheduled refresh for a semantic model.
+    
+* Configure incremental refresh settings.
+    
+* Manage and promote semantic models.
+    
+* Troubleshoot service connectivity.
+    
+* Boost performance with query caching (Premium).
+    
+
 ---
 
 # XVI. Module 16 **Create dashboards in Power BI**

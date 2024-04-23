@@ -3533,6 +3533,66 @@ In this module, you will:
 
 ![](https://learn.microsoft.com/en-us/training/achievements/create-dashboards-power-bi.svg)
 
+Power BI report uses data from a single semantic model, a Power BI dashboard can contain visuals from different semantic models.
+
+## 1\. Introduction to dashboards
+
+### i. Dashboards vs. reports
+
+| Dashboards | Reports |
+| --- | --- |
+| Create only in service | Create in Power BI Desktop (limited in service) |
+| Single page | Multiple pages |
+| Static tiles | Interactive visuals |
+| Read-only tiles | Filters pane |
+
+dashboards and reports can be refreshed to show the latest data.
+
+### ii. **Get started with dashboards**
+
+Dashboards are created by *pinning* report visuals, and are then called *tiles* within reports.
+
+## 2\. Configure data alerts
+
+Data alerts can notify you or a user that a specific data point is above, below, or at a specific threshold that you can set.
+
+## 3\. Explore data by asking questions
+
+## 4\. Review Quick insights
+
+## 5\. Add a dashboard theme
+
+## 6\. Pin a live report page to a dashboard
+
+Dashboards are intended to be a collection from various sources, not just as a "launching pad" for reports.
+
+We recommend that you pin at the tile level first and foremost, and if needed, the entire report page can also be pinned. Seeing an entire report page in a dashboard tile can be difficult.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713846767057/9f61231e-1711-4325-b5cd-fa25a42aaebe.png)
+
+## 7\. Configure a real-time dashboard
+
+## 8\. Set mobile view
+
+## 9\. Exercise - Create a Power BI dashboard
+
+## 10\. Check your knowledge
+
+## 11\. Summary
+
+## **Learning objectives**
+
+In this module, you'll:
+
+* Set a mobile view.
+    
+* Add a theme to the visuals in your dashboard.
+    
+* Add real-time semantic model visuals to your dashboards.
+    
+* Pin a live report page to a dashboard.
+    
+
 ---
 
 # XVI. Module 17 **Implement row-level security**

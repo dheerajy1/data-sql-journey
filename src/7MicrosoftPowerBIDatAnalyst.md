@@ -3572,13 +3572,132 @@ We recommend that you pin at the tile level first and foremost, and if needed, t
 
 ## 7\. Configure a real-time dashboard
 
+Power BI's real-time streaming semantic models, you can stream data and update dashboards as soon as the data is logged.
+
+### i. Stream in Power BI
+
+![](https://learn.microsoft.com/en-us/training/modules/create-dashboards-power-bi/media/06-diagram-iot-ss.png#lightbox)
+
+Data - from streaming data source - stored in a temporary cache, not a semantic model - means you can't make changes to the semantic model.
+
+visualize the data from a streaming data source - create a tile directly on a dashboard and use a custom streaming data source.
+
+tiles - optimized because no database exists to pull the data from - These types of tiles have low latency and are best suited for data that doesn't need additional transformations, such as temperature or humidity.
+
+### ii. Visualize real-time data in Power BI
+
 ## 8\. Set mobile view
 
 ## 9\. Exercise - Create a Power BI dashboard
 
+### i. Lab story
+
+In this lab, you’ll create the **Sales Monitoring** dashboard in the Power BI service using an existing report.
+
+In this lab you learn how to:
+
+* Pin visuals to a dashboard
+    
+* Use Q&A to create dashboard tiles
+    
+
+### ii. Get started – Sign in
+
+### iii. Get started – Publish the report
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713929392282/880b63b7-87b3-4c6a-bd22-4367c7604c3b.png)
+
+### iv. Create a dashboard
+
+In this task, you’ll create the Sales Monitoring dashboard. You’ll pin a visual from the report, and add a tile based on an image data URI, and use Q&A to create a tile.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713929656019/0a040229-31e2-48df-a922-dc2e3d9a8ea3.png)
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713929960514/980ca482-57fe-4dcc-ac9d-34b27799c7a6.png)
+
+### v. Edit tile details
+
+In this task, you’ll edit the details of two tiles.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713930109459/7df29d68-cbef-4050-a51d-02ee41237f10.png)
+
+### vi. Refresh the Semantic model
+
+In this exercise, you’ll first load sales order data for June 2020 into the **AdventureWorksDW2020** database. You’ll then open your Power BI Desktop file, perform a data refresh, and then upload the file to your workspace.
+
+### vii. Update the lab database
+
+No data:
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713933323240/046b1bb5-888b-48ed-8708-36b251c31a4f.png)
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713933332829/5de1f4ee-49c4-4c0b-ae82-b759c6d2e593.png)
+
+Now,
+
+```sql
+UPDATE [dbo].[FactResellerSales] SET [ShipDate] = DATEADD(DAY, 7, [OrderDate]) WHERE [ShipDate] IS NULL;
+```
+
+Load data from csv file:
+
+```sql
+--Add June 2020 sales
+BULK INSERT [dbo].[FactResellerSales] FROM 'F:\Power BI\filesfrom internet\Allfiles\Resources\ResellerSales_202006.csv' WITH
+(
+	DATAFILETYPE = 'widechar'
+	,FIRSTROW = 2
+	,FIELDTERMINATOR = ','
+	,ROWTERMINATOR = '\n'
+	,TABLOCK
+);
+GO
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713933350199/db735783-fd13-46d9-9783-4d166ad741a8.png)
+
+Data:
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713933391450/22cf16aa-9617-4d55-9ba5-032f5187c749.png)
+
+### viii. Refresh the Power BI Desktop file
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713933804915/ed0a426d-681d-4d06-8968-b9f22be1b769.png)
+
+### ix. Review the dashboard
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1713933900712/f9528d63-6cc5-4d32-9a37-21028db95e4c.png)
+
 ## 10\. Check your knowledge
 
+What is a dashboard?
+
+A canvas of report elements that can be built in Power BI service. Correct. Dashboards can only be built in Power BI service.
+
+What is one way that reports and dashboards differ?
+
+In reports, you can have multiple pages; in dashboards, you can have only one page. Correct. You can have only one-page dashboards, but you can have multiple page reports.
+
+Where can you configure and set data alerts?
+
+Data alerts can be set only in Power BI service on specific visuals such as KPI cards, gauges, and cards. Correct. Data alerts can be set only in Power BI service on specific visuals.
+
 ## 11\. Summary
+
+In this module, you have learned about dashboards: what they are, why you need them, and what tiles and pinning are in relation to dashboards. You have also learned how to accomplish several tasks around dashboards, such as:
+
+* Setting mobile view.
+    
+* Adding a theme to the visuals in your dashboard.
+    
+* Configuring data classification.
+    
+* Adding real-time semantic model visuals to your dashboards.
+    
+* Pinning a live report page to a dashboard.
+    
+
+With this new knowledge, consider how you can transform the data that you have to create a story. Dashboards can help you visualize that story.
 
 ## **Learning objectives**
 

@@ -3722,6 +3722,101 @@ In this module, you'll:
 
 ![](https://learn.microsoft.com/en-us/training/achievements/row-level-security-power-bi.svg)
 
+Row-level security (RLS) allows you to create a single or a set of reports that targets data for a specific user. In this module, you'll learn how to implement RLS by using either a static or dynamic method and how Microsoft Power BI simplifies testing RLS in Power BI Desktop and Power BI service.
+
+## 1\. Introduction
+
+Row-level security (RLS) uses a DAX filter as the core logic mechanism.
+
+## 2\. Configure row-level security with the static method
+
+RLS - static (fixed value in the DAX filter) or dynamic method (DAX function) - DAX filter as the core logic mechanism.
+
+RLS involves several configuration steps, which should be completed in the following order:
+
+1. Create a report in Microsoft Power BI Desktop.
+    
+    1. Import the data.
+        
+    2. Confirm the semantic model between both tables.
+        
+    3. Create the report visuals.
+        
+2. Create RLS roles in Power BI Desktop by using DAX.
+    
+3. Test the roles in Power BI Desktop.
+    
+4. Deploy the report to Microsoft Power BI service.
+    
+5. Add members to the role in Power BI service.
+    
+6. Test the roles in Power BI service.
+    
+
+## 3\. Configure row-level security with the dynamic method
+
+userprincipalname() function
+
+## 4\. Exercise - Enforce row-level security in Power BI
+
+In this exercise, you’ll enforce row-level security to ensure that a salesperson can only analyze sales data for their assigned region(s).
+
+In this exercise you learn how to:
+
+* Enforce row-level security
+    
+* Choose between dynamic and static methods
+    
+
+### i. Lab story
+
+### ii. Get started
+
+### iii. Enforce row-level security
+
+In this task, you’ll enforce row-level security to ensure a salesperson can only see sales made in their assigned region(s).
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714018569384/4d1f9cde-ee1b-4f3e-aa96-df1778636943.png)
+
+after:
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714018971563/4d358f9e-ac6c-4a18-ae19-483c980c418a.png)
+
+Not working for me.
+
+## 5\. Check your knowledge
+
+Which function will tell you the username of the person who is signed in to Power BI service?
+
+USERPRINCIPALNAME() The USERPRINCIPALNAME() function will tell you which user is signed in to view a report.
+
+Where can you test RLS by using different security roles?
+
+Both Power BI Desktop and Power BI service You can use Power BI Desktop and Power BI service to test RLS.
+
+## 6\. Summary
+
+This module described row-level security (RLS), the ability in Power BI to limit what a user sees on a specific report.
+
+RLS targets the data to a specific user, for instance, only allowing a manager to see the salary of their direct reports.
+
+RLS is implemented with a combination of Power BI Desktop and Power BI service. To implement RLS, you can create a DAX formula that restricts their data access, which makes RLS versatile.
+
+You can use DAX to indicate that someone can only see records in the United States or sales transactions that are below a certain dollar amount.
+
+This programmatic approach means that RLS can be used in a variety of solutions.
+
+After you have created the DAX formula in a specific security role, you can deploy the report and then add users to that role. RLS is an effortlessly implemented, powerful security feature of Power BI.
+
+## **Learning objectives**
+
+In this module, you will:
+
+* Configure row-level security by using a static method.
+    
+* Configure row-level security by using a dynamic method.
+    
+
 ---
 
 # Conclusion
@@ -3733,7 +3828,14 @@ Learning Objectives,
 2. Get started building with Power BI
     
 3. Get data in Power BI
-    
+
+4. Prepare the data
+
+5. Model the data
+
+6. Visualize and analyze the data
+
+7. Deploy and maintain items
 
 # Source: Microsoft Power BI Data Analyst \[[Link](https://learn.microsoft.com/en-us/training/courses/pl-300t00)\]
 

@@ -49,3 +49,8 @@ The schema : Project Name : SQL File Location , src, Blog
 [.sql - [Link¹]()]
 [ src - [Link²](src/8AISkillsChallengeFabricAnalyticsEngineer.md)]
 [ Blog - [Link³]()]
+
+9. OWID ETL  & Visualization in Power BI
+[.sql - [Link¹](sql/Ourworldindataenergyconsmpbyworld.pbix)]
+[ src - [Link²](src/9OWIDETL&VisualizationinPowerBI.md)]
+[ Blog - [Link³](https://dheerajy1.hashnode.dev/owid-etl-visualization-in-power-bi)]

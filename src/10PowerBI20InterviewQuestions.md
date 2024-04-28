@@ -118,6 +118,170 @@ Example: Aggregations, like calculating the sum of a column, involve filter cont
 
 We can use Userelationship dax function
 
+```
+= CALCULATE(SUM(InternetSales[SalesAmount]), USERELATIONSHIP(InternetSales[ShippingDate], DateTime[Date]))
+```
+
+# Q11. How many active and inactive relationship I can have between two tables?
+
+You can only have one active relationship between two tables. You can however create as many inactive relationships as possible.
+
+# Q12. What is Crossfilter direction? And how many types of cross filter direction available in Power BI?
+
+Crossfilter direction refers to the way in which filters applied on one table affect the data displayed in related tables within a Power BI report.
+
+1. Single Directional
+    
+2. Both Directional
+    
+
+# Q13. What is Object Level Security? How to configure it?
+
+Object-level security (OLS) enables model authors to secure specific tables or columns from report viewers.
+
+For example, a column that includes personal data can be restricted so that only certain viewers can see and interact with it. In addition, you can also restrict object names and metadata.
+
+Steps to apply Object level security on Sales amount column present in Sales table:
+
+* In Power BI Desktop go to modelling tab
+    
+* Click on manage roles
+    
+* Name the role and select the table
+    
+* Click on Save
+    
+* Go to Tabular Editor and connect to your dataset
+    
+* Go to your and then your column
+    
+* At the right side of your tabular editor go to object level security and click on none
+    
+* To test it, go to desktop and preview your role
+    
+* Publish it to service
+    
+* Assign user to a role
+    
+
+# Q14. What is the difference between functions Username vs. UserPrincipalName?
+
+Username: This is your login name, often in the format DOMAIN\\username. UserPrincipalName (UPN): This is your unique identifier, often resembling an email address like username@domain.com
+
+# Q15. What are deployment pipelines in Power BI? Have you used it? How you change the connection in each environment?
+
+Yes, The deployment process lets you clone content from one stage in the deployment pipeline to another, typically from development to test, and from test to production.
+
+During deployment, power bi copies the content from the current stage, into the target one.
+
+The connections between the copied items are kept during the copy process. How you change the connection in each environment – We can change the environment only in QUA and Prod, We can change the connection simply through deployment rules.
+
+There is a setting button at the top left of deployment pipeline we need click there.
+
+You can define the rules by two ways, First one will be “Data set rules” and Second one will Parameter Rules” So whenever you move your report from dev to qua and qua to prod the deployment rules will automatically change the connection.
+
+# Q16. What is difference between contributor and member?
+
+## Contributor Role:
+
+* All viewer role access
+    
+* Ideal for developers.
+    
+* Publish, Create, edit, and delete content, such as reports, in the workspace.
+    
+* Create report in other workspace based on semantic model in this workspace
+    
+* Copy a report
+    
+* Create metrics that's based on a semantic model in the workspace
+    
+* Schedule data refreshes via the on-premises gateway
+    
+* Modify gateway connection settings
+    
+* Subscribe others to reports
+    
+
+## Member Role:
+
+* All contributor role access
+    
+* Add members or others with lower permissions
+    
+* Publish, unpublish, and change permissions for an app.
+    
+* Update an app
+    
+* Share items in apps, including semantic models
+    
+* Allow others to reshare items
+    
+* Manage semantic model permissions
+    
+
+# Q17. If I want to provide access for report not for entire workspace can I do it and if yes then how can I do it?
+
+We can go to power bi report in power bi workspace, click on share and provide the user email Id.
+
+# Q18. **What are Filters in Power BI?**
+
+The term "Filter" is self-explanatory.
+
+Filters are mathematical and logical conditions applied to data to filter out essential information in rows and columns.
+
+The following are the variety of filters available in Power BI:
+
+1. Manual filters
+    
+2. Auto filters
+    
+3. Include/Exclude filters
+    
+4. Drill-down filters
+    
+5. Cross Drill filters
+    
+6. Drillthrough filters
+    
+7. Drillthrough filters
+    
+8. URL filters–transient
+    
+9. Pass-Through filters
+    
+
+# Q19. List out some drawbacks/limitations of using Power BI.
+
+Here are some limitations to using Power BI:
+
+* Power BI does not accept file sizes larger than 1 GB and doesn't mix imported data accessed from real-time connections.
+    
+* There are very few data sources that allow real-time connections to Power BI reports and dashboards.
+    
+* It only shares dashboards and reports with users logged in with the same email address.
+    
+* Dashboard doesn't accept or pass user, account, or other entity parameters.
+    
+
+# Q20. Name the different connectivity modes available in Power BI?
+
+There are three main connectivity modes used in Power BI.
+
+## SQL Server Import
+
+An SQL Server Import is the default and most common connectivity type used in Power BI. It allows you to use the full capabilities of the Power BI Desktop.
+
+## Direct Query
+
+The Direct Query connection type is only available when you connect to specific data sources. In this connectivity type, Power BI will only store the metadata of the underlying data and not the actual data.
+
+## Live Connection
+
+With this connectivity type, it does not store data in the Power BI model. All interaction with a report using a Live Connection will directly query the existing Analysis Services model.
+
+There are only 3 data sources that support the live connection method - SQL Server Analysis Services (Tabular models and Multidimensional Cubes), Azure Analysis Services (Tabular Models), and Power BI Datasets hosted in the Power BI Service.
+
 ### Conclusion
 
 Learning Objectives,

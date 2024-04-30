@@ -10,8 +10,25 @@ first row as headers
 
 rename columns
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714116020371/928b9aa3-0e09-4bb3-b52a-cd25d0d2b3a3.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714116020371/928b9aa3-0e09-4bb3-b52a-cd25d0d2b3a3.png)
 
+# Load data
+
+# Visualization in Power BI
+
+mark country column
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714205126014/20e95678-857f-47ed-8c3c-5de4cad2a852.png)
+
+Measure in athletes table:
+
+```sql
+Total Athletes = COUNTROWS(athletes)
+```
+
+Total athletes by country:
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714205394633/ef04fcfd-5039-4bd0-9ad6-5ee8a9f671ba.png)
 
 # Conclusion
 
@@ -22,7 +39,11 @@ Learning Objectives,
 2. Medallion architecture
     
 3. Transformations in Power Query
-        
+
+4. Measures
+    
+5. Visualization in Power Query
+    
 
 # Source: Darshil Parmar YT \[[Link](https://www.youtube.com/watch?v=IaA9YNlg5hM&t=844s)\]
 

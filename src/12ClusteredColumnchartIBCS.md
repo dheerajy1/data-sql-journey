@@ -1,6 +1,5 @@
 In this article I have mentioned about the learnings involving Column chart in power BI.
 
-
 # Get Data
 
 ```markdown
@@ -85,7 +84,31 @@ add Measures to the model
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714375665305/f63ba413-344d-4bca-80a2-8338378bde10.png)
 
+---
 
+# Visualizations
+
+sort month col by month number
+
+format colors for PY, AC, FC.
+
+toggle overlap
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714377669613/bf004942-3952-46d7-9642-11a4691e25a5.png)
+
+Error bars/variance bar:
+
+PY - upper bound: green max
+
+AC - upper bound: red max
+
+FC - upper bound: red max
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714380108932/e5b1ffb8-509e-4961-9061-aaef2000083a.png)
+
+labels & delta color
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714381251741/b695bbbb-073f-4b6f-b992-208dbf01589f.png)
 
 # Conclusion
 
@@ -96,6 +119,10 @@ Learning Objectives,
 2. Cluster column chart visualization
     
 3. measures
+    
+4. Error bars / variance bars
+    
+5. conditional color format
     
 
 # Source: Power BI Park \[[Link](https://www.youtube.com/watch?v=4Kn9jmgUlnY)\]

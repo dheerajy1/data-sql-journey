@@ -48,9 +48,31 @@ The schema : Project Name : SQL File Location , src, Blog
 8. AI Skills Challenge: Fabric Analytics Engineer
 [.sql - [Link¹]()]
 [ src - [Link²](src/8AISkillsChallengeFabricAnalyticsEngineer.md)]
-[ Blog - [Link³]()]
+[ Blog - [Link³](https://dheerajy1.hashnode.dev/ai-skills-challenge-fabric-analytics-engineer)]
 
 9. OWID ETL  & Visualization in Power BI
 [.sql - [Link¹](sql/Ourworldindataenergyconsmpbyworld.pbix)]
 [ src - [Link²](src/9OWIDETL&VisualizationinPowerBI.md)]
 [ Blog - [Link³](https://dheerajy1.hashnode.dev/owid-etl-visualization-in-power-bi)]
+
+10 Power BI 20 Interview Questions
+[.sql - [Link¹]()]
+[ src - [Link²](src/10PowerBI20InterviewQuestions.md)]
+[ Blog - [Link³](https://dheerajy1.hashnode.dev/power-bi-20-interview-questions)]
+
+
+11. Data Engineering in Power BI on Olympic Data
+[.sql - [Link¹]()]
+[ src - [Link²](src/11DataEngineeringinPowerBIonOlympicData.md)]
+[ Blog - [Link³](https://dheerajy1.hashnode.dev/data-engineering-in-power-bi-on-olympic-data)]
+
+12. Clustered Column chart in Power BI IBCS
+[.sql - [Link¹]()]
+[ src - [Link²](src/12ClusteredColumnchartIBCS.md)]
+[ Blog - [Link³](https://dheerajy1.hashnode.dev/clustered-column-chart-in-power-bi-ibcs)]
+
+13. Ingest data into SQL & Build AdventureWorks analytics dashboard in Microsoft Power BI
+[.sql - [Link¹](sql/AdventureWorks Dashboard MA PBI.sql)]
+[ src - [Link²](src/13Ingest data into SQL & Build AdventureWorks analytics.md)]
+[ Blog - [Link³]()]
+

@@ -755,3 +755,284 @@ FROM [CustomAdventureWorksDW].[dbo].[AdventureWorks Customer Lookup]
 
 
 ----------------------------------------------------------------------------------------------------------------
+
+
+-- AdventureWorks Calendar Lookup
+
+
+BEGIN TRY
+
+    BEGIN TRANSACTION T17CALT; -- Start the transaction
+
+	-- Your main content of the script here
+		
+		IF OBJECT_ID(N'[CustomAdventureWorksDW].[dbo].[AdventureWorks Calendar Lookup]', N'U') IS NOT NULL
+			BEGIN
+				PRINT('[CustomAdventureWorksDW].[dbo].[AdventureWorks Calendar Lookup] EXISTS, Dropped')
+				DROP TABLE [CustomAdventureWorksDW].[dbo].[AdventureWorks Calendar Lookup]
+			END
+
+		ELSE
+			BEGIN
+				PRINT('[CustomAdventureWorksDW].[dbo].[AdventureWorks Calendar Lookup] DOES NOT EXIST, Created')
+				CREATE TABLE [CustomAdventureWorksDW].[dbo].[AdventureWorks Calendar Lookup] (
+					[Date] date
+					)
+			END
+
+	-- If no exception occurs, commit the transaction
+    COMMIT TRANSACTION T17CALT;
+
+END TRY
+
+BEGIN CATCH
+    -- If an exception occurs, roll back the transaction
+    IF @@ERROR <> 0
+		BEGIN
+			ROLLBACK TRANSACTION T17CALT;
+			-- Optionally, you can log or handle the error here
+			-- For example:
+			PRINT 'Error occurred: ' + ERROR_MESSAGE();
+		END
+END CATCH;
+
+
+
+
+
+BEGIN TRY
+
+    BEGIN TRANSACTION T18CALBI; -- Start the transaction
+	
+    -- Your main content of the script here
+		-- import the file
+		BULK INSERT [CustomAdventureWorksDW].[dbo].[AdventureWorks Calendar Lookup]
+		FROM 'F:\Power BI\filesfrom internet\adventure-works-main\data\AdventureWorks Calendar Lookup.csv'
+		WITH (
+			FORMAT='CSV',
+			FIRSTROW=2,
+			FIELDTERMINATOR = ',', 
+			ROWTERMINATOR = '0x0a'
+			)
+
+    -- If no exception occurs, commit the transaction
+    COMMIT TRANSACTION T18CALBI;
+
+END TRY
+
+BEGIN CATCH
+    -- If an exception occurs, roll back the transaction
+    IF @@ERROR <> 0
+		BEGIN
+			ROLLBACK TRANSACTION T18CALBI;
+			-- Optionally, you can log or handle the error here
+			-- For example:
+			PRINT 'Error occurred: ' + ERROR_MESSAGE();
+		END
+END CATCH;
+
+
+
+SELECT TOP 10000
+*
+FROM [CustomAdventureWorksDW].[dbo].[AdventureWorks Calendar Lookup]
+
+
+----------------------------------------------------------------------------------------------------------------
+
+-- AdventureWorks Territory Lookup
+
+
+
+BEGIN TRY
+
+    BEGIN TRANSACTION T19TLT; -- Start the transaction
+
+	-- Your main content of the script here
+		
+		IF OBJECT_ID(N'[CustomAdventureWorksDW].[dbo].[AdventureWorks Territory Lookup]', N'U') IS NOT NULL
+			BEGIN
+				PRINT('[CustomAdventureWorksDW].[dbo].[AdventureWorks Territory Lookup] EXISTS, Dropped')
+				DROP TABLE [CustomAdventureWorksDW].[dbo].[AdventureWorks Territory Lookup]
+			END
+
+		ELSE
+			BEGIN
+				PRINT('[CustomAdventureWorksDW].[dbo].[AdventureWorks Territory Lookup] DOES NOT EXIST, Created')
+				CREATE TABLE [CustomAdventureWorksDW].[dbo].[AdventureWorks Territory Lookup] (
+					[SalesTerritoryKey] int NOT NULL,
+					[Region] varchar(50),
+					[Country] varchar(50),
+					[Continent] varchar(50)
+					)
+			END
+
+	-- If no exception occurs, commit the transaction
+    COMMIT TRANSACTION T19TLT;
+
+END TRY
+
+BEGIN CATCH
+    -- If an exception occurs, roll back the transaction
+    IF @@ERROR <> 0
+		BEGIN
+			ROLLBACK TRANSACTION T19TLT;
+			-- Optionally, you can log or handle the error here
+			-- For example:
+			PRINT 'Error occurred: ' + ERROR_MESSAGE();
+		END
+END CATCH;
+
+
+
+
+
+BEGIN TRY
+
+    BEGIN TRANSACTION T20TLBI; -- Start the transaction
+	
+    -- Your main content of the script here
+		-- import the file
+		BULK INSERT [CustomAdventureWorksDW].[dbo].[AdventureWorks Territory Lookup]
+		FROM 'F:\Power BI\filesfrom internet\adventure-works-main\data\AdventureWorks Territory Lookup.csv'
+		WITH (
+			FORMAT='CSV',
+			FIRSTROW=2,
+			FIELDTERMINATOR = ',', 
+			ROWTERMINATOR = '0x0a'
+			)
+
+    -- If no exception occurs, commit the transaction
+    COMMIT TRANSACTION T20TLBI;
+
+END TRY
+
+BEGIN CATCH
+    -- If an exception occurs, roll back the transaction
+    IF @@ERROR <> 0
+		BEGIN
+			ROLLBACK TRANSACTION T20TLBI;
+			-- Optionally, you can log or handle the error here
+			-- For example:
+			PRINT 'Error occurred: ' + ERROR_MESSAGE();
+		END
+END CATCH;
+
+
+
+SELECT TOP 10000
+*
+FROM [CustomAdventureWorksDW].[dbo].[AdventureWorks Territory Lookup]
+
+
+----------------------------------------------------------------------------------------------------------------
+
+-- AdventureWorks Returns Data
+
+
+
+BEGIN TRY
+
+    BEGIN TRANSACTION T21RDT; -- Start the transaction
+
+	-- Your main content of the script here
+		
+		IF OBJECT_ID(N'[CustomAdventureWorksDW].[dbo].[AdventureWorks Returns Data]', N'U') IS NOT NULL
+			BEGIN
+				PRINT('[CustomAdventureWorksDW].[dbo].[AdventureWorks Returns Data] EXISTS, Dropped')
+				DROP TABLE [CustomAdventureWorksDW].[dbo].[AdventureWorks Returns Data]
+			END
+
+		ELSE
+			BEGIN
+				PRINT('[CustomAdventureWorksDW].[dbo].[AdventureWorks Returns Data] DOES NOT EXIST, Created')
+				CREATE TABLE [CustomAdventureWorksDW].[dbo].[AdventureWorks Returns Data] (
+					[ReturnDate] date,
+					[TerritoryKey] int NOT NULL,
+					[ProductKey] int NOT NULL,
+					[ReturnQuantity] int
+					)
+			END
+
+	-- If no exception occurs, commit the transaction
+    COMMIT TRANSACTION T21RDT;
+
+END TRY
+
+BEGIN CATCH
+    -- If an exception occurs, roll back the transaction
+    IF @@ERROR <> 0
+		BEGIN
+			ROLLBACK TRANSACTION T21RDT;
+			-- Optionally, you can log or handle the error here
+			-- For example:
+			PRINT 'Error occurred: ' + ERROR_MESSAGE();
+		END
+END CATCH;
+
+
+
+
+
+BEGIN TRY
+
+    BEGIN TRANSACTION T22RDBI; -- Start the transaction
+	
+    -- Your main content of the script here
+		-- import the file
+		BULK INSERT [CustomAdventureWorksDW].[dbo].[AdventureWorks Returns Data]
+		FROM 'F:\Power BI\filesfrom internet\adventure-works-main\data\AdventureWorks Returns Data.csv'
+		WITH (
+			FORMAT='CSV',
+			FIRSTROW=2,
+			FIELDTERMINATOR = ',', 
+			ROWTERMINATOR = '0x0a'
+			)
+
+    -- If no exception occurs, commit the transaction
+    COMMIT TRANSACTION T22RDBI;
+
+END TRY
+
+BEGIN CATCH
+    -- If an exception occurs, roll back the transaction
+    IF @@ERROR <> 0
+		BEGIN
+			ROLLBACK TRANSACTION T22RDBI;
+			-- Optionally, you can log or handle the error here
+			-- For example:
+			PRINT 'Error occurred: ' + ERROR_MESSAGE();
+		END
+END CATCH;
+
+
+
+SELECT TOP 10000
+*
+FROM [CustomAdventureWorksDW].[dbo].[AdventureWorks Returns Data]
+
+
+
+----------------------------------------------------------------------------------------------------------------
+
+
+
+SELECT TOP 10000
+*
+FROM [CustomAdventureWorksDW].[dbo].[AdventureWorks Customer Lookup]
+
+
+SELECT TOP 10000
+*
+FROM [CustomAdventureWorksDW].[dbo].[AdventureWorks Sales Data]
+
+
+SELECT TOP 10000
+*
+FROM [CustomAdventureWorksDW].[dbo].[AdventureWorks Customer Lookup]
+INNER JOIN [CustomAdventureWorksDW].[dbo].[AdventureWorks Sales Data] ON [CustomAdventureWorksDW].[dbo].[AdventureWorks Sales Data].CustomerKey = [CustomAdventureWorksDW].[dbo].[AdventureWorks Customer Lookup].CustomerKey
+
+
+----------------------------------------------------------------------------------------------------------------
+
+exec sp_help '[CustomAdventureWorksDW].[dbo].[AdventureWorks Product Lookup]'

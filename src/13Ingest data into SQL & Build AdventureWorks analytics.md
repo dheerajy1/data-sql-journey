@@ -567,7 +567,387 @@ END CATCH;
 
 ---
 
+## viii. AdventureWorks Calendar Lookup
 
+create table
+
+```sql
+BEGIN TRY
+
+    BEGIN TRANSACTION T17CALT; -- Start the transaction
+
+	-- Your main content of the script here
+		
+		IF OBJECT_ID(N'[CustomAdventureWorksDW].[dbo].[AdventureWorks Calendar Lookup]', N'U') IS NOT NULL
+			BEGIN
+				PRINT('[CustomAdventureWorksDW].[dbo].[AdventureWorks Calendar Lookup] EXISTS, Dropped')
+				DROP TABLE [CustomAdventureWorksDW].[dbo].[AdventureWorks Calendar Lookup]
+			END
+
+		ELSE
+			BEGIN
+				PRINT('[CustomAdventureWorksDW].[dbo].[AdventureWorks Calendar Lookup] DOES NOT EXIST, Created')
+				CREATE TABLE [CustomAdventureWorksDW].[dbo].[AdventureWorks Calendar Lookup] (
+					[Date] date
+					)
+			END
+
+	-- If no exception occurs, commit the transaction
+    COMMIT TRANSACTION T17CALT;
+
+END TRY
+
+BEGIN CATCH
+    -- If an exception occurs, roll back the transaction
+    IF @@ERROR <> 0
+		BEGIN
+			ROLLBACK TRANSACTION T17CALT;
+			-- Optionally, you can log or handle the error here
+			-- For example:
+			PRINT 'Error occurred: ' + ERROR_MESSAGE();
+		END
+END CATCH;
+```
+
+bulk import
+
+```sql
+BEGIN TRY
+
+    BEGIN TRANSACTION T18CALBI; -- Start the transaction
+	
+    -- Your main content of the script here
+		-- import the file
+		BULK INSERT [CustomAdventureWorksDW].[dbo].[AdventureWorks Calendar Lookup]
+		FROM 'path\AdventureWorks Calendar Lookup.csv'
+		WITH (
+			FORMAT='CSV',
+			FIRSTROW=2,
+			FIELDTERMINATOR = ',', 
+			ROWTERMINATOR = '0x0a'
+			)
+
+    -- If no exception occurs, commit the transaction
+    COMMIT TRANSACTION T18CALBI;
+
+END TRY
+
+BEGIN CATCH
+    -- If an exception occurs, roll back the transaction
+    IF @@ERROR <> 0
+		BEGIN
+			ROLLBACK TRANSACTION T18CALBI;
+			-- Optionally, you can log or handle the error here
+			-- For example:
+			PRINT 'Error occurred: ' + ERROR_MESSAGE();
+		END
+END CATCH;
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714568453650/35dbbb2e-b54d-4295-8869-52553d760e1a.png)
+
+## ix. AdventureWorks Territory Lookup
+
+create table
+
+```sql
+BEGIN TRY
+
+    BEGIN TRANSACTION T19TLT; -- Start the transaction
+
+	-- Your main content of the script here
+		
+		IF OBJECT_ID(N'[CustomAdventureWorksDW].[dbo].[AdventureWorks Territory Lookup]', N'U') IS NOT NULL
+			BEGIN
+				PRINT('[CustomAdventureWorksDW].[dbo].[AdventureWorks Territory Lookup] EXISTS, Dropped')
+				DROP TABLE [CustomAdventureWorksDW].[dbo].[AdventureWorks Territory Lookup]
+			END
+
+		ELSE
+			BEGIN
+				PRINT('[CustomAdventureWorksDW].[dbo].[AdventureWorks Territory Lookup] DOES NOT EXIST, Created')
+				CREATE TABLE [CustomAdventureWorksDW].[dbo].[AdventureWorks Territory Lookup] (
+					[SalesTerritoryKey] int NOT NULL,
+					[Region] varchar(50),
+					[Country] varchar(50),
+					[Continent] varchar(50)
+					)
+			END
+
+	-- If no exception occurs, commit the transaction
+    COMMIT TRANSACTION T19TLT;
+
+END TRY
+
+BEGIN CATCH
+    -- If an exception occurs, roll back the transaction
+    IF @@ERROR <> 0
+		BEGIN
+			ROLLBACK TRANSACTION T19TLT;
+			-- Optionally, you can log or handle the error here
+			-- For example:
+			PRINT 'Error occurred: ' + ERROR_MESSAGE();
+		END
+END CATCH;
+```
+
+bulk import
+
+```sql
+BEGIN TRY
+
+    BEGIN TRANSACTION T20TLBI; -- Start the transaction
+	
+    -- Your main content of the script here
+		-- import the file
+		BULK INSERT [CustomAdventureWorksDW].[dbo].[AdventureWorks Territory Lookup]
+		FROM 'path\AdventureWorks Territory Lookup.csv'
+		WITH (
+			FORMAT='CSV',
+			FIRSTROW=2,
+			FIELDTERMINATOR = ',', 
+			ROWTERMINATOR = '0x0a'
+			)
+
+    -- If no exception occurs, commit the transaction
+    COMMIT TRANSACTION T20TLBI;
+
+END TRY
+
+BEGIN CATCH
+    -- If an exception occurs, roll back the transaction
+    IF @@ERROR <> 0
+		BEGIN
+			ROLLBACK TRANSACTION T20TLBI;
+			-- Optionally, you can log or handle the error here
+			-- For example:
+			PRINT 'Error occurred: ' + ERROR_MESSAGE();
+		END
+END CATCH;
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714568555328/3707ca08-4167-4954-902e-12538970f6a4.png)
+
+## x. AdventureWorks Returns Data
+
+create table
+
+```sql
+BEGIN TRY
+
+    BEGIN TRANSACTION T21RDT; -- Start the transaction
+
+	-- Your main content of the script here
+		
+		IF OBJECT_ID(N'[CustomAdventureWorksDW].[dbo].[AdventureWorks Returns Data]', N'U') IS NOT NULL
+			BEGIN
+				PRINT('[CustomAdventureWorksDW].[dbo].[AdventureWorks Returns Data] EXISTS, Dropped')
+				DROP TABLE [CustomAdventureWorksDW].[dbo].[AdventureWorks Returns Data]
+			END
+
+		ELSE
+			BEGIN
+				PRINT('[CustomAdventureWorksDW].[dbo].[AdventureWorks Returns Data] DOES NOT EXIST, Created')
+				CREATE TABLE [CustomAdventureWorksDW].[dbo].[AdventureWorks Returns Data] (
+					[ReturnDate] date,
+					[TerritoryKey] int NOT NULL,
+					[ProductKey] int NOT NULL,
+					[ReturnQuantity] int
+					)
+			END
+
+	-- If no exception occurs, commit the transaction
+    COMMIT TRANSACTION T21RDT;
+
+END TRY
+
+BEGIN CATCH
+    -- If an exception occurs, roll back the transaction
+    IF @@ERROR <> 0
+		BEGIN
+			ROLLBACK TRANSACTION T21RDT;
+			-- Optionally, you can log or handle the error here
+			-- For example:
+			PRINT 'Error occurred: ' + ERROR_MESSAGE();
+		END
+END CATCH;
+```
+
+bulk import
+
+```sql
+BEGIN TRY
+
+    BEGIN TRANSACTION T22RDBI; -- Start the transaction
+	
+    -- Your main content of the script here
+		-- import the file
+		BULK INSERT [CustomAdventureWorksDW].[dbo].[AdventureWorks Returns Data]
+		FROM 'path\AdventureWorks Returns Data.csv'
+		WITH (
+			FORMAT='CSV',
+			FIRSTROW=2,
+			FIELDTERMINATOR = ',', 
+			ROWTERMINATOR = '0x0a'
+			)
+
+    -- If no exception occurs, commit the transaction
+    COMMIT TRANSACTION T22RDBI;
+
+END TRY
+
+BEGIN CATCH
+    -- If an exception occurs, roll back the transaction
+    IF @@ERROR <> 0
+		BEGIN
+			ROLLBACK TRANSACTION T22RDBI;
+			-- Optionally, you can log or handle the error here
+			-- For example:
+			PRINT 'Error occurred: ' + ERROR_MESSAGE();
+		END
+END CATCH;
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714580814479/c6f7d5b9-b365-4e78-b2d5-cfb848432782.png)
+
+---
+
+# 2\. Ingest Data into Power BI
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714569673534/320fe72f-a4ff-4205-835a-341da460f8c0.png)
+
+---
+
+# 4\. Transformations
+
+## i. AdventureWorks Sales Data
+
+no transformations
+
+## ii. AdventureWorks Product Lookup
+
+Changed to Currency
+
+* I changed the column data types in sql server itself as I want to use Direct query instead of import.
+    
+
+RemoveColumns
+
+* ProductSize
+    
+
+AddColumn
+
+* based on a condition before hypen delimiter on column ProductSKU
+    
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714580852771/c2fa24ca-4753-41f6-a956-89597af8605e.png)
+
+column rename
+
+* SKU Type
+    
+
+change data type
+
+* Text
+    
+
+Replace
+
+* "0", to "NA" for column ProductStyle
+    
+
+AddColumn
+
+* based on a condition ProductPrice \* 0.9
+    
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714580887339/a456c941-21cc-4577-9c06-dbe47da42229.png)
+
+Transformation done for Product lookup:
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714580914937/9e6d7e88-4459-41b7-a731-cf694b7501bc.png)
+
+## iii. AdventureWorks Product Categories Lookup
+
+change column type
+
+* ProductCategoryKey to Int
+    
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714580715203/7421322c-8d2a-4333-b1b4-d076e15e248c.png)
+
+## iv. AdventureWorks Product Subcategories Lookup
+
+None for me.
+
+## v. AdventureWorks Customer Lookup
+
+RemoveRowsWithErrors:
+
+* CustomerKey
+    
+
+Filter rows
+
+* CustomerKey remove nulls, remove empty
+    
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714581353265/b956db18-d611-447f-b675-238b878d5d50.png)
+
+Capital S starting letter of the word
+
+* Prefix, Firstname, Lastname
+    
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714581537891/89fb3281-a051-4661-aace-f37ef9644f3d.png)
+
+AddColumn
+
+* Combine Prefix, FirstName, LastName
+    
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714581869843/1a9698af-ca43-4145-9ac5-8567d24f8aa4.png)
+
+addcolumn
+
+* extract from emailaddress column and rename to Domain Name
+    
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714582354889/b45a4ec8-14a5-441c-9a5a-168f3277299c.png)
+
+## vi. AdventureWorks Calendar Lookup
+
+add columns
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714584337965/2a610932-3b8b-4c6c-ad5f-14a70c1324c1.png)
+
+## vii. AdventureWorks Territory Lookup
+
+None
+
+## viii. AdventureWorks Returns Data
+
+None
+
+## ix. Rolling Calendar
+
+Blank Query and enter 01-01-2023
+
+right click source and choose insert step after to get custom1
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714584314680/59c3ec24-25c0-4601-81f6-21ba91723fe5.png)
+
+## x. Measure Table
+
+select Enter data option and do not type any info.
+
+Note:
+
+remove the column the measure table.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714636159999/101570cb-4c35-4e41-a4b3-8de84d36bea2.png)
 
 
 

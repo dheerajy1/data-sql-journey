@@ -950,12 +950,784 @@ remove the column the measure table.
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714636159999/101570cb-4c35-4e41-a4b3-8de84d36bea2.png)
 
 
+# 5\. Modeling
+
+Building relationships
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714627522770/2c14f962-7c6a-4bf0-82d1-c3608686458e.png)
+
+---
+
+# 6\. Measures
+
+## i. Calendar Lookup
+
+Mark date column as date column.
+
+change format of date column to short date.
+
+Date Hierarchy
+
+Calculated columns:
+
+Day of Week
+
+Return type: **2**, week begins on Monday (1) and ends on Sunday (7).
+
+```sql
+Day of Week = 
+    WEEKDAY(
+        'Calendar Lookup'[Date],
+        2
+    )
+```
+
+Month Number (SWITCH)
+
+```sql
+Month Number (SWITCH) = 
+    SWITCH(
+            'Calendar Lookup'[Month Name],
+            "January", "1",
+            "February","2",
+            "March","3",
+            "April","4",
+            "May","5",
+            "June","6",
+            "July","7",
+            "August","8",
+            "September","9",
+            "October","10",
+            "November","11",
+            "December","12"
+    )
+```
+
+Month Short
+
+```sql
+Month Short = 
+    UPPER(
+        LEFT(
+            'Calendar Lookup'[Month Name],
+            3
+        )
+    )
+```
+
+Weekend
+
+```sql
+Weekend = 
+    SWITCH(
+        TRUE(),
+        'Calendar Lookup'[Day of Week] IN {6,7}, "Weekend",
+        "Weekday"
+    )
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714639484583/e854ad68-9db3-4f5f-baa9-8f2eceb81031.png)
+
+## ii. Customer Lookup
+
+Don't summarize the Annual income column, total children column.
+
+change format of Birthdate column to short.
+
+Calculated columns:
+
+Birth Year
+
+```sql
+Birth Year = 
+    YEAR('Customer Lookup'[BirthDate]
+    )
+```
+
+Customer Full Name (CC)
+
+```sql
+Customer Full Name (CC) = 
+'Customer Lookup'[Prefix]&" "&'Customer Lookup'[FirstName]&" "&'Customer Lookup'[LastName]
+```
+
+Is Parent?
+
+```sql
+Is Parent? = 
+    SWITCH(
+        TRUE(),
+        'Customer Lookup'[TotalChildren] > 0, "Yes",
+        "No"
+    )
+```
+
+Customer Priority
+
+```sql
+Customer Piority = 
+   SWITCH(
+        TRUE(),
+        'Customer Lookup'[AnnualIncome] > 100000 && 'Customer Lookup'[Is Parent?] = "Yes", "Priority",
+        "Standard"
+   )
+```
+
+Education Category
+
+```sql
+Education Category =
+    SWITCH(
+        'Customer Lookup'[EducationLevel],
+        "High School", "High School",
+        "Partial High School","High School",
+        "Bachelors","Undergrad",
+        "Partial College","Undergrad",
+        "Graduate Degree","Graduate"
+    )
+```
+
+Income Level
+
+```sql
+Income Level = 
+    SWITCH(
+        TRUE(),
+        'Customer Lookup'[AnnualIncome] >= 150000, "Very High",
+        'Customer Lookup'[AnnualIncome] >= 100000, "High",
+        'Customer Lookup'[AnnualIncome] >= 50000, "Average",
+        "Low"
+    )
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714641997823/af35026f-ba8f-4b30-a84d-5fb82f08da12.png)
+
+## iii. Customer Metric Selection calculated table
+
+perform this after building all measures in measure table.
+
+Modelling/parameters/new parameters/fields/select
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714727446934/aad95534-85e9-4328-bbfb-851c7e198c2f.png)
+
+```sql
+Customer Metric Selection = {
+    ("Total Customers", NAMEOF('Measure Table'[Total Customers]),0),
+    ("Revenue per Customer", NAMEOF('Measure Table'[Average Revenue per Customer]),1)
+}
+```
+
+rename columns
+
+Customer Metric Selection
+
+hide in report view
+
+Customer Metric Selection Fields
+
+Customer Metric Selection Order
+
+## iv. Price Adjustment (%) calculated table
+
+perform this after building all measures in measure table.
+
+Modelling/parameters/new parameters/numeric range/select
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714727625759/0d3ff000-5ed9-44f2-bce2-facc65beda01.png)
+
+```sql
+Price Adjustment (%) = GENERATESERIES(-1, 1, 0.1)
+```
+
+rename & dont summarize
+
+Measure:
+
+Price Adjustment (%) Value
+
+```sql
+Price Adjustment (%) Value = 
+    SELECTEDVALUE(
+        'Price Adjustment (%)'[Price Adjustment (%)],
+        0
+        )
+```
+
+## v. Product Lookup
+
+hide in report view
+
+* ProductSubcategoryKey
+    
+
+Calculated column:
+
+Price Point
+
+```sql
+Price Point = 
+    SWITCH(
+        TRUE(),
+        'Product Lookup'[ProductPrice] > 500, "High",
+        'Product Lookup'[ProductPrice] > 100, "Mid-Range",
+        "Low"
+    )
+```
+
+SKU Category
+
+```sql
+SKU Category = 
+    LEFT(
+        'Product Lookup'[SKU Type],
+        SEARCH(
+            "-",
+            'Product Lookup'[SKU Type]
+        ) -1
+    )
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714643682936/c1185745-a98f-4a1f-829e-33a5db52bc15.png)
+
+## vi. Product Categories Lookup
+
+none
+
+## vii. Product Subcategories Lookup
+
+hide in report view
+
+* ProductCategoryKey
+    
+
+## viii. Product Metric Selection calculated table
+
+perform this after building all measures in measure table.
+
+Modelling/parameters/new parameters/fields
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714727132001/0e33e323-3fe6-4485-8ce5-68c3efb780a8.png)
+
+```sql
+Product Metric Selection = {
+    ("Orders", NAMEOF('Measure Table'[Total Orders]), 0),
+    ("Revenue", NAMEOF('Measure Table'[Total Revenue]), 1),
+    ("Profit", NAMEOF('Measure Table'[Total Profit]), 2),
+    ("Returns", NAMEOF('Measure Table'[Total Returns]), 3),
+    ("Return %", NAMEOF('Measure Table'[Return Rate]), 4)
+}
+```
+
+hide in report view
+
+* Product Metric Selection Fields
+    
+* Product Metric Selection Order
+    
+
+rename them
+
+Sort Product Metric Selection by Product Metric Selection Order
+
+## ix. Returns Data
+
+hide in report view
+
+* ProductKey
+    
+* ReturnDate
+    
+* TerritoryKey
+    
+
+## x. Rolling Calendar
+
+None
+
+## xi. Sales Data
+
+hide in report view
+
+* CustomerKey
+    
+* OrderDate
+    
+* ProductKey
+    
+* StockDate
+    
+* TerritoryKey
+    
+
+Calculated column:
+
+Quantity Type
+
+```sql
+Quantity Type = 
+    SWITCH(
+        TRUE(),
+        'Sales Data'[OrderQuantity] > 1, "Multiple Items",
+        "Single Item"
+    )
+```
+
+Retail Price
+
+set currency format.
+
+```sql
+Retail Price = 
+    RELATED(
+        'Product Lookup'[ProductPrice]
+        )
+```
+
+Revenue
+
+```sql
+Revenue = 
+    'Sales Data'[OrderQuantity] * 'Sales Data'[Retail Price]
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714644334720/ee6267d9-50cf-4900-b6a2-8f49f2b6ff92.png)
+
+## xii. Territory Lookup
+
+configure data categories:
+
+* continent
+    
+* country
+    
+
+add Territory Hierarchy
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714644508809/044f1ed4-4a63-409d-8cc3-52f554b8638a.png)
+
+## xiii. Measure Table
+
+Total Revenue
+
+Add the total revenue measure to the measure table and go to transform and delete the single column.
+
+```sql
+Total Revenue = 
+    SUMX(
+        'Sales Data',
+        'Sales Data'[OrderQuantity] 
+        * 
+        RELATED(
+            'Product Lookup'[ProductPrice]
+        )
+    )
+```
+
+YTD Revenue
+
+```sql
+YTD Revenue = 
+    CALCULATE(
+        [Total Revenue],
+        DATESYTD(
+            'Calendar Lookup'[Date]
+        )
+    )
+```
+
+Total Orders
+
+```sql
+Total Orders = 
+  DISTINCTCOUNT(
+    'Sales Data'[OrderNumber]
+  )
+```
+
+Weekend Orders
+
+```sql
+Weekend Orders = 
+    CALCULATE(
+        [Total Orders],
+        'Calendar Lookup'[Weekend] = "Weekend"
+    )
+```
+
+Total Returns
+
+```sql
+Total Returns = 
+ COUNT(
+    'Returns Data'[ReturnQuantity]
+ )
+```
+
+Total Cost
+
+```sql
+Total Cost = 
+    SUMX(
+        'Sales Data',
+        'Sales Data'[OrderQuantity]
+        *
+        RELATED(
+            'Product Lookup'[ProductCost]
+            )
+    )
+```
+
+Total Profit
+
+```sql
+Total Profit = 
+    [Total Revenue] - [Total Cost]
+```
+
+Total Customers
+
+```sql
+Total Customers = 
+DISTINCTCOUNT(
+    'Sales Data'[CustomerKey]
+)
+```
+
+Previous Month Revenue
+
+```sql
+Previous Month Revenue = 
+    CALCULATE(
+        [Total Revenue],
+        DATEADD(
+            'Calendar Lookup'[Date],
+            -1,
+            MONTH
+        )
+    )
+```
+
+Revenue Target
+
+```sql
+Revenue Target = 
+    [Previous Month Revenue] * 1.1
+```
+
+Revenue Target Gap
+
+```sql
+Revenue Target Gap = 
+    [Total Revenue] - [Revenue Target]
+```
+
+Quantity Returned
+
+```sql
+Quantity Returned = 
+    SUM(
+        'Returns Data'[ReturnQuantity]
+    )
+```
+
+Quantity Sold
+
+```sql
+Quantity Sold = 
+    SUM(
+        'Sales Data'[OrderQuantity]
+    )
+```
+
+Return Rate
+
+```sql
+Return Rate =
+    DIVIDE(
+        [Quantity Returned],
+        [Quantity Sold],
+        "No Sales"
+    )
+```
+
+Previous Month Profit
+
+```sql
+Previous Month Profit = 
+    CALCULATE(
+        [Total Profit],
+        DATEADD(
+            'Calendar Lookup'[Date],
+            -1,
+            MONTH
+        )
+    )
+```
+
+Profit Target
+
+```sql
+Profit Target = 
+    [Previous Month Profit] * 1.1
+```
+
+Profit Target Gap
+
+```sql
+Profit Target Gap = 
+    [Total Profit] - [Profit Target]
+```
+
+Previous Month Returns
+
+```sql
+Previous Month Returns = 
+    CALCULATE(
+        [Total Returns],
+        DATEADD(
+            'Calendar Lookup'[Date],
+            -1,
+            MONTH
+        )
+    )
+```
+
+Previous Month Orders
+
+```sql
+Previous Month Orders = 
+    CALCULATE(
+        [Total Orders],
+        DATEADD(
+            'Calendar Lookup'[Date],
+            -1,
+            MONTH
+        )
+    )
+```
+
+Order Target
+
+```sql
+Order Target = 
+    [Previous Month Orders] * 1.1
+```
+
+Order Target Gap
+
+```sql
+Order Target Gap = 
+    [Total Orders] - [Order Target]
+```
+
+Bulk Orders
+
+```sql
+Bulk Orders = 
+    CALCULATE(
+        [Total Orders],
+        'Sales Data'[OrderQuantity] > 1
+    )
+```
+
+Bike Sales
+
+```sql
+Bike Sales = 
+    CALCULATE(
+        [Quantity Sold],
+        'Product Categories Lookup'[CategoryName] = "Bikes"
+    )
+```
+
+Bike Returns
+
+```sql
+Bike Returns = 
+    CALCULATE(
+        [Quantity Returned],
+        'Product Categories Lookup'[CategoryName] = "Bikes"
+    )
+```
+
+Bike Return Rate
+
+```sql
+Bike Return Rate = 
+    CALCULATE(
+        [Return Rate],
+        'Product Categories Lookup'[CategoryName] = "Bikes"
+    )
+```
+
+Average Revenue per Customer
+
+```sql
+Average Revenue per Customer = 
+    DIVIDE(
+        [Total Revenue],
+        [Total Customers]
+    )
+```
+
+Average Retail Price
+
+```sql
+Average Retail Price = 
+    AVERAGE(
+        'Product Lookup'[ProductPrice]
+    )
+```
+
+Overall Average Price
+
+```sql
+Overall Average Price = 
+    CALCULATE(
+        [Average Retail Price],
+        ALL(
+            'Product Lookup'
+        )
+    )
+```
+
+ALL() - will ignore/removes any applied filters.
+
+High Ticket Orders
+
+```sql
+High Ticket Orders = 
+    CALCULATE(
+        [Total Orders],
+        FILTER(
+            'Product Lookup',
+            'Product Lookup'[ProductPrice] > [Overall Average Price]
+        )
+    )
+```
+
+All Returns
+
+```sql
+All Returns = 
+    CALCULATE(
+        [Total Returns],
+        ALL(
+            'Returns Data'
+        )
+    )
+```
+
+All Orders
+
+```sql
+All Orders = 
+    CALCULATE(
+        [Total Orders],
+        ALL(
+            'Sales Data'
+        )
+    )
+```
+
+Adjusted Price
+
+```sql
+Adjusted Price = 
+    [Average Retail Price] * (1 + 'Price Adjustment (%)'[Price Adjustment (%) Value])
+```
+
+Adjusted Revenue
+
+```sql
+Adjusted Revenue = 
+    SUMX(
+        'Sales Data',
+        'Sales Data'[OrderQuantity]
+        *
+        [Adjusted Price]
+    )
+```
+
+Adjusted Profit
+
+```sql
+Adjusted Profit = 
+    [Adjusted Revenue] - [Total Cost]
+```
+
+90-day Rolling Profit
+
+```sql
+90-day Rolling Profit = 
+    CALCULATE(
+        [Total Profit],
+        DATESINPERIOD(
+            'Calendar Lookup'[Date],
+            LASTDATE(
+                'Calendar Lookup'[Date]
+            ),
+            -90,
+            DAY
+        )
+    )
+```
+
+10-day Rolling Revenue
+
+```sql
+10-day Rolling Revenue = 
+    CALCULATE(
+        [Total Revenue],
+        DATESINPERIOD(
+            'Calendar Lookup'[Date],
+            MAX(
+                'Calendar Lookup'[Date]
+            ),
+            -10,
+            DAY
+        )
+    )
+```
+
+% of All Returns
+
+```sql
+% of All Returns = 
+    DIVIDE(
+        [Total Returns],
+        [All Returns]
+    )
+```
+
+% of All Orders
+
+```sql
+% of All Orders = 
+    DIVIDE(
+        [Total Orders],
+        [All Orders]
+    )
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714652431434/4faeefb2-1ad0-487e-8017-cadbaee35292.png)
+
+---
+
 
 # Conclusion
 
 Learning Objectives,
 
 1. Ingest data into SQL
+
+2. Connect to SQL Server in Power BI
+
+3. Transformations using Power Query
+
+4. Modeling, building relationships
+
+5. DAX Queries, Measures, parameters fields, parameters numeric range
 
     
 

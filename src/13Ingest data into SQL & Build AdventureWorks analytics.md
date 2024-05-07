@@ -1714,6 +1714,30 @@ Adjusted Profit =
 
 ---
 
+# 7\. Visualization
+
+## Exec Dashboard page
+
+Top 10 products Matrix visual:
+
+data bars
+
+KPI Monthly Returns:
+
+Distance to goal - distance direction: decreasing is positive. Next
+
+trend axis - direction: Low is good
+
+Bookmarks
+
+slicer
+
+set action for button by assigning action
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714670131405/de4e6300-ca14-457e-8714-799265714ab7.png align="center")
+
+
+
 
 # Conclusion
 
@@ -1729,7 +1753,7 @@ Learning Objectives,
 
 5. DAX Queries, Measures, parameters fields, parameters numeric range
 
-    
+6. data bars, Bookmarks, slicer, action for button
 
 # Source: \[[Link]()\]
 

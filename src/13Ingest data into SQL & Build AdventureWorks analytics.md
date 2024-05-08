@@ -1734,8 +1734,44 @@ slicer
 
 set action for button by assigning action
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714670131405/de4e6300-ca14-457e-8714-799265714ab7.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714670131405/de4e6300-ca14-457e-8714-799265714ab7.png)
 
+
+Category tooltip:
+
+hide Category Tooltip page
+
+set canvas background
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714714122783/e4326a36-10c1-4128-89fa-cc43c0ad11c2.png)
+
+## Map page:
+
+select image in selection panel and toggle action and set type to page navigation and designation to Map.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714717935920/8ddcd734-0ec9-401f-8bcf-6290dae15cd6.png)
+
+## Product Detail Page:
+
+Gauge Monthly vs Target visual:
+
+color conditional format for callout value
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714719803062/5267f88e-0d19-4d84-b8bf-73ba69efce18.png)
+
+slicer Price adjustment:
+
+make sure you create new parameters by Modelling/parameters/new parameters/numeric range/select
+
+the only you will get single value in slicer settings.
+
+Report summary:
+
+right click visual and select summarize
+
+Current month orders value
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714732133338/aa449bf8-2b75-4f89-8cec-459c43ab2070.png)
 
 
 
@@ -1754,6 +1790,13 @@ Learning Objectives,
 5. DAX Queries, Measures, parameters fields, parameters numeric range
 
 6. data bars, Bookmarks, slicer, action for button
+
+7. Design Tooltip page
+
+8. Map page
+
+9. Color conditional format
+
 
 # Source: \[[Link]()\]
 

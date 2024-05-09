@@ -1774,7 +1774,50 @@ Current month orders value
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714732133338/aa449bf8-2b75-4f89-8cec-459c43ab2070.png)
 
 
+## Customer Detail page
 
+add this text to i button in style settings:
+
+*Among customers in skilled manual roles in 2022, Ruben Suarez drove the most revenue at $4,683.*
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714738126432/e8aaa0cb-386d-48b3-a17f-20c8eeb8fd4c.png)
+
+## Q&A page
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714738521274/60be6cdc-0a5d-4af5-85e4-e5a0668e5999.png)
+
+## Decomposition Tree page:
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714739183490/760bab97-4fd8-4216-a168-590481322324.png)
+
+## Key Influencers page:
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714739719537/0f674498-4906-444b-a1ea-ebe2549193f2.png)
+
+---
+
+# Final dashboard:
+
+Completed successfully the Project AW dashboard.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715268184573/7832af25-8135-415b-baec-0a57bd4ca607.png)
+
+
+
+# Conclusion
+
+Learning Objectives,
+
+1. Ingest data into SQL
+    
+2. Connect and transform the raw source data
+    
+3. Design and build a relational model
+    
+4. Analyze the data with calculated columns & DAX measures
+    
+5. Design custom, interactive reports and dashboards
+    
 # Conclusion
 
 Learning Objectives,

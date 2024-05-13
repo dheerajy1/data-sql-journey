@@ -25,7 +25,7 @@ search for economic data and order by
 sp_search = fred.search('S&P', order_by = 'popularity')
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714799892626/d4063afc-49bc-4dc9-9897-0c79281a89ea.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714799892626/d4063afc-49bc-4dc9-9897-0c79281a89ea.png)
 
 ## Pull Raw Data & Plot
 
@@ -43,9 +43,9 @@ sp500.plot(figsize=(10,5), title = 'S&P 500', lw = 2)
 plt.show()
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714815062252/6bc52022-f209-403a-833a-bad07be76fad.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714815062252/6bc52022-f209-403a-833a-bad07be76fad.png)
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715350251243/07ab1746-f315-4d0d-9a0f-96e7975dbd4d.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715350251243/07ab1746-f315-4d0d-9a0f-96e7975dbd4d.png)
 
 
 # Transformations
@@ -80,7 +80,7 @@ unemp_search_df_filtered_states = unemp_search_df_filtered.loc[
 unemp_search_df_filtered_states.shape
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714832592574/a126d228-edc8-43ff-9956-e5c18f06157f.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714832592574/a126d228-edc8-43ff-9956-e5c18f06157f.png)
 
 ```python
 # Create an empty list to store all results
@@ -102,11 +102,11 @@ for myid in unemp_search_df_filtered_states.index:
 unemp_states_df = pd.concat(all_results, axis = 1)
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714834617100/ab014092-948e-4cee-9c2e-83d13f0d5a0a.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714834617100/ab014092-948e-4cee-9c2e-83d13f0d5a0a.png)
 
 columns to drop:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714835218262/e492da99-e73a-417b-8a0d-331dcca5a282.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714835218262/e492da99-e73a-417b-8a0d-331dcca5a282.png)
 
 findings nulls and visualizing nulls distribution:
 
@@ -118,7 +118,7 @@ unemp_states_df_filtered.isna().sum(axis = 1)
 unemp_states_df_filtered.isna().sum(axis = 1).plot()
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714835864286/2c73088e-c843-4435-830a-7a3d6d7f91d2.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714835864286/2c73088e-c843-4435-830a-7a3d6d7f91d2.png)
 
 replacing the serices Id's with actual state name:
 
@@ -127,7 +127,7 @@ id_to_state = unemp_search_df_filtered_states['title'].str.replace('Unemployment
 unemp_states.columns = [id_to_state[c] for c in unemp_states.columns]
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714887716740/62e6d9cd-36f3-43f8-bece-c1bd0d73c1ce.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714887716740/62e6d9cd-36f3-43f8-bece-c1bd0d73c1ce.png)
 
 
 ## Pull May2020 Unemployment Rate Per State
@@ -152,7 +152,7 @@ unemp_states_May20.set_xlabel('% Unemployed')
 plt.show()
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714892808648/0611195a-e9e2-4103-94fb-098da0a59b96.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714892808648/0611195a-e9e2-4103-94fb-098da0a59b96.png)
 
 ## Pull Participation Rate
 
@@ -180,23 +180,23 @@ part_filtered = part_search.loc[
 part_filtered
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714894424358/3f32162a-8384-4029-b6cf-17c27a8499c6.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714894424358/3f32162a-8384-4029-b6cf-17c27a8499c6.png)
 
 Get data for each series ID
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714895120557/ed8aa4de-a709-42e4-8d7d-4379a11f6ac7.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714895120557/ed8aa4de-a709-42e4-8d7d-4379a11f6ac7.png)
 
 concatenate using pd
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714898715226/d17adab5-9dc4-4713-a570-82818403c64b.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714898715226/d17adab5-9dc4-4713-a570-82818403c64b.png)
 
 columns to drop:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714899057247/89f59e8b-620b-4ccc-b7c5-18d0de31a6e0.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714899057247/89f59e8b-620b-4ccc-b7c5-18d0de31a6e0.png)
 
 Now swap id with actual state name:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714900133153/643d4aaf-632a-41a0-93fc-db36cd6dbe5d.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714900133153/643d4aaf-632a-41a0-93fc-db36cd6dbe5d.png)
 
 ---
 
@@ -206,7 +206,7 @@ Now swap id with actual state name:
 unemp_states.query('index >= 2020 and index < 2022')['New York'].plot()
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714901933653/2b6443ec-6682-4632-bb3c-62e71dede52c.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714901933653/2b6443ec-6682-4632-bb3c-62e71dede52c.png)
 
 ```python
 fig, ax = plt.subplots()
@@ -215,7 +215,7 @@ unemp_states.query('index >= 2020 and index < 2022')['New York'].plot(ax = ax)
 part_states_filter_colsw.query('index >= 2020 and index < 2022')['New York'].plot(ax = ax)
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714902054601/2d73d89e-5c4b-4f2a-9edb-cc7b5117be05.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714902054601/2d73d89e-5c4b-4f2a-9edb-cc7b5117be05.png)
 
 for any state:
 
@@ -240,7 +240,7 @@ fig.legend(labels = ['Unemployement', 'Participation'])
 plt.show()
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714904223537/9bc68445-488b-4aed-928e-e153a1dd5ab5.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714904223537/9bc68445-488b-4aed-928e-e153a1dd5ab5.png)
 
 for all states:
 
@@ -291,7 +291,7 @@ fig.legend(labels = ['Unemployement', 'Participation'])
 plt.show()
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714905416183/41e1b809-2a00-4345-8505-8a14ef17281d.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1714905416183/41e1b809-2a00-4345-8505-8a14ef17281d.png)
 
 # Conclusion
 

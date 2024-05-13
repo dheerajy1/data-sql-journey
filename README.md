@@ -29,5 +29,5 @@ The schema : Project Name, SQL File location & other file types, src/md File Loc
 | 12 | Clustered Column chart in Power BI IBCS | [Link¹](<>) | [Link²](<src/12ClusteredColumnchartIBCS.md>) | [Link³](<https://dheerajy1.hashnode.dev/clustered-column-chart-in-power-bi-ibcs>) |
 | 13 | Ingest data into SQL & Build AdventureWorks analytics dashboard in Microsoft Power BI | [Link¹](<sql/AdventureWorks Dashboard MA PBI.sql>) | [Link²](<src/13Ingest data into SQL & Build AdventureWorks analytics.md>) | [Link³](<https://dheerajy1.hashnode.dev/ingest-data-into-sql-build-adventureworks-analytics-dashboard-in-microsoft-power-bi>) |
 | 14 | Economic Data Analysis python | [Link¹](<https://dheerajy1.hashnode.dev/economic-data-analysis-project-with-python-pandas>) | [Link²](<src/14 Economic Data Analysis python.md>) | [Link³](<>) |
-| 15 | Perform read & write on SQL Server using Python | [Link¹](<>) | [Link²](<src/15-Perform-read-&-write-on-SQL-Server-using-Python>) | [Link³](<>) |
+| 15 | Perform read & write on SQL Server using Python | [Link¹](<>) | [Link²](<src/15-Perform-read-&-write-on-SQL-Server-using-Python.md>) | [Link³](<>) |
 

@@ -358,14 +358,237 @@ DBCC OPENTRAN:
 killed all open sessions.
 
 
+# 7\. Bulk insert CSV Files (Data Files) to SQL Server
 
+Change the current working directory to the specified path where order files are located.
+
+```python
+os.chdir(r'path\orders')
+```
+
+List all files and directories in the current working directory.
+
+```python
+os.listdir()
+```
+
+Retrieve and return the current working directory of the process.
+
+```python
+os.getcwd()
+```
+
+Create a list of tuples containing file information for all CSV files in the current directory.
+
+```python
+# Create a list of tuples containing file information for all CSV files in the current directory.
+# Each tuple will contain a formatted string and the absolute path to the file.
+data_files = [
+    [
+        f'{os.path.basename(os.getcwd())} {fn.split(".")[0]}',  # Create a formatted string with the directory name and the file name (without extension)
+        os.path.join(os.getcwd(), fn)                           # Generate the full path to the file
+    ] 
+    for fn in os.listdir(os.getcwd())                           # List all files in the current directory
+    if fn.endswith('.csv')                                      # Filter the list to include only files that end with '.csv'
+]
+
+data_files  # This line evaluates to the list of data_files, which can be used for further processing or output.
+```
+
+## i. Read CSV data into pandas dataframe
+
+```python
+orderSchema = {
+    "SalesOrderNumber": str,
+    "SalesOrderLineNumber": int,
+    "OrderDate": 'category',
+    "CustomerName": str,
+    "Email": str,
+    "Item": str,
+    "Quantity": int,
+    "UnitPrice": float,
+    "Tax": float
+}
+df = pd.DataFrame()
+for path in data_files:
+    newdata = pd.read_csv(path[1], header= None, names=orderSchema.keys(), dtype=orderSchema, parse_dates=["OrderDate"])
+    df = pd.concat([df, newdata], ignore_index=True)
+df
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715180764844/a05ba7cb-ae5f-41cd-91ce-65bc3ab75770.png)
+
+Group the DataFrame 'df' by the year part of the 'OrderDate' column.
+
+```python
+df.groupby(pd.to_datetime(df['OrderDate']).dt.year).count()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715180745635/cf337252-40cd-489d-acc8-f6572d13972d.png)
+
+```python
+df[['OrderDate', 'SalesOrderNumber']].groupby(pd.to_datetime(df['OrderDate']).dt.year)['SalesOrderNumber'].count().reset_index(name='SalesOrderNumber')
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715180807448/b43f79d1-ea12-4180-b478-0fbe8d872d8b.png)
+
+```python
+df.groupby(pd.to_datetime(df['OrderDate']).dt.year).agg({
+    'SalesOrderNumber':'count','SalesOrderLineNumber':'count',
+    'CustomerName':'count','Email':'count',
+    'Item':'count', 'Quantity':'count',
+    'UnitPrice':'count', 'Tax':'count'
+    }).reset_index()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715180838636/e4f1b334-3612-45c1-9f9e-12367c8023b0.png)
+
+## ii. Clean df
+
+Find duplicates in SalesOrderNumber column:
+
+```python
+df['SalesOrderNumber'].duplicated().sum()
+```
+
+check duplicates in each year
+
+```python
+df_subset = df[['OrderDate','SalesOrderNumber']].loc[
+    pd.to_datetime(df['OrderDate']).dt.year == 2019
+]
+df_subset['SalesOrderNumber'].duplicated().sum()
+```
+
+```python
+df.groupby(pd.to_datetime(df['OrderDate']).dt.year)['SalesOrderNumber'].apply(lambda x: x.duplicated().sum()).reset_index(name='DuplicatedSalesOrderNumber')df_subset = df.groupby(pd.to_datetime(df['OrderDate']).dt.year).agg({
+    'SalesOrderNumber':'count','SalesOrderLineNumber':'count',
+    'CustomerName':'count','Email':'count',
+    'Item':'count', 'Quantity':'count',
+    'UnitPrice':'count', 'Tax':'count'
+    }).reset_index()
+df_subset['DuplicatedSalesOrderNumber'] = df.groupby(pd.to_datetime(df['OrderDate']).dt.year)['SalesOrderNumber'].apply(lambda x: x.duplicated().sum()).to_list()
+df_subset
+```
+
+plot to visualize the duplicates:
+
+```python
+sns.set_theme(style="ticks")
+fig, ax = plt.subplots()
+
+# Set the width of each bar
+bar_width = 0.35
+
+# Calculate the position of each bar on the x-axis
+r1 = df_subset['OrderDate'].to_list() # [2019, 2020, 2021]
+r2 = [x + bar_width for x in r1]
+
+# Plot the Sales Order Count
+ax.bar(r1, df_subset['SalesOrderNumber'], color='steelblue', width=bar_width, label='Sales Order Count')
+
+# Plot the Duplicated Sales Order Count
+ax.bar(r2, df_subset['DuplicatedSalesOrderNumber'], color='red', width=bar_width, label='Duplicated Sales Order Count')
+
+# Set labels and title
+ax.set_xlabel('Year')
+ax.set_ylabel('Count')
+ax.set_title('Sales Order Count and Duplicated Sales Order Count by Year')
+
+# Set the x-axis tick labels
+ax.set_xticks([r + bar_width/2 for r in r1])
+ax.set_xticklabels(df_subset['OrderDate'])
+
+# Add legend
+ax.legend()
+
+# Display the plot
+plt.show()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715181012803/e5312a9d-b9fa-405b-b4de-faba22fa976f.png)
+
+using sns barplot:
+
+```python
+sns.set_theme(style="ticks")
+fig, axs = plt.subplots(1, 2, figsize = (10,5), sharey= True)
+
+# Flatten the array of axes (subplots) for easier iteration
+axs = axs.flatten()
+
+# Plot the Sales Order Count
+sns.barplot(data=df_subset, x='OrderDate', y='SalesOrderNumber', ax=axs[0])
+axs[0].set_xlabel('Year')
+axs[0].set_ylabel('')
+
+# Plot the Duplicated Sales Order Count
+sns.barplot(data=df_subset, x='OrderDate', y='DuplicatedSalesOrderNumber', ax=axs[1], color='black')
+axs[1].set_xlabel('Year')
+axs[1].set_ylabel('Duplicated Sales Order Count')
+
+# Add a legend to the figure with the labels 'Unemployement' and 'Participation'
+fig.legend(labels = ['Sales Order Count', 'Duplicated Sales Order Count'])
+
+# Display the plot
+plt.show()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715181039104/f5bebb3d-63e7-4aa2-954e-cde783a80d22.png)
+
+using sns barplot adjacent
+
+```python
+sns.set_style("whitegrid")
+
+df_subset = df_subset[['OrderDate', 'SalesOrderNumber', 'DuplicatedSalesOrderNumber']].melt(id_vars='OrderDate', var_name='Variable', value_name='Count')
+
+sns.barplot(x='OrderDate', y='Count', hue='Variable', data=df_subset)
+
+plt.xlabel('Order Date')
+plt.ylabel('Count')
+plt.title('Sales Order Numbers vs Duplicated Sales Order Numbers')
+plt.legend(title='Variable')
+plt.show()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715181065561/593ef399-3abb-40a9-bf9d-235b7e599ba8.png)
+
+drop duplicate
+
+```python
+df_clean = df.drop_duplicates(subset = 'SalesOrderNumber')
+df_clean.duplicated().sum()
+df_clean.shape
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715181336142/80ff819b-3347-45f6-9c4d-6758945567cc.png)
+
+check nulls
+
+```python
+df_clean.isnull().sum(axis=1).plot()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715181101015/cab213b8-9b10-471f-97c3-55e4a29e5283.png)
+
+rebuild indexes:
+
+```python
+df_clean = df.drop_duplicates(subset = 'SalesOrderNumber')
+df_clean.reset_index(drop=True, inplace=True)
+df_clean.duplicated().sum()
+df_clean.shape
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715183578430/5c46c229-ff7e-48f8-b0ce-9d97d90d0e1b.png)
 
 
 # Conclusion
 
 Learning Objectives,
 
-1. Python
+1. Python, sql server, sqlalchemy lib, pandas lib. seaborn lib,
     
 2. connect to sql server using python.
     
@@ -375,9 +598,10 @@ Learning Objectives,
     
 5. Using Pandas read\_sql\_query() menthod - DQL
     
-6. SQL Server
+6. Bulk insert CSV Files
     
-7. sqlalchemy lib, pandas lib
+7. finding duplicates, check nulls, clean data, rebuild indexes:
+    
     
 
 # Source: \[Link\]

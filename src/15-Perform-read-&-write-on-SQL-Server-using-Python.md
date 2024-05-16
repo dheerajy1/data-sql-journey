@@ -583,6 +583,187 @@ df_clean.shape
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715183578430/5c46c229-ff7e-48f8-b0ce-9d97d90d0e1b.png)
 
+## iii. Send data to SQL Server using pandas to\_sql() method
+
+```python
+df_clean.to_sql(table_name, engine, if_exists='replace', index=False)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715181445229/770a2f56-46e4-4737-a9a2-d411807ab4cf.png)
+
+```python
+df_clean
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715183723440/a7d1b60c-d74b-415a-b56f-c1c04710fcb4.png)
+
+## iii. Create data for orders year 2022
+
+Generate random number function
+
+```python
+def genran(type = 'int'):
+    if type == 'int':
+        ran = int((random.randint(1,9)*random.random()*random.random())*1000) 
+    else:
+        ran = round((random.randint(1,9)*random.random()*random.random())*1000, random.randint(2,4))
+    
+    return ran if ran < df['SalesOrderNumber'].count() else None
+```
+
+Generate date function
+
+```python
+strtdate = datetime.date(2022,1,1)
+enddate = datetime.date(2022,12,31)
+delta = datetime.timedelta(days=1)
+datevar = strtdate
+
+def get_date():
+    global datevar
+    if datevar <= enddate and datevar != strtdate:
+        storedate = datevar
+        datevar = datevar + delta
+        return storedate
+    else:
+        datevar = datevar + delta
+        return strtdate
+```
+
+Generating Sales Order Data with Incrementing Sales Order Numbers
+
+```python
+sta_son = int(df_clean['SalesOrderNumber'].str[2:].max()) + 1
+
+key_list = df.columns.to_list()
+dict_data = {key: [] for key in key_list}
+
+for row in range(0,1000):
+    
+    dict_data['SalesOrderNumber'].append('SO' + str(sta_son))
+    
+    dict_data['SalesOrderLineNumber'].append(random.randint(1,7))
+    
+    dict_data['OrderDate'].append(get_date())
+    
+    cusema = df_clean[['CustomerName', 'Email']].loc[
+    df_clean.index == genran()]
+    
+    dict_data['CustomerName'].append(cusema.values[0][0])
+    dict_data['Email'].append(cusema.values[0][1])
+    
+    dict_data['Item'].append(df_clean['Item'].loc[
+    df_clean.index == genran()].values[0])
+    
+    dict_data['Quantity'].append(1)
+    
+    dict_data['UnitPrice'].append(genran('round'))
+    
+    dict_data['Tax'].append(genran('round'))
+    
+    sta_son += 1
+    
+dict_data
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715183837143/7ca12325-2b22-4e48-9b5f-234823a8bdff.png)
+
+Create dataframe from the dict data
+
+```python
+df_gendata = pd.DataFrame(dict_data)
+df_gendata
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715183886669/f43ae168-10d5-43e0-b678-1eeb8f9d1192.png)
+
+## iv. Add the generated orders data for year 2022 to df\_clean
+
+16459 old + 2000 added = 18459 rows
+
+```python
+df_clean2 = pd.concat([df_clean, pd.DataFrame(dict_data)], ignore_index=True)
+df_clean2
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715184094922/c4851b34-507d-4b5f-8a4d-4bef933f781d.png)
+
+```python
+df_clean2.groupby(pd.to_datetime(df_clean2['OrderDate']).dt.year).count() #[['OrderDate','CustomerName']]
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715184127504/7a1d8135-9fb5-45fe-875b-2f562cf3e375.png)
+
+Data in df\_clean2.
+
+```python
+df_clean2.loc[
+    pd.to_datetime(df_clean2['OrderDate']).dt.year == 2022,
+    ['CustomerName', 'OrderDate', 'Item', 'Quantity', 'UnitPrice', 'Tax']
+]
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715187529852/b2d41a0e-fe3f-40de-8f00-92232af62ccb.png)
+
+check data from sql table
+
+```python
+table_name = 'Sales orders'
+
+query = f"""
+SELECT TOP 10000 
+YEAR(OrderDate) AS year,
+COUNT(SalesOrderNumber) AS [No of records],
+SUM(COUNT(SalesOrderNumber)) OVER(ORDER BY YEAR(OrderDate)) AS [Running records count]
+FROM [dballpurpose].[dbo].[Sales orders]
+GROUP BY YEAR(OrderDate)
+ORDER BY YEAR(OrderDate)
+"""
+
+df_salesorders = pd.read_sql_query(query, engine)
+df_salesorders
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715186881973/ef6c5be7-4718-40f4-9a6a-52e8d88b874d.png)
+
+## v. Send data for orders year 2022 to SQL Server
+
+```python
+table_name = 'Sales orders'
+df_clean2.to_sql(table_name, engine, if_exists= 'append', index=False)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715188054225/d930c16a-6e90-4cbf-b065-280fd3d8647f.png)
+
+Errors:
+
+1. **TypeError**: the dtype datetime64\[ns\] is not supported for parsing, pass this column using parse\_dates instead.
+    
+    * `"OrderDate": 'category'`, specify `parse_dates=["OrderDate"]`
+        
+2. **TypeError**: cannot concatenate object of type '&lt;class 'list'&gt;'; only Series and DataFrame objs are valid
+    
+    * `df = pd.DataFrame()` initialize an empty DataFrame
+        
+3. **ValueError**: If using all scalar values, you must pass an index
+    
+    * To fix this error, you can pass an index when creating the DataFrame
+        
+4. **IndexError**: index 0 is out of bounds for axis 0 with size 0
+    
+    * rebuild indexes.
+        
+    * before rebuild indexes:
+        
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715183479275/a2cd8a7a-b5db-4bb3-982b-766228cfc0fe.png)
+
+* after rebuild indexes: `df_clean.reset_index(drop=True, inplace=True)`
+    
+
+5. **IndexError**: Boolean index has wrong length: 11038 instead of 18459
+    
+6. **MemoryError**:
 
 # Conclusion
 
@@ -601,7 +782,10 @@ Learning Objectives,
 6. Bulk insert CSV Files
     
 7. finding duplicates, check nulls, clean data, rebuild indexes:
-    
+
+8. Generate data for orders year 2022
+
+9. Send data for orders year 2022 to SQL Server
     
 
 # Source: \[Link\]

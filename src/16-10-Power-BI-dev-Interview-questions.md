@@ -1,6 +1,5 @@
 This article contains info about the Power BI dev Interview questions.
 
-# <mark>17th May</mark>
 
 # Q1: Total = a *\** b / c \* d. How do you optimise this dax?
 
@@ -44,11 +43,11 @@ TOTAL =
 
 Star schema:
 
-![Untitled-Diagram-521.png (493×362)](https://media.geeksforgeeks.org/wp-content/uploads/20190527113206/Untitled-Diagram-521.png)
+![Untitled-Diagram-521.png (493×362)](https://media.geeksforgeeks.org/wp-content/uploads/20190527113206/Untitled-Diagram-521.png align="left")
 
 Snowflake:
 
-![Lightbox](https://media.geeksforgeeks.org/wp-content/uploads/20190527113447/Untitled-Diagram-53.png)
+![Lightbox](https://media.geeksforgeeks.org/wp-content/uploads/20190527113447/Untitled-Diagram-53.png align="left")
 
 ---
 
@@ -66,7 +65,7 @@ Use-case scenarios for dataflows:
 
 Using dataflows to build a data warehouse
 
-# Q4: Different refreshes power BI?
+# Q4: Different refreshes in power BI?
 
 Power BI refresh types
 
@@ -88,22 +87,134 @@ This feature can help your report readers explore and customize the analysis of 
 Use a field parameter to control visual properties
 
 
+# Q6: What is RLS?
+
+Row-level security (RLS) with Power BI can be used to restrict data access for given users.
+
+Filters restrict data access at the row level, and you can define filters within roles.
+
+In the Power BI service, users with access to a workspace have access to semantic models in that workspace.
+
+Define roles and rules in Power BI Desktop
+
+Using the username() or userprincipalname() DAX function.
+
+username() will return a user in the format of DOMAIN\\User and userprincipalname() will return a user in the format of user@contoso.com
+
+# Q7: Join Disconnected tables?
+
+customers table
+
+```sql
+name	age	gender
+John	25	M
+Emily	32	F
+Michael	45	M
+Sarah	28	F
+David	37	M
+Jessica	41	F
+Robert	19	M
+Jennifer	36	F
+Christopher	52	M
+Amanda	30	F
+```
+
+address details table
+
+```sql
+address	city	state
+123 Main St	New York	NY
+456 Elm St	Los Angeles	CA
+789 Oak St	Chicago	IL
+321 Pine St	Houston	TX
+987 Maple Ave	Miami	FL
+654 Cedar Rd	Seattle	WA
+876 Birch Ln	Boston	MA
+234 Ash St	Atlanta	GA
+543 Walnut Dr	Dallas	TX
+890 Spruce Ave	San Francisco	CA
+```
+
+In power query transformations add indexcolumn.
+
+and then use merge
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715267037459/feede6cc-56ee-4310-9a68-cd7c3d5e4cd3.png)
+
+whenever another row is added to address an index will be created. so this index is called as surrogate key or Sudo key.
+
+# Q8: . What are different refresh options in Power BI?
+
+There are four key refresh options in Power BI, which are as follows:
+
+Package Refresh
+
+To synchronise the Power BI Desktop and Excel file between the Power BI service and OneDrive or SharePoint Online. But it doesn’t extract data from its original source, and the dataset is updated with what’s in the file within OneDrive.
+
+Model or Data Refresh
+
+Refreshes the dataset with data collected from the original source using the scheduled refresh or refresh now option. It requires a gateway for on-premise data sources.
+
+Tile Refresh
+
+Once data changes, it updates the cache for tile visuals on the dashboard every 15 minutes. You can force a tile refresh by clicking on the ellipsis (...) on the upper right side of a dashboard and selecting Refresh Dashboard tiles.
+
+Visual Container Refresh
+
+Refreshes the visual container and updates the cached report visuals within a dashboard once the data is changed.
+
+# Q9: What are the different filters in Power BI Reports?
+
+Visual-level Filters
+
+They work on an individual visualisation and are applied to both data and calculation conditions.
+
+Page-level Filters
+
+They are used for a given page within a report made of multiple pages. You can apply different page-level filters to multiple pages in the same report. Also, each page in a report can have different filters applied to it.
+
+Report-level Filters
+
+As they are used to apply filters to the entire report, affecting all pages and visualisations of a report, they are also known as generalised filters.
+
+# Q10: What are the three fundamental concepts of DAX?
+
+Syntax
+
+It is the way a formula is written, referring to the elements included in it. If the Syntax is wrong, you get an error message.
+
+Functions They are the arguments or specific values written in a particular order to perform a calculation, the same as the function in Excel. It includes date/time, information, statistical, mathematical, logical, text, parent/child, etc.
+
+Context
+
+It is of two types- Row Context and Filter Context.
+
+The former is used when a formula has a function to apply filters to find a row in a table while the latter is used when more than one filter is applied in a calculation to find a value
+
 # Conclusion
 
 Learning Objectives,
 
 1. Optimise dax query
-
+    
 2. Star schema and snowflake schema
-
+    
 3. Dataflows in power BI
-
+    
 4. Refreshes in power BI
-
+    
 5. Field parameters in Power BI
-
-
-
+    
+6. RLS
+    
+7. Join Disconnected tables in Power Query.
+    
+8. Refresh options in Power BI
+    
+9. Filters in Power BI
+    
+10. Three fundamental concepts of DAX
+    
 
 # Source: YT \[[Link](https://www.youtube.com/watch?v=-ABSkLQ-igw&list=LL&index=18)\], \[[Link](https://www.wscubetech.com/blog/wp-content/uploads/2023/11/power-bi-question.pdf)\]
 

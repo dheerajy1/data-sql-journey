@@ -1,0 +1,201 @@
+This article is about the code used to build my portfolio project.
+
+
+# 1\. Setup
+
+```powershell
+npx create-next-app@latest
+```
+
+`npx create-next-app@latest .` to install in the current directory.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715420526506/68fed28f-0a48-4a78-9adc-6f2df6ec3cc8.png)
+
+to run server
+
+```markdown
+npm run dev
+```
+
+To remove the favicon.ico:
+
+* stop the server using ctrl + c and type 'y' in the vscode terminal.
+    
+* delete the .next folder
+    
+* now start the server using the cmd `npm run dev`, the .next folder will be created automatically.
+    
+
+to check whether you have tailwind css installed or not: `npm view tailwindcss version`
+
+absolute will take the div out of its flow.
+
+CSS code for the bg blur:
+
+```powershell
+<div className="bg-[#fbe2e3] absolute top-[-6rem] -z-10 right-[11rem] h-[31.25rem] w-[31.25rem] rounded-full blur-[10rem] sm:w-[68.75rem] dark:bg-[#946263]"></div>
+<div className="bg-[#dbd7fb] absolute top-[-1rem] -z-10 left-[-35rem] h-[31.25rem] w-[50rem] rounded-full blur-[10rem] sm:w-[68.75rem] md:left-[-33rem] lg:left-[-28rem] xl:left-[-15rem] 2xl:left-[-5rem] dark:bg-[#676394]"></div>
+```
+
+create a lib folder 📂.
+
+create a data.ts file in the lib folder 📂.
+
+paste the entire code in the data.ts file:
+
+```javascript
+import React from "react";
+import { CgWorkAlt } from "react-icons/cg";
+import { FaReact } from "react-icons/fa";
+import { LuGraduationCap } from "react-icons/lu";
+import corpcommentImg from "@/public/corpcomment.png";
+import rmtdevImg from "@/public/rmtdev.png";
+import wordanalyticsImg from "@/public/wordanalytics.png";
+
+export const links = [
+  {
+    name: "Home",
+    hash: "#home",
+  },
+  {
+    name: "About",
+    hash: "#about",
+  },
+  {
+    name: "Projects",
+    hash: "#projects",
+  },
+  {
+    name: "Skills",
+    hash: "#skills",
+  },
+  {
+    name: "Experience",
+    hash: "#experience",
+  },
+  {
+    name: "Contact",
+    hash: "#contact",
+  },
+] as const;
+
+export const experiencesData = [
+  {
+    title: "Graduated bootcamp",
+    location: "Miami, FL",
+    description:
+      "I graduated after 6 months of studying. I immediately found a job as a front-end developer.",
+    icon: React.createElement(LuGraduationCap),
+    date: "2019",
+  },
+  {
+    title: "Front-End Developer",
+    location: "Orlando, FL",
+    description:
+      "I worked as a front-end developer for 2 years in 1 job and 1 year in another job. I also upskilled to the full stack.",
+    icon: React.createElement(CgWorkAlt),
+    date: "2019 - 2021",
+  },
+  {
+    title: "Full-Stack Developer",
+    location: "Houston, TX",
+    description:
+      "I'm now a full-stack developer working as a freelancer. My stack includes React, Next.js, TypeScript, Tailwind, Prisma and MongoDB. I'm open to full-time opportunities.",
+    icon: React.createElement(FaReact),
+    date: "2021 - present",
+  },
+] as const;
+
+export const projectsData = [
+  {
+    title: "CorpComment",
+    description:
+      "I worked as a full-stack developer on this startup project for 2 years. Users can give public feedback to companies.",
+    tags: ["React", "Next.js", "MongoDB", "Tailwind", "Prisma"],
+    imageUrl: corpcommentImg,
+  },
+  {
+    title: "rmtDev",
+    description:
+      "Job board for remote developer jobs. I was the front-end developer. It has features like filtering, sorting and pagination.",
+    tags: ["React", "TypeScript", "Next.js", "Tailwind", "Redux"],
+    imageUrl: rmtdevImg,
+  },
+  {
+    title: "Word Analytics",
+    description:
+      "A public web app for quick analytics on text. It shows word count, character count and social media post limits.",
+    tags: ["React", "Next.js", "SQL", "Tailwind", "Framer"],
+    imageUrl: wordanalyticsImg,
+  },
+] as const;
+
+export const skillsData = [
+  "HTML",
+  "CSS",
+  "JavaScript",
+  "TypeScript",
+  "React",
+  "Next.js",
+  "Node.js",
+  "Git",
+  "Tailwind",
+  "Prisma",
+  "MongoDB",
+  "Redux",
+  "GraphQL",
+  "Apollo",
+  "Express",
+  "PostgreSQL",
+  "Python",
+  "Django",
+  "Framer Motion",
+] as const;
+```
+
+To use an SVG file in your React project, you can import it and then use it as a component. Here's how you can do it:
+
+import using `@@` ,
+
+```javascript
+ "paths": {
+      "@/*": ["./src/*"],
+      "@@/*": ["./*"]
+    }
+```
+
+then use the varibale.
+
+```javascript
+icon: GraduateCap,
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715438999735/31187988-b0cf-473c-8fa0-a7a65ecec62e.png)
+
+
+
+# Conclusion
+
+Learning Objectives,
+
+1. Setup using next js
+
+2. Project setup,
+
+3. Installing dependencies,
+
+    
+
+# Source: ByteGrad YT \[[Link](https://www.youtube.com/watch?v=sUKptmUVIBM)\], \[[Link](https://github.com/ByteGrad/portfolio-website.git)\]
+
+# Author: Dheeraj. Yss
+
+# Connect with me:
+
+* [My Twitter](https://twitter.com/yssdheeraj)
+    
+* [My LinkedIn](https://www.linkedin.com/in/dheerajy1/)
+    
+* [My GitHub](https://github.com/dheerajy1)
+    
+* [My Hashnode](https://dheerajy1.hashnode.dev/)

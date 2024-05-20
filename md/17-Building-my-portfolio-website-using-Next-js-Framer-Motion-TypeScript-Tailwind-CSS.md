@@ -1,6 +1,5 @@
 This article is about the code used to build my portfolio project.
 
-
 # 1\. Setup
 
 ```powershell
@@ -19,12 +18,9 @@ npm run dev
 
 To remove the favicon.ico:
 
-* stop the server using ctrl + c and type 'y' in the vscode terminal.
-    
-* delete the .next folder
-    
-* now start the server using the cmd `npm run dev`, the .next folder will be created automatically.
-    
+- stop the server using ctrl + c and type 'y' in the vscode terminal.
+- delete the .next folder
+- now start the server using the cmd `npm run dev`, the .next folder will be created automatically.
 
 to check whether you have tailwind css installed or not: `npm view tailwindcss version`
 
@@ -172,7 +168,57 @@ icon: GraduateCap,
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715438999735/31187988-b0cf-473c-8fa0-a7a65ecec62e.png)
 
+# 2\. Header
 
+create components folder 📂
+
+create header.tsx file.
+
+install es7 + extension for boilerplates.
+
+use rfc
+
+install framer motion:
+
+```javascript
+npm install framer-motion
+```
+
+"use client"; to tell header.tsx file is a client component.
+
+```javascript
+<header className="z-[999] relative">
+  <motion.div
+    className="fixed top-0 left-1/2 h-[4.5rem] w-full rounded-none border border-white border-opacity-40 bg-white bg-opacity-80 shadow-lg shadow-black/[0.03] backdrop-blur-[0.5rem] sm:top-6 sm:h-[3.25rem] sm:w-[36rem] sm:rounded-full dark:bg-gray-950 dark:border-black/40 dark:bg-opacity-75"
+    initial={{ y: -100, x: "-50%", opacity: 0 }}
+    animate={{ y: 0, x: "-50%", opacity: 1 }}
+  ></motion.div>
+
+  <nav className="flex fixed top-[0.15rem] left-1/2 h-12 -translate-x-1/2 py-2 sm:top-[1.7rem] sm:h-[initial] sm:py-0">
+    <ul className="flex w-[22rem] flex-wrap items-center justify-center gap-y-1 text-[0.9rem] font-medium text-gray-500 sm:w-[initial] sm:flex-nowrap sm:gap-5">
+      {links.map((link) => (
+        <motion.li
+          className="h-3/4 flex items-center justify-center relative"
+          key={link.hash}
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+        >
+          <Link
+            className={
+              "flex w-full items-center justify-center px-3 py-3 hover:text-gray-950 transition dark:text-gray-500 dark:hover:text-gray-300"
+            }
+            href={link.hash}
+          >
+            {link.name}
+          </Link>
+        </motion.li>
+      ))}
+    </ul>
+  </nav>
+</header>
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715439037756/41025b1d-ed5c-44b5-b59d-07896307cdc4.png)
 
 # Conclusion
 
@@ -184,7 +230,7 @@ Learning Objectives,
 
 3. Installing dependencies,
 
-    
+4. Completed header section.
 
 # Source: ByteGrad YT \[[Link](https://www.youtube.com/watch?v=sUKptmUVIBM)\], \[[Link](https://github.com/ByteGrad/portfolio-website.git)\]
 
@@ -192,10 +238,7 @@ Learning Objectives,
 
 # Connect with me:
 
-* [My Twitter](https://twitter.com/yssdheeraj)
-    
-* [My LinkedIn](https://www.linkedin.com/in/dheerajy1/)
-    
-* [My GitHub](https://github.com/dheerajy1)
-    
-* [My Hashnode](https://dheerajy1.hashnode.dev/)
+- [My Twitter](https://twitter.com/yssdheeraj)
+- [My LinkedIn](https://www.linkedin.com/in/dheerajy1/)
+- [My GitHub](https://github.com/dheerajy1)
+- [My Hashnode](https://dheerajy1.hashnode.dev/)

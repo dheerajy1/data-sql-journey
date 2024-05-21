@@ -220,6 +220,66 @@ npm install framer-motion
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715439037756/41025b1d-ed5c-44b5-b59d-07896307cdc4.png)
 
+# <mark>21st May</mark>
+
+# 3\. Intro section
+
+create intro.tsx file in components folder 📂
+
+Everything belongs to same semantic meaning than using section.
+
+In the page.tsx:
+
+add the intro and place the cursor and hit: ctrl + spacebar and select the intro.tsx file to import into page.tsx.
+
+modify next config mjs file to include the external image.
+
+Extend eslintrc json to remove the apos syntax errors rules
+
+```javascript
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "react/no-unescaped-entities": 0
+  }
+}
+```
+
+to use svg files
+
+i have used image tag.
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715527332116/efbe1506-fabf-4dde-923e-67b0ab5bd084.png align="center")
+
+install
+
+```powershell
+npm install @react-spring/web
+```
+
+# 4\. Section divider
+
+create section-divider file.
+
+```javascript
+"use client";
+
+import React from "react";
+
+export default function SectionDivider() {
+  return (
+    <div
+      className="bg-gray-200 my-24 h-16 w-1 rounded-full hidden sm:block dark:bg-opacity-20"
+    ></div>
+  );
+}
+```
+
+add to page.tsx
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715527565980/dc6cd813-0aa9-43db-9771-cd7eaaa453e6.png align="center")
+
+
 # Conclusion
 
 Learning Objectives,

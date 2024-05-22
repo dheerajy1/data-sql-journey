@@ -249,7 +249,7 @@ to use svg files
 
 i have used image tag.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715527332116/efbe1506-fabf-4dde-923e-67b0ab5bd084.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715527332116/efbe1506-fabf-4dde-923e-67b0ab5bd084.png)
 
 install
 
@@ -277,7 +277,31 @@ export default function SectionDivider() {
 
 add to page.tsx
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715527565980/dc6cd813-0aa9-43db-9771-cd7eaaa453e6.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715527565980/dc6cd813-0aa9-43db-9771-cd7eaaa453e6.png)
+
+Using rough notation library
+
+```javascript
+npm install --save react-rough-notation
+```
+
+# 5\. About section
+
+create about.tsx file
+
+use rfc
+
+create a file section-heading.tsx
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715687397565/1439aa7b-0d74-40b7-88a3-60ca9bfef346.png)
+
+# 6\. Projects section
+
+create projects.tsx file
+
+create project.tsx file
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715687417449/80c5f076-585b-455b-a4fd-fe38ac1adc7f.png)
 
 
 # Conclusion

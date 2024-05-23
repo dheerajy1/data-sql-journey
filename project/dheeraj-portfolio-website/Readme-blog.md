@@ -1,5 +1,6 @@
 This article is about the code used to build my portfolio project.
 
+
 # 1\. Setup
 
 ```powershell
@@ -18,9 +19,12 @@ npm run dev
 
 To remove the favicon.ico:
 
-- stop the server using ctrl + c and type 'y' in the vscode terminal.
-- delete the .next folder
-- now start the server using the cmd `npm run dev`, the .next folder will be created automatically.
+* stop the server using ctrl + c and type 'y' in the vscode terminal.
+    
+* delete the .next folder
+    
+* now start the server using the cmd `npm run dev`, the .next folder will be created automatically.
+    
 
 to check whether you have tailwind css installed or not: `npm view tailwindcss version`
 
@@ -168,6 +172,7 @@ icon: GraduateCap,
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715438999735/31187988-b0cf-473c-8fa0-a7a65ecec62e.png)
 
+
 # 2\. Header
 
 create components folder 📂
@@ -187,40 +192,40 @@ npm install framer-motion
 "use client"; to tell header.tsx file is a client component.
 
 ```javascript
-<header className="z-[999] relative">
-  <motion.div
-    className="fixed top-0 left-1/2 h-[4.5rem] w-full rounded-none border border-white border-opacity-40 bg-white bg-opacity-80 shadow-lg shadow-black/[0.03] backdrop-blur-[0.5rem] sm:top-6 sm:h-[3.25rem] sm:w-[36rem] sm:rounded-full dark:bg-gray-950 dark:border-black/40 dark:bg-opacity-75"
-    initial={{ y: -100, x: "-50%", opacity: 0 }}
-    animate={{ y: 0, x: "-50%", opacity: 1 }}
-  ></motion.div>
+ <header className="z-[999] relative">
+            <motion.div
+                className="fixed top-0 left-1/2 h-[4.5rem] w-full rounded-none border border-white border-opacity-40 bg-white bg-opacity-80 shadow-lg shadow-black/[0.03] backdrop-blur-[0.5rem] sm:top-6 sm:h-[3.25rem] sm:w-[36rem] sm:rounded-full dark:bg-gray-950 dark:border-black/40 dark:bg-opacity-75"
+                initial={{ y: -100, x: "-50%", opacity: 0 }}
+                animate={{ y: 0, x: "-50%", opacity: 1 }}
+            ></motion.div>
 
-  <nav className="flex fixed top-[0.15rem] left-1/2 h-12 -translate-x-1/2 py-2 sm:top-[1.7rem] sm:h-[initial] sm:py-0">
-    <ul className="flex w-[22rem] flex-wrap items-center justify-center gap-y-1 text-[0.9rem] font-medium text-gray-500 sm:w-[initial] sm:flex-nowrap sm:gap-5">
-      {links.map((link) => (
-        <motion.li
-          className="h-3/4 flex items-center justify-center relative"
-          key={link.hash}
-          initial={{ y: -100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-        >
-          <Link
-            className={
-              "flex w-full items-center justify-center px-3 py-3 hover:text-gray-950 transition dark:text-gray-500 dark:hover:text-gray-300"
-            }
-            href={link.hash}
-          >
-            {link.name}
-          </Link>
-        </motion.li>
-      ))}
-    </ul>
-  </nav>
-</header>
+            <nav className="flex fixed top-[0.15rem] left-1/2 h-12 -translate-x-1/2 py-2 sm:top-[1.7rem] sm:h-[initial] sm:py-0">
+                <ul className="flex w-[22rem] flex-wrap items-center justify-center gap-y-1 text-[0.9rem] font-medium text-gray-500 sm:w-[initial] sm:flex-nowrap sm:gap-5">
+                    {links.map((link) => (
+                        <motion.li
+                            className="h-3/4 flex items-center justify-center relative"
+                            key={link.hash}
+                            initial={{ y: -100, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                        >
+                            <Link
+                                className={
+                                    "flex w-full items-center justify-center px-3 py-3 hover:text-gray-950 transition dark:text-gray-500 dark:hover:text-gray-300"
+                                }
+                                href={link.hash}
+                            >
+                                {link.name}
+
+                            </Link>
+                        </motion.li>
+                    ))}
+                </ul>
+            </nav>
+        </header>
 ```
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715439037756/41025b1d-ed5c-44b5-b59d-07896307cdc4.png)
 
-# <mark>21st May</mark>
 
 # 3\. Intro section
 
@@ -251,12 +256,6 @@ i have used image tag.
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715527332116/efbe1506-fabf-4dde-923e-67b0ab5bd084.png)
 
-install
-
-```powershell
-npm install @react-spring/web
-```
-
 # 4\. Section divider
 
 create section-divider file.
@@ -279,88 +278,6 @@ add to page.tsx
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715527565980/dc6cd813-0aa9-43db-9771-cd7eaaa453e6.png)
 
-Using rough notation library
-
-```javascript
-npm install --save react-rough-notation
-```
-
-# 5\. About section
-
-create about.tsx file
-
-use rfc
-
-create a file section-heading.tsx
-
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715687397565/1439aa7b-0d74-40b7-88a3-60ca9bfef346.png)
-
-# 6\. Projects section
-
-create projects.tsx file
-
-create project.tsx file
-
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715687417449/80c5f076-585b-455b-a4fd-fe38ac1adc7f.png)
-
-
-# 7\. Finish header
-
-using scroll property to scroll to the sections.
-
-adding smooth scroll for all the layout.
-
-keeping track of active section using state.
-
-install clsx framework to apply classes conditionally
-
-```powershell
-npm install --save clsx
-```
-
-conditionally applying background color
-
-```javascript
-{
-    link.name === activeSection && (
-        <motion.span
-            className="bg-gray-100 rounded-full absolute inset-0 -z-10 dark:bg-gray-800"
-            layoutId="activeSection"
-            transition={{
-                type: "spring",
-                stiffness: 380,
-                damping: 30,
-            }}
-        ></motion.span>
-    )
-}
-```
-
-using onclick:
-
-```javascript
- onClick={() => {
-                  setActiveSection(link.name);
-                  setTimeOfLastClick(Date.now());
-                }}
-```
-
-as you scroll the active session should change the background not only when you click:
-
-intersection observer API in react intersection observer
-
-```powershell
-npm install react-intersection-observer --save
-```
-
-create context folder and create active-section-context.tsx file
-
-create hook.ts file in lib folder 📂
-
-create types.ts file in lib folder 📂
-
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715698694371/1e5079e3-ca14-4e61-b904-dac492b97dae.png)
-
 
 # Conclusion
 
@@ -368,20 +285,16 @@ Learning Objectives,
 
 1. Setup using next js
 
-2. Project setup,
-
-3. Installing dependencies,
-
-4. using scroll property to scroll to the sections.
-
-
 # Source: ByteGrad YT \[[Link](https://www.youtube.com/watch?v=sUKptmUVIBM)\], \[[Link](https://github.com/ByteGrad/portfolio-website.git)\]
 
 # Author: Dheeraj. Yss
 
 # Connect with me:
 
-- [My Twitter](https://twitter.com/yssdheeraj)
-- [My LinkedIn](https://www.linkedin.com/in/dheerajy1/)
-- [My GitHub](https://github.com/dheerajy1)
-- [My Hashnode](https://dheerajy1.hashnode.dev/)
+* [My Twitter](https://twitter.com/yssdheeraj)
+    
+* [My LinkedIn](https://www.linkedin.com/in/dheerajy1/)
+    
+* [My GitHub](https://github.com/dheerajy1)
+    
+* [My Hashnode](https://dheerajy1.hashnode.dev/)

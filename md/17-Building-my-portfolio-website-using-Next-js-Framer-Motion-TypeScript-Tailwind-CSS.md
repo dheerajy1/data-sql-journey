@@ -361,6 +361,34 @@ create types.ts file in lib folder 📂
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715698694371/1e5079e3-ca14-4e61-b904-dac492b97dae.png)
 
+# 8\. Skills section
+
+create a skills.tsx file
+
+# 9\. Experience section
+
+create experience.tsx file
+
+```powershell
+npm i react-vertical-timeline-component
+```
+
+types declaration package
+
+```powershell
+npm i --save-dev @types/react-vertical-timeline-component
+```
+
+create theme-context.tsx file
+
+Error:
+
+* Server Error Error: Cannot read properties of undefined (reading 'prototype')
+    
+    * `"use client";`
+        
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715836879599/ed7cb783-dd30-4bb0-b341-48f1b84d8e90.png align="center")
 
 # Conclusion
 

@@ -388,7 +388,33 @@ Error:
     * `"use client";`
         
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715836879599/ed7cb783-dd30-4bb0-b341-48f1b84d8e90.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715836879599/ed7cb783-dd30-4bb0-b341-48f1b84d8e90.png)
+
+
+# 10\. Contact section
+
+create contact.tsx file
+
+toast
+
+```powershell
+npm install react-hot-toast
+```
+
+create email folder and contact-form-email.tsx file
+
+```powershell
+npm i @react-email/components
+```
+
+create actions folder 📂 and sendEmail.ts file:
+
+create utils.ts file in lib folder
+
+create submit-btn.tsx file in component folder
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715892561275/8a798ffe-eb67-4814-a446-34b8d48d8a05.png)
+
 
 # Conclusion
 
@@ -401,6 +427,8 @@ Learning Objectives,
 3. Installing dependencies,
 
 4. using scroll property to scroll to the sections.
+
+5. implemented toast lib
 
 
 # Source: ByteGrad YT \[[Link](https://www.youtube.com/watch?v=sUKptmUVIBM)\], \[[Link](https://github.com/ByteGrad/portfolio-website.git)\]

@@ -415,6 +415,10 @@ create submit-btn.tsx file in component folder
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715892561275/8a798ffe-eb67-4814-a446-34b8d48d8a05.png)
 
+improved:
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715964909012/dc2199ad-a920-4e08-b758-e09388f85f0f.png)
+
 
 # Conclusion
 

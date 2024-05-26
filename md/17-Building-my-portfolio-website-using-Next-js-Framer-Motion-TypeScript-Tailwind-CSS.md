@@ -434,6 +434,8 @@ Learning Objectives,
 
 5. implemented toast lib
 
+6. Implemented predefined text messages.
+
 
 # Source: ByteGrad YT \[[Link](https://www.youtube.com/watch?v=sUKptmUVIBM)\], \[[Link](https://github.com/ByteGrad/portfolio-website.git)\]
 

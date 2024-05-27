@@ -419,6 +419,12 @@ improved:
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1715964909012/dc2199ad-a920-4e08-b758-e09388f85f0f.png)
 
+# 11\. Footer
+
+create footer.tsx file
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716029220538/5b5c2f9b-c0da-4f57-a57b-d30556f45ea1.png)
+
 
 # Conclusion
 

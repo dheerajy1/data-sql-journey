@@ -426,6 +426,11 @@ create footer.tsx file
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716029220538/5b5c2f9b-c0da-4f57-a57b-d30556f45ea1.png)
 
 
+added functionality to let user like
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716908745293/b7e2b365-e3b1-482e-a099-f9502fe60f72.png)
+
+
 # Conclusion
 
 Learning Objectives,
@@ -441,6 +446,8 @@ Learning Objectives,
 5. implemented toast lib
 
 6. Implemented predefined text messages.
+
+7. Added functionality to like
 
 
 # Source: ByteGrad YT \[[Link](https://www.youtube.com/watch?v=sUKptmUVIBM)\], \[[Link](https://github.com/ByteGrad/portfolio-website.git)\]

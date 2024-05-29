@@ -430,6 +430,15 @@ added functionality to let user like
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716908745293/b7e2b365-e3b1-482e-a099-f9502fe60f72.png)
 
+adding error checks
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716996708414/55b5703e-c005-4e56-aae8-cc7897530178.png)
+
+
+Final:
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716996927818/bf9d47a6-ee1b-4e10-a3b1-630a184ab646.png)
+
 
 # Conclusion
 
@@ -448,6 +457,8 @@ Learning Objectives,
 6. Implemented predefined text messages.
 
 7. Added functionality to like
+
+8. Added error checks
 
 
 # Source: ByteGrad YT \[[Link](https://www.youtube.com/watch?v=sUKptmUVIBM)\], \[[Link](https://github.com/ByteGrad/portfolio-website.git)\]

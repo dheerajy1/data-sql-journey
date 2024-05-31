@@ -31,4 +31,6 @@ The schema : Project Name, SQL File location & other file types, md/md File Loca
 | 14 | Economic Data Analysis python | [Link¹](<md/14 Economic Data Analysis python.md>) | [Link²](<>) | [Link³](<https://dheerajy1.hashnode.dev/economic-data-analysis-project-with-python-pandas>) |
 | 15 | Perform read & write on SQL Server using Python | [Link¹](<md/15-Perform-read-&-write-on-SQL-Server-using-Python.md>) | [Link²](<>) | [Link³](<https://dheerajy1.hashnode.dev/perform-read-write-on-sql-server-using-python>) |
 | 16 | 10 Power BI dev Interview questions | [Link¹](<md/16-10-Power-BI-dev-Interview-questions.md>) | [Link²](<>) | [Link³](<https://dheerajy1.hashnode.dev/10-power-bi-dev-interview-questions>) |
-| 17 | Building my portfolio website using Next js, Framer Motion, TypeScript, Tailwind CSS | [Link¹](<md/17-Building-my-portfolio-website-using-Next-js-Framer-Motion-TypeScript-Tailwind-CSS.md>) | [Link²](<project/dheeraj-portfolio-website>) | [Link³](<>) |
+| 17 | Building my portfolio website using Next js, Framer Motion, TypeScript, Tailwind CSS | [Link¹](<md/17-Building-my-portfolio-website-using-Next-js-Framer-Motion-TypeScript-Tailwind-CSS.md>) | [Link²](<project/dheeraj-portfolio-website>) | [Link³](<https://dheerajy1.hashnode.dev/building-my-portfolio-website-using-next-js-framer-motion-typescript-tailwind-css>) |
+| 18 | Ingest data from NYC OpenData FHVS  & OPCV | [Link¹](<md/18-Ingest-data-from-NYC-OpenData-FHVS-&-OPCV.md>) | [Link²](<>) | [Link³](<>) |
+

@@ -168,6 +168,57 @@ violations_bronze
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716556203053/5c8a572e-9ae0-420c-b664-cdf747fa1275.png)
 
 
+# 5\. Read the existing tables in the SQL Server Database
+
+## 5.1 Using Pandas read\_sql\_query() method - DQL: Select
+
+* first, confirm if the tables already exist in the database
+    
+
+```python
+qlist_tables = """
+    SELECT TOP 10000 *
+    FROM [dballpurpose].INFORMATION_SCHEMA.TABLES
+    WHERE TABLE_TYPE IN ('BASE TABLE')
+    ORDER BY TABLE_NAME ASC
+"""
+
+df_var = pd.read_sql_query(qlist_tables,engine)
+df_var
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716543232891/f9e8ed3f-11a3-4cf5-807a-4ce7a64270d3.png)
+
+# 6\. Send the ingested data in dataframes to SQL Server tables
+
+## 6.1 Using Pandas to\_sql() method - DDL: Create
+
+* fhvs data to for\_hire\_vehicles sql table:
+    
+
+```python
+fhvs.to_sql('for_hire_vehicles', engine, if_exists='replace', index=False)
+```
+
+* violations data to violations sql table:
+    
+
+```python
+violations.to_sql('violations', engine, if_exists='replace', index=False)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716556430071/1cde87ae-0dee-45d0-8c9a-996d5845ff4d.png)
+
+Error:
+
+* ProgrammingError: (pyodbc.ProgrammingError) ('Invalid parameter type. param-index=16 param-type=dict', 'HY105')
+    
+    * (Background on this error at: [https://sqlalche.me/e/20/f405](https://sqlalche.me/e/20/f405))
+        
+    * Like.. the column data has an object as its row value.
+        
+    * `violations['summons_image'] = violations['summons_image'].astype(str)`
+
 
 # Conclusion
 
@@ -180,6 +231,12 @@ Learning Objectives,
 - using pandas read_json()
 
 - Transforming dataframe
+
+- Pandas read_sql_query()
+
+- Pandas to_sql() method
+
+- fixing ProgrammingError: (pyodbc.ProgrammingError) ('Invalid parameter type. param-index=16 param-type=dict', 'HY105') by changing data type of a column
 
 
 # Source: Meghan Maloy \[[Link](https://www.youtube.com/watch?v=tqk9RL8FEGU&list=LL&index=3)\], \[[Link](https://2024.open-data.nyc/event/intro-to-sql/)\], \[[Link](https://drive.google.com/drive/folders/1Z39aC3sypkBhphlX_YyW04HjxdBlddGv)\]

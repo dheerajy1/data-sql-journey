@@ -331,6 +331,270 @@ fbpi.to_sql('financial_plan', engine, if_exists='replace', index=False)
 
 * first, confirm if the tables already exist in the database
 
+# 9 Query the data from SQL table
+
+## 9.1 Read a SQL Query out of your database and into a pandas dataframe Using Pandas read\_sql\_query() method - DQL: Select
+
+```python
+sql_string = """
+  SELECT TOP 5 
+    *
+  FROM [dballpurpose].[dbo].[financial_plan]
+"""
+
+df_var = pd.read_sql(sql_string, engine)
+df_var.head(1000000)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716559571427/4f81899f-baf0-4914-bc9f-8c07b974d564.png)
+
+# 10\. Exploring violations data
+
+## 10.1 Total no of Violations:
+
+```python
+sql_string = """
+SELECT TOP 10000 
+FORMAT(COUNT(*), '###,### K') AS [Total no of rows]
+FROM [dballpurpose].[dbo].[violations]
+"""
+
+df_var = pd.read_sql(sql_string, engine)
+df_var.head(1000000)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716629344695/54f02a2e-9a5b-487b-ab26-e45f000b9b26.png)
+
+* Viz 📉
+    
+
+```python
+fig, axs = plt.subplots(1, 1, figsize=(5, 3))
+
+sns.barplot(
+    data=df_var,
+    y='Total no of rows',
+    hue = 'Total no of rows',
+    palette = 'pastel',
+    ax=axs
+)
+
+plt.xlabel('Total no of violations')
+plt.ylabel('')
+
+plt.show()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716634839557/6427b519-27d7-4b27-9983-e063d75d980a.png)
+
+## 10.2 Retrieving all info about Fire Hydrant violation:
+
+```python
+sql_string = """
+SELECT
+*
+FROM [dballpurpose].[dbo].[violations]
+WHERE violation = 'FIRE HYDRANT'
+"""
+
+df_var = pd.read_sql(sql_string, engine)
+df_var.head(1000000)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716629383942/8d6e5226-4107-40e4-8f13-7abe6595ae01.png)
+
+* Viz 📉
+    
+
+```python
+fig, axs = plt.subplots(1, 1, figsize=(15, 5))
+
+sns.set_theme(style="darkgrid")
+
+sns.scatterplot(
+    data=df_var,
+    x= 'state',
+    y = 'payment_amount',
+    hue = 'penalty_amount',
+    palette = 'Pastel1',
+    ax=axs
+)
+
+plt.title(label='Sate wide distribution of payment & penalty amount', loc='center')
+
+plt.show()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716642913995/a9f64a7e-59e9-4b16-bd3c-4f021dc1705f.png)
+
+## 10.3 Display no of violations, no of unique plates and avg fine amount for each violations:
+
+```python
+sql_string = """
+SELECT
+violation,
+COUNT(*) AS [Total no of Violations],
+COUNT(DISTINCT plate) AS [Unique no of plate],
+AVG(fine_amount) AS [Avg fine]
+FROM [dballpurpose].[dbo].[violations]
+GROUP BY violation
+HAVING COUNT(*) > 100
+ORDER BY COUNT(*) DESC
+"""
+
+df_var = pd.read_sql(sql_string, engine)
+df_var.head(1000000)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716629411429/fdd56fad-1b1c-4194-a913-b0d4cdf4aab3.png)
+
+```python
+# Create a figure with two subplots sharing the x-axis
+fig, axs = plt.subplots(2, 1, sharex=True, figsize=(20, 10))
+fig.subplots_adjust(hspace=0.009)  # Adjust space between the two subplots
+
+# Flatten the array of axes (subplots) for easier iteration
+axs = axs.flatten()
+
+# Plot the same data on both subplots
+for ax in axs:
+    sns.barplot(data=df_var, x='violation', y='Total no of Violations', ax=ax)
+
+# Set the limits for the y-axis on both subplots to 'break' the axis
+# For example, if you want to break between 100 and 200:
+axs[0].set_ylim(df_var['Total no of Violations'].nlargest(2).iloc[-1] + 100, df_var['Total no of Violations'].max()+500)  # Upper part for outliers
+axs[1].set_ylim(0, df_var['Total no of Violations'].nlargest(2).iloc[-1] + 100)  # Lower part for the rest
+
+# Hide the spines between ax1 and ax2
+axs[0].spines['bottom'].set_visible(False)
+axs[1].spines['top'].set_visible(False)
+
+# Add diagonal lines to indicate the break in the y-axis
+kwargs = dict(transform=axs[0].transAxes, color='k', clip_on=False)
+axs[0].plot((-0.005, 0.005), (-0.005, 0.005), **kwargs)  # top axes-left diagonal
+axs[0].plot((0.995, 1.005), (-0.005, 0.005), **kwargs)  # top axes-right diagonal
+
+kwargs.update(transform=axs[1].transAxes)  # switch to the bottom axes
+axs[1].plot((-0.005, 0.005), (0.995, 1.005), **kwargs)  # bottom axes-left diagonal
+axs[1].plot((0.995, 1.005), (0.995, 1.005), **kwargs)  # bottom axes-right diagonal
+
+# Set the title
+axs[0].set_title('Each violations distribution', loc='center')
+
+# Set the labels
+axs[0].set_ylabel('')
+axs[1].set_xlabel('Violation')
+axs[1].set_ylabel('Total no of Violations')
+
+# Get the current tick positions and labels
+tick_positions = axs[1].get_xticks()
+tick_labels = [label.get_text() for label in axs[1].get_xticklabels()]
+
+# Set the tick positions and labels with rotation and Rotate x-axis labels by 90 degrees
+axs[1].set_xticks(tick_positions)
+axs[1].set_xticklabels(labels=tick_labels, rotation=90)
+
+
+plt.tight_layout()
+
+plt.show()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716649718925/81f80e9a-5f60-4a82-9c67-959ef653a9ca.png)
+
+## 10.4 Display no of violations, no of unique for hire vehilcles plates and avg fine amount for each violation:
+
+```python
+sql_string = """
+SELECT
+    violation,
+    CASE
+        WHEN [for_hire_vehicles].[dmv_license_plate_number] IS NOT NULL THEN 'FHV'
+        ELSE 'NOT FHV'
+    END AS [Category],
+    COUNT(DISTINCT summons_number) AS [Total no of Violations],
+    COUNT(DISTINCT plate) AS [Unique no of plate],
+    AVG(fine_amount) AS [Avg fine]
+FROM [dballpurpose].[dbo].[violations]
+LEFT JOIN [dballpurpose].[dbo].[for_hire_vehicles] ON [dballpurpose].[dbo].[for_hire_vehicles].[dmv_license_plate_number] = [dballpurpose].[dbo].[violations].[plate]
+GROUP BY violation,
+    CASE
+        WHEN [for_hire_vehicles].[dmv_license_plate_number] IS NOT NULL THEN 'FHV'
+        ELSE 'NOT FHV'
+    END 
+ORDER BY COUNT(*) DESC
+"""
+
+df_var = pd.read_sql(sql_string, engine)
+df_var.head(1000000)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716629441990/c14210f4-256b-494a-8704-ea8597372c40.png)
+
+* Viz 📉
+    
+
+```python
+# Create a figure with two subplots sharing the x-axis
+fig, axs = plt.subplots(2, 1, sharex=True, figsize=(20, 10))
+fig.subplots_adjust(hspace=0.009)  # Adjust space between the two subplots
+
+# Flatten the array of axes (subplots) for easier iteration
+axs = axs.flatten()
+
+# Plot the same data on both subplots
+for ax in axs:
+    sns.barplot(
+        data=df_var, 
+        x='violation', 
+        y='Total no of Violations', 
+        hue = 'Category',
+        palette = 'Pastel1',
+        ax=ax
+    )
+
+# Set the limits for the y-axis on both subplots to 'break' the axis
+# For example, if you want to break between 100 and 200:
+axs[0].set_ylim(df_var['Total no of Violations'].nlargest(3).iloc[-1] + 5, df_var['Total no of Violations'].max()+500)  # Upper part for outliers
+axs[1].set_ylim(0, df_var['Total no of Violations'].nlargest(3).iloc[-1] + 5)  # Lower part for the rest
+
+# Hide the spines between ax1 and ax2
+axs[0].spines['bottom'].set_visible(False)
+axs[1].spines['top'].set_visible(False)
+
+# Add diagonal lines to indicate the break in the y-axis
+kwargs = dict(transform=axs[0].transAxes, color='k', clip_on=False)
+axs[0].plot((-0.005, 0.005), (-0.005, 0.005), **kwargs)  # top axes-left diagonal
+axs[0].plot((0.995, 1.005), (-0.005, 0.005), **kwargs)  # top axes-right diagonal
+
+kwargs.update(transform=axs[1].transAxes)  # switch to the bottom axes
+axs[1].plot((-0.005, 0.005), (0.995, 1.005), **kwargs)  # bottom axes-left diagonal
+axs[1].plot((0.995, 1.005), (0.995, 1.005), **kwargs)  # bottom axes-right diagonal
+
+# Set the title
+axs[0].set_title('Each violations distribution', loc='center')
+
+# Set the labels
+axs[0].set_ylabel('')
+axs[1].set_xlabel('Violation')
+axs[1].set_ylabel('Total no of Violations')
+
+# Get the current tick positions and labels
+tick_positions = axs[1].get_xticks()
+tick_labels = [label.get_text() for label in axs[1].get_xticklabels()]
+
+# Set the tick positions and labels with rotation and Rotate x-axis labels by 90 degrees
+axs[1].set_xticks(tick_positions)
+axs[1].set_xticklabels(labels=tick_labels, rotation=90)
+
+
+plt.tight_layout()
+
+plt.show()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716650608444/2e3b7c8f-7820-4095-871b-ca0c247d692f.png)
+
 
 # Conclusion
 
@@ -360,6 +624,11 @@ Learning Objectives,
 
 - Pandas to_sql() method
 
+- Pandas read_sql_query() method
+
+- visualizing data using seaborn lib
+
+- Pandas read_sql() method
 
 
 # Source: Meghan Maloy \[[Link](https://www.youtube.com/watch?v=tqk9RL8FEGU&list=LL&index=3)\], \[[Link](https://2024.open-data.nyc/event/intro-to-sql/)\], \[[Link](https://drive.google.com/drive/folders/1Z39aC3sypkBhphlX_YyW04HjxdBlddGv)\]

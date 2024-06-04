@@ -596,13 +596,195 @@ plt.show()
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716650608444/2e3b7c8f-7820-4095-871b-ca0c247d692f.png)
 
 
+# 11\. Workshop Questions
+
+## 11.1 Choose your favorite violation type and filter the violations table for it!
+
+```python
+sql_string = """
+SELECT
+    *
+FROM [dballpurpose].[dbo].[violations]
+WHERE violation = 'CROSSWALK'
+"""
+
+df_var = pd.read_sql(sql_string, engine)
+df_var
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716656798589/6104a837-71fb-4183-8a9e-af3b60c3b265.png)
+
+* Viz 📉
+    
+
+```python
+fig, axs = plt.subplots(1, 1, figsize=(15, 5))
+
+sns.set_theme(style="darkgrid")
+
+sns.barplot(
+    data=df_var,
+    x= 'payment_amount',
+    y = 'penalty_amount',
+    hue = 'state',
+    palette= 'Pastel1',
+    ax=axs
+)
+
+plt.title(label='Sate wide distribution of penalty amount', loc='center')
+
+plt.show()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716657462774/580d1569-87c2-432f-a7e6-dbf472c91cfb.png)
+
+## 11.2 How many total violations are there in that category?
+
+```python
+sql_string = """
+SELECT
+    COUNT(*) AS [Total no of violations]
+FROM [dballpurpose].[dbo].[violations]
+WHERE violation = 'CROSSWALK'
+"""
+
+df_var = pd.read_sql(sql_string, engine)
+df_var
+```
+
+* Viz 📉
+    
+
+```python
+fig, axs = plt.subplots(1, 1, figsize=(15, 5))
+
+sns.set_theme(style="darkgrid")
+
+sns.barplot(
+    data=df_var,
+    y = 'Total no of violations',
+    ax=axs
+)
+
+plt.xlabel('CROSSWALK violation')
+
+plt.title(label='Total no of violations for \'CROSSWALK\' violation', loc='center')
+
+plt.show()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716657770799/17d0b27c-fef9-430a-a30a-2c9143f40a13.png)
+
+## 11.3 What state’s residents are the worst offenders (excluding NY)?
+
+```python
+sql_string = """
+SELECT
+	state,
+	COUNT(DISTINCT plate) AS [Total no of Violations]
+FROM [dballpurpose].[dbo].[violations]
+WHERE violation = 'CROSSWALK'
+	AND state <> 'NY'
+GROUP BY state
+ORDER BY [Total no of Violations] DESC
+"""
+
+df_var = pd.read_sql(sql_string, engine)
+df_var
+```
+
+* Viz 📉
+    
+
+```python
+fig, axs = plt.subplots(1, 1, figsize=(15, 5))
+
+sns.set_theme(style="darkgrid")
+
+sns.barplot(
+    data=df_var,
+    x = 'state',
+    y = 'Total no of Violations',
+    ax=axs
+)
+
+plt.xlabel('State')
+
+plt.title(label='Total no of violations for \'CROSSWALK\' violation for each state', loc='center')
+
+plt.show()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716659175058/ccdef2ed-7f25-4d0c-8bfa-45aef7cb0628.png)
+
+## 11.4 How many of those violations came from FHVs?
+
+```python
+sql_string = """
+SELECT
+    state,
+    CASE
+        WHEN [for_hire_vehicles].[dmv_license_plate_number] IS NOT NULL THEN 'FHV'
+        ELSE 'NOT FHV'
+    END AS [Category],
+    COUNT(DISTINCT summons_number) AS [Total no of Violations],
+    COUNT(DISTINCT plate) AS [Unique no of plate],
+    AVG(fine_amount) AS [Avg fine]
+FROM [dballpurpose].[dbo].[violations]
+LEFT JOIN [dballpurpose].[dbo].[for_hire_vehicles] ON [dballpurpose].[dbo].[for_hire_vehicles].[dmv_license_plate_number] = [dballpurpose].[dbo].[violations].[plate]
+WHERE violation = 'CROSSWALK'
+	AND state <> 'NY'
+GROUP BY state,
+    CASE
+        WHEN [for_hire_vehicles].[dmv_license_plate_number] IS NOT NULL THEN 'FHV'
+        ELSE 'NOT FHV'
+    END 
+ORDER BY COUNT(*) DESC
+"""
+
+df_var = pd.read_sql(sql_string, engine)
+df_var
+```
+
+* Viz 📉
+    
+
+```python
+fig, axs = plt.subplots(1, 1, figsize=(15, 5))
+
+sns.set_theme(style="darkgrid")
+
+sns.barplot(
+    data=df_var,
+    x = 'state',
+    y = 'Total no of Violations',
+    hue= 'Category',
+    palette='Pastel1',
+    ax=axs
+)
+
+plt.xlabel('CROSSWALK violation')
+
+plt.title(label='Total no of violations for \'CROSSWALK\' violation', loc='center')
+
+plt.show()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716659218057/587fbc8f-ff45-48f6-b919-f18416f1ea61.png)
+
 # Conclusion
 
 Learning Objectives,
 
-- Python & Pandas: Import libraries and use Pandas for data manipulation and analysis.
-
-- Data Ingestion: Ingesting data from NYC OpenData using Python requests and Pandas functions.
+* Python & Pandas: Import libraries and use Pandas for data manipulation and analysis.
+    
+* Database Connectivity: Configuring database connections and creating engines with SQLAlchemy in Python.
+    
+* Data Ingestion: Ingesting data from NYC OpenData using Python requests and Pandas functions.
+    
+* SQL Operations: Perform CRUD operations and query data from SQL Server using Python.
+    
+* Data Visualization: Visualize data using Python libraries such as Matplotlib and Seaborn for insightful charts and graphs.
 
 - using pandas read_json()
 
@@ -618,13 +800,7 @@ Learning Objectives,
 
 - Pandas read_sql_query() method
 
-- ingest fbpi
-
-- pandas read_json()
-
-- Pandas to_sql() method
-
-- Pandas read_sql_query() method
+- ingest nyc open data
 
 - visualizing data using seaborn lib
 

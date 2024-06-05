@@ -1,6 +1,5 @@
 This article mentions how to ingest and transform wheat data obtained from US DA NAAS.
 
-# <mark>5 june</mark>
 
 # United States Department of Agriculture (US DA)
 

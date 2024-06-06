@@ -97,9 +97,68 @@ whtcmdt.dtypes, whtcmdt.shape
 whtcmdt
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716748167770/f181a90c-4f5e-4050-9c41-c5c7e78b4d49.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716748167770/f181a90c-4f5e-4050-9c41-c5c7e78b4d49.png)
 
+* Filter rows that does not contains a string value:
+    
 
+```python
+whtcmdt[~whtcmdt['Value'].str.contains('D')]
+```
+
+* group by
+    
+
+```python
+whtcmdt.groupby('year').count().sort_index()
+```
+
+## 2.5 Empty & no use columns data exploration
+
+..
+
+## 2.6 Dropping columns
+
+```python
+cols_to_drop = ['end_code', 'county_ansi', 'watershed_desc', 'region_desc', 'zip_5', 'asd_desc', 'county_code', 'country_code', 'congr_district_code', 'asd_code', 'watershed_code', 'state_fips_code', 'week_ending', 'county_name', 'begin_code']
+
+whtcmdt_filter = whtcmdt.drop(columns=cols_to_drop, axis=1, inplace=False)
+```
+
+## 2.7 Transformation on a column
+
+* To filter out the rows in the DataFrame whtcmdt that do not contain the letter 'D' in the "Value" column, you can use the str.contains() method with the <mark>~</mark> operator to negate the condition.
+    
+
+```python
+whtcmdt_filter = whtcmdt_filter[~whtcmdt_filter['Value'].str.contains('D')]
+
+whtcmdt_filter['Value'] = whtcmdt_filter['Value'].str.replace(',', '')
+
+whtcmdt_filter
+```
+
+## 2.7 Sorting the filtered dataframe
+
+```python
+whtcmdt_filter.sort_values(by=['state_ansi', 'year'], ascending=[True, False], inplace=True) #.query("state_ansi == '01' & year == 2022")
+whtcmdt_filter.reset_index(drop=True, inplace=True)
+```
+
+## 2.8 Reordering the columns
+
+```python
+whtcmdt_filter = whtcmdt_filter[['source_desc', 'sector_desc', 'group_desc', 'commodity_desc','class_desc', 'prodn_practice_desc', 'util_practice_desc', 'statisticcat_desc', 'short_desc', 'domain_desc', 'domaincat_desc', 'agg_level_desc', 'state_ansi', 'state_alpha', 'state_name', 'location_desc', 'country_name', 'year', 'freq_desc', 'reference_period_desc', 'load_time', 'Value', 'unit_desc', 'CV (%)']]
+whtcmdt_filter
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716748386231/24e35cec-e706-4916-83d9-cb8928945fb3.png)
+
+* changing the data type:
+    
+
+```python
+whtcmdt_filter['Value'] = whtcmdt_filter['Value'].astype(int)
 
 
 # Conclusion

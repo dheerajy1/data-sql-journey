@@ -1,6 +1,5 @@
 This article mentions how to ingest and transform wheat data obtained from US DA NAAS.
 
-
 # United States Department of Agriculture (US DA)
 
 National Agricultural Statistics Service (NAAS)
@@ -28,8 +27,7 @@ pd.set_option('display.max_columns', None)
 
 # 2\. Ingest data of records of wheat commodities with ([<mark>US DA NAAS</mark>](https://quickstats.nass.usda.gov/))
 
-* Returns a set of records with data for wheat Commodity with the corresponding Commodity data:
-    
+- Returns a set of records with data for wheat Commodity with the corresponding Commodity data:
 
 ## 2.1 USDA NAAS Connection setup
 
@@ -90,8 +88,7 @@ whtcmdt = pd.DataFrame(data=raw_data)
 whtcmdt.dtypes, whtcmdt.shape
 ```
 
-* NASS may suppress individual table cells by explicitly replacing the cell value with an indicator identifying a suppression. NASS uses a (D), in place of the actual number in the affected cells, to indicate the value is withheld to avoid disclosure of an individual operation. [USDA NASS Data Lab Handbook](https://www.nass.usda.gov/Data_and_Statistics/Special_Tabulations/PSM-CS-02-Attachment-A-Handbook.pdf)
-    
+- NASS may suppress individual table cells by explicitly replacing the cell value with an indicator identifying a suppression. NASS uses a (D), in place of the actual number in the affected cells, to indicate the value is withheld to avoid disclosure of an individual operation. [USDA NASS Data Lab Handbook](https://www.nass.usda.gov/Data_and_Statistics/Special_Tabulations/PSM-CS-02-Attachment-A-Handbook.pdf)
 
 ```python
 whtcmdt
@@ -99,15 +96,13 @@ whtcmdt
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716748167770/f181a90c-4f5e-4050-9c41-c5c7e78b4d49.png)
 
-* Filter rows that does not contains a string value:
-    
+- Filter rows that does not contains a string value:
 
 ```python
 whtcmdt[~whtcmdt['Value'].str.contains('D')]
 ```
 
-* group by
-    
+- group by
 
 ```python
 whtcmdt.groupby('year').count().sort_index()
@@ -127,8 +122,7 @@ whtcmdt_filter = whtcmdt.drop(columns=cols_to_drop, axis=1, inplace=False)
 
 ## 2.7 Transformation on a column
 
-* To filter out the rows in the DataFrame whtcmdt that do not contain the letter 'D' in the "Value" column, you can use the str.contains() method with the <mark>~</mark> operator to negate the condition.
-    
+- To filter out the rows in the DataFrame whtcmdt that do not contain the letter 'D' in the "Value" column, you can use the str.contains() method with the <mark>~</mark> operator to negate the condition.
 
 ```python
 whtcmdt_filter = whtcmdt_filter[~whtcmdt_filter['Value'].str.contains('D')]
@@ -154,12 +148,71 @@ whtcmdt_filter
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716748386231/24e35cec-e706-4916-83d9-cb8928945fb3.png)
 
-* changing the data type:
-    
+- changing the data type:
 
-```python
+````python
 whtcmdt_filter['Value'] = whtcmdt_filter['Value'].astype(int)
 
+# 3\. Configuring Database connection setup
+
+## 3.1. Check the driver
+
+```python
+pyodbc.drivers()
+````
+
+## 3.2. Configure the connection string
+
+```python
+connection_url = URL.create(
+    "mssql+pyodbc",
+    username = sql_login_name,
+    password = sql_login_password,
+    host = server_name,
+    port= port_number,
+    database = database_name,
+    query = {
+        "driver": "ODBC Driver 18 for SQL Server",
+         "TrustServerCertificate": "yes", # When yes, the transport layer will use SSL to encrypt the channel and bypass walking the certificate chain to validate trust. Useful when using self-signed certificates or when the certificate chain cannot be validated.
+        "authentication": "SqlPassword", # use SQL login credentials instead of Windows authentication.
+        "pool_size": "1", # to limit the number of sessions to one
+    },
+)
+```
+
+## 3.3. Create an engine using the create_engine() function, specifying the database URL
+
+```python
+engine = create_engine(connection_url)
+```
+
+# 4\. Read the existing tables in the SQL Server Database
+
+## 4.1 Using Pandas read_sql_query() method - DQL: Select
+
+- first, confirm if the tables already exist in the database
+
+```python
+qlist_tables = """
+    SELECT TOP 10000 *
+    FROM [dballpurpose].INFORMATION_SCHEMA.TABLES
+    WHERE TABLE_TYPE IN ('BASE TABLE')
+    ORDER BY TABLE_NAME ASC
+"""
+
+df_var = pd.read_sql_query(qlist_tables,engine)
+df_var
+```
+
+# 5\. Send the ingested data in dataframes to SQL Server tables
+
+## 5.1 Using Pandas to_sql() method - DDL: Create
+
+```python
+whtcmdt_filter.to_sql('us wheat production', engine, if_exists='replace', index=False)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716998974555/cf984a04-c668-47c5-96c5-c88872c12925.png)
 
 # Conclusion
 
@@ -171,16 +224,12 @@ Learning Objectives,
 
 - Use pandas DataFrame to convert the JSON data
 
-
-
 # Source: US DA NAAS \[[Link](https://www.nass.usda.gov/index.php)\]
 
 # Author: Dheeraj. Yss
 
 # Connect with me:
 
-* [My Twitter](https://twitter.com/yssdheeraj)
-    
-* [My LinkedIn](https://www.linkedin.com/in/dheerajy1/)
-    
-* [My GitHub](https://github.com/dheerajy1)
+- [My Twitter](https://twitter.com/yssdheeraj)
+- [My LinkedIn](https://www.linkedin.com/in/dheerajy1/)
+- [My GitHub](https://github.com/dheerajy1)

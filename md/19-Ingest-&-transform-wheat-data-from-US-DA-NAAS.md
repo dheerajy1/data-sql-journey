@@ -214,6 +214,71 @@ whtcmdt_filter.to_sql('us wheat production', engine, if_exists='replace', index=
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716998974555/cf984a04-c668-47c5-96c5-c88872c12925.png)
 
+
+# 6 Query the data from SQL table
+
+* Read from your database Using Pandas read\_sql\_query() method - DQL: Select
+    
+
+## 6.1 Wheat production by states
+
+```python
+sql_string = """
+  SELECT TOP 5 
+    *
+  FROM [dballpurpose].[dbo].[us wheat production]
+"""
+
+df_var = pd.read_sql(sql_string, engine)
+df_var
+```
+
+* Viz 📉
+    
+
+```python
+fig, axs = plt.subplots(1, 1, figsize=(25, 8))
+
+sns.set_theme(style="darkgrid")
+
+sns.barplot(
+    data=df_var,
+    x= 'state_name',
+    y = 'Value',
+    hue = 'commodity_desc',
+    palette = 'Pastel1',
+    ax=axs
+)
+
+
+# Get the current tick positions and labels
+tick_positions = axs.get_xticks()
+tick_labels = [label.get_text() for label in axs.get_xticklabels()]
+
+# Set the tick positions and labels with rotation and Rotate x-axis labels by 90 degrees
+axs.set_xticks(tick_positions)
+axs.set_xticklabels(labels=tick_labels, rotation=90)
+
+# Get the current tick positions and labels
+tick_positions = axs.get_yticks()
+tick_labels = [f'{int(tick/1e6)} M' for tick in tick_positions]  # Custom labels in millions
+
+# Set the tick positions and labels
+axs.set_yticks(tick_positions)
+axs.set_yticklabels(labels=tick_labels)
+
+plt.title(label='Wheat production by state', loc='center')
+
+plt.ylabel('Production value (BU)')
+
+
+plt.show()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1716999124404/bf127544-d1fa-4217-b508-b568dfb2d5be.png)
+
+
+
 # Conclusion
 
 Learning Objectives,
@@ -223,6 +288,9 @@ Learning Objectives,
 - Destructuring json response
 
 - Use pandas DataFrame to convert the JSON data
+
+- 
+
 
 # Source: US DA NAAS \[[Link](https://www.nass.usda.gov/index.php)\]
 

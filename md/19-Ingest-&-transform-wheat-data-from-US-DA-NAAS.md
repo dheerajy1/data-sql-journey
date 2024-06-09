@@ -279,6 +279,105 @@ plt.show()
 
 
 
+## 6.2 State wise wheat production
+
+```python
+sql_string = """
+  SELECT 
+    'WHEAT' AS [commodity_desc], 
+    location_desc, 
+    year,
+    AVG(Value) AS [Avg area harvested],
+    'BU' AS [unit desc]
+  FROM [dballpurpose].[dbo].[us wheat production]
+  GROUP BY location_desc, year
+  ORDER BY location_desc ASC, year DESC
+"""
+
+df_var = pd.read_sql(sql_string, engine)
+df_var
+```
+
+* Viz 📉
+    
+
+```python
+states = df_var.groupby('location_desc').count().reset_index()['location_desc'].tolist()
+
+# Create a 10x5 grid of subplots without a shared x-axis, and set the figure size to 30x30
+fig, axs = plt.subplots(10, 5, figsize = (40,30), sharex = False, sharey= False)
+
+# Flatten the array of axes (subplots) for easier iteration
+axs = axs.flatten()
+
+# Initialize a counter variable
+i = 0
+
+sns.set_theme(style="darkgrid")
+
+# Flatten the array of axes (subplots) for easier iteration
+axs = axs.flatten()
+
+# Initialize a counter variable
+i = 0
+
+
+# Loop over each column (state) in the unemp_states dataframe
+for state in states:
+    data = df_var.query(f"location_desc == '{state}'")
+    
+    # Plot the unemployment data for the current state on the i-th subplot's primary y-axis
+    sns.barplot(
+        data= data,
+        x= 'year',
+        y = 'Avg area harvested',
+        ax=axs[i]
+    )
+    
+    # Get the current tick positions and labels
+    tick_positions = axs[i].get_yticks()
+    
+    tick_labels = [f'{float(tick/1e6)} M' for tick in tick_positions]  # Custom labels in millions
+
+    # Set the tick positions and labels
+    axs[i].set_yticks(tick_positions)
+    axs[i].set_yticklabels(labels=tick_labels)
+
+    # Set the title of the i-th subplot to the current state
+    axs[i].set_title(state)
+    
+    axs[i].set_ylabel('')
+    
+    # Increment the counter variable
+    i += 1
+
+# Remove any empty subplots
+for j in range(i, len(axs)):
+    fig.delaxes(axs[j])
+
+axs[25].set_ylabel('Avg area harvested (BU)')
+
+# Adjust the padding between and around the subplots
+plt.tight_layout()
+
+# Set the title
+fig.suptitle('State wise Wheat production', fontsize=14, fontweight='bold')
+
+# Add a legend to the figure with the labels
+fig.legend(labels = ['Wheat production trend in BU'])
+
+# Display the figure with its subplots
+plt.show()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717008815465/b85b16e4-a434-4c97-bcea-cb3b4ad0c515.png)
+
+Error:
+
+* Arithmetic overflow error converting expression to data type int.
+    
+    * Casted Value as Int64.
+
 # Conclusion
 
 Learning Objectives,
@@ -289,7 +388,7 @@ Learning Objectives,
 
 - Use pandas DataFrame to convert the JSON data
 
-- 
+- Data vizualization using seaborn lib.
 
 
 # Source: US DA NAAS \[[Link](https://www.nass.usda.gov/index.php)\]

@@ -128,6 +128,102 @@ json_wbctry[0]
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717394970799/8e031e66-10ad-4e6c-a7e8-5513179260c4.png)
 
 
+### 2.1.4 Destructuring json response
+
+```python
+destrc_json_wbctry = []
+
+for ctry in json_wbctry:
+    
+    # Destructuring nested objects and sorting the keys
+    destrc_json = {f"{k}_{nested_k}": nested_v.strip() for k, v in ctry.items() if isinstance(v, dict) for nested_k, nested_v in v.items()}
+    srt_destrc_json = {k: destrc_json[k] for k in sorted(destrc_json.keys())}
+
+    # Adding the main key to the destructured objects
+    srt_destrc_json.update({k: v for k, v in ctry.items() if not isinstance(v, dict)})
+    destrc_json_wbctry.append(srt_destrc_json)
+```
+
+```python
+destrc_json_wbctry
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717395015163/9695f67b-defd-4ee1-a02d-550cb36f12e0.png)
+
+### 2.1.5 Use pandas DataFrame to convert the JSON data:
+
+```python
+wbctry = pd.DataFrame(data=destrc_json_wbctry)[[
+    'id',
+    'iso2Code',
+    'name',
+    'region_id',
+    'region_iso2code',
+    'region_value',
+    'adminregion_id',
+    'adminregion_iso2code',
+    'adminregion_value',
+    'incomeLevel_id',
+    'incomeLevel_iso2code',
+    'incomeLevel_value',
+    'lendingType_id',
+    'lendingType_iso2code',
+    'lendingType_value',
+    'capitalCity',
+    'longitude',
+    'latitude',
+]]
+wbctry.dtypes, wbctry.shape
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717395042020/6c2f73bb-de57-48ef-ac02-2e6469df3722.png)
+
+```python
+wbctry
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717395068673/dd234abb-6f6b-4dd6-9602-f8671e98bdd8.png)
+
+### 2.1.6 Transfromations
+
+##### 2.1.6.1 Renaming column
+
+```python
+wbctry_filt = wbctry.rename(columns={'id': 'iso2Code', 'iso2Code': 'id'})
+```
+
+##### 2.1.6.2 Filtering data
+
+```python
+wbctry_filt.loc[wbctry_filt['incomeLevel_value'] != 'Aggregates'].reset_index(drop=True, inplace=True)
+```
+
+#### 2.1.6.2 Rearranging
+
+```python
+wbctry_filt = wbctry_filt[[
+    'id',
+    'iso2Code',
+    'name',
+    'region_id',
+    'region_iso2code',
+    'region_value',
+    'adminregion_id',
+    'adminregion_iso2code',
+    'adminregion_value',
+    'incomeLevel_id',
+    'incomeLevel_iso2code',
+    'incomeLevel_value',
+    'lendingType_id',
+    'lendingType_iso2code',
+    'lendingType_value',
+    'capitalCity',
+    'longitude',
+    'latitude',
+]].copy()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717395831182/fe4fbf01-3fcd-473a-a905-0bf273313e4c.png)
 
 # Conclusion
 
@@ -135,8 +231,13 @@ Learning Objectives,
 
 - Python & Pandas: Import libraries and use Pandas for data manipulation and analysis.
 
-- 
-    
+- Destructuring json response
+- pandas DataFrame to convert the JSON data
+- Transfromations: 
+    - Renaming column, 
+    - Filtering data,
+    - Rearranging
+        
 
 # Source: Self \[[Link](https://databank.worldbank.org/reports.aspx?source=2&series=NY.GDP.MKTP.CD&country=)\], \[[Link](https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information)\]
 

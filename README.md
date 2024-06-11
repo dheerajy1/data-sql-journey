@@ -34,5 +34,5 @@ The schema : Project Name, md/md File Location, SQL File location & other file t
 | 17 | Building my portfolio website using Next js, Framer Motion, TypeScript, Tailwind CSS | [Link¹](<md/17-Building-my-portfolio-website-using-Next-js-Framer-Motion-TypeScript-Tailwind-CSS.md>) | [Link²](<project/dheeraj-portfolio-website>) | [Link³](<https://dheerajy1.hashnode.dev/building-my-portfolio-website-using-next-js-framer-motion-typescript-tailwind-css>) |
 | 18 | Ingest data from NYC OpenData FHVS  & OPCV | [Link¹](<md/18-Ingest-data-from-NYC-OpenData-FHVS-&-OPCV.md>) | [Link²](<>) | [Link³](<https://dheerajy1.hashnode.dev/ingest-data-from-nyc-opendata-fhvs-opcv>) |
 | 19 | Ingest & transform wheat data from US DA NAAS | [Link¹](<md/19-Ingest-&-transform-wheat-data-from-US-DA-NAAS.md>) | [Link²](<>) | [Link³](<https://dheerajy1.hashnode.dev/ingest-transform-wheat-data-from-us-da-naas>) |
-| 20 | Ingest data of World Development Indicators from The World Bank Open Data | [Link¹](<>) | [Link²](<>) | [Link³](<>) |
+| 20 | Ingest data of World Development Indicators from The World Bank Open Data | [Link¹](<md/20-Ingest-data-of-World-Development-Indicators-from-The-World-Bank-Open-Data.md>) | [Link²](<>) | [Link³](<>) |
 

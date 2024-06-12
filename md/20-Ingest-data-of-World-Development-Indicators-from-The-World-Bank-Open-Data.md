@@ -4,8 +4,6 @@ This article will demonstrate the data ingestion and exploration for World Devel
 
 World Bank Open Data
 
-# <mark>10 june</mark>
-
 # 1\. Import libraries
 
 ```python
@@ -222,8 +220,66 @@ wbctry_filt = wbctry_filt[[
     'latitude',
 ]].copy()
 ```
-
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717395831182/fe4fbf01-3fcd-473a-a905-0bf273313e4c.png)
+
+
+## 2.2 Finding source Id
+
+### 2.2.1 Url Connection setup
+
+```python
+wbsrc_code_url = (
+    f"https://api.worldbank.org/v2/sources"
+    f"?format=json"
+    f"&per_page=50000"
+)
+```
+
+### 2.2.2 using Get request to ingest from url:
+
+**<mark>Run the below cell only once</mark>**
+
+```python
+# Make the HTTP request.
+response = requests.get(wbsrc_code_url)
+
+# Check the status of the request
+if response.status_code == 200:
+    raw_data = response.json()
+    print("Request was successful.",response.headers['Content-Type'])
+else:
+    print(f"Request failed with status code: {response.status_code}")
+```
+
+```python
+response.headers
+```
+
+```python
+response.content
+```
+
+### 2.2.3 Exploring json response
+
+```python
+type(raw_data), len(raw_data)
+```
+
+```python
+raw_data[0]
+```
+
+```python
+json_wbsrc = copy.deepcopy(raw_data[1])
+type(json_wbsrc)
+```
+
+```python
+json_wbsrc
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717395354124/fa17f67f-1b17-4b98-84a0-6907ff63169b.png)
+
 
 # Conclusion
 
@@ -237,7 +293,9 @@ Learning Objectives,
     - Renaming column, 
     - Filtering data,
     - Rearranging
-        
+- Finding source Id
+- using Get request to ingest from url
+- Exploring json response
 
 # Source: Self \[[Link](https://databank.worldbank.org/reports.aspx?source=2&series=NY.GDP.MKTP.CD&country=)\], \[[Link](https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information)\]
 

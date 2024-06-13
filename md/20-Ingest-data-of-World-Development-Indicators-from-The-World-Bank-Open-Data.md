@@ -280,6 +280,80 @@ json_wbsrc
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717395354124/fa17f67f-1b17-4b98-84a0-6907ff63169b.png)
 
+### 2.2.4 Use pandas DataFrame to convert the JSON data:
+
+```python
+wbsrc = pd.DataFrame(data=json_wbsrc)
+wbsrc.dtypes, wbsrc.shape
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717395390903/e1947c1c-8718-4319-90bf-7db1d55cdad0.png)
+
+```python
+wbsrc
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717395414522/da9e0521-272e-4ea1-aeae-7552127b9061.png)
+
+### 2.2.5 Get Source Id for a Database
+
+```python
+wdi_srcid = wbsrc.loc[
+    wbsrc['name'].str.contains('World Development Indicators', case=False),
+    'id'
+].to_string(index=False)
+wdi_srcid
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717395543666/bd589d3f-8d2f-49e8-9373-3b534e488bcd.png)
+
+---
+
+## 2.3 [<mark>World Bank CO2 emissions (kt)</mark>](https://datahelpdesk.worldbank.org/knowledgebase/articles/898599-indicator-api-queries)
+
+### 2.3.1 Finding indicator Id
+
+#### 2.3.1.1 Url Connection setup
+
+```python
+schkeywrd = 'CO2'
+
+wbindicaco_code_url = (
+    f"https://api.worldbank.org/v2"
+    f"/sources"
+    f"/{wdi_srcid}"
+    f"/search"
+    f"/{schkeywrd}"
+    f"?format=json"
+    f"&per_page=20000"
+)
+```
+
+#### 2.3.1.2 using Get request to ingest from url:
+
+**<mark>Run the below cell only once</mark>**
+
+```python
+# Make the HTTP request.
+response = requests.get(wbindicaco_code_url)
+
+# Check the status of the request
+if response.status_code == 200:
+    raw_data = response.json()
+    print("Request was successful.",response.headers['Content-Type'])
+else:
+    print(f"Request failed with status code: {response.status_code}")
+```
+
+```python
+response.headers
+```
+
+```python
+response.content
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717396061270/44db1cb4-17ac-4c29-8e71-709f812270bc.png)
 
 # Conclusion
 

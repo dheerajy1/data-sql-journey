@@ -355,6 +355,69 @@ response.content
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717396061270/44db1cb4-17ac-4c29-8e71-709f812270bc.png)
 
+
+#### 2.3.1.3 Exploring json response
+
+```python
+type(raw_data), len(raw_data)
+```
+
+```python
+raw_data
+```
+
+```python
+raw_data.keys()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717397350113/88432bad-17a1-43a7-8421-6ec328bc56e7.png)
+
+```python
+type(raw_data['source']), len(raw_data['source'])
+```
+
+```python
+raw_data['source'][0]['concept'][0]['variable']
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717397453699/0148d9c1-8c0c-4a98-804c-c6bf7db604cb.png)
+
+```python
+json_wbindicaco = copy.deepcopy(raw_data['source'][0]['concept'][0]['variable'])
+type(json_wbindicaco)
+```
+
+```python
+json_wbindicaco[0]
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717397480850/28ab91a3-ef21-44b1-b588-ed8dc05b8f5d.png)
+
+#### 2.3.1.4 Destructuring json response
+
+```python
+destrc_json_wbindicaco = []
+
+for indica in json_wbindicaco:
+    destrc_json = {}
+
+    for k, v in indica.items():
+        if isinstance(v, list):
+            for i, nested_v in enumerate(v):
+                for nested_k, nested_val in nested_v.items():
+                    destrc_json[f"{k}_{i}_{nested_k}"] = nested_val
+        else:
+            destrc_json[k] = v
+
+    destrc_json_wbindicaco.append(destrc_json)
+```
+
+```python
+destrc_json_wbindicaco
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717397537520/facbaead-03be-48f5-9d30-5e5769493b51.png)
+
 # Conclusion
 
 Learning Objectives,
@@ -370,6 +433,7 @@ Learning Objectives,
 - Finding source Id
 - using Get request to ingest from url
 - Exploring json response
+
 
 # Source: Self \[[Link](https://databank.worldbank.org/reports.aspx?source=2&series=NY.GDP.MKTP.CD&country=)\], \[[Link](https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information)\]
 

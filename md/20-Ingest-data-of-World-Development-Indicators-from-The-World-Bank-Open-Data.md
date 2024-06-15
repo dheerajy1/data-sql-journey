@@ -418,6 +418,40 @@ destrc_json_wbindicaco
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717397537520/facbaead-03be-48f5-9d30-5e5769493b51.png)
 
+
+
+#### 2.3.1.5 Use pandas DataFrame to convert the JSON data:
+
+```python
+wbindicaco = pd.DataFrame(data=destrc_json_wbindicaco)
+wbindicaco.dtypes, wbindicaco.shape
+```
+
+#### 2.3.1.6 changing the data type
+
+```python
+wbindicaco['metatype_1_value'] = wbindicaco['metatype_1_value'].astype(str)
+```
+
+```python
+wbindicaco
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717397625721/08572be4-e005-4bbc-9d06-80ecb67cc6a1.png)
+
+#### 2.3.1.7 Get indicator Id
+
+```python
+coindicaid = wbindicaco.loc[
+    wbindicaco['metatype_1_value'].str.contains(r'CO2 emissions \(kt\)', case=False),
+    'id'
+].to_string(index=False)
+coindicaid
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717397703643/2dc1d248-f3a1-4e1a-9ffd-11dddf39187a.png)
+
+
 # Conclusion
 
 Learning Objectives,

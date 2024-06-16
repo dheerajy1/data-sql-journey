@@ -451,6 +451,65 @@ coindicaid
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717397703643/2dc1d248-f3a1-4e1a-9ffd-11dddf39187a.png)
 
+### 2.3.2 CO2 emissions (kt) data
+
+#### 2.3.2.1 Url Connection setup
+
+```python
+wbcoemi_code_url = (
+    f"http://api.worldbank.org/v2"
+    f"/country"
+    f"/all"
+    f"/indicator"
+    f"/{coindicaid}"
+    f"?format=json"
+    f"&per_page=20000"
+)
+```
+
+#### 2.3.2.2 using Get request to ingest from url:
+
+```python
+# Make the HTTP request.
+response = requests.get(wbcoemi_code_url)
+
+# Check the status of the request
+if response.status_code == 200:
+    raw_data = response.json()
+    print("Request was successful.",response.headers['Content-Type'])
+else:
+    print(f"Request failed with status code: {response.status_code}")
+```
+
+```python
+response.headers
+```
+
+```python
+response.content
+```
+
+#### 2.3.2.3 Exploring json response
+
+```python
+type(raw_data), len(raw_data)
+```
+
+```python
+raw_data[0]
+```
+
+```python
+json_wbcoemi = copy.deepcopy(raw_data[1])
+type(json_wbcoemi)
+```
+
+```python
+json_wbcoemi[0]
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717397808996/2235576a-43cc-4303-96b0-d546d46eaf41.png)
+
 
 # Conclusion
 

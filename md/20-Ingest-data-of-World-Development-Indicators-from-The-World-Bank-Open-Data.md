@@ -510,6 +510,58 @@ json_wbcoemi[0]
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717397808996/2235576a-43cc-4303-96b0-d546d46eaf41.png)
 
+#### 2.3.2.4 Destructuring json response
+
+```python
+destrc_json_wbcoemi = []
+
+for coemi in json_wbcoemi:
+    destrc_json = {}
+    
+    for k, v in coemi.items():
+        if isinstance(v, dict):
+            for nested_k, nested_v in v.items():
+                destrc_json[f'{k}_{nested_k}'] = nested_v
+        else:
+            destrc_json[k] = v
+    destrc_json_wbcoemi.append(destrc_json)
+```
+
+```python
+destrc_json_wbcoemi
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717397859121/dcf7eced-2240-4820-ae39-a0900544c90c.png)
+
+#### 2.3.2.5 Use pandas DataFrame to convert the JSON data:
+
+```python
+wbcoemi = pd.DataFrame(data=destrc_json_wbcoemi)
+wbcoemi.dtypes, wbcoemi.shape
+```
+
+```python
+wbcoemi
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717397895573/444598c0-ebce-4af1-b4d4-1518533827d0.png)
+
+#### 2.3.2.6 Transformations
+
+##### 2.3.2.6.1 Renaming column
+
+```python
+wbcoemi_trnsfmtn = wbcoemi.rename(columns={'date': 'year'}).add_prefix('co2_') #, 'value': 'co2_value'
+```
+
+##### 2.3.2.6.2 Sorting
+
+```python
+wbcoemi_trnsfmtn.sort_values(['co2_country_value', 'co2_year'], ascending=[True, True], inplace=True)
+wbcoemi_trnsfmtn.reset_index(drop=True, inplace=True)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717397966682/84a1640f-ddfd-4bea-a98e-75a639b734f3.png)
 
 # Conclusion
 

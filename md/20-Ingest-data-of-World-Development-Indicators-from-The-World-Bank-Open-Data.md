@@ -563,6 +563,106 @@ wbcoemi_trnsfmtn.reset_index(drop=True, inplace=True)
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717397966682/84a1640f-ddfd-4bea-a98e-75a639b734f3.png)
 
+## 2.4 [<mark>World Bank GDP</mark>](https://datahelpdesk.worldbank.org/knowledgebase/articles/898599-indicator-api-queries) data
+
+### 2.4.1 Finding indicator Id
+
+#### 2.4.1.1 Url Connection setup
+
+```python
+schkeywrd = 'GDP'
+
+wbindicagdp_code_url = (
+    f"https://api.worldbank.org/v2"
+    f"/sources"
+    f"/{wdi_srcid}"
+    f"/search"
+    f"/{schkeywrd}"
+    f"?format=json"
+    f"&per_page=20000"
+)
+```
+
+#### 2.4.1.2 using Get request to ingest from url:
+
+**<mark>Run the below cell only once</mark>**
+
+```python
+# Make the HTTP request.
+response = requests.get(wbindicagdp_code_url)
+
+# Check the status of the request
+if response.status_code == 200:
+    raw_data = response.json()
+    print("Request was successful.",response.headers['Content-Type'])
+else:
+    print(f"Request failed with status code: {response.status_code}")
+```
+
+```python
+response.headers
+```
+
+```python
+response.content
+```
+
+#### 2.4.1.3 Exploring json response
+
+```python
+type(raw_data), len(raw_data)
+```
+
+```python
+raw_data
+```
+
+```python
+raw_data.keys()
+```
+
+```python
+type(raw_data['source']), len(raw_data['source'])
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717398600685/4555d46b-2fed-4f2c-9a3a-941f663e670b.png)
+
+```python
+raw_data['source'][0]['concept'][0]['variable']
+```
+
+```python
+json_wbindicagdp = copy.deepcopy(raw_data['source'][0]['concept'][0]['variable'])
+type(json_wbindicagdp)
+```
+
+```python
+json_wbindicagdp[0]
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717398761184/89d53e2a-7b15-46ab-9501-7a3da7e62d8c.png)
+
+#### 2.4.1.4 Destructuring json response
+
+```python
+destrc_json_wbindicagdp = []
+
+for indica in json_wbindicagdp:
+    destrc_json = {}
+
+    for k, v in indica.items():
+        if isinstance(v, list):
+            for i, nested_v in enumerate(v):
+                for nested_k, nested_val in nested_v.items():
+                    destrc_json[f"{k}_{i}_{nested_k}"] = nested_val
+        else:
+            destrc_json[k] = v
+
+    destrc_json_wbindicagdp.append(destrc_json)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717398819836/b1510b0c-c25d-419e-8280-e28752ab4b70.png)
+
 # Conclusion
 
 Learning Objectives,

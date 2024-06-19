@@ -663,6 +663,39 @@ for indica in json_wbindicagdp:
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717398819836/b1510b0c-c25d-419e-8280-e28752ab4b70.png)
 
+
+#### 2.4.1.5 Use pandas DataFrame to convert the JSON data:
+
+```python
+wbindicagdp = pd.DataFrame(data=destrc_json_wbindicagdp)
+wbindicagdp.dtypes, wbindicagdp.shape
+```
+
+#### 2.4.1.6 changing the data type
+
+```python
+wbindicagdp['metatype_0_value'] = wbindicagdp['metatype_0_value'].astype(str)
+```
+
+```python
+wbindicagdp
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717398879722/3729d715-6e09-47e1-b7f8-0a88dfd346df.png)
+
+#### 2.4.1.7 Get indicator Id
+
+```python
+gdpindicaid = wbindicagdp.loc[
+    wbindicagdp['metatype_0_value'].str.contains(r'GDP \(current US\$\)', case=False),
+    'id'
+].to_string(index=False)
+gdpindicaid
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717398940826/28b6a578-d002-4e3c-b719-0c2230eb859f.png)
+
+
 # Conclusion
 
 Learning Objectives,

@@ -696,6 +696,91 @@ gdpindicaid
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717398940826/28b6a578-d002-4e3c-b719-0c2230eb859f.png)
 
 
+### 2.4.2 GDP per capita (current US$) data
+
+#### 2.4.2.1 Url Connection setup
+
+```python
+wbgdp_code_url = (
+    f"http://api.worldbank.org/v2"
+    f"/country"
+    f"/all"
+    f"/indicator"
+    f"/{gdpindicaid}"
+    f"?format=json"
+    f"&per_page=20000"
+)
+```
+
+#### 2.4.2.2 using Get request to ingest from url:
+
+**<mark>Run the below cell only once</mark>**
+
+```python
+# Make the HTTP request.
+response = requests.get(wbgdp_code_url)
+
+# Check the status of the request
+if response.status_code == 200:
+    raw_data = response.json()
+    print("Request was successful.",response.headers['Content-Type'])
+else:
+    print(f"Request failed with status code: {response.status_code}")
+```
+
+```python
+response.headers
+```
+
+```python
+response.content
+```
+
+#### 2.4.2.3 Exploring json response
+
+```python
+type(raw_data), len(raw_data)
+```
+
+```python
+raw_data[0]
+```
+
+```python
+json_wbgdp = copy.deepcopy(raw_data[1])
+type(json_wbgdp)
+```
+
+```python
+json_wbgdp[0]
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717399064761/a2faa66a-2665-4863-9485-742b546b945e.png)
+
+#### 2.4.2.4 Destructuring json response
+
+```python
+destrc_json_wbgdp = []
+
+for gdp in json_wbgdp:
+    destrc_json = {}
+    
+    for k, v in gdp.items():
+        if isinstance(v, dict):
+            for nested_k, nested_v in v.items():
+                destrc_json[f'{k}_{nested_k}'] = nested_v
+        else:
+            destrc_json[k] = v
+    destrc_json_wbgdp.append(destrc_json)
+```
+
+```python
+destrc_json_wbgdp
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717399109962/69a044e6-305a-4684-9d55-fc40f3f5d791.png)
+
+
 # Conclusion
 
 Learning Objectives,

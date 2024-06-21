@@ -781,6 +781,36 @@ destrc_json_wbgdp
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717399109962/69a044e6-305a-4684-9d55-fc40f3f5d791.png)
 
 
+#### 2.4.2.5 Use pandas DataFrame to convert the JSON data:
+
+```python
+wbgdp = pd.DataFrame(data=destrc_json_wbgdp)
+wbgdp.dtypes, wbgdp.shape
+```
+
+```python
+wbgdp
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717399169645/b51cb8b6-bcb2-423a-b813-a186998a061e.png)
+
+#### 2.4.2.6 Transformations
+
+##### 2.4.2.6.1 Renaming column
+
+```python
+wbgdp_trnsfmtn = wbgdp.rename(columns={'date': 'year'}).add_prefix('gdp_')#, 'value': 'gdp_value'
+```
+
+##### 2.4.2.6.2 Sorting
+
+```python
+wbgdp_trnsfmtn.sort_values(['gdp_country_value', 'gdp_year'], ascending=[True, True], inplace=True)
+wbgdp_trnsfmtn.reset_index(drop=True, inplace=True)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717399246090/de6a8c6e-ef33-4d9d-94a9-6b5a21de847a.png)
+
 # Conclusion
 
 Learning Objectives,

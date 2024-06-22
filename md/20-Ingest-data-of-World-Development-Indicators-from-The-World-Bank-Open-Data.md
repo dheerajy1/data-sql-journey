@@ -811,6 +811,111 @@ wbgdp_trnsfmtn.reset_index(drop=True, inplace=True)
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717399246090/de6a8c6e-ef33-4d9d-94a9-6b5a21de847a.png)
 
+
+## 2.5 [<mark>World Bank Life expectancy</mark>](https://datahelpdesk.worldbank.org/knowledgebase/articles/898599-indicator-api-queries) data
+
+### 2.5.1 Finding indicator Id
+
+#### 2.5.1.1 Url Connection setup
+
+```python
+schkeywrd = 'Life expectancy at birth'
+
+wbindicale_code_url = (
+    f"https://api.worldbank.org/v2"
+    f"/sources"
+    f"/{wdi_srcid}"
+    f"/search"
+    f"/{schkeywrd}"
+    f"?format=json"
+    f"&per_page=20000"
+)
+```
+
+#### 2.5.1.2 using Get request to ingest from url:
+
+**<mark>Run the below cell only once</mark>**
+
+```python
+# Make the HTTP request.
+response = requests.get(wbindicale_code_url)
+
+# Check the status of the request
+if response.status_code == 200:
+    raw_data = response.json()
+    print("Request was successful.",response.headers['Content-Type'])
+else:
+    print(f"Request failed with status code: {response.status_code}")
+```
+
+```python
+response.headers
+```
+
+```python
+response.content
+```
+
+#### 2.5.1.3 Exploring json response
+
+```python
+type(raw_data), len(raw_data)
+```
+
+```python
+raw_data
+```
+
+```python
+raw_data.keys()
+```
+
+```python
+type(raw_data['source']), len(raw_data['source'])
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717399380863/d3da85d8-438a-4400-9d70-8b2da1dbfe7d.png
+
+```python
+raw_data['source'][0]['concept'][0]['variable']
+```
+
+```python
+json_wbindicale = copy.deepcopy(raw_data['source'][0]['concept'][0]['variable'])
+type(json_wbindicale)
+```
+
+```python
+json_wbindicale[0]
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717399419222/bfdc3cd0-b46a-43b9-85c7-9a0ca6366bd2.png
+
+#### 2.5.1.4 Destructuring json response
+
+```python
+destrc_json_wbindicale = []
+
+for indica in json_wbindicale:
+    destrc_json = {}
+
+    for k, v in indica.items():
+        if isinstance(v, list):
+            for i, nested_v in enumerate(v):
+                for nested_k, nested_val in nested_v.items():
+                    destrc_json[f"{k}_{i}_{nested_k}"] = nested_val
+        else:
+            destrc_json[k] = v
+
+    destrc_json_wbindicale.append(destrc_json)
+```
+
+```python
+destrc_json_wbindicale
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717399491210/069663b9-c65b-4506-b25a-e5eb74b0f68d.png
+
 # Conclusion
 
 Learning Objectives,

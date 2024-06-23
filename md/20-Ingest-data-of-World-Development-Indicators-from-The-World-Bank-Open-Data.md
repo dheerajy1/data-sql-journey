@@ -916,6 +916,39 @@ destrc_json_wbindicale
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717399491210/069663b9-c65b-4506-b25a-e5eb74b0f68d.png
 
+
+#### 2.5.1.5 Use pandas DataFrame to convert the JSON data:
+
+```python
+wbindicale = pd.DataFrame(data=destrc_json_wbindicale)
+wbindicale.dtypes, wbindicale.shape
+```
+
+#### 2.5.1.6 changing the data type
+
+```python
+wbindicale['metatype_1_value'] = wbindicale['metatype_1_value'].astype(str)
+```
+
+```python
+wbindicale
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717399564207/f6de5fe7-7041-42fc-8f52-3fafb3a9521b.png)
+
+#### 2.5.1.7 Get indicator Id
+
+```python
+leindicaid = wbindicale.loc[
+    wbindicale['metatype_1_value'].str.contains(r'Life expectancy at birth, total \(years\)', case=False),
+    'id'
+].to_string(index=False)
+leindicaid
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717399613499/ad464499-6d4f-46bf-a05f-b54e98f93d2f.png)
+
+
 # Conclusion
 
 Learning Objectives,

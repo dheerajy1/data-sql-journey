@@ -949,6 +949,89 @@ leindicaid
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717399613499/ad464499-6d4f-46bf-a05f-b54e98f93d2f.png)
 
 
+
+### 2.5.2 Life expectancy at birth, total (years) data
+
+#### 2.5.2.1 Url Connection setup
+
+```python
+wble_code_url = (
+    f"http://api.worldbank.org/v2"
+    f"/country"
+    f"/all"
+    f"/indicator"
+    f"/{leindicaid}"
+    f"?format=json"
+    f"&per_page=20000"
+)
+```
+
+#### 2.5.2.2 using Get request to ingest from url:
+
+```python
+# Make the HTTP request.
+response = requests.get(wble_code_url)
+
+# Check the status of the request
+if response.status_code == 200:
+    raw_data = response.json()
+    print("Request was successful.",response.headers['Content-Type'])
+else:
+    print(f"Request failed with status code: {response.status_code}")
+```
+
+```python
+response.headers
+```
+
+```python
+response.content
+```
+
+#### 2.5.2.3 Exploring json response
+
+```python
+type(raw_data), len(raw_data)
+```
+
+```python
+raw_data[0]
+```
+
+```python
+json_wble = copy.deepcopy(raw_data[1])
+type(json_wble)
+```
+
+```python
+json_wble[0]
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717399698344/48d4f945-104a-409d-8233-557ec5f80798.png align="center")
+
+#### 2.5.2.4 Destructuring json response
+
+```python
+destrc_json_wble = []
+
+for le in json_wble:
+    destrc_json = {}
+    
+    for k, v in le.items():
+        if isinstance(v, dict):
+            for nested_k, nested_v in v.items():
+                destrc_json[f'{k}_{nested_k}'] = nested_v
+        else:
+            destrc_json[k] = v
+    destrc_json_wble.append(destrc_json)
+```
+
+```python
+destrc_json_wble
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717399742442/b2b58f87-13ff-4bf5-9f80-3301aa84cc2a.png align="center")
+
 # Conclusion
 
 Learning Objectives,

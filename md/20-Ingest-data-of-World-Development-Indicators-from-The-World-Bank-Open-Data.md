@@ -1007,7 +1007,7 @@ type(json_wble)
 json_wble[0]
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717399698344/48d4f945-104a-409d-8233-557ec5f80798.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717399698344/48d4f945-104a-409d-8233-557ec5f80798.png)
 
 #### 2.5.2.4 Destructuring json response
 
@@ -1030,7 +1030,38 @@ for le in json_wble:
 destrc_json_wble
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717399742442/b2b58f87-13ff-4bf5-9f80-3301aa84cc2a.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717399742442/b2b58f87-13ff-4bf5-9f80-3301aa84cc2a.png)
+
+
+#### 2.5.2.5 Use pandas DataFrame to convert the JSON data:
+
+```python
+wble = pd.DataFrame(data=destrc_json_wble)
+wble.dtypes, wble.shape
+```
+
+```python
+wble
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717399776015/c58aca30-6ee3-47f1-8dd2-0d5e7b43e045.png)
+
+#### 2.5.2.6 Transformations
+
+##### 2.5.2.6.1 Renaming column
+
+```python
+wble_trnsfmtn = wble.rename(columns={'date': 'year'}).add_prefix('life_exp_')#, 'value': 'life_exp_value'
+```
+
+##### 2.5.2.6.2 Sorting
+
+```python
+wble_trnsfmtn.sort_values(['life_exp_country_value', 'life_exp_year'], ascending=[True, True], inplace=True)
+wble_trnsfmtn.reset_index(drop=True, inplace=True)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717399827297/1b81e167-fdcd-4901-a22f-ef8cd8bdd6a5.png)
 
 # Conclusion
 

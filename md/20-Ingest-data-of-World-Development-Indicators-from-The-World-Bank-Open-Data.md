@@ -1063,6 +1063,95 @@ wble_trnsfmtn.reset_index(drop=True, inplace=True)
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717399827297/1b81e167-fdcd-4901-a22f-ef8cd8bdd6a5.png)
 
+# 3\. Merge all Dataframes
+
+## 3.1 Countries dataframe
+
+```python
+wbctry_filt = wbctry_filt[['iso2Code', 'name', 'region_value', 'incomeLevel_value']]
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717400002240/f8f70b69-d586-4893-8200-0a901d995d24.png)
+
+```python
+wbctry_filt.dtypes
+```
+
+## 3.2 CO2 emissions dataframe
+
+```python
+wbcoemi_trnsfmtn = wbcoemi_trnsfmtn[['co2_countryiso3code', 'co2_year', 'co2_value']]
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717400029576/8b15ca05-8c38-4ea1-ac80-936784cd1e97.png)
+
+```python
+wbcoemi_trnsfmtn.dtypes
+```
+
+## 3.3 GDP dataframe
+
+```python
+wbgdp_trnsfmtn = wbgdp_trnsfmtn[['gdp_countryiso3code', 'gdp_year', 'gdp_value']]
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717400062430/5f0d0cea-586d-4e84-a78c-edc0c062b6e5.png)
+
+```python
+wbgdp_trnsfmtn.dtypes
+```
+
+## 3.4 Life expectancy dataframe
+
+```python
+wble_trnsfmtn = wble_trnsfmtn[['life_exp_countryiso3code', 'life_exp_year', 'life_exp_value']]
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717400087173/cb723b19-7736-48af-ae59-b39ed4f4979f.png)
+
+```python
+wble_trnsfmtn.dtypes
+```
+
+## 3.5 Merging
+
+```python
+wb_df = wbctry_filt.merge(wbcoemi_trnsfmtn, left_on=["iso2Code"], right_on=["co2_countryiso3code"], how="right")[['iso2Code','name', 'region_value', 'incomeLevel_value', 'co2_year', 'co2_value']]
+wb_df = wb_df.merge(wbgdp_trnsfmtn, left_on=["iso2Code","co2_year"], right_on=["gdp_countryiso3code", "gdp_year"], how="right")[['iso2Code','name', 'region_value', 'incomeLevel_value', 'co2_year', 'co2_value', 'gdp_value']]
+wb_df = wb_df.merge(wble_trnsfmtn, left_on=["iso2Code","co2_year"], right_on=["life_exp_countryiso3code", "life_exp_year"], how="right")[['iso2Code','name', 'region_value', 'incomeLevel_value', 'co2_year', 'co2_value', 'gdp_value', 'life_exp_value']]
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717400131519/c0a55ec1-8c5a-4300-ba55-2def2b0a1581.png)
+
+## 3.6 Renaming column names
+
+```python
+wb_df.rename(columns={'iso2Code': 'country_code','name': 'country_name', 'region_value': 'region', 'incomeLevel_value': 'income_group', 'co2_year': 'year', 'co2_value': 'co2', 'gdp_value': 'gdp', 'life_exp_value': 'life_exp'}, inplace=True)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717400159365/f9798f45-4ed0-4234-949d-d6f0060ae7fc.png)
+
+## 3.7 Rearranging columns
+
+```python
+wb_df = wb_df[[
+    'country_name',
+    'country_code',
+    'year',
+    'co2',
+    'gdp',
+    'life_exp',
+    'income_group',
+    'region',
+]].copy()
+```
+
+```python
+wb_df
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717400186108/1e8046fb-d04e-4fb8-94f4-b058e039adef.png)
+
 # Conclusion
 
 Learning Objectives,
@@ -1078,7 +1167,10 @@ Learning Objectives,
 - Finding source Id
 - using Get request to ingest from url
 - Exploring json response
-
+- Merge all Dataframes
+- Transformations   
+    - Renaming column names   
+    - Rearranging columns
 
 # Source: Self \[[Link](https://databank.worldbank.org/reports.aspx?source=2&series=NY.GDP.MKTP.CD&country=)\], \[[Link](https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information)\]
 

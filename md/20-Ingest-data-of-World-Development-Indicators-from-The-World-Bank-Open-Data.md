@@ -1239,6 +1239,114 @@ else:
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717400318584/a56be331-7d1b-4730-8669-78e92aa6c14b.png)
 
+### 4.2.2 Using sqlalchemy Session() method - DDL: DROP
+
+* Drop table if n only if exists
+    
+
+**<mark>Caution: Below is a DROP SQL statement</mark>**
+
+```python
+# Define the DROP SQL statement
+
+table_name = 'World bank tidy'
+qdrp_table = f"""
+IF OBJECT_ID(N'[dbo].[{table_name}]', N'U') IS NOT NULL
+BEGIN
+    DROP TABLE [dballpurpose].[dbo].[{table_name}]
+END
+"""
+
+try:
+    # Execute the SQL statement using the session's execute() method
+    session.execute(text(qdrp_table))
+
+    # Commit the changes
+    session.commit()
+    print(f"{table_name} dropped successfully!")
+except OperationalError as e:
+    # Handle the OperationalError exception
+    session.rollback()
+    print(f"An error occurred: {str(e)}")
+finally:
+    # Close the session
+    session.close()
+```
+
+## 4.3 Send the ingested data in dataframes to SQL Server tables
+
+## 4.3.1 Using Pandas to\_sql() method - DDL: Create
+
+**<mark>Run the below cell only once</mark>**
+
+```python
+table_name = 'World bank tidy'
+
+wb_df.to_sql(table_name, engine, if_exists='replace', index=False)
+```
+
+# 5\. Query the data from SQL table
+
+* Read from your database Using Pandas read\_sql\_query() method - DQL: Select
+    
+
+```python
+sql_string = """
+  SELECT 
+    *
+  FROM [dballpurpose].[dbo].[World bank tidy]
+"""
+
+df_var = pd.read_sql(sql_string, engine)
+df_var
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717400435677/42e7c7bd-fdfa-47c5-aac3-2269220077b3.png)
+
+* Viz 📉
+    
+
+```python
+df_var = df_var.dropna().groupby(['year', 'income_group']).agg({'co2': 'sum', 'life_exp': 'mean'})
+
+fig, axs = plt.subplots(1, 1, figsize=(25, 8))
+
+sns.set_theme(style="darkgrid")
+
+sns.barplot(
+    data=df_var,
+    x= 'year',
+    y = 'co2',
+    hue = 'income_group',
+    palette = 'Pastel1',
+    ax=axs
+)
+
+# Get the current tick positions and labels
+tick_positions = axs.get_xticks()
+tick_labels = [label.get_text() for label in axs.get_xticklabels()]
+
+# Set the tick positions and labels with rotation and Rotate x-axis labels by 90 degrees
+axs.set_xticks(tick_positions)
+axs.set_xticklabels(labels=tick_labels, rotation=90)
+
+# Get the current tick positions and labels
+tick_positions = axs.get_yticks()
+tick_labels = [f'{int(tick/1e6)} PPM' for tick in tick_positions]  # Custom labels in parts per millions
+
+# Set the tick positions and labels
+axs.set_yticks(tick_positions)
+axs.set_yticklabels(labels=tick_labels)
+
+plt.title(label='Worlds CO2 emission by year', loc='center')
+
+plt.ylabel('CO2 Emissions (PPM)')
+
+plt.show()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717400458115/2ad72cf3-39b2-43f3-9af7-9197fdd6f121.png)
+
 # Conclusion
 
 Learning Objectives,

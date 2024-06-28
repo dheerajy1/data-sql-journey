@@ -1366,6 +1366,11 @@ Learning Objectives,
 - Transformations   
     - Renaming column names   
     - Rearranging columns
+- Merging Datafrmaes
+- Using sqlalchemy Session() - DDL: DROP
+- Using Pandas to_sql() - DDL: Create
+- Using Pandas read_sql_query() - DQL: Select
+- Data visualization seaborn lib
 
 # Source: Self \[[Link](https://databank.worldbank.org/reports.aspx?source=2&series=NY.GDP.MKTP.CD&country=)\], \[[Link](https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information)\]
 

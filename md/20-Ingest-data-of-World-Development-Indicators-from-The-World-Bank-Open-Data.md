@@ -1347,9 +1347,107 @@ plt.show()
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717400458115/2ad72cf3-39b2-43f3-9af7-9197fdd6f121.png)
 
+# 6\. Save wb\_df as CSV file
+
+## 6.1 Check file if exists
+
+```python
+os.getcwd()
+```
+
+```python
+# Define the file path
+path = r'nnnn'
+file_name = 'wb_tidy'
+
+os.chdir(f'{path}')
+
+csv_files = [file for file in os.listdir() if file.endswith('.csv')]
+
+if any(file_name in file for file in csv_files):
+    print(f'Found a file with {file_name} in the name.')
+else:
+    print(f'No {file_name} in any file name.')
+```
+
+## 6.2 Remove file if exists
+
+```python
+# Define the file path
+path = r'nnnn'
+file_name = 'wb_tidy'
+file_path = f"{path}{file_name}.csv"
+
+try:
+    # Check if the file exists
+    if os.path.exists(file_path):
+        # Delete the file
+        os.remove(file_path)
+        print(f"File {file_name} deleted successfully!")
+    else:
+        print(f"File {file_name} does not exist.")
+except Exception as e:
+    # Handle any exceptions that occur during file deletion
+    print("An error occurred:", str(e))
+```
+
+## 6.3 Using pandas to\_csv() to save dataframe as CSV file
+
+**<mark>Run the below cell only once</mark>**
+
+```python
+# Define the file path
+path = r'nnnn'
+file_name = 'wb_tidy'
+file_path = f"{path}{file_name}.csv"
+
+try:
+    wb_df.to_csv(f'{file_path}', index=False)
+    print(f'CSV file {file_name}.csv is successfully saved')
+except Exception as e:
+    print(f"An error occurred while saving the CSV file: {e}")
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717400659378/8aada421-0015-45a1-94fc-cde6b4b53c25.png)
+
+# 7\. Read from CSV file
+
+## 7.1 Using pandas
+
+```python
+# Define the file path
+path = r'C:\Users\HP\Downloads\\'
+file_name = 'wb_tidy'
+file_path = f"{path}{file_name}.csv"
+
+try:
+    df_var = pd.read_csv(filepath_or_buffer=f'{file_path}', delimiter=',')
+    print(f'CSV file {file_name} is successfully read')
+except Exception as e:
+    print(f"An error occurred while reading the CSV file: {e}")
+```
+
+```python
+df_var
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717400689855/529ae85e-2a14-425b-819e-e37821b5b961.png)
+
 # Conclusion
 
 Learning Objectives,
+
+* Python & Pandas: Import libraries and use Pandas for data manipulation and analysis.
+    
+* Database Connectivity: Configuring database connections and creating engines with SQLAlchemy in Python.
+    
+* Data Ingestion: Ingesting data from NYC OpenData using Python requests and Pandas functions.
+    
+* SQL Operations: Perform CRUD operations and query data from SQL Server using Python.
+    
+* Data Visualization: Visualize data using Python libraries such as Matplotlib and Seaborn for insightful charts and graphs.
+
+Extended Learning Objectives,
 
 - Python & Pandas: Import libraries and use Pandas for data manipulation and analysis.
 

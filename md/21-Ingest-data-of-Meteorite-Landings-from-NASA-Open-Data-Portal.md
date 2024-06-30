@@ -1,6 +1,5 @@
 This article will demonstrate the data ingestion and exploration for Meteorite Landings dataset provided by NASA Open Data Portal.
 
-# <mark>30 june</mark>
 
 # NASA
 

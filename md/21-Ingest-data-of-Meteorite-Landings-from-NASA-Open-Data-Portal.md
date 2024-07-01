@@ -131,6 +131,109 @@ nasa_ml
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717565398133/66fe644a-a413-48c3-aa76-27fd050dcb6a.png)
 
 
+### 2.1.6 Transfromations
+
+##### 2.1.6.1 Renaming column
+
+```python
+nasa_ml_filt = nasa_ml.rename(columns={'mass': 'mass (g)', 'geolocation': 'GeoLocation'})
+```
+
+##### 2.1.6.2 Check isna() alias isnulls() , empty strings
+
+* Viz 📉
+    
+
+```python
+# Count the number of empty string rows for each column
+df_var = nasa_ml_filt.isna().sum().to_frame().reset_index(names='Column names').rename(columns={0: 'isna row count'}).merge(nasa_ml_filt.eq('Aggregates').sum().to_frame().reset_index(names='Column names').rename(columns={0: 'Aggregates row count'})).merge(nasa_ml_filt.eq('').sum().to_frame().reset_index(names='Column names').rename(columns={0: 'empty string row count'}))
+
+fig, axs = plt.subplots(1, 1, figsize=(25, 8))
+
+sns.set_theme(style="darkgrid")
+
+sns.barplot(
+    data=df_var,
+    x = 'Column names',
+    y= 'isna row count',
+    hue= 'isna row count',
+    palette='Pastel1',
+    ax=axs
+)
+
+# Move the hue legend for axs2 to the right middle
+axs.legend(title='isna row count', bbox_to_anchor=(0.10, 0.93), loc='center right')
+
+# Create the second y-axis for Aggregates row count
+axs2 = axs.twinx()
+sns.barplot(
+    data=df_var,
+    x = 'Column names',
+    y= 'Aggregates row count',
+    hue= 'Aggregates row count',
+    palette='coolwarm',
+    ax=axs2,
+)
+
+# Adjust the position of the spines for axs2
+axs2.spines['right'].set_position(('outward', 60))
+
+# Create the third y-axis for empty string row count
+axs3 = axs.twinx()
+
+sns.lineplot(
+    data=df_var,
+    x = 'Column names',
+    y= 'empty string row count',
+    ax=axs3,
+)
+
+# Adjust the position of the spines for axs3
+axs3.spines['right'].set_position(('outward', 120))
+
+# Get the current tick positions and labels
+tick_positions = axs.get_xticks()
+tick_labels = [label.get_text() for label in axs.get_xticklabels()]
+
+# Set the tick positions and labels with rotation and Rotate x-axis labels by 90 degrees
+axs.set_xticks(tick_positions)
+axs.set_xticklabels(labels=tick_labels, rotation=90)
+
+
+plt.title(label='isna(), Aggregates and empty string row count', loc='center')
+
+axs.grid(False)
+axs2.grid(False)
+axs3.grid(False)
+
+plt.show()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717565473641/a29b5edf-5cb6-461f-a1e3-a12a67c121ab.png)
+
+```python
+nasa_ml_filt
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717565521618/bbed6dcb-0dfe-45a3-beec-2722cb5070be.png)
+
+##### 2.1.6.3 Extract year using str.extract
+
+```python
+nasa_ml_filt['year'] = nasa_ml_filt['year'].str.extract(r'(\d{4})')
+```
+
+```python
+nasa_ml_filt
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717587592786/f7acfecb-592d-4574-94e6-6e862714da25.png)
+
+Error:
+
+* OutOfBoundsDatetime: Out of bounds nanosecond timestamp: 1583-01-01T00:00:00.000, at position 174
+    
+* **OutOfBoundsDatetime**: Out of bounds nanosecond timestamp: 1583-01-01T00:00:00.000, at position 125. You might want to try: - passing `format` if your strings have a consistent format; - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format; - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
 
 # Conclusion
 

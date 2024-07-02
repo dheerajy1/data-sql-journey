@@ -235,6 +235,140 @@ Error:
     
 * **OutOfBoundsDatetime**: Out of bounds nanosecond timestamp: 1583-01-01T00:00:00.000, at position 125. You might want to try: - passing `format` if your strings have a consistent format; - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format; - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
 
+# 3\. Store final dataframe in SQL Server
+
+## 3.1 Configuring Database connection setup
+
+### 3.1.1 Check the driver
+
+```python
+pyodbc.drivers()
+```
+
+### 3.1.2. Configure the connection string
+
+```python
+connection_url = URL.create(
+    "mssql+pyodbc",
+    username = sql_login_name,
+    password = sql_login_password,
+    host = server_name,
+    port= port_number,
+    database = database_name,
+    query = {
+        "driver": "ODBC Driver 18 for SQL Server",
+         "TrustServerCertificate": "yes", # When yes, the transport layer will use SSL to encrypt the channel and bypass walking the certificate chain to validate trust. Useful when using self-signed certificates or when the certificate chain cannot be validated.
+        "authentication": "SqlPassword", # use SQL login credentials instead of Windows authentication.
+        "pool_size": "1", # to limit the number of sessions to one
+    },
+)
+```
+
+### 3.1.3. Create an engine using the create\_engine() function, specifying the database URL
+
+```python
+engine = create_engine(connection_url)
+```
+
+### 3.1.4 Create a session using sessionmaker
+
+* only run this if you are not using pandas read sql query or to sql i.e if you want to perform DDL or DML oprations:
+    
+
+```python
+Session = sessionmaker(bind=engine)
+session = Session()
+```
+
+## 3.2 Read the existing tables in the SQL Server Database
+
+### 3.2.1 Using Pandas read\_sql\_query() method - DQL: Select
+
+* first, confirm if the tables already exist in the database
+    
+
+```python
+qlist_tables = """
+    SELECT TOP 10000 *
+    FROM [dballpurpose].INFORMATION_SCHEMA.TABLES
+    WHERE TABLE_TYPE IN ('BASE TABLE')
+    ORDER BY TABLE_NAME ASC
+"""
+
+df_var = pd.read_sql_query(qlist_tables,engine)
+df_var
+```
+
+```python
+table_name = 'Meteorite Landings'
+
+qlist_tables = f"""
+    SELECT TOP 10000 *
+    FROM [dballpurpose].INFORMATION_SCHEMA.TABLES
+    WHERE TABLE_TYPE IN ('BASE TABLE')
+        AND TABLE_NAME = '{table_name}'
+    ORDER BY TABLE_NAME ASC
+"""
+
+df_var = pd.read_sql_query(qlist_tables,engine)
+
+if df_var.empty:
+    print(f"Table [{table_name}] does not exist")
+else:
+    print(f"Table [{table_name}] exists")
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717587716796/1e51549c-bce3-4052-b0ae-5b5328685c9b.png)
+
+### 3.2.2 Using sqlalchemy Session() method - DDL: DROP
+
+* Drop table if n only if exists
+    
+
+**<mark>Caution: Below is a DROP SQL statement</mark>**
+
+```python
+# Define the DROP SQL statement
+
+table_name = 'Meteorite Landings'
+
+qdrp_table = f"""
+IF OBJECT_ID(N'[dbo].[{table_name}]', N'U') IS NOT NULL
+BEGIN
+    DROP TABLE [dballpurpose].[dbo].[{table_name}]
+END
+"""
+
+try:
+    # Execute the SQL statement using the session's execute() method
+    session.execute(text(qdrp_table))
+
+    # Commit the changes
+    session.commit()
+    print(f"{table_name} dropped successfully!")
+except OperationalError as e:
+    # Handle the OperationalError exception
+    session.rollback()
+    print(f"An error occurred: {str(e)}")
+finally:
+    # Close the session
+    session.close()
+```
+
+## 3.3 Send the ingested data in dataframes to SQL Server tables
+
+## 3.3.1 Using Pandas to\_sql() method - DDL: Create
+
+**<mark>Run the below cell only once</mark>**
+
+```python
+table_name = 'Meteorite Landings'
+
+nasa_ml_filt.to_sql(table_name, engine, if_exists='replace', index=False)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717587795110/bf593429-d23b-4cfd-a56a-f44ffe9460c8.png)
+
 # Conclusion
 
 Learning Objectives,

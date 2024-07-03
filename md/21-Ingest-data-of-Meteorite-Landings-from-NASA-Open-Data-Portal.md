@@ -369,6 +369,59 @@ nasa_ml_filt.to_sql(table_name, engine, if_exists='replace', index=False)
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717587795110/bf593429-d23b-4cfd-a56a-f44ffe9460c8.png)
 
+
+# 4\. Query the data from SQL table
+
+* Read from your database Using Pandas read\_sql\_query() method - DQL: Select
+    
+
+```python
+table_name = 'Meteorite Landings'
+
+sql_string = f"""
+  SELECT TOP 20
+    *
+  FROM [dballpurpose].[dbo].[{table_name}]
+"""
+
+df_var = pd.read_sql(sql_string, engine)
+df_var
+```
+
+* Viz 📉
+    
+
+```python
+df_var = df_var.dropna().groupby(['name', 'fall']).agg({'mass (g)': 'mean'})
+
+fig, axs = plt.subplots(1, 1, figsize=(25, 8))
+
+sns.set_theme(style="darkgrid")
+
+sns.barplot(
+    data=df_var,
+    x= 'name',
+    y = 'mass (g)',
+    hue = 'fall',
+    palette = 'Pastel1',
+    ax=axs
+)
+
+# Get the current tick positions and labels
+tick_positions = axs.get_xticks()
+tick_labels = [label.get_text() for label in axs.get_xticklabels()]
+
+# Set the tick positions and labels with rotation and Rotate x-axis labels by 90 degrees
+axs.set_xticks(tick_positions)
+axs.set_xticklabels(labels=tick_labels, rotation=90)
+
+plt.title(label='Mean Mass of Meteorites by Fall Type', loc='center')
+
+plt.show()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717587940197/4edf5aff-08ca-48b2-ad32-2a747b7f7ac4.png)
+
 # Conclusion
 
 Learning Objectives,

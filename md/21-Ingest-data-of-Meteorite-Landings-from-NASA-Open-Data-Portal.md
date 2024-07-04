@@ -422,9 +422,101 @@ plt.show()
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717587940197/4edf5aff-08ca-48b2-ad32-2a747b7f7ac4.png)
 
+# 5\. Save nasa\_ml\_filt as CSV file
+
+## 5.1 Check file if exists
+
+```python
+os.getcwd()
+```
+
+```python
+# Define the file path
+path = r'cc'
+file_name = 'Meteorite_Landings'
+
+os.chdir(f'{path}')
+
+csv_files = [file for file in os.listdir() if file.endswith('.csv')]
+
+if any(file_name in file for file in csv_files):
+    print(f'Found a file with {file_name} in the name.')
+else:
+    print(f'No {file_name} in any file name.')
+```
+
+## 5.2 Remove file if exists
+
+```python
+# Define the file path
+path = r'cc'
+file_name = 'Meteorite_Landings'
+file_path = f"{path}{file_name}.csv"
+
+try:
+    # Check if the file exists
+    if os.path.exists(file_path):
+        # Delete the file
+        os.remove(file_path)
+        print(f"File {file_name} deleted successfully!")
+    else:
+        print(f"File {file_name} does not exist.")
+except Exception as e:
+    # Handle any exceptions that occur during file deletion
+    print("An error occurred:", str(e))
+```
+
+## 5.3 Using pandas to\_csv() to save dataframe as CSV file
+
+```python
+# Define the file path
+path = r'cc'
+file_name = 'Meteorite_Landings'
+file_path = f"{path}{file_name}.csv"
+
+try:
+    nasa_ml_filt.to_csv(f'{file_path}', index=False)
+    print(f'CSV file {file_name}.csv is successfully saved')
+except Exception as e:
+    print(f"An error occurred while saving the CSV file: {e}")
+```
+
+# 6\. Read from CSV file
+
+## 6.1 Using pandas
+
+```python
+# Define the file path
+path = r'cc'
+file_name = 'Meteorite_Landings'
+file_path = f"{path}{file_name}.csv"
+
+try:
+    df_var = pd.read_csv(filepath_or_buffer=f'{file_path}', delimiter=',')
+    print(f'CSV file {file_name} is successfully read')
+except Exception as e:
+    print(f"An error occurred while reading the CSV file: {e}")
+```
+
+```python
+df_var
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1717588046931/5a812e22-b9ec-482a-bf08-99f42cd3e32e.png)
+
 # Conclusion
 
 Learning Objectives,
+
+* Python & Pandas: Import libraries and use Pandas for data manipulation and analysis.
+    
+* Database Connectivity: Configuring database connections and creating engines with SQLAlchemy in Python.
+    
+* Data Ingestion: Ingesting data from NYC OpenData using Python requests and Pandas functions.
+    
+* SQL Operations: Perform CRUD operations and query data from SQL Server using Python.
+    
+* Data Visualization: Visualize data using Python libraries such as Matplotlib and Seaborn for insightful charts and graphs.
 
     
 

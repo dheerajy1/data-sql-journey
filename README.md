@@ -36,5 +36,5 @@ The schema : Project Name, md/md File Location, SQL File location & other file t
 | 19 | Ingest & transform wheat data from US DA NAAS | [Link¹](<md/19-Ingest-&-transform-wheat-data-from-US-DA-NAAS.md>) | [Link²](<>) | [Link³](<https://dheerajy1.hashnode.dev/ingest-transform-wheat-data-from-us-da-naas>) |
 | 20 | Ingest data of World Development Indicators from The World Bank Open Data | [Link¹](<md/20-Ingest-data-of-World-Development-Indicators-from-The-World-Bank-Open-Data.md>) | [Link²](<>) | [Link³](<https://dheerajy1.hashnode.dev/ingest-data-of-world-development-indicators-from-the-world-bank-open-data>) |
 | 21 | Ingest data of Meteorite Landings from NASA Open Data Portal | [Link¹](<md/21-Ingest-data-of-Meteorite-Landings-from-NASA-Open-Data-Portal.md>) | [Link²](<>) | [Link³](<https://dheerajy1.hashnode.dev/ingest-data-of-meteorite-landings-from-nasa-open-data-portal>) |
-| 22 | Ingest data of Power plants from US EIA Open  Data | [Link¹](<md/22-Ingest-data-of-Power-plants-from-US-EIA-Open--Data.md>) | [Link²](<>) | [Link³](<>) |
+| 22 | Ingest data of Power plants from US EIA Open  Data | [Link¹](<md/22-Ingest-data-of-Power-plants-from-US-EIA-Open-Data.md>) | [Link²](<>) | [Link³](<>) |
 

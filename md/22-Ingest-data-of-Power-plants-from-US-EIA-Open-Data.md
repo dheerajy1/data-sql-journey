@@ -116,6 +116,56 @@ response.content
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1718002286587/ea0193e0-96c0-479c-be1b-01bc61a81a96.png)
 
+### 2.1.3 Exploring json response
+
+```python
+type(data), len(data)
+```
+
+```python
+data
+```
+
+```python
+data.keys()
+```
+
+```python
+data['exceededTransferLimit']
+```
+
+```python
+pd.DataFrame(data=data['fields'])
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1718002455403/f6f657c3-8c64-4977-ac92-530658842844.png)
+
+```python
+data['features']
+```
+
+```python
+type(data['features']), len(data['features'])
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1718002480355/e276e3c0-60cd-43ef-8552-07666db5c736.png)
+
+```python
+raw_data # all records
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1718002500008/a4665f6f-146e-4d6a-867b-b016cad4b36d.png)
+
+```python
+json_eia_powplt = copy.deepcopy(raw_data)
+type(json_eia_powplt), len(json_eia_powplt)
+```
+
+```python
+json_eia_powplt[0]
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1718002524494/c3530834-1865-49c6-a20a-48e5e1073a82.png)
 
 # Conclusion
 

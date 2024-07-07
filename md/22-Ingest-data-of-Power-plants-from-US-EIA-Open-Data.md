@@ -167,6 +167,33 @@ json_eia_powplt[0]
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1718002524494/c3530834-1865-49c6-a20a-48e5e1073a82.png)
 
+### 2.1.4 Destructuring json response
+
+```python
+destrc_json_eia_powplt = []
+
+for powplt in json_eia_powplt:
+    emtdict = {}
+    for data in powplt.values():
+        emtdict.update(data) 
+    destrc_json_eia_powplt.append(emtdict)
+```
+
+### 2.1.5 Use pandas DataFrame to convert the JSON data:
+
+```python
+eia_powplt = pd.DataFrame(data=destrc_json_eia_powplt)
+eia_powplt.dtypes, eia_powplt.shape
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1718002553579/9001fb64-fd8c-46d7-8830-2b2a81819954.png)
+
+```python
+eia_powplt
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1718002575758/ac912f4e-9f96-4c67-bf2e-a015078a6b2d.png)
+
 # Conclusion
 
 Learning Objectives,

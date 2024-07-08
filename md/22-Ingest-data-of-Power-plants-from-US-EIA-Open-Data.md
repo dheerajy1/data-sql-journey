@@ -194,6 +194,32 @@ eia_powplt
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1718002575758/ac912f4e-9f96-4c67-bf2e-a015078a6b2d.png)
 
+### 2.1.6 Transformations
+
+```python
+eia_powplt_filt = eia_powplt.copy()
+```
+
+#### 2.1.6.1 Check for duplicates
+
+```python
+eia_powplt.merge(eia_powplt.duplicated().to_frame().rename(columns={0: "Isduplicate"}), left_index=True, right_index=True).query("Isduplicate == True")
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1718002638462/ea6f1a7b-46fa-4245-b290-b627b39a010a.png)
+
+```python
+eia_powplt_filt.loc[
+    eia_powplt_filt['OBJECTID'] == 23578
+]
+```
+
+```python
+eia_powplt_filt
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1718002606213/ea06cf8d-a883-48c2-ae27-51cc2d3fb331.png)
+
 # Conclusion
 
 Learning Objectives,

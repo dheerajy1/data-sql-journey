@@ -340,6 +340,72 @@ finally:
     session.close()
 ```
 
+## 3.3 Send the ingested data in dataframes to SQL Server tables
+
+## 3.3.1 Using Pandas to\_sql() method - DDL: Create
+
+**<mark>Run the below cell only once</mark>**
+
+```python
+table_name = 'Power Plants'
+
+eia_powplt_filt.to_sql(table_name, engine, if_exists='replace', index=False)
+```
+
+# 4\. Query the data from SQL table
+
+* Read from your database Using Pandas read\_sql\_query() method - DQL: Select
+    
+
+```python
+table_name = 'Power Plants'
+
+sql_string = f"""
+  SELECT TOP 100
+    *
+  FROM [dballpurpose].[dbo].[{table_name}]
+"""
+
+df_var = pd.read_sql(sql_string, engine)
+df_var
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1718002928469/161c0662-726b-405e-b5d3-865456be6fd4.png)
+
+* Viz 📉
+    
+
+```python
+df_var = df_var.groupby(['State', 'sector_name']).agg({'Total_MW': 'mean'})
+
+fig, axs = plt.subplots(1, 1, figsize=(25, 8))
+
+sns.set_theme(style="darkgrid")
+
+sns.barplot(
+    data=df_var,
+    x= 'State',
+    y = 'Total_MW',
+    hue = 'sector_name',
+    palette = 'Pastel1',
+    ax=axs
+)
+
+# Get the current tick positions and labels
+tick_positions = axs.get_xticks()
+tick_labels = [label.get_text() for label in axs.get_xticklabels()]
+
+# Set the tick positions and labels with rotation and Rotate x-axis labels by 90 degrees
+axs.set_xticks(tick_positions)
+axs.set_xticklabels(labels=tick_labels, rotation=90)
+
+plt.title(label='Mean Mass of Power Plants by sector_name Type', loc='center')
+
+plt.show()
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1718002951201/7b600c9b-5e9b-4e69-aff4-bcbe96cf12f9.png)
+
 
 # Conclusion
 

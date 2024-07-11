@@ -407,11 +407,106 @@ plt.show()
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1718002951201/7b600c9b-5e9b-4e69-aff4-bcbe96cf12f9.png)
 
 
+# 5\. Save nasa\_ml\_filt as CSV file
+
+## 5.1 Check file if exists
+
+```python
+os.getcwd()
+```
+
+```python
+# Define the file path
+path = r'C:\Users\HP\Downloads\\'
+file_name = 'Power Plants'
+
+os.chdir(f'{path}')
+
+csv_files = [file for file in os.listdir() if file.endswith('.csv')]
+
+if any(file_name in file for file in csv_files):
+    print(f'Found a file with {file_name} in the name.')
+else:
+    print(f'No {file_name} in any file name.')
+```
+
+## 5.2 Remove file if exists
+
+**<mark>Caution: Below is a remove file statement</mark>**
+
+```python
+# Define the file path
+path = r'C:\Users\HP\Downloads\\'
+file_name = 'Power Plants'
+file_path = f"{path}{file_name}.csv"
+
+try:
+    # Check if the file exists
+    if os.path.exists(file_path):
+        # Delete the file
+        os.remove(file_path)
+        print(f"File {file_name} deleted successfully!")
+    else:
+        print(f"File {file_name} does not exist.")
+except Exception as e:
+    # Handle any exceptions that occur during file deletion
+    print("An error occurred:", str(e))
+```
+
+## 5.3 Using pandas to\_csv() to save dataframe as CSV file
+
+**<mark>Run the below cell only once</mark>**
+
+```python
+# Define the file path
+path = r'C:\Users\HP\Downloads\\'
+file_name = 'Power Plants'
+file_path = f"{path}{file_name}.csv"
+
+try:
+    eia_powplt_filt.to_csv(f'{file_path}', index=False)
+    print(f'CSV file {file_name}.csv is successfully saved')
+except Exception as e:
+    print(f"An error occurred while saving the CSV file: {e}")
+```
+
+# 6\. Read from CSV file
+
+## 6.1 Using pandas
+
+```python
+# Define the file path
+path = r'C:\Users\HP\Downloads\\'
+file_name = 'Power Plants'
+file_path = f"{path}{file_name}.csv"
+
+try:
+    df_var = pd.read_csv(filepath_or_buffer=f'{file_path}', delimiter=',')
+    print(f'CSV file {file_name} is successfully read')
+except Exception as e:
+    print(f"An error occurred while reading the CSV file: {e}")
+```
+
+```python
+df_var
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1718003024164/cbc6bc21-7814-471b-9f40-4275da802dae.png)
+
 # Conclusion
 
 Learning Objectives,
 
-
+* Python & Pandas: Import libraries and use Pandas for data manipulation and analysis.
+    
+* Database Connectivity: Configuring database connections and creating engines with SQLAlchemy in Python.
+    
+* Data Ingestion: Ingesting data from NYC OpenData using Python requests and Pandas functions.
+    
+* SQL Operations: Perform CRUD operations and query data from SQL Server using Python.
+    
+* Data Visualization: Visualize data using Python libraries such as Matplotlib and Seaborn for insightful charts and graphs.
+    
 
 # Source: Self \[[Link](https://atlas.eia.gov/datasets/eia::power-plants/api)\], \[[Link](https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information)\]
 

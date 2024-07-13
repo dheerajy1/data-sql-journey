@@ -26,6 +26,23 @@ Plot.plot({
 <iframe width="100%" height="426" src="https://observablehq.com/embed/c14eafd65a30fc4d@158?cells=cellchart_weather"></iframe>
 
 
+## 1.2 Activity 2: The grammar of graphics in Observable Plot
+
+Uploaded the file us\_energy.csv (with data from the US Energy Information Administration), and below we load it into the notebook as an array of objects named energy:
+
+```javascript
+energy = FileAttachment("us_energy.csv").csv({ typed: true })
+```
+
+The `energy` data contains different amounts of energy produced in the US, by source (`type`), over a range of years:
+
+<iframe width="100%" height="492" src="https://observablehq.com/embed/c14eafd65a30fc4d@155?cells=table_energydata"></iframe>
+
+A new scatterplot, replacing the default variables with the year (x) and quadrillion\_btu (y) from energy instead:
+
+<iframe width="100%" height="476" src="https://observablehq.com/embed/c14eafd65a30fc4d@155?cells=scatterplot_energy"></iframe>
+
+
 # Conclusion
 
 Learning Objectives,

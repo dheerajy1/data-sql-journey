@@ -43,6 +43,47 @@ A new scatterplot, replacing the default variables with the year (x) and quadril
 <iframe width="100%" height="476" src="https://observablehq.com/embed/c14eafd65a30fc4d@155?cells=scatterplot_energy"></iframe>
 
 
+## 1.3 Activity 3: Customization with marks, channels, and scales
+
+Create a line chart of energy production over time
+
+<iframe width="100%" height="514" src="https://observablehq.com/embed/c14eafd65a30fc4d@155?cells=linechart_energy"></iframe>
+
+## 1.4 Activity 4: A custom size and color scale
+
+Create a scatterplot of flipper\_length\_mm and body\_mass\_g using the built-in penguins data
+
+```javascript
+scatterplot_penguins = Plot.plot({
+  marks: [
+    Plot.dot(penguins, {
+      x: "body_mass_g",
+      y: "flipper_length_mm",
+      r: "flipper_length_mm",
+      fill: "species",
+      tip: true
+    })
+  ],
+  r: {
+    domain: d3.extent(penguins, (d) => d.flipper_length_mm),
+    range: [1, 10]
+  },
+  color: {
+    domain: ["Adelie", "Chinstrap", "Gentoo"],
+    range: ["purple", "teal", "orange"]
+  }
+})
+```
+
+Note:
+
+* Domain: what's going in.
+    
+* Range: what's going out.
+    
+
+<iframe width="100%" height="476" src="https://observablehq.com/embed/c14eafd65a30fc4d@156?cells=scatterplot_penguins"></iframe>
+
 # Conclusion
 
 Learning Objectives,

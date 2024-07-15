@@ -23,7 +23,7 @@ Plot.plot({
 })
 ```
 
-<iframe width="100%" height="426" src="https://observablehq.com/embed/c14eafd65a30fc4d@158?cells=cellchart_weather"></iframe>
+\[[Plot Link](https://observablehq.com/embed/c14eafd65a30fc4d@158?cells=cellchart_weathe)\]
 
 
 ## 1.2 Activity 2: The grammar of graphics in Observable Plot
@@ -36,18 +36,19 @@ energy = FileAttachment("us_energy.csv").csv({ typed: true })
 
 The `energy` data contains different amounts of energy produced in the US, by source (`type`), over a range of years:
 
-<iframe width="100%" height="492" src="https://observablehq.com/embed/c14eafd65a30fc4d@155?cells=table_energydata"></iframe>
+\[[Plot Link](https://observablehq.com/embed/c14eafd65a30fc4d@155?cells=table_energydata)\]
 
 A new scatterplot, replacing the default variables with the year (x) and quadrillion\_btu (y) from energy instead:
 
-<iframe width="100%" height="476" src="https://observablehq.com/embed/c14eafd65a30fc4d@155?cells=scatterplot_energy"></iframe>
+\[[Plot Link](https://observablehq.com/embed/c14eafd65a30fc4d@155?cells=scatterplot_energy)\]
 
 
 ## 1.3 Activity 3: Customization with marks, channels, and scales
 
 Create a line chart of energy production over time
 
-<iframe width="100%" height="514" src="https://observablehq.com/embed/c14eafd65a30fc4d@155?cells=linechart_energy"></iframe>
+
+\[[Plot Link](https://observablehq.com/embed/c14eafd65a30fc4d@155?cells=linechart_energy)\]
 
 ## 1.4 Activity 4: A custom size and color scale
 
@@ -82,7 +83,86 @@ Note:
 * Range: what's going out.
     
 
-<iframe width="100%" height="476" src="https://observablehq.com/embed/c14eafd65a30fc4d@156?cells=scatterplot_penguins"></iframe>
+
+\[[Plot Link](https://observablehq.com/embed/c14eafd65a30fc4d@156?cells=scatterplot_penguins)\]
+
+# **2\. Session 2: Introduction to Observable Plot \[**[**Link**](https://observablehq.com/@observablehq/plot-session-2-follow-along)**\]**
+
+*Scales, transforms, and more customization*
+
+## 2.1 Data ingestion
+
+* salamanders data:
+    
+
+upload file: mackCreekVertebrates.csv
+
+* monoYearly data:
+    
+
+```javascript
+import { monoYearly } from "@observablehq/keep-saving-mono-lake"
+```
+
+## 2.2 Activity 1: Plot essentials recap
+
+```javascript
+Plot.plot({
+  marks: [
+    Plot.frame(),
+    Plot.dot(salamanders, {
+      x: "totalLength",
+      y: d => d.weight, // You can use functions instead of "variableName"!
+      fill: "creekSection",
+      opacity: 0.5,
+      r: "totalLength",
+      // sort: {channel: "fill"},
+      tip: true
+    })
+  ]
+})
+```
+
+\[[Plot Link](https://observablehq.com/embed/c14eafd65a30fc4d@260?cells=scatterplot_salamanders)\]
+
+## 2.3 Activity 2: More fun with scales (and beyond)
+
+Let's update the chart we made in Activity 1 in several ways:
+
+* Convert the y-axis scale to "log" (then try some others, like "pow")
+    
+* Reverse the x-axis scale
+    
+* Update the x-axis domain
+    
+* Customize the color scheme
+    
+* Bonus: Add gridlines and labels!
+    
+
+```javascript
+scatterplot_salamanders_v2 = Plot.plot({
+  marks: [
+    Plot.frame(),
+    Plot.dot(salamanders, {
+      x: "totalLength",
+      y: (d) => d.weight,
+      fill: "creekSection", // Later, switch to totalLength to see continuous custom scheme!
+      opacity: 0.5,
+      r: "totalLength",
+      sort: { channel: "fill" },
+      tip: true
+    })
+  ],
+  x: { domain: [0, 400], ticks: 5, reverse: true },
+  y: { type: "pow", exponent: 0.5, label: "weight" },
+  color: { range: ["cyan", "purple"], legend: true },
+  grid: true
+})
+```
+
+\[[Plot Link](https://observablehq.com/embed/c14eafd65a30fc4d@272?cells=scatterplot_salamanders_v2)\]
+
 
 # Conclusion
 

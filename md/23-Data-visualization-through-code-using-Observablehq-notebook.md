@@ -163,6 +163,65 @@ scatterplot_salamanders_v2 = Plot.plot({
 
 \[[Plot Link](https://observablehq.com/embed/c14eafd65a30fc4d@272?cells=scatterplot_salamanders_v2)\]
 
+## 2.4 Activity 3: Bin transform for summary values over time
+
+Again using the salamanders data, let's make a bar chart (thinking carefully about the mark, here)
+
+* to visualize the change in *mean salamander length* over different intervals of time (e.g. first for different years, then by different time spans).
+    
+* We'll do that from scratch using a combination of `Plot.rectY()` and `Plot.binX()`, customizing the interval option to reveal the mean over different bins of time (e.g. 1 year, 5 years, 10 years).
+    
+
+```javascript
+barplot_salmanders = Plot.plot({
+  marks: [
+    Plot.rectY(
+      salamanders,
+      Plot.binX(
+        { y: "mean" },
+        { x: "date", y: "totalLength", interval: "5 years", tip: true }
+      )
+    )
+  ]
+})
+```
+
+\[[Plot Link](https://observablehq.com/embed/c14eafd65a30fc4d@291?cells=barplot_salmanders)\]
+
+
+* Then, we'll see how we can get up-and-running even more quickly by starting with the Chart cell, then converting to JavaScript to keep customizing!
+    
+
+Use chart: Quick plots without code
+
+\[[Plot Link](https://observablehq.com/embed/c14eafd65a30fc4d@303?cells=chartQuick_salamanders)\]
+
+
+Now, use convert to JavaScript suggestion.
+
+```javascript
+barplotGenra_salamanders = Plot.plot({
+  color: { legend: true },
+  marks: [
+    Plot.rectY(
+      salamanders,
+      Plot.binX(
+        { fill: "mean", y: "mean" },
+        {
+          x: "date",
+          y: "totalLength",
+          fill: "totalLength",
+          tip: true,
+          interval: "5 years"
+        }
+      )
+    ),
+    Plot.ruleY([0])
+  ]
+})
+```
+
+\[[Plot Link](https://observablehq.com/embed/c14eafd65a30fc4d@306?cells=barplotGenra_salamanders)\]
 
 # Conclusion
 

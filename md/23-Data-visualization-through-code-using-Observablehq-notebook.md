@@ -223,6 +223,71 @@ barplotGenra_salamanders = Plot.plot({
 
 \[[Plot Link](https://observablehq.com/embed/c14eafd65a30fc4d@306?cells=barplotGenra_salamanders)\]
 
+## 2.5 Activity 4: Group transform for counts by reach
+
+This time, let's start with the Chart cell to create a summary view of total counts of salamanders by creekSection.
+
+Use chart: Quick plots without code
+
+\[[Plot Link](https://observablehq.com/embed/c14eafd65a30fc4d@323?cells=chartQuick_salamandersv2)\]
+
+* Then we'll check out the JavaScript code (which you could also write by hand!).
+    
+
+```javascript
+barplotGenra_salamandersv2 = Plot.plot({
+  marks: [
+    Plot.barX(
+      salamanders,
+      Plot.groupY(
+        { x: "count" },
+        { y: "creekSection", tip: true, fill: "reach" }
+      )
+    ),
+    Plot.ruleX([0])
+  ]
+})
+```
+
+\[[Plot Link](https://observablehq.com/embed/c14eafd65a30fc4d@322?cells=barplotGenra_salamandersv2)\]
+
+## 2.6 Activity 5: Normalize transform
+
+There are *many* more built-in transforms in Observable Plot. Let's wrap the day with a transform that normalizes values to some basis (e.g. the first value, mean value, max value, or something else!). We'll use more transforms in future sessions, too!
+
+For this activity, we'll use a different dataset on lake levels for Mono Lake, California — a saline lake supporting a rich and diverse ecosystem, which saw its levels drop drastically after water started being diverted to Los Angeles in the early 1940s.
+
+\[[Plot Link](https://observablehq.com/embed/c14eafd65a30fc4d@349?cells=Datatable_monoYearlydata)\]
+
+We'll start by creating a line graph, then normalize to different basis..es?
+
+```javascript
+Plot.plot({
+  marks: [
+    Plot.line(
+      monoYearly,
+      Plot.normalizeY({ x: "year", y: "volume", basis: "first" })
+    ) // Try mean, min, last,!
+  ],
+  marginLeft: 60,
+  x: { tickFormat: "" }
+})
+```
+
+\[[Plot Link](https://observablehq.com/embed/c14eafd65a30fc4d@360?cells=lineplot_monoYearly)\]
+
+another line plot
+
+```javascript
+lineplot_monoYearlyv2 = Plot.plot({
+  marks: [
+    Plot.line(monoYearly, Plot.normalizeY("first", { x: "year", y: "lake" }))
+  ]
+})
+```
+
+\[[Plot Link](https://observablehq.com/embed/c14eafd65a30fc4d@367?cells=lineplot_monoYearlyv2)\]
+
 # Conclusion
 
 Learning Objectives,

@@ -288,6 +288,120 @@ lineplot_monoYearlyv2 = Plot.plot({
 
 \[[Plot Link](https://observablehq.com/embed/c14eafd65a30fc4d@367?cells=lineplot_monoYearlyv2)\]
 
+
+# 3\. Session 3: Introduction to Observable Plot \[[Link](https://observablehq.com/@observablehq/plot-session-3-code-key)\]
+
+*More customization: faceting, annotation, a map, and introducing Inputs for interactivity*
+
+## 3.1 Activity 1: Warm-up (and add faceting!)
+
+**Data:** The World Bank Open Data
+
+```javascript
+Plot.plot({
+  marks: [
+    Plot.frame(),
+    Plot.dot(worldbank, {
+      filter: (d) => d.year == 2010,
+      x: "gdp",
+      y: "co2",
+      fill: "#ccc",
+      r: "life_exp",
+      opacity: 0.7
+    }),
+    Plot.dot(worldbank, {
+      filter: (d) => d.year == 2010,
+      x: "gdp",
+      y: "co2",
+      fill: "life_exp",
+      r: "life_exp",
+      opacity: 0.7,
+      tip: true,
+      fy: "income_group"
+    })
+  ],
+  x: { type: "log", label: "GDP (USD)" },
+  y: { type: "log", label: "CO2 Emissions" },
+  fy: {
+    label: "Income group",
+    domain: [
+      "Not classified",
+      "Low income",
+      "Lower middle income",
+      "Upper middle income",
+      "High income"
+    ],
+    reverse: true
+  },
+  color: { legend: true, label: "Life expectancy (years)" },
+  r: { domain: d3.extent(worldbank, (d) => d.life_exp), range: [1, 10] },
+  marginRight: 150
+})
+```
+
+\[[Plot Link](https://observablehq.com/embed/c14eafd65a30fc4d@510?cells=scatterplot_incgrfact)\]
+
+## 3.2 Activity 2: Customization continued - Annotation and transforms continued (select, window)
+
+Here, we have an existing line chart of stock market closing prices ($, USD) for three companies (AAPL, GOOG (Alphabet), and TSLA).
+
+We will update the chart with some annotations, facets, and by adding a window transform to show a noise-reduced version of the trends for each
+
+```javascript
+lineplot_stocksv2 = // Calculates (by default a rolling mean, using the current value as the middle of the window). Can also update to "start" or "end" for leading or trailing windows! Add `strict` to avoid noisy tails (from incomplete windows at series endpoints)
+
+Plot.plot({
+  marks: [
+    Plot.lineY(stocks, {
+      x: "Date",
+      y: "Close",
+      stroke: "symbol",
+      opacity: 0.3,
+      tip: true
+    }),
+    Plot.lineY(
+      stocks,
+      Plot.windowY(
+        { k: 50, anchor: "middle", reduce: "mean", strict: true },
+        { x: "Date", y: "Close", stroke: "symbol" }
+      )
+    ),
+    Plot.text(
+      stocks,
+      Plot.selectLast({
+        x: "Date",
+        y: "Close",
+        text: "symbol",
+        fill: "symbol",
+        textAnchor: "start",
+        dx: 5,
+        dy: -9, // Use the getDy function to set the dy value
+        fontSize: 15
+      })
+    ),
+    Plot.tip([`Oct 27, 2022: Elon Musk becomes Twitter CEO`], {
+      x: new Date("2022-10-27"),
+      y: 250,
+      anchor: "bottom-left"
+    })
+  ],
+  color: { legend: true, range: ["teal", "navy", "orange"] },
+  x: {
+    domain: [new Date("2019-01-01"), new Date("2024-06-04")]
+  },
+  y: {
+    domain: [0, 400],
+    label: "Closing Price (USD)"
+  },
+  marginRight: 100
+})
+```
+
+\[[Plot Link](https://observablehq.com/embed/c14eafd65a30fc4d@511?cells=lineplot_stocks)\]
+
+(Below is the final version that we'll make in the course, starting from the base plot above):
+
+
 # Conclusion
 
 Learning Objectives,

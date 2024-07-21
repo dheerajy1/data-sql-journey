@@ -465,19 +465,207 @@ lineplot_stocksv3 = Plot.plot({
 
 \[[Plot Link](https://observablehq.com/embed/c14eafd65a30fc4d@663?cells=lineplot_stocksv3)\]
 
+
+# 4\. Session 4: Introduction to Observable Plot \[[Link](https://observablehq.com/@observablehq/plot-session-4-code-key)\]
+
+Interactivity
+
+## 4.1 Activity 1: Crosshairs and pointer transform
+
+**Data:** The World Bank DataBank
+
+```javascript
+wb2010 = wb.filter(d => d.year == 2010)
+```
+
+```javascript
+Plot.plot({
+  marks: [
+    Plot.dot(wb2010, { x: "gdp", y: "life_exp", fill: "gray" }),
+    Plot.dot(
+      wb2010,
+      Plot.pointer({
+        x: "gdp",
+        y: "life_exp",
+        fill: "red",
+        r: 8,
+        opacity: 0.6,
+        tip: true,
+        title: (d) => `${d.country_name}`
+      })
+    ),
+    Plot.crosshair(wb2010, {
+      x: "gdp",
+      y: "life_exp",
+      textFill: "red",
+      textStroke: "white",
+      strokeWidth: 3
+    })
+  ],
+  x: { type: "log" },
+  margin: 50
+})
+```
+
+\[[Plot Link](https://observablehq.com/embed/c14eafd65a30fc4d@698?cells=scatterplot_wb2010)\]
+
+## 4.2 Activity 2: Custom tooltips
+
+Three quick ways to customize your tooltips!
+
+* Add more channels
+    
+* Formatting and style
+    
+* Tip mark for static annotations
+    
+
+```javascript
+scatterplot_stocksv1 = Plot.plot({
+  marks: [
+    Plot.lineY(stocks, {
+      x: "Date",
+      y: "Close",
+      stroke: "symbol",
+      tip: true,
+      channels: {
+        Open: "Open"
+      }
+    }),
+    Plot.tip(
+      stocks,
+      Plot.selectMaxY({
+        x: "Date",
+        y: "Close",
+        stroke: "symbol",
+        anchor: "right",
+        fill: "yellow"
+      })
+    ) // Static annotation!
+  ],
+  x: {
+    domain: [new Date("2019-01-01"), new Date("2024-06-04")]
+  },
+  y: {
+    domain: [0, 400],
+    label: "Closing Price (USD)"
+  },
+  color: { legend: true }
+})
+```
+
+\[[Plot Link](https://observablehq.com/embed/c14eafd65a30fc4d@727?cells=scatterplot_stocksv1)\]
+
+
+
+## 4.3 Activity 3: Dropdown and slider
+
+Add a dropdown widget to select region, and a slider to select year:
+
+```javascript
+viewof selectRegion = Inputs.select(wb.map(d => d.region), {label: "Select region:", unique: true})
+```
+
+Update the chart below so that:
+
+* It only shows observations for countries in the selected region
+    
+* Only observations *at or below* the selected year are visible
+    
+* Observations at the selected year are opaque, but all previous are more transparent
+    
+
+```javascript
+Plot.plot({
+  marks: [
+    Plot.dot(wb, {
+      filter: (d) => d.region == selectRegion && d.year <= pickYear,
+      x: "gdp",
+      y: "co2",
+      fill: "country_name",
+      r: "gdp",
+      opacity: d => d.year == pickYear ? 1 : 0.2
+    })
+  ],
+  x: { type: "log" },
+  y: { type: "log" },
+  r: { range: [3, 20] }
+})
+```
+
+\[[Plot Link](https://observablehq.com/embed/c14eafd65a30fc4d@772?cells=scatterplot_wbv1)\]
+
+## 4.4 Activity 4: Input form with checkbox and radio
+
+**Data:**[US Energy Information Administration US Energy Atlas](https://atlas.eia.gov/datasets/eia::power-plants/about)
+
+US power plant data:
+
+The chart below compares data for the selected primary source, and across the selected states in the checkbox input.
+
+After adding database, click hide (eye icon) to hide the output if you want.
+
+US spatial data:
+
+```javascript
+us = FileAttachment("us-counties-10m.json").json()
+```
+
+Access state polygons:
+
+```javascript
+states = topojson.feature(us, us.objects.states)
+```
+
+Select states to compare:
+
+```javascript
+viewof pickStates = Inputs.checkbox(plants.map(d => d.state).sort(), {label: "Select states to compare:", unique: true, value: ["Alabama", "Alaska", "Arizona"]})
+```
+
+Select primary source:
+
+```javascript
+viewof pickSource = Inputs.radio(plants.map(d => d.primary_source), {label: "Select primary source:", unique: true, value: "oil"})
+```
+
+The chart below compares data for the selected primary source, and across the selected states in the checkbox input.
+
+\[[Plot Link](https://observablehq.com/embed/c14eafd65a30fc4d@773?cells=barplot_plants)\]
+
+
 ---
 
 # Conclusion
 
-Learning Objectives,
+1. Learning Objectives,
 
-1. Created Observable notebook
-2. Explored weather sample data
-3. Created Observable plot
+2. Created Observable notebook
 
-4. slicing data
+3. Explore weather sample data
 
-5. date parsing
+4. Created Observable plot
+
+5. slicing data
+
+6. date parsing
+
+7. Plot marks
+
+8. Bins
+
+9. Group transf
+
+10. Interactivity
+
+11. Plot.geo
+
+12. faceting
+
+13. Crosshairs and pointer
+
+14. Custom tooltips
+
 
 # Source: Observablehq \[[Link](https://www.youtube.com/watch?v=tHorkp-WCQY&list=PLOHIJAFwtkEevglMLsR9wBnXpPK3QY_Go)\] \[[Link](https://observablehq.com/@observablehq/plot-session-1-code-key)\]
 

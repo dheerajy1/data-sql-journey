@@ -37,5 +37,6 @@ The schema : Project Name, md/md File Location, SQL File location & other file t
 | 20 | Ingest data of World Development Indicators from The World Bank Open Data | [Link¹](<md/20-Ingest-data-of-World-Development-Indicators-from-The-World-Bank-Open-Data.md>) | [Link²](<>) | [Link³](<https://dheerajy1.hashnode.dev/ingest-data-of-world-development-indicators-from-the-world-bank-open-data>) |
 | 21 | Ingest data of Meteorite Landings from NASA Open Data Portal | [Link¹](<md/21-Ingest-data-of-Meteorite-Landings-from-NASA-Open-Data-Portal.md>) | [Link²](<>) | [Link³](<https://dheerajy1.hashnode.dev/ingest-data-of-meteorite-landings-from-nasa-open-data-portal>) |
 | 22 | Ingest data of Power plants from US EIA Open  Data | [Link¹](<md/22-Ingest-data-of-Power-plants-from-US-EIA-Open-Data.md>) | [Link²](<>) | [Link³](<https://dheerajy1.hashnode.dev/ingest-data-of-power-plants-from-us-eia-open-data>) |
-| 23 | Data visualization through code using Observablehq notebook | [Link¹](<md/23-Data-visualization-through-code-using-Observablehq-notebook.md>) | [Link²](<>) | [Link³](<>) |
+| 23 | Data visualization through code using Observablehq notebook | [Link¹](<md/23-Data-visualization-through-code-using-Observablehq-notebook.md>) | [Link²](<>) | [Link³](<https://dheerajy1.hashnode.dev/data-visualization-through-code-using-observablehq-notebook>) |
+| 24 | Ingest, Explore & Visualize AirQuality data from NYC OpenData | [Link¹](<md/24-Ingest,-Explore-&-Visualize-AirQuality-data-from-NYC-OpenData.md>) | [Link²](<>) | [Link³](<>) |
 

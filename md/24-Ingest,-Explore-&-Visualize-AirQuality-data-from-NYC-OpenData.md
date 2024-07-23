@@ -25,12 +25,44 @@ airquality = d3.csvParse(csvdata);
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1721665184621/cac9859f-e4eb-4f16-a81a-a44ec5352255.png)
 
+
+# 3\. Data Visualizations
+
+```javascript
+Plot.plot({
+  marks: [
+    Plot.barY(
+      airquality,
+      Plot.groupX(
+        {
+          y: "mean",
+          title: (d) =>
+            `Mean air quality: ${(
+              d.reduce((acc, curr) => acc + curr.data_value, 0) / d.length
+            ).toFixed(0)} \n Air particle: ${d[0].name}`
+        },
+        {
+          x: "name",
+          y: "data_value"
+        }
+      )
+    ),
+    Plot.ruleY([0])
+  ]
+})
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1721744305887/ad3830ec-affc-4b87-ac15-b4f454bc7baa.png align="center")
+
 # Conclusion
 
 Learning Objectives,
 
 1. Observable Plot
+    
 2. Data Ingestion
+    
+3. Data Visualization
 
 # Source: NYC OpenData \[[Link](https://data.cityofnewyork.us/Environment/Air-Quality/c3uy-2p5r/about_data)\], Observablehq NoteBook \[Link\]
 

@@ -1,12 +1,10 @@
 This article talks about the performing data analysis and building data visualizations for Air pollutants data from Our World in Data.
 
-
 # 1\. Data Source
 
 Data for
 
 1. Air pollutants \[[**Link**\]](https://ourworldindata.org/explorers/air-pollution?time=1750..latest&uniformYAxis=0&Pollutant=All+pollutants&Sector=From+all+sectors+%28Total%29&Per+capita=false&country=USA~CHN~IND~GBR~OWID_WRL)
-    
 
 # **2\. Ingest Data**
 
@@ -34,20 +32,36 @@ ${TotalRows[0].Total_Rows}
 </div>
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1721844843143/c0c0031b-a98c-4fe9-9103-63286f9525f2.png align="center")
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1721844843143/c0c0031b-a98c-4fe9-9103-63286f9525f2.png)
+
+## 5.2 Nitrogen oxide (NOx) trend
+
+```javascript
+Plot.plot({
+  marks: [
+    Plot.ruleY([0]),
+    Plot.ruleX(airPollution, {
+      x: "Year",
+      y: "Nitrogen oxide (NOx)",
+      tip: true,
+    }),
+  ],
+  width,
+  marginBottom: 60,
+  marginLeft: 60,
+});
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1721924783854/b4aa218f-42c5-401f-a8c7-d8d03581445d.png)
 
 # Conclusion
 
 Learning Objectives,
 
 1. Data Ingestion
-    
 2. Data Transformation
-    
 3. Observable Notebook
-    
 4. Data Visualization
-    
 
 # Source: Observablehq EIA \[[Link](https://observablehq.observablehq.cloud/framework-example-eia/)\]
 
@@ -55,10 +69,7 @@ Learning Objectives,
 
 # Connect with me:
 
-* [My Twitter](https://twitter.com/yssdheeraj)
-    
-* [My LinkedIn](https://www.linkedin.com/in/dheerajy1/)
-    
-* [My GitHub](https://github.com/dheerajy1)
-    
-* [My Hashnode](https://dheerajy1.hashnode.dev/)
+- [My Twitter](https://twitter.com/yssdheeraj)
+- [My LinkedIn](https://www.linkedin.com/in/dheerajy1/)
+- [My GitHub](https://github.com/dheerajy1)
+- [My Hashnode](https://dheerajy1.hashnode.dev/)

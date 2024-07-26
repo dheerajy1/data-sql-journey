@@ -54,6 +54,80 @@ Plot.plot({
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1721924783854/b4aa218f-42c5-401f-a8c7-d8d03581445d.png)
 
+
+
+## 5.3 Nitrogen oxide (NOx) trend for selective countries
+
+```javascript
+<div class="card" style="width:95%; height:100%; font-size:2rem;">
+  ${(() => {
+    const data = airPollution.filter((d) =>
+      ["United Kingdom", "United States", "India", "China", "World"].includes(
+        d.Entity
+      )
+    );
+
+    return Plot.plot({
+      marks: [
+        Plot.line(data, {
+          x: "Year",
+          y: "Nitrogen oxide (NOx)",
+          z: "Entity",
+          stroke: "Entity",
+          tip: true
+        }),
+        Plot.ruleX(
+          data,
+          Plot.pointerX({
+            x: "Year",
+            py: "Nitrogen oxide (NOx)",
+            z: "Entity",
+            stroke: "red"
+          })
+        ),
+        Plot.dot(
+          data,
+          Plot.pointerX({
+            x: "Year",
+            y: "Nitrogen oxide (NOx)",
+            z: "Entity",
+            stroke: "red"
+          })
+        ),
+        Plot.text(
+          data,
+          Plot.selectLast({
+            x: "Year",
+            y: "Nitrogen oxide (NOx)",
+            z: "Entity",
+            text: "Entity",
+            textAnchor: "start",
+            dx: -3,
+            dy: 9
+          })
+        )
+      ],
+      y: {
+        type: "linear",
+        grid: true,
+        nice: true
+      },
+      color: {
+        scheme: "spectral",
+        legend: true
+      },
+      title: "NOx Trend",
+      width,
+      marginLeft: 70
+    });
+  })()}
+</div>
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1722009979949/f1ee5f1b-3a43-464d-8063-27fe57e16f58.png)
+
+
+
 # Conclusion
 
 Learning Objectives,
@@ -62,6 +136,11 @@ Learning Objectives,
 2. Data Transformation
 3. Observable Notebook
 4. Data Visualization
+
+- filter data
+- vertical ruler
+- text at end of line
+- Visualization
 
 # Source: Observablehq EIA \[[Link](https://observablehq.observablehq.cloud/framework-example-eia/)\]
 

@@ -54,13 +54,12 @@ Plot.plot({
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1721924783854/b4aa218f-42c5-401f-a8c7-d8d03581445d.png)
 
-
-
 ## 5.3 Nitrogen oxide (NOx) trend for selective countries
 
 ```javascript
 <div class="card" style="width:95%; height:100%; font-size:2rem;">
-  ${(() => {
+  $
+  {(() => {
     const data = airPollution.filter((d) =>
       ["United Kingdom", "United States", "India", "China", "World"].includes(
         d.Entity
@@ -74,7 +73,7 @@ Plot.plot({
           y: "Nitrogen oxide (NOx)",
           z: "Entity",
           stroke: "Entity",
-          tip: true
+          tip: true,
         }),
         Plot.ruleX(
           data,
@@ -82,7 +81,7 @@ Plot.plot({
             x: "Year",
             py: "Nitrogen oxide (NOx)",
             z: "Entity",
-            stroke: "red"
+            stroke: "red",
           })
         ),
         Plot.dot(
@@ -91,7 +90,7 @@ Plot.plot({
             x: "Year",
             y: "Nitrogen oxide (NOx)",
             z: "Entity",
-            stroke: "red"
+            stroke: "red",
           })
         ),
         Plot.text(
@@ -103,22 +102,22 @@ Plot.plot({
             text: "Entity",
             textAnchor: "start",
             dx: -3,
-            dy: 9
+            dy: 9,
           })
-        )
+        ),
       ],
       y: {
         type: "linear",
         grid: true,
-        nice: true
+        nice: true,
       },
       color: {
         scheme: "spectral",
-        legend: true
+        legend: true,
       },
       title: "NOx Trend",
       width,
-      marginLeft: 70
+      marginLeft: 70,
     });
   })()}
 </div>
@@ -126,8 +125,79 @@ Plot.plot({
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1722009979949/f1ee5f1b-3a43-464d-8063-27fe57e16f58.png)
 
+## 5.4 Sulphur dioxide (SO₂) emissions trend for selective countries
 
+```javascript
+<div class="card" style="width:95%; height:100%; font-size:2rem;">
+  $
+  {(() => {
+    const data = airPollution.filter((d) =>
+      ["United Kingdom", "United States", "India", "China", "World"].includes(
+        d.Entity
+      )
+    );
 
+    return Plot.plot({
+      marks: [
+        Plot.line(data, {
+          x: "Year",
+          y: "Sulphur dioxide (SO₂) emissions",
+          z: "Entity",
+          stroke: "Entity",
+          tip: true,
+        }),
+        Plot.ruleX(
+          data,
+          Plot.pointerX({
+            x: "Year",
+            py: "Sulphur dioxide (SO₂) emissions",
+            z: "Entity",
+            stroke: "red",
+          })
+        ),
+        Plot.dot(
+          data,
+          Plot.pointerX({
+            x: "Year",
+            y: "Sulphur dioxide (SO₂) emissions",
+            z: "Entity",
+            stroke: "red",
+          })
+        ),
+        Plot.text(
+          data,
+          Plot.selectLast({
+            x: "Year",
+            y: "Sulphur dioxide (SO₂) emissions",
+            z: "Entity",
+            text: "Entity",
+            textAnchor: "start",
+            dx: -3,
+            dy: 9,
+          })
+        ),
+      ],
+      y: {
+        type: "linear",
+        grid: true,
+        nice: true,
+        tickFormat: (d) => (d === 0 ? "0" : d / 1e6 + "M t"), // Format tick values in millions and append "t"
+        domain: [0, 140000000], // Set the maximum value to 140M
+        ticks: 8, // Set the number of ticks to 8, with a step of 20M
+      },
+      color: {
+        scheme: "spectral",
+        legend: true,
+      },
+      title: "SO₂ Trend",
+      width,
+      marginLeft: 70,
+    });
+  })()}
+</div>
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1722102887095/6a0dc54e-4d07-4aba-b388-18d947eee5c9.png)
 
 # Conclusion
 

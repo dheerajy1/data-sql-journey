@@ -128,6 +128,7 @@ Plot.plot({
 
 
 
+
 # Conclusion
 
 Learning Objectives,
@@ -141,6 +142,11 @@ Learning Objectives,
 - vertical ruler
 - text at end of line
 - Visualization
+- filter data
+- vertical ruler
+- text at end of line
+- Visualization
+- improved scale units.
 
 # Source: Observablehq EIA \[[Link](https://observablehq.observablehq.cloud/framework-example-eia/)\]
 

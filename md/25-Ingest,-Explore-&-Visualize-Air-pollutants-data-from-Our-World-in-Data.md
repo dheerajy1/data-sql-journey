@@ -490,8 +490,66 @@ background: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(230, 230, 2
   }
 <style/>
 ```
+5.5 Carbon monoxide (CO) emissions
 
-
+```javascript
+Plot.plot({
+  marks: [
+    Plot.line(data, {
+      x: "Year",
+      y: "Carbon monoxide (CO) emissions",
+      z: "Entity",
+      stroke: "Entity",
+      tip: true
+    }),
+    Plot.ruleX(
+      data,
+      Plot.pointerX({
+        x: "Year",
+        py: "Carbon monoxide (CO) emissions",
+        z: "Entity",
+        stroke: "red"
+      })
+    ),
+    Plot.dot(
+      data,
+      Plot.pointerX({
+        x: "Year",
+        y: "Carbon monoxide (CO) emissions",
+        z: "Entity",
+        stroke: "red"
+      })
+    ),
+    Plot.text(
+      data,
+      Plot.selectLast({
+        x: "Year",
+        y: "Carbon monoxide (CO) emissions",
+        z: "Entity",
+        text: "Entity",
+        textAnchor: "start",
+        dx: -3,
+        dy: 9
+      })
+    )
+  ],
+  y: {
+    type: "linear",
+    grid: true,
+    nice: true,
+    tickFormat: (d) => (d === 0 ? "0" : d / 1e6 + "M t"), // Format tick values in millions and append "t"
+    domain: [0, 140000000], // Set the maximum value to 140M
+    ticks: 8 // Set the number of ticks to 8, with a step of 20M
+  },
+  color: {
+    scheme: "spectral",
+    legend: true
+  },
+  title: "Carbon monoxide (CO) Trend",
+  width
+})
+```
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1722276801510/ecf137de-b51d-426f-a1e1-0f3dc30ef263.png)
 
 
 # Conclusion

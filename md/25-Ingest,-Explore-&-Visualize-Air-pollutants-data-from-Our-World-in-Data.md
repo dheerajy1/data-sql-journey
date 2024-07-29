@@ -90,7 +90,6 @@ FROM airPollution
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1722183154154/6dc5db8b-8ef4-4f17-aa67-62d31f054c1a.png)
 
-# <mark>25 july</mark>
 
 ## 5.2 Nitrogen oxide (NOx) trend
 
@@ -112,7 +111,7 @@ Plot.plot({
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1722183351153/8eb22e35-0d2d-4b0b-81a6-9e09e77545a3.png)
 
-# <mark>26 july</mark>
+
 
 ## 5.3 Nitrogen oxide (NOx) trend for selective countries
 
@@ -491,6 +490,9 @@ background: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(230, 230, 2
   }
 <style/>
 ```
+
+
+
 
 # Conclusion
 

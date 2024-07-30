@@ -552,6 +552,24 @@ Plot.plot({
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1722276801510/ecf137de-b51d-426f-a1e1-0f3dc30ef263.png)
 
 
+# 5.6 CO Data viz
+
+```javascript
+viewof CO = Plot.plot({
+  marks: [
+    Plot.line(data, {
+      x: "Year",
+      y: "Carbon monoxide (CO) emissions",
+      z: "Entity",
+      stroke: "Entity",
+      tip: true
+    })
+  ]
+})
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1722364023051/ebad03e0-a1ab-426f-958f-7ea570526def.png)
+
 # Conclusion
 
 Learning Objectives,

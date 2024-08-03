@@ -998,6 +998,135 @@ viewof CO = Plot.plot({
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1722613937825/9fa4b73a-f6b2-4bcf-9cb9-9314dea85506.png)
 
 
+# <mark>3 August</mark>
+
+## 5.8 Black carbon (BC) emissions
+
+```javascript
+<div class="main-container" style=""> 
+  <div class="card-svg-container" style="font-size:2rem;">
+    
+    <div class="svg-container">
+
+      <svg class="svg1" viewBox="0 0 651 710" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g filter="url(#filter0_f_11_2)">
+          <path d="M326.28 455.153C301.737 441.546 238.629 302.484 252.684 266.78C266.739 231.076 298.09 257.878 362.004 309.723C386.547 323.33 410.222 379.439 396.167 415.143C382.113 450.847 350.823 468.76 326.28 455.153Z" fill="url(#paint0_linear_11_2)" />
+        </g>
+        <defs>
+          <filter id="filter0_f_11_2" x="0.665921" y="0.475006" width="649.706" height="709.232" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+            <feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_11_2" />
+          </filter>
+          <linearGradient id="paint0_linear_11_2" x1="297.484" y1="418.282" x2="409.275" y2="401.649" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#3EF3C8" />
+            <stop offset="1" stop-color="#3EF3C8" stop-opacity="0.5" />
+          </linearGradient>
+        </defs>
+      </svg>
+  
+      <svg class="svg2" viewBox="0 0 428 459" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g filter="url(#filter0_f_1_9)">
+          <path d="M211.76 251.893C252.437 257.839 284.97 364.837 287.558 295.009C290.145 225.18 259.215 147.128 218.538 141.183C177.861 135.238 142.84 203.651 140.253 273.479C137.665 343.308 171.082 245.948 211.76 251.893Z" fill="url(#paint0_linear_1_9)" />
+        </g>
+        <defs>
+          <filter id="filter0_f_1_9" x="0.111717" y="0.821381" width="427.597" height="457.756" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+            <feGaussianBlur stdDeviation="70" result="effect1_foregroundBlur_1_9" />
+          </filter>
+          <linearGradient id="paint0_linear_1_9" x1="142.448" y1="214.242" x2="290.347" y2="219.723" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FFE924" />
+            <stop offset="1" stop-color="#ECFF79" stop-opacity="0.32" />
+          </linearGradient>
+        </defs>
+      </svg>
+  
+      <svg class="svg3" viewBox="0 0 465 408" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g filter="url(#filter0_f_1_11)">
+          <path d="M131.708 242.056C147.41 133.679 218.698 131.25 252.379 143.583C257.225 132.578 277.604 117.172 320.348 143.583C341.429 160.09 350.806 159.976 351.969 225.549C353.132 291.122 320.953 311.69 304.718 313.777H202.584C172.416 335.027 116.006 350.434 131.708 242.056Z" fill="#DD8A8A" fill-opacity="0.79" />
+        </g>
+        <defs>
+          <filter id="filter0_f_1_11" x="0" y="0" width="481" height="458" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+            <feGaussianBlur stdDeviation="90" result="effect1_foregroundBlur_1_11" />
+          </filter>
+        </defs>
+      </svg>
+
+    </div>
+    <div class="card" style="">
+        ${(() => {
+          const data = airPollution.filter((d) =>
+            ["United Kingdom", "United States", "India", "China", "World"].includes(
+              d.Entity
+            )
+          );
+      
+          return Plot.plot({
+        marks: [
+          Plot.line(data, {
+            x: "Year",
+            y: "Black carbon (BC) emissions",
+            z: "Entity",
+            stroke: "Entity",
+            tip: true
+          }),
+          Plot.ruleX(
+            data,
+            Plot.pointerX({
+              x: "Year",
+              py: "Black carbon (BC) emissions",
+              z: "Entity",
+              stroke: "red"
+            })
+          ),
+          Plot.dot(
+            data,
+            Plot.pointerX({
+              x: "Year",
+              y: "Black carbon (BC) emissions",
+              z: "Entity",
+              stroke: "red"
+            })
+          ),
+          Plot.text(
+            data,
+            Plot.selectLast({
+              x: "Year",
+              y: "Black carbon (BC) emissions",
+              z: "Entity",
+              text: "Entity",
+              textAnchor: "start",
+              dx: -3,
+              dy: 9
+            })
+          )
+        ],
+        y: {
+          type: "linear",
+          grid: true,
+          nice: true,
+          tickFormat: (d) => (d === 0 ? "0" : d / 1e6 + "M t"), // Format tick values in millions and append "t"
+          domain: d3.extent(data, (d) => d["Black carbon (BC) emissions"]), // Set the maximum value 
+          ticks: 8 // Set the number of ticks to 8, with a step of 20M
+        },
+        color: {
+          scheme: "spectral",
+          legend: true
+        },
+        title: "Black carbon (BC) emissions Trend",
+        width
+      });
+        })()}
+    </div>
+  </div>
+</div>
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1722698265757/0e755ddf-be83-4b33-81be-8e84774831e1.png)
+
 # Conclusion
 
 Learning Objectives,

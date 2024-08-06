@@ -55,6 +55,45 @@ Error:
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1722878111018/a860820f-0263-47c5-971a-67a7926b7c65.png)
 
+
+# **3\. Explore Data**
+
+## **3.1 Exploring country column data**
+
+```javascript
+CropYieldsCountryData = Array.from(
+  d3.rollup(
+    CropYieldsData,
+    (v) => v.length,
+    (d) => d.country
+  ),
+  ([key, value]) => ({ country: key, rows: value })
+)
+```
+
+country viz js plot
+
+```javascript
+Plot.plot({
+  width,
+  marginBottom: 90,
+  marks: [
+    Plot.barY(CropYieldsCountryData, {
+      x: "country",
+      y: "rows",
+      title: (d) => `${d.country}\nrows:${d.rows}`
+    }),
+    Plot.ruleY([0])
+  ],
+  x: {
+    tickRotate: -45
+  }
+})
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1722964201839/be03984a-9d2d-49ea-aef3-2a5fa818b57f.png)
+
+
 # Conclusion
 
 Learning Objectives,

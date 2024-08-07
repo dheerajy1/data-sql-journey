@@ -94,11 +94,66 @@ Plot.plot({
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1722964201839/be03984a-9d2d-49ea-aef3-2a5fa818b57f.png)
 
 
+filtering through the count of grouped country data
+
+```javascript
+viewof slicingRange = Inputs.range(
+  [
+    1,
+    d3
+      .groups(
+        CropYieldsCountryData.map((obj) => obj.rows),
+        (d) => d
+      )
+      .map(([, value]) => value[0]).length
+  ],
+  { step: 1, value: 0 }
+)
+```
+
+plot code
+
+```javascript
+Plot.plot({
+  width,
+  marginBottom: 90,
+  marks: [
+    Plot.barY(
+      CropYieldsCountryData.filter(
+        (obj) =>
+          obj.rows ===
+          d3
+            .groups(
+              CropYieldsCountryData.map((obj) => obj.rows),
+              (d) => d
+            )
+            .map(([, value]) => value[0])[slicingRange - 1]
+      ),
+      {
+        x: "country",
+        y: "rows",
+        title: (d) => `${d.country}\nrows:${d.rows}`
+      }
+    ),
+    Plot.ruleY([0])
+  ],
+  x: {
+    tickRotate: -45
+  }
+})
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723046439103/36fe5d98-d621-46ae-9497-c6f0d5587eb9.png)
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723046605285/305798e3-1605-4745-9336-7daed7aeca86.png)
+
+
 # Conclusion
 
 Learning Objectives,
 
 1. Data Ingestion
+
 2. Observable Notebook
 
 # Source: Observablehq \[Link\]

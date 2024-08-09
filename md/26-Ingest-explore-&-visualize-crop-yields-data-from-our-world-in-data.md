@@ -180,6 +180,27 @@ CropYieldsData.filter((obj) =>
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723135145048/5a7c7f19-e2fb-4d42-b288-d7f77387dada.png)
 
+
+Multi select countries
+
+```javascript
+viewof Country = Inputs.table(
+  Array.from(
+    d3.rollup(
+      CropYieldsData,
+      (v) => v.length,
+      (d) => d.country
+    ),
+    ([key, value]) => ({
+      country: key
+    })
+  ),
+  { width: 800, maxHeight: 200, required: false }
+)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723217101782/a4ae9f3e-bb62-4053-a036-ae030895a93c.png)
+
 # Conclusion
 
 Learning Objectives,

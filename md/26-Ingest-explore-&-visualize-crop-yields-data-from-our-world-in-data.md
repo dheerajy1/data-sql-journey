@@ -182,24 +182,44 @@ CropYieldsData.filter((obj) =>
 
 
 Multi select countries
+default countries
 
 ```javascript
-viewof Country = Inputs.table(
-  Array.from(
-    d3.rollup(
-      CropYieldsData,
-      (v) => v.length,
-      (d) => d.country
-    ),
-    ([key, value]) => ({
-      country: key
-    })
+viewof Country = Inputs.table(countrydata, {
+  value: countrydata.filter((obj, i) =>
+    ["United States", "Italy", "Hungary", "Bulgaria"].includes(obj.country)
   ),
-  { width: 800, maxHeight: 200, required: false }
-)
+  width: 800,
+  maxHeight: 200,
+  multiple: true,
+  required: false
+})
 ```
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723217101782/a4ae9f3e-bb62-4053-a036-ae030895a93c.png)
+
+# Crop Almond viz
+
+```javascript
+Plot.plot({
+  marks: [
+    Plot.ruleY([0]),
+    Plot.lineY(
+      CropYieldsData.filter((obj) =>
+        Country.map((obj) => obj.country).includes(obj.country)
+      ),
+      {
+        x: "year",
+        y: `${CropName}`,
+        z: "country",
+        title: (d) => `${d.year}\n${d.country}:${d[CropName]}`
+      }
+    )
+  ]
+})
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723306049254/abb96e7a-af57-4b4c-9e38-661b1f58c185.png)
 
 # Conclusion
 

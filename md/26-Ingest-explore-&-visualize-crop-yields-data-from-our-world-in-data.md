@@ -1,6 +1,5 @@
 This article talks about the performing data ingesting, exploration, analysis and building data visualizations for crop yields across the world.
 
-# <mark>5 august</mark>
 
 # 1\. Data Source
 
@@ -197,6 +196,24 @@ viewof Country = Inputs.table(countrydata, {
 ```
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723217101782/a4ae9f3e-bb62-4053-a036-ae030895a93c.png)
+
+# 3.2 Exploring year column data
+
+```javascript
+CropYearData = Array.from(
+  d3.rollup(
+    CropYieldsData,
+    (v) => v.length,
+    (d) => d.year
+  ),
+  ([key]) => key
+)
+  .sort((a, b) => a - b)
+  .slice(90)
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723390511392/a0b53970-744c-42bc-be42-e0b554fffc12.png)
+
 
 # Crop Almond viz
 

@@ -215,7 +215,7 @@ CropYearData = Array.from(
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723390511392/a0b53970-744c-42bc-be42-e0b554fffc12.png)
 
 
-# Crop Almond viz
+# 4. Crop Almond viz
 
 ```javascript
 Plot.plot({
@@ -224,7 +224,7 @@ Plot.plot({
     Plot.lineY(
       CropYieldsData.filter((obj) =>
         Country.map((obj) => obj.country).includes(obj.country)
-      ),
+      ).filter((obj) => obj.year >= CropYearData[slicingRangeYear - 1]),
       {
         x: "year",
         y: `${CropName}`,
@@ -236,7 +236,9 @@ Plot.plot({
 })
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723306049254/abb96e7a-af57-4b4c-9e38-661b1f58c185.png)
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723478221343/e7e519bb-24a9-4bdb-90ea-54407173c90d.png)
+
+
 
 # Conclusion
 

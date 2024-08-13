@@ -231,12 +231,22 @@ Plot.plot({
         z: "country",
         title: (d) => `${d.year}\n${d.country}:${d[CropName]}`
       }
+    ),
+    Plot.ruleX(
+      CropYieldsData,
+      Plot.pointerX({ x: "year", py: `${CropName}`, stroke: "red" })
+    ),
+    Plot.dot(
+      CropYieldsData,
+      Plot.pointerX({ x: "year", y: `${CropName}`, stroke: "red" })
     )
   ]
 })
 ```
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723478221343/e7e519bb-24a9-4bdb-90ea-54407173c90d.png)
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723563589705/018ae378-dcad-425c-887a-6575bc10a393.png)
 
 
 

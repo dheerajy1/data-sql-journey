@@ -219,18 +219,27 @@ CropYearData = Array.from(
 
 ```javascript
 Plot.plot({
+  width,
+  marginRight: 80,
   marks: [
     Plot.ruleY([0]),
-    Plot.lineY(
-      CropYieldsData.filter((obj) =>
-        Country.map((obj) => obj.country).includes(obj.country)
-      ).filter((obj) => obj.year >= CropYearData[slicingRangeYear - 1]),
-      {
+    Plot.lineY(CropYieldsData, {
+      x: "year",
+      y: `${CropName}`,
+      z: "country",
+      title: (d) => `${d.year}\n${d.country}:${d[CropName]}`
+    }),
+    Plot.text(
+      CropYieldsData,
+      Plot.selectLast({
         x: "year",
         y: `${CropName}`,
         z: "country",
-        title: (d) => `${d.year}\n${d.country}:${d[CropName]}`
-      }
+        text: "country",
+        textAnchor: "start",
+        dx: -3,
+        dy: 9
+      })
     ),
     Plot.ruleX(
       CropYieldsData,
@@ -248,6 +257,7 @@ Plot.plot({
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723563589705/018ae378-dcad-425c-887a-6575bc10a393.png)
 
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723641972877/c5a3a8c2-2763-483a-a24f-3b8f04aa84e2.png)
 
 
 # Conclusion

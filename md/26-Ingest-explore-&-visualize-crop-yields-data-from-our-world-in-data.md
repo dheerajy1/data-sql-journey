@@ -227,6 +227,7 @@ Plot.plot({
       x: "year",
       y: `${CropName}`,
       z: "country",
+      stroke: "country",
       title: (d) => `${d.year}\n${d.country}:${d[CropName]}`
     }),
     Plot.text(
@@ -253,11 +254,7 @@ Plot.plot({
 })
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723478221343/e7e519bb-24a9-4bdb-90ea-54407173c90d.png)
-
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723563589705/018ae378-dcad-425c-887a-6575bc10a393.png)
-
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723641972877/c5a3a8c2-2763-483a-a24f-3b8f04aa84e2.png)
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723737773060/caf0855c-1a9b-4827-a665-60431f64d492.png)
 
 
 # Conclusion

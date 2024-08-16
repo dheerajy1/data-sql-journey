@@ -250,11 +250,13 @@ Plot.plot({
       CropYieldsData,
       Plot.pointerX({ x: "year", y: `${CropName}`, stroke: "red" })
     )
-  ]
+  ],
+  color: { legend: true }
 })
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723737773060/caf0855c-1a9b-4827-a665-60431f64d492.png)
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723824393252/94ecd532-66f4-4bb3-8f2a-7a31536f9c8a.png)
+
 
 
 # Conclusion

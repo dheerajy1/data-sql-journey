@@ -289,7 +289,75 @@ Plot.plot({
 });
 ```
 
+
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723910593670/38790aa1-dcc1-4183-a068-2d44c024620f.png)
+
+# 6\. bean yield viz
+
+countries
+
+```javascript
+viewof Country = Inputs.table(countrydata, {
+  value: countrydata.filter((obj, i) =>
+    [
+      "United States",
+      "Italy",
+      "Hungary",
+      "Bulgaria",
+      "Austria",
+      "Romania",
+      "Brazil"
+    ].includes(obj.country)
+  ),
+  width: 800,
+  maxHeight: 200,
+  multiple: true,
+  required: false
+})
+```
+
+plot
+
+```javascript
+Plot.plot({
+  width,
+  marginRight: 80,
+  marks: [
+    Plot.ruleY([0]),
+    Plot.lineY(CropYieldsData, {
+      x: "year",
+      y: `${CropName}`,
+      z: "country",
+      stroke: "country",
+      title: (d) => `${d.year}\n${d.country}:${d[CropName]}`
+    }),
+    Plot.text(
+      CropYieldsData,
+      Plot.selectLast({
+        x: "year",
+        y: `${CropName}`,
+        z: "country",
+        text: "country",
+        textAnchor: "start",
+        dx: -3,
+        dy: 9
+      })
+    ),
+    Plot.ruleX(
+      CropYieldsData,
+      Plot.pointerX({ x: "year", py: `${CropName}`, stroke: "red" })
+    ),
+    Plot.dot(
+      CropYieldsData,
+      Plot.pointerX({ x: "year", y: `${CropName}`, stroke: "red" })
+    )
+  ],
+  color: { legend: true }
+})
+```
+
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723996687009/89d2c6d4-f048-4290-9f47-53c38beee905.png)
+
 
 # Conclusion
 
